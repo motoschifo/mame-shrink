@@ -8,6 +8,40 @@ using System.Windows.Forms;
 namespace MAME_Shrink.Common.Filters;
 internal class FilterMenuCollection : Collection<FilterMenuItem>
 {
+    private readonly Dictionary<FilterKind, FilterMenuItem> _filterKindMap = [];
+
+    protected override void ClearItems()
+    {
+        _filterKindMap.Clear();
+        base.ClearItems();
+    }
+
+    protected override void InsertItem(int index, FilterMenuItem item)
+    {
+        if (item.Kind is not null)
+            _filterKindMap[item.Kind.Value] = item;
+        base.InsertItem(index, item);
+    }
+
+    protected override void RemoveItem(int index)
+    {
+        var item = this[index];
+        if (item.Kind is not null)
+            _filterKindMap.Remove(item.Kind.Value);
+        base.RemoveItem(index);
+    }
+
+    protected override void SetItem(int index, FilterMenuItem item)
+    {
+        var oldItem = this[index];
+        if (oldItem.Kind is not null)
+            _filterKindMap.Remove(oldItem.Kind.Value);
+        if (item.Kind is not null)
+            _filterKindMap[item.Kind.Value] = item;
+        base.SetItem(index, item);
+    }
+
+
     public void Initialize()
     {
         Clear();
@@ -317,4 +351,31 @@ internal class FilterMenuCollection : Collection<FilterMenuItem>
             target.Add(menuItem);
         }
     }
+
+    public FilterMenuItem? GetByKind(FilterKind kind)
+    {
+        if (_filterKindMap.TryGetValue(kind, out var item))
+            return item;
+
+        FilterMenuItem? Search(IEnumerable<FilterMenuItem> items)
+        {
+            foreach (var i in items)
+            {
+                if (i.Kind == kind)
+                    return i;
+
+                var foundInChildren = Search(i.Children);
+                if (foundInChildren is not null)
+                    return foundInChildren;
+            }
+            return null;
+        }
+
+        item = Search(this);
+        if (item is not null)
+            _filterKindMap[kind] = item;
+
+        return item;
+    }
+
 }

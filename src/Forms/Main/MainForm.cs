@@ -839,6 +839,9 @@ public partial class MainForm : Form
             await LoadFromArcadeDatabaseOrCache(
                 progressUpdate: (text) => Dialogs.ProgressUpdate(lblInfo, text)
             );
+            UpdateInfo("Aggiornamento filtri...");
+            UpdateFiltersCounters(MenuFilters);
+
             UpdateInfo("Aggiunta dati alla griglia...");
             GamesListView.BeginUpdate();
 
@@ -1641,5 +1644,64 @@ public partial class MainForm : Form
         if (!Enum.TryParse(menuItem.Tag?.ToString() ?? string.Empty, true, out FilterKind filter) || !_menuActions.ContainsKey(filter))
             Dialogs.ShowErrorDialog($"Unsupported filter type {menuItem.Tag?.ToString()}");
         ApplyFilters(_menuActions[filter]);
+    }
+
+    private void UpdateFiltersCounters(ContextMenuStrip menu)
+    {
+        var level = 0;
+        foreach (var item in menu.Items)
+        {
+            if (item is ToolStripMenuItem menuItem)
+                UpdateFiltersCounters(menuItem, level++);
+        }
+    }
+
+    private void UpdateFiltersCounters(ToolStripMenuItem menu, int level)
+    {
+        if (level > 99)
+            return;
+        if (menu.DropDownItems.Count == 0)
+        {
+            if (Enum.TryParse(menu.Tag?.ToString() ?? string.Empty, true, out FilterKind key) || !_menuActions.ContainsKey(key))
+            {
+                var filter = _filters.GetByKind(key);
+                if (filter is not null)
+                {
+                    var action = _menuActions[key];
+                    menu.Text = filter.Text;
+                    menu.Enabled = filter.Enabled;
+                    if (filter.Enabled)
+                    {
+                        var count = 0;
+                        foreach (var gridItem in _gridItems.Values)
+                        {
+                            var machine = _mame.Machines.GetMachineByName(gridItem.Name);
+                            if (machine is null)
+                                continue;
+                            if (action.Invoke(machine))
+                                count++;
+                        }
+                        if (count > 0)
+                        {
+                            menu.ShortcutKeyDisplayString = count.ToString();
+                            //menu.Text += $" ({count})";
+                        }
+                        else
+                        {
+                            menu.Enabled = false;
+                            menu.ShortcutKeyDisplayString = "-";
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            foreach (var item in menu.DropDownItems)
+            {
+                if (item is ToolStripMenuItem menuItem)
+                    UpdateFiltersCounters(menuItem, level++);
+            }
+        }
     }
 }
