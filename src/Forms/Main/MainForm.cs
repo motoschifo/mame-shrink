@@ -1316,28 +1316,28 @@ public partial class MainForm : Form
         }
     }
 
-    private MachinesCache _mameCache = new();
-    private SnapshotsCache _snapshotsCache = new();
+    private readonly MachinesCache _mameCache = new();
+    private readonly SnapshotsCache _snapshotsCache = new();
 
     void SetOnlineFiltersEnabled(bool enabled)
     {
         // TODO: rifare il menu o seguire la definizione per poi disabilitare le voci diverse
-        var onlineFilters = new[]
-        {
-            MenuFilterTypeMamecab,
-            // TODO: MenuFilterClassificationsGenre,
-            // TODO: MenuFilterClassificationsCategories,
-            // TODO: MenuFilterRelease,
-        };
+        //var onlineFilters = new[]
+        //{
+        //    MenuFilterTypeMamecab,
+        //    MenuFilterClassificationsGenre,
+        //    MenuFilterClassificationsCategories,
+        //    MenuFilterRelease,
+        //};
 
-        //var changed = false;
-        foreach (var item in onlineFilters)
-        {
-            if (item.Enabled == enabled)
-                continue;
-            item.Enabled = enabled;
-            //changed = true;
-        }
+        ////var changed = false;
+        //foreach (var item in onlineFilters)
+        //{
+        //    if (item.Enabled == enabled)
+        //        continue;
+        //    item.Enabled = enabled;
+        //    //changed = true;
+        //}
     }
 
     private async Task LoadFromArcadeDatabaseOrCache(Action<string> progressUpdate)
