@@ -1,0 +1,1645 @@
+﻿#nullable enable
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ArcadeDatabaseSdk.Net48.Common;
+using ArcadeDatabaseSdk.Net48.Mame;
+using ArcadeDatabaseSdk.Net48.Services;
+using Extensions.Net48;
+using MAME_Shrink.Common.Cache;
+using MAME_Shrink.Common.Filters;
+using MAME_Shrink.Forms.Main;
+using MAME_Shrink.Settings;
+using MAME_Shrink.Utilities;
+using MameTools.Machine;
+using MameTools.Net48;
+using MameTools.Net48.Config;
+using MameTools.Net48.Exports;
+using MameTools.Net48.Helpers;
+using MameTools.Net48.Imports;
+using NLog;
+using static MAME_Shrink.Settings.UserPreferences;
+using static MAME_Shrink.Settings.UserPreferences.GridColumnDefinition;
+using static MameTools.Net48.Machines.Disks.Disk;
+using static MameTools.Net48.Machines.Displays.Display;
+using static MameTools.Net48.Machines.Drivers.Driver;
+using static MameTools.Net48.Machines.Feature.Feature;
+
+namespace MAME_Shrink.Forms;
+
+public partial class MainForm : Form
+{
+    private UserPreferences _userPreferences = new();
+    private readonly Mame _mame = new();
+    private MameConfiguration _mameConfig = new();
+    private string _applicationPath = string.Empty;
+    private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
+    private CancellationToken PageCancellationToken => _pageCancellationTokenSource.Token;
+    private CancellationTokenSource _pageCancellationTokenSource = new();
+
+    private readonly List<RomFile> _files = [];
+    private Dictionary<int, GamesGridItem> _gridItems = [];
+    private readonly List<string> _selectedItems = [];
+    private enum FilterOperation
+    {
+        AddToSelected,
+        RemoveFromSelected,
+        ToggleSelected,
+    }
+    private FilterOperation _filterOperation;
+
+    private enum ShowType
+    {
+        AllGames,
+        ExistingFiles,
+        Selected,
+        NotSelected,
+    }
+    private ShowType _showType = ShowType.ExistingFiles;
+
+
+    private GridColumnKind _sortColumn = GridColumnKind.Description;
+    private bool _sortAsc = true;
+    private string _filterPrec = string.Empty;
+    private GamesGridItem? _currentSelectedItem = null;
+    private readonly string _percorsoMame = string.Empty;
+    private bool? _online;
+
+    private readonly FilterMenuCollection _filters = [];
+
+    public MainForm()
+    {
+        InitializeComponent();
+        _userPreferences = UserPreferencesManager.Get() ?? new();
+        _filters.Initialize();
+        _filters.BuildMenuItems(MenuFilters.Items, MenuFiltersItem_Click);
+        CheckMenuActions();
+    }
+
+    private void CheckMenuActions()
+    {
+        if (!Debugger.IsAttached)
+            return;
+        var errors = new List<string>();
+        foreach (FilterKind filter in Enum.GetValues(typeof(FilterKind)))
+        {
+            if (!_menuActions.TryGetValue(filter, out var action))
+                errors.Add(filter.ToString());
+        }
+        if (errors.Count > 0)
+            Dialogs.ShowErrorDialog("Not implemented filters actions:\n\n" + string.Join("\n", errors));
+    }
+
+    private readonly Dictionary<FilterKind, Func<MameMachine, bool>> _menuActions = new()
+    {
+        { FilterKind.All, (machine) => true },
+        { FilterKind.IsParentMachine, (machine) => machine.IsParentMachine },
+        { FilterKind.IsCloneMachine, (machine) => machine.IsCloneMachine },
+        { FilterKind.IsMamecab, (machine) => machine.Extra.IsMameCab },
+        { FilterKind.IsMachine, (machine) => machine.IsMachine },
+        { FilterKind.IsBios, (machine) => machine.IsBios },
+        { FilterKind.IsDevice, (machine) => machine.IsDevice },
+        { FilterKind.IsMechanical, (machine) => machine.IsMechanical },
+        { FilterKind.AudioUnsupported, (machine) => machine.Sound.HasAudio },
+        { FilterKind.AudioChannelMono, (machine) => machine.Sound.IsMono },
+        { FilterKind.AudioChannelStereo, (machine) => machine.Sound.IsStereo },
+        { FilterKind.AudioMultichannel, (machine) => machine.Sound.IsMultiChannel },
+        { FilterKind.SoundEmulated, (machine) => machine.FeatureOfType(FeatureKind.sound) is null },
+        { FilterKind.SoundImperfect, (machine) => machine.FeatureOfType(FeatureKind.sound)?.Imperfect == true },
+        { FilterKind.SoundUnemulated, (machine) => machine.FeatureOfType(FeatureKind.sound)?.Unemulated == true },
+        { FilterKind.DisplayTypeRaster, (machine) => {
+            var display = machine.GetMainDisplay();
+            return display is not null && display.Type == DisplayKind.raster;
+        } },
+        { FilterKind.DisplayTypeVector, (machine) => {
+            var display = machine.GetMainDisplay();
+            return display is not null && display.Type == DisplayKind.vector;
+        } },
+        { FilterKind.DisplayTypeLCD, (machine) => {
+            var display = machine.GetMainDisplay();
+            return display is not null && display.Type == DisplayKind.lcd;
+        } },
+        { FilterKind.DisplayTypeSVG, (machine) => {
+            var display = machine.GetMainDisplay();
+            return display is not null && display.Type == DisplayKind.svg;
+        } },
+        { FilterKind.DisplayTypeUnknown, (machine) => {
+            var display = machine.GetMainDisplay();
+            return display is not null && display.Type == DisplayKind.unknown;
+        } },
+        { FilterKind.Screenless, (machine) => machine.Screenless },
+        { FilterKind.ScreensOne, (machine) => machine.Displays.Count == 1 },
+        { FilterKind.ScreensOneOrMore, (machine) => machine.Displays.Count >= 1 },
+        { FilterKind.ScreensTwo, (machine) => machine.Displays.Count == 2 },
+        { FilterKind.ScreensTwoOrMore, (machine) => machine.Displays.Count>= 2 },
+        { FilterKind.ScreensThree, (machine) => machine.Displays.Count == 3 },
+        { FilterKind.ScreensThreeOrMore, (machine) => machine.Displays.Count>= 3 },
+        { FilterKind.ScreensFour, (machine) => machine.Displays.Count == 4 },
+        { FilterKind.ScreensFourOrMore, (machine) => machine.Displays.Count>= 4 },
+        { FilterKind.ScreensFiveOrMore, (machine) => machine.Displays.Count>= 5 },
+        { FilterKind.HorizontalScreen, (machine) => {
+            var display = machine.GetMainDisplay();
+            if (display is null) return false;
+            return display.Orientation == DisplayOrientationKind.horizontal;
+        } },
+        { FilterKind.VerticalScreen, (machine) => {
+            var display = machine.GetMainDisplay();
+            if (display is null) return false;
+            return display.Orientation == DisplayOrientationKind.vertical;
+        } },
+        { FilterKind.ScreenRotated0, (machine) => {
+            var display = machine.GetMainDisplay();
+            if (display is null) return false;
+            return display.Rotate == 0;
+        } },
+        { FilterKind.ScreenRotated90, (machine) => {
+            var display = machine.GetMainDisplay();
+            if (display is null) return false;
+            return display.Rotate == 90;
+        } },
+        { FilterKind.ScreenRotated180, (machine) => {
+            var display = machine.GetMainDisplay();
+            if (display is null) return false;
+            return display.Rotate == 180;
+        } },
+        { FilterKind.ScreenRotated270, (machine) => {
+            var display = machine.GetMainDisplay();
+            if (display is null) return false;
+            return display.Rotate == 270;
+        } },
+        { FilterKind.GraphicEmulated, (machine) => machine.FeatureOfType(FeatureKind.graphics) is null },
+        { FilterKind.GraphicImperfect, (machine) => machine.FeatureOfType(FeatureKind.graphics)?.Imperfect == true },
+        { FilterKind.GraphicNotEmulated, (machine) => machine.FeatureOfType(FeatureKind.graphics)?.Unemulated == true },
+        { FilterKind.ProtectionEmulated, (machine) => machine.FeatureOfType(FeatureKind.protection) is null },
+        { FilterKind.ProtectionImperfect, (machine) => machine.FeatureOfType(FeatureKind.protection)?.Imperfect == true },
+        { FilterKind.ProtectionUnemulated, (machine) => machine.FeatureOfType(FeatureKind.protection)?.Unemulated == true },
+        { FilterKind.ColorEmulated, (machine) => machine.FeatureOfType(FeatureKind.palette) is null },
+        { FilterKind.ColorImperfect, (machine) => machine.FeatureOfType(FeatureKind.palette)?.Imperfect == true },
+        { FilterKind.ColorUnemulated, (machine) => machine.FeatureOfType(FeatureKind.palette)?.Unemulated == true },
+        { FilterKind.DriverWorking, (machine) => machine.Driver.Status == DriverStatusKind.good },
+        { FilterKind.DriverImperfect, (machine) => machine.Driver.Status == DriverStatusKind.imperfect },
+        { FilterKind.DriverNotWorking, (machine) => machine.Driver.Status == DriverStatusKind.preliminary },
+        { FilterKind.DriverUnknown, (machine) => machine.Driver.Status == DriverStatusKind.unknown },
+        { FilterKind.CocktailGood, (machine) => machine.Driver.Cocktail == CocktailKind.good },
+        { FilterKind.CocktailImperfect, (machine) => machine.Driver.Cocktail== CocktailKind.imperfect },
+        { FilterKind.CocktailPreliminary, (machine) => machine.Driver.Cocktail == CocktailKind.preliminary },
+        { FilterKind.CocktailUnknown, (machine) => machine.Driver.Cocktail== CocktailKind.unknown },
+        { FilterKind.SaveStateSupported, (machine) => machine.Driver.SaveState == SaveStateKind.supported },
+        { FilterKind.SaveStateUnsupported, (machine) => machine.Driver.SaveState == SaveStateKind.unsupported },
+        { FilterKind.SaveStateUnknown, (machine) => machine.Driver.SaveState == SaveStateKind.unknown },
+        { FilterKind.RequiresDisk, (machine) => machine.RequiresDisks },
+        { FilterKind.DoNotRequiresDisk, (machine) => !machine.RequiresDisks },
+        { FilterKind.DiskStatusGood, (machine) => machine.RequiresDisks && machine.Disks.Any(x => x.Status == DiskStatusKind.good) },
+        { FilterKind.DiskStatusBadDump, (machine) => machine.RequiresDisks && machine.Disks.Any(x => x.Status == DiskStatusKind.baddump) },
+        { FilterKind.DiskStatusNoDump, (machine) => machine.RequiresDisks && machine.Disks.Any(x => x.Status == DiskStatusKind.nodump) },
+        { FilterKind.EmulationGood, (machine) => machine.Driver.Emulation==EmulationKind.good },
+        { FilterKind.EmulationImperfect, (machine) => machine.Driver.Emulation==EmulationKind.imperfect},
+        { FilterKind.EmulationPreliminary, (machine) => machine.Driver.Emulation==EmulationKind.preliminary },
+        { FilterKind.EmulationUnknown, (machine) => machine.Driver.Emulation==EmulationKind.unknown },
+        { FilterKind.ArtworkRequired, (machine) => machine.Driver.RequiresArtwork },
+        { FilterKind.ArtworkNotRequired, (machine) => !machine.Driver.RequiresArtwork },
+        { FilterKind.DriverOfficial, (machine) => !machine.Driver.Unofficial },
+        { FilterKind.DriverUnofficial, (machine) => machine.Driver.Unofficial },
+        { FilterKind.SoundHardwareYes, (machine) => !machine.Driver.NoSoundHardware },
+        { FilterKind.SoundHardwareNo, (machine) => machine.Driver.NoSoundHardware },
+        { FilterKind.DriverComplete, (machine) => !machine.Driver.Incomplete },
+        { FilterKind.DriverIncomplete, (machine) => machine.Driver.Incomplete },
+        { FilterKind.UseSample, (machine) => machine.UseSample },
+        { FilterKind.DoNotUseSample, (machine) => !machine.UseSample },
+        { FilterKind.NoGenre, (machine) => string.IsNullOrEmpty(machine.Extra.Genre) },   // TODO
+        { FilterKind.Genre, (machine) => false },   // TODO
+        { FilterKind.NoCategory, (machine) => string.IsNullOrEmpty(machine.Extra.Category) },  // TODO
+        { FilterKind.Category, (machine) => false },  // TODO
+        { FilterKind.NoSerie, (machine) => false },  // TODO
+        { FilterKind.Serie, (machine) => false },  // TODO
+        { FilterKind.Release, (machine) => false },    // TODO
+    };
+
+    ~MainForm()
+    {
+        _pageCancellationTokenSource.Dispose();
+    }
+
+    private void GamesListView_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Return)
+        {
+            GamesListView_DoubleClick(sender, e);
+            e.Handled = true;
+        }
+        else if (e.KeyCode == Keys.Space)
+        {
+            if (_currentSelectedItem is not null)
+            {
+                var name = GetSelectedGameName();
+                if (!string.IsNullOrEmpty(name))
+                {
+                    ToggleSelection(name!);
+                    UpdateSelectionInfo();
+                }
+            }
+        }
+    }
+
+    public void UpdateInfo(string text = "") => Dialogs.ProgressUpdate(lblInfo, text);
+
+    public void MouseWait() => Cursor = Cursors.WaitCursor;
+
+    public void MouseDefault() => Cursor = Cursors.Default;
+
+    private void GamesListView_DoubleClick(object sender, EventArgs e)
+    {
+        Dialogs.DoSomethingSafe((Action)(() =>
+        {
+            if (_currentSelectedItem is null)
+                return;
+            var machine = _mame.Machines.GetMachineByName(_currentSelectedItem.Name);
+            if (machine is null)
+                return;
+            var proc = new Process();
+            proc.StartInfo.WorkingDirectory = Path.GetDirectoryName(_userPreferences.Mame.ExecutableFilePath);
+            proc.StartInfo.UseShellExecute = true;
+            proc.StartInfo.FileName = _userPreferences.Mame.ExecutableFilePath;
+            proc.StartInfo.Arguments = machine.Name;
+            proc.Start();
+        }));
+    }
+
+
+    //private void AddToSelectedItems(string name)
+    //{
+    //    var item = _gridItems.Values.FirstOrDefault(x => x.Name == name);
+    //    if (item is null || !item.CanBeSelected || !item.HasFiles || _selectedItems.Contains(item.Name))
+    //        return;
+    //    _selectedItems.Add(item.Name);
+    //}
+
+    //private void RemoveFromSelectedItems(string name)
+    //{
+    //    var item = _gridItems.Values.FirstOrDefault(x => x.Name == name);
+    //    if (item is null || !item.CanBeSelected || !item.HasFiles || !_selectedItems.Contains(item.Name))
+    //        return;
+    //    _selectedItems.Remove(item.Name);
+    //}
+
+    public void SelectGame(string name)
+    {
+        if (_selectedItems.Contains(name))
+            return;
+        var machine = _mame.Machines.GetMachineByName(name);
+        if (machine is null)
+            return;
+        var item = _gridItems.Values.FirstOrDefault(x => x.Name == name);
+        if (!item.CanBeSelected || !item.HasFiles)
+            return;
+        _selectedItems.Add(item.Name);
+
+        //if (_config.Mame.MameSet == MameSection.MameSetKind.Auto)
+        //{
+        //    // Parent and clone are linked by XML data
+        //    var requiredMachines = _mame.Machines.GetAllDependantMachinesOf(machine);
+        //    foreach (var reqMachine in requiredMachines)
+        //    {
+        //        AddToSelectedItems(reqMachine.Name);
+        //    }
+        //}
+        //else if (_config.Mame.MameSet == MameSection.MameSetKind.Splitted)
+        //{
+        //    // Parent and clone are linked
+        //    if (machine.IsClone)
+        //    {
+        //        var parent = _mame.Machines.GetParentMachineOf(machine.Name);
+        //        if (parent is not null)
+        //            AddToSelectedItems(parent.Name);
+        //    }
+        //}
+        //else if (_config.Mame.MameSet == MameSection.MameSetKind.Merged)
+        //{
+        //    // Parent and clone are stored together
+        //    if (machine.IsClone)
+        //    {
+        //        var parent = _mame.Machines.GetParentMachineOf(machine.Name);
+        //        if (parent is not null)
+        //        {
+        //            AddToSelectedItems(parent.Name);
+        //            foreach (var clone in _mame.Machines.GetCloneMachinesOf(parent.Name))
+        //            {
+        //                AddToSelectedItems(clone.Name);
+        //            }
+        //        }
+        //    }
+        //    else if (machine.IsParent)
+        //    {
+        //        foreach (var clone in _mame.Machines.GetCloneMachinesOf(machine.Name))
+        //        {
+        //            AddToSelectedItems(clone.Name);
+        //        }
+        //    }
+        //}
+        //else if (_config.Mame.MameSet == MameSection.MameSetKind.NonMerged)
+        //{
+        //    // Parent and clone are in diffetent files
+        //}
+        GamesListView.Invalidate();
+    }
+
+    public void DeselectGame(string name)
+    {
+        if (!_selectedItems.Contains(name))
+            return;
+        var machine = _mame.Machines.GetMachineByName(name);
+        if (machine is null)
+            return;
+        var item = _gridItems.Values.FirstOrDefault(x => x.Name == name);
+        if (!item.CanBeSelected || !item.HasFiles)
+            return;
+        _selectedItems.Remove(item.Name);
+
+        //if (_config.Mame.MameSet == MameSection.MameSetKind.Auto)
+        //{
+        //    // Parent and clone are linked by XML data
+        //    var requiredMachines = _mame.Machines.GetAllParentDependantMachinesOf(machine);
+        //    foreach (var reqMachine in requiredMachines)
+        //    {
+        //        RemoveFromSelectedItems(reqMachine.Name);
+        //    }
+        //    //foreach (var romOf in _mame.Machines.GetAllMachinesWithRomOf(machine))
+        //    //{
+        //    //    RemoveFromSelectedItems(romOf.Name);
+        //    //}
+        //}
+        //else if (_config.Mame.MameSet == MameSection.MameSetKind.Splitted)
+        //{
+        //    // Parent and clone are linked
+        //    if (machine.IsParent)
+        //    {
+        //        foreach (var clone in _mame.Machines.GetCloneMachinesOf(machine.Name))
+        //        {
+        //            RemoveFromSelectedItems(clone.Name);
+        //        }
+        //    }
+        //}
+        //else if (_config.Mame.MameSet == MameSection.MameSetKind.Merged)
+        //{
+        //    // Parent and clone are stored together
+        //    if (machine.IsClone)
+        //    {
+        //        var parent = _mame.Machines.GetParentMachineOf(machine.Name);
+        //        if (parent is not null)
+        //        {
+        //            RemoveFromSelectedItems(parent.Name);
+        //            foreach (var clone in _mame.Machines.GetCloneMachinesOf(parent.Name))
+        //            {
+        //                RemoveFromSelectedItems(clone.Name);
+        //            }
+        //        }
+        //    }
+        //    else if (machine.IsParent)
+        //    {
+        //        foreach (var clone in _mame.Machines.GetCloneMachinesOf(machine.Name))
+        //        {
+        //            RemoveFromSelectedItems(clone.Name);
+        //        }
+        //    }
+        //}
+        //else if (_config.Mame.MameSet == MameSection.MameSetKind.NonMerged)
+        //{
+        //    // Parent and clone are in diffetent files
+        //}
+        GamesListView.Invalidate();
+    }
+
+    public void UpdateSelectionInfo()
+    {
+        UpdateInfo("...");
+        List<string> parts = [];
+        var text = string.Empty;
+        if (_selectedItems.Count > 0)
+        {
+            var totalSize = _gridItems.Values.Where(x => _selectedItems.Contains(x.Name)).Sum(x => x.TotalFilesSize);
+            parts.Add($"{_selectedItems.Count:#,##0} giochi selezionati");
+            parts.Add($"spazio disco {totalSize.ToFileSizeString()}");
+        }
+        else
+        {
+            parts.Add("Nessuna rom selezionata");
+        }
+        parts.Add($"{_mame.Machines.Count.ToFormattedString()} giochi totali");
+        StartClean.Visible = _selectedItems.Count > 0;
+        ValidateRomset.Visible = StartClean.Visible;
+        UpdateInfo(string.Join(", ", parts));
+    }
+
+    private void GamesListView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
+    {
+        if (e.ItemIndex >= _gridItems.Count)
+        {
+            e.Item = new();
+            return;
+        }
+
+        var g = _gridItems[e.ItemIndex];
+        if (g is null)
+        {
+            e.Item = new();
+            return;
+        }
+
+        var li = new ListViewItem
+        {
+            Name = g.Name,
+            Text = string.Empty,
+            Tag = g.Name
+        };
+
+        foreach (var column in _userPreferences.Grid.Columns.Where(x => x.Visible).OrderBy(x => x.Position))
+        {
+            if (column.Kind is GridColumnKind.Id) continue;
+            var text = column.Kind switch
+            {
+                GridColumnKind.Id => string.Empty,
+                GridColumnKind.Romset => g.Name,
+                GridColumnKind.Description => g.Description,
+                GridColumnKind.GameYear => g.GameYear,
+                GridColumnKind.Manufacturer => g.Manufacturer,
+                GridColumnKind.CloneOf => g.CloneOf,
+                GridColumnKind.DriverStatus => g.DriverStatus,
+                GridColumnKind.Genre => g.Genre,
+                GridColumnKind.Category => g.Category,
+                GridColumnKind.Release => g.FirstEmulatorRelease,
+                GridColumnKind.Players => g.InputPlayers > 0 ? g.InputPlayers.ToString("0") : "-",
+                GridColumnKind.Buttons => g.InputButtons > 0 ? g.InputButtons.ToString("0") : "-",
+                GridColumnKind.Display => g.Display,
+                _ => "-"
+            };
+            _ = li.SubItems.Add(text);
+        }
+
+        // Items selectable are black, otherwise gray
+        li.ForeColor = _files.Exists(x => x.Name == g.Name) ? Color.Black : Color.Gray;
+        e.Item = li;
+    }
+
+    private void GamesListView_DrawItem(object sender, DrawListViewItemEventArgs e)
+    {
+        e.DrawDefault = true;
+        var romset = e.Item.Tag.ToString();
+        var selected = _selectedItems.Contains(romset);
+        var item = _gridItems[e.ItemIndex];
+        if (item.CanBeSelected)
+        {
+            CheckBoxRenderer.DrawCheckBox(e.Graphics,
+                        new Point(e.Bounds.Left + 4, e.Bounds.Top + 4),
+                        selected ? System.Windows.Forms.VisualStyles.CheckBoxState.CheckedNormal :
+                        System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal);
+        }
+    }
+
+    private void GamesListView_MouseClick(object sender, MouseEventArgs e)
+    {
+        if (sender is not ListView lv)
+            return;
+        var lvi = lv.GetItemAt(e.X, e.Y);
+        if (lvi is not null)
+        {
+            if (e.X < (lvi.Bounds.Left + 24))
+            {
+                var romset = lvi.Tag.ToString();
+                ToggleSelection(romset);
+                UpdateSelectionInfo();
+            }
+        }
+    }
+
+    private void GamesListView_ColumnClick(object sender, ColumnClickEventArgs e)
+    {
+        if (e.Column == 0)
+        {
+            if (!bool.TryParse(GamesListView.Columns[e.Column].Tag?.ToString(), out var value))
+                return;
+            GamesListView.Columns[e.Column].Tag = !value;
+            _selectedItems.Clear();
+            if (value)
+                _selectedItems.AddRange(_gridItems.Values.Select(x => x.Name));
+            GamesListView.Invalidate();
+        }
+        else
+        {
+
+            if (e.Column == 0)
+                return;
+            var ch = GamesListView.Columns[e.Column];
+            if (Enum.TryParse<GridColumnKind>(ch.Tag.ToString(), out var newColumn))
+            {
+                _sortAsc = newColumn != _sortColumn || !_sortAsc;
+                _sortColumn = newColumn;
+            }
+            else
+            {
+                _sortAsc = true;
+                _sortColumn = GridColumnKind.Description;
+            }
+            UpdateGridItems();
+        }
+    }
+
+    public void UpdateGridItems()
+    {
+        ToolbarMenuGrid.Enabled = false;
+        try
+        {
+            GamesListView.BeginUpdate();
+            _filterPrec = GridTextFilter.Text;
+            var s = _filterPrec.Trim();
+            List<MameMachine> list;
+            if (string.IsNullOrEmpty(s))
+            {
+                list = [.. _mame.Machines];
+            }
+            else
+            {
+                list = [.. _mame.Machines.Where(x =>
+                    x.Description?.IndexOf(s, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    x.Name.IndexOf(s, StringComparison.OrdinalIgnoreCase) >= 0)];
+            }
+            Func<GamesGridItem, object?> orderByPredicate = _sortColumn switch
+            {
+                GridColumnKind.Id => item => item.Description,
+                GridColumnKind.Romset => item => item.Name,
+                GridColumnKind.Description => item => item.Description,
+                GridColumnKind.GameYear => item => item.GameYear,
+                GridColumnKind.Manufacturer => item => item.Manufacturer,
+                GridColumnKind.CloneOf => item => item.CloneOf,
+                GridColumnKind.DriverStatus => item => item.DriverStatus,
+                GridColumnKind.Genre => item => item.Genre,
+                GridColumnKind.Category => item => item.Category,
+                GridColumnKind.Release => item => item.FirstEmulatorRelease,
+                GridColumnKind.Players => item => item.InputPlayers,
+                GridColumnKind.Buttons => item => item.InputButtons,
+                GridColumnKind.Display => item => item.Display,
+                _ => item => item.Description
+            };
+
+            List<GamesGridItem> tmpList = _sortAsc
+                ? [.. list.Select(GamesGridItem.Create).OrderBy(orderByPredicate)]
+                : [.. list.Select(GamesGridItem.Create).OrderByDescending(orderByPredicate)];
+            var index = 0;
+            _gridItems = [];
+            foreach (var item in tmpList)
+            {
+                if (_showType is ShowType.Selected && !_selectedItems.Contains(item.Name))
+                    continue;
+                else if (_showType is ShowType.NotSelected && _selectedItems.Contains(item.Name))
+                    continue;
+                var file = _files.FirstOrDefault(x => x.Name == item.Name);
+                if (file is not null)
+                {
+                    item.Files.Add(file);
+                    item.CanBeSelected = true;
+                }
+                if (_showType == ShowType.ExistingFiles && !item.HasFiles)
+                    continue;
+                item.Index = index;
+                index++;
+                _gridItems.Add(item.Index, item);
+            }
+
+            GamesListView.VirtualListSize = _gridItems.Count();
+        }
+        catch (Exception ex)
+        {
+            // Ignore
+            _logger.Error(ex, $"Failed to update grid items: {ex.Message}");
+        }
+        finally
+        {
+            GamesListView.EndUpdate();
+            GamesListView.Invalidate();
+            ToolbarMenuGrid.Enabled = true;
+        }
+    }
+
+    private void GamesListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+    {
+        // TODO
+        e.DrawDefault = true;
+    }
+
+    public void EnableControls(bool enable)
+    {
+        GridTextFilter.Enabled = enable;
+        GamesListView.Enabled = enable;
+    }
+
+    private void GridTextFilter_TextChanged(object sender, EventArgs e)
+    {
+        GridTextFilterTimer.Stop();
+        GridTextFilterTimer.Enabled = true;
+        GridTextFilterTimer.Interval = 500;
+        GridTextFilterTimer.Start();
+    }
+
+    private void GridTextFilterTimer_Tick(object sender, EventArgs e)
+    {
+        GridTextFilterTimer.Stop();
+        if (GridTextFilter.Text != _filterPrec)
+            UpdateGridItems();
+    }
+
+    private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        Dialogs.DoSomethingSafe((Action)(() =>
+        {
+            try
+            {
+                var changed = false;
+                _userPreferences.CleanOptions.ValidateBeforeCleaning = ValidateRomset.Checked;
+                foreach (ColumnHeader ch in GamesListView.Columns)
+                {
+                    var key = ParseGridColumn(ch.Tag?.ToString());
+                    var column = _userPreferences.Grid.Columns.FirstOrDefault(x => x.Kind == key);
+                    if (column is null)
+                        continue;
+                    column.Width = ch.Width;
+                    changed = true;
+                }
+                if (changed)
+                    UserPreferencesManager.Set(_userPreferences);
+            }
+            catch (Exception ex)
+            {
+                // Ignore
+                _logger.Error(ex, $"Failed to store user settings: {ex.Message}");
+            }
+            UserPreferencesManager.Set(_userPreferences);
+        }));
+    }
+
+    private void AddColumnsToGrid()
+    {
+        GamesListView.Columns.Clear();
+        foreach (var column in _userPreferences.Grid.Columns.Where(x => x.Visible).OrderBy(x => x.Position))
+        {
+            ColumnHeader ch = GamesListView.Columns.Add(
+                key: column.Kind.ToString(),
+                text: column.Title,
+                width: column.Width,
+                textAlign: column.RightAlignment ? HorizontalAlignment.Right : HorizontalAlignment.Left,
+                imageKey: null
+            );
+            ch.Tag = column.Kind.ToString();
+        }
+    }
+
+    private void FrmMain_Load(object sender, EventArgs e)
+    {
+        _applicationPath = ApplicationHelper.GetApplicationPath(Assembly.GetEntryAssembly());
+        Text = ApplicationHelper.GetApplicationTitle(Assembly.GetExecutingAssembly());
+        ShowUpdatedSetting();
+
+        // Columns selection menu
+        MenuColumnItems.Items.Clear();
+        foreach (GridColumnKind key in Enum.GetValues(typeof(GridColumnKind)))
+        {
+            if (key is GridColumnKind.Id) continue;
+            var column = _userPreferences.Grid.Columns.FirstOrDefault(x => x.Kind == key);
+            if (column is null)
+                continue;
+            var item = new ToolStripMenuItem(column.Title)
+            {
+                Tag = column.Kind,
+                Width = column.Width,
+                Checked = column.Visible || key is GridColumnKind.Romset,
+                Enabled = key is not GridColumnKind.Romset,
+                CheckOnClick = true,
+            };
+            item.Click += (s, e) =>
+            {
+                var menuItem = (ToolStripMenuItem)s;
+                var key = GridColumnDefinition.ParseGridColumn(menuItem.Tag?.ToString());
+                if (key == GridColumnKind.Unknown)
+                    return;
+                var column = _userPreferences.Grid.Columns.FirstOrDefault(x => x.Kind == key);
+                if (column is null)
+                    return;
+                column.Visible = menuItem.Checked;
+                AddColumnsToGrid();
+            };
+            MenuColumnItems.Items.Add(item);
+        }
+
+        ValidateRomset.Checked = _userPreferences.CleanOptions.ValidateBeforeCleaning;
+
+        // Cache
+        _mameCache.SetFilePath(Path.Combine(_applicationPath, "local-cache", "mame-cache.json"));
+        _snapshotsCache.SetFilePath(Path.Combine(_applicationPath, "local-cache", "snapshots"));
+
+        EnableControls(false);
+    }
+
+    private void ShowUpdatedSetting()
+    {
+        LabelManueExe.Text = _userPreferences.Mame.ExecutableFilePath;
+        LabelGamelistXml.Text = _userPreferences.Mame.GameListFilePath;
+        LabelRomsPath.Text = _userPreferences.Mame.AutoDetectRomPaths ? "Da configurazione Mame" : string.Join(";", _userPreferences.Mame.RomPaths);
+    }
+
+    private void ChangeOptions_Click(object sender, EventArgs e)
+    {
+        using var form = new OptionsForm();
+        var result = form.ShowDialog();
+        var newPreferences = UserPreferencesManager.Get();
+        if (newPreferences is null)
+        {
+            Dialogs.ShowErrorDialog($"Ci sono stati problemi nella lettura delle opzioni, saranno usati i valori predefiniti");
+            _userPreferences = new();
+        }
+        else
+        {
+            _userPreferences = newPreferences;
+        }
+        _online = null;     // Retry connection, is specified
+        ShowUpdatedSetting();
+    }
+
+    private async void LoadGames_Click(object sender, EventArgs e)
+    {
+        MouseWait();
+        EnableControls(false);
+
+        try
+        {
+            ResetPageCancellationToken();
+            LoadGames.Hide();
+            CancelCurrentProcess.Show();
+            CancelCurrentProcess.Enabled = true;
+            ChangeOptions.Enabled = false;
+
+            var fileXml = _userPreferences.Mame.GameListFilePath;
+            if (_userPreferences.Mame.GenerateGameListFromExecutable && !string.IsNullOrWhiteSpace(_userPreferences.Mame.ExecutableFilePath))
+            {
+                var name = Path.GetFileNameWithoutExtension(_userPreferences.Mame.ExecutableFilePath);
+                var path = Path.GetDirectoryName(_userPreferences.Mame.ExecutableFilePath);
+                fileXml = Path.Combine(path, $"{name}-gamelist.xml");
+                var errors = string.Empty;
+                if (!File.Exists(fileXml) || _userPreferences.Mame.ForceGameListGeneration)
+                {
+                    // Gamelist creation
+                    errors = await FileFactory.GenerateGamelistXml(
+                        executableFilePath: _userPreferences.Mame.ExecutableFilePath!,
+                        outputFile: fileXml,
+                        cancellationToken: PageCancellationToken,
+                        prefix: null,
+                        progressUpdate: (text) => Dialogs.ProgressUpdate(lblInfo, text)
+                    );
+                    PageCancellationToken.ThrowIfCancellationRequested();
+                }
+                if (!File.Exists(fileXml) || !string.IsNullOrEmpty(errors))
+                {
+                    throw new Exception(
+                        $"Non è stato possibile leggere il file {fileXml}.\n\n{errors}\n\n" +
+                        "Prova a creare il file manualmente, digitando da una finestra di terminale questo comando:\n" +
+                        $"{_userPreferences.Mame.ExecutableFilePath} -listxml > {fileXml}"
+                    );
+                }
+                if (_userPreferences.Mame.AutoDetectRomPaths)
+                {
+                    _mameConfig = await Mame.LoadMameConfiguration(_userPreferences.Mame.ExecutableFilePath!);
+                    _userPreferences.Mame.RomPaths = _mameConfig.RomPath;
+                }
+            }
+            PageCancellationToken.ThrowIfCancellationRequested();
+
+            if (string.IsNullOrWhiteSpace(fileXml))
+                throw new Exception("File xml non specificato");
+
+            await ImportMachines.LoadFromFile(
+                mame: _mame,
+                filename: fileXml!,
+                cancellationToken: PageCancellationToken,
+                loadHeaderOnly: false,
+                progressUpdate: (text) => Dialogs.ProgressUpdate(lblInfo, text)
+            );
+
+            if (string.IsNullOrEmpty(_userPreferences.Mame.RomPaths))
+                _userPreferences.Mame.RomPaths = "roms";
+            LoadRomsFiles(
+                progressUpdate: (text) => Dialogs.ProgressUpdate(lblInfo, text)
+            );
+            await LoadFromArcadeDatabaseOrCache(
+                progressUpdate: (text) => Dialogs.ProgressUpdate(lblInfo, text)
+            );
+            UpdateInfo("Aggiunta dati alla griglia...");
+            GamesListView.BeginUpdate();
+
+            // Grid setup
+            _selectedItems.Clear();
+            GamesListView.Items.Clear();
+            GamesListView.FullRowSelect = true;
+            GamesListView.CheckBoxes = true;
+            GamesListView.OwnerDraw = true;
+            GamesListView.GridLines = false;
+            GamesListView.MultiSelect = false;
+            GamesListView.View = View.Details;
+            _sortColumn = GridColumnKind.Description;
+            _sortAsc = true;
+            _filterPrec = GridTextFilter.Text;
+            GamesListView.VirtualMode = true;
+            GamesListView.VirtualListSize = _gridItems.Count();
+
+            UpdateInfo("Aggiornamento griglia...");
+            AddColumnsToGrid();
+            UpdateGridItems();
+            UpdateSelectionInfo();
+        }
+        catch (Exception ex)
+        {
+            Dialogs.ShowErrorDialog(ex);
+        }
+        finally
+        {
+            EnableControls(true);
+            MouseDefault();
+            LoadGames.Show();
+            CancelCurrentProcess.Hide();
+            ChangeOptions.Enabled = true;
+            GamesListView.EndUpdate();
+        }
+    }
+
+    private void ResetPageCancellationToken()
+    {
+        _pageCancellationTokenSource.Dispose();
+        _pageCancellationTokenSource = new();
+        Application.DoEvents();
+    }
+
+    private void CancelCurrentProcess_Click(object sender, EventArgs e)
+    {
+        CancelCurrentProcess.Enabled = false;
+        _pageCancellationTokenSource.Cancel();
+    }
+
+    private void LoadRomsFiles(Action<string> progressUpdate)
+    {
+        progressUpdate("Lettura roms...");
+        _files.Clear();
+        var exePath = (string.IsNullOrEmpty(_userPreferences.Mame.ExecutableFilePath) || !File.Exists(_userPreferences.Mame.ExecutableFilePath)) ? string.Empty : Path.GetDirectoryName(_userPreferences.Mame.ExecutableFilePath);
+        foreach (var path in _userPreferences.Mame.RomPathList)
+        {
+            progressUpdate($"Lettura {path}...");
+            foreach (var ext in "zip,7z".Split(','))
+            {
+                var i = 0;
+                foreach (var file in Directory.GetFiles(Path.Combine(exePath, path), $"*.{ext}", SearchOption.TopDirectoryOnly))
+                {
+                    i++;
+                    if (i % 100 == 0)
+                        progressUpdate($"Lettura file cartella roms {i}..");
+                    var romset = file.Substring(file.LastIndexOf(@"\") + 1);
+                    _files.Add(new RomFile()
+                    {
+                        Name = romset.Substring(0, romset.Length - ext.Length - 1),
+                        Filename = file,
+                        Size = new FileInfo(file).Length
+                    });
+                }
+            }
+        }
+    }
+
+    private void ToggleSelection(string name)
+    {
+        if (_selectedItems.Contains(name))
+            DeselectGame(name);
+        else
+            SelectGame(name);
+    }
+
+
+    private void ApplyFilters(Func<MameMachine, bool> func)
+    {
+        Dialogs.DoSomethingSafe(() =>
+        {
+            var changed = false;
+            foreach (var item in _gridItems.Values.Where(x => x.HasFiles))
+            {
+                var machine = _mame.Machines.GetMachineByName(item.Name);
+                if (machine is null) continue;
+                if (!func.Invoke(machine)) continue;
+
+                if (_filterOperation == FilterOperation.AddToSelected)
+                {
+                    if (_selectedItems.Contains(machine.Name))
+                        continue;
+                    _selectedItems.Add(machine.Name);
+                    //SelectGame(machine.Name);
+                    changed = true;
+                }
+                else if (_filterOperation == FilterOperation.RemoveFromSelected)
+                {
+                    if (!_selectedItems.Contains(machine.Name))
+                        continue;
+                    _selectedItems.Remove(machine.Name);
+                    //DeselectGame(machine.Name);
+                    changed = true;
+                }
+                else if (_filterOperation == FilterOperation.ToggleSelected)
+                {
+                    if (_selectedItems.Contains(machine.Name))
+                    {
+                        _selectedItems.Remove(machine.Name);
+                        //DeselectGame(machine.Name);
+                    }
+                    else
+                    {
+                        _selectedItems.Add(machine.Name);
+                        //SelectGame(machine.Name);
+                    }
+                    changed = true;
+                }
+            }
+
+            if (changed)
+            {
+                UpdateGridItems();
+                UpdateSelectionInfo();
+            }
+        });
+    }
+
+    private void MenuAddToSelectedGames_Click(object sender, EventArgs e)
+    {
+        _filterOperation = FilterOperation.AddToSelected;
+        ShowMenu(MenuFilters, MenuAddToSelectedGames);
+    }
+
+    private void MenuRemoveFromSelectedGames_Click(object sender, EventArgs e)
+    {
+        _filterOperation = FilterOperation.RemoveFromSelected;
+        ShowMenu(MenuFilters, MenuRemoveFromSelectedGames);
+    }
+
+    private void MenuToggleSelectedGames_Click(object sender, EventArgs e)
+    {
+        _filterOperation = FilterOperation.ToggleSelected;
+        ShowMenu(MenuFilters, MenuToggleSelectedGames);
+    }
+
+    private void MenuColumns_Click(object sender, EventArgs e) => ShowMenu(MenuColumnItems, MenuColumns);
+
+    private void ShowMenu(ContextMenuStrip menu, ToolStripMenuItem parentMenu)
+    {
+        if (parentMenu is not ToolStripMenuItem menuItem)
+            return;
+        if (menuItem.Owner is ToolStripDropDown dropDown)
+        {
+            var menuPosition = dropDown.PointToScreen(Point.Empty);
+            var itemIndex = menuItem.Owner.Items.IndexOf(menuItem);
+            var yOffset = 0;
+            for (var i = 0; i < itemIndex; i++)
+            {
+                yOffset += menuItem.Owner.Items[i].GetPreferredSize(Size.Empty).Height;
+            }
+
+            menu.Show(menuPosition.X, menuPosition.Y + yOffset + menuItem.Height);
+            return;
+        }
+        else if (menuItem.Owner is MenuStrip menuStrip)
+        {
+            var menuPosition = menuStrip.PointToScreen(menuItem.Bounds.Location);
+            menu.Show(menuPosition.X, menuPosition.Y + menuItem.Bounds.Height);
+        }
+    }
+
+    private void MenuShowType_Click(object sender, EventArgs e)
+    {
+        if (sender is not ToolStripMenuItem menuItem || string.IsNullOrEmpty(menuItem.Tag?.ToString()))
+            return;
+        if (!Enum.TryParse(menuItem.Tag?.ToString(), out ShowType showType))
+            return;
+        if (_showType == showType)
+            return;
+        foreach (ToolStripMenuItem item in MenuShow.DropDownItems)
+        {
+            item.Checked = item.Tag == menuItem.Tag;
+        }
+        _showType = showType;
+        UpdateGridItems();
+    }
+
+    private void StartClean_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            StartClean.Enabled = false;
+            ValidateRomset.Enabled = StartClean.Enabled;
+            if (_selectedItems.Count == 0)
+                throw new Exception("Nessun gioco selezionato");
+
+            if (ValidateRomset.Checked)
+            {
+                if (!ValidateSelectedItems())
+                    return;
+            }
+
+            if (_userPreferences.CleanOptions.CleanMethod == CleanMethodKind.DeleteFiles)
+            {
+                var dr = MessageBox.Show($"Confermi la cancellazione di {_selectedItems.Count:#,##0} giochi?",
+                    "Conferma pulizia",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning,
+                    MessageBoxDefaultButton.Button2
+                );
+                if (dr is not DialogResult.Yes)
+                    return;
+
+                dr = MessageBox.Show($"Dato che l'operazione non è reversibile, ti chiedo una seconda conferma prima di procedere all'eliminazione di {_selectedItems.Count:#,##0} giochi.\n\nProcedo?",
+                    "Conferma pulizia",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button2
+                );
+                if (dr is not DialogResult.Yes)
+                    return;
+                MouseWait();
+                var mamePath = Path.GetDirectoryName(_userPreferences.Mame.ExecutableFilePath);
+                foreach (var romset in _selectedItems)
+                {
+                    var machine = _mame.Machines.GetMachineByName(romset);
+                    if (machine is null)
+                        continue;
+                    UpdateInfo($"Pulizia romset {machine.Name} - {machine.Description}...");
+                    MameFiles.DeleteMameFiles(mamePath, machine, _mameConfig, _userPreferences.Mame.RomPaths, false);
+                }
+            }
+            else if (_userPreferences.CleanOptions.CleanMethod == CleanMethodKind.MoveFilesToRecycleBin)
+            {
+                var destinationPath = Path.Combine(Path.GetDirectoryName(_userPreferences.Mame.ExecutableFilePath), $"0-removed {DateTime.Now:yyyy-MM-dd HH-mm-ss}");
+                var dr = MessageBox.Show($"Confermi la cancellazione di {_selectedItems.Count:#,##0} giochi?\n\nNOTA: Cercherò di spostare i file nel cestino, se possibile",
+                    "Conferma pulizia",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning,
+                    MessageBoxDefaultButton.Button2
+                );
+                if (dr is not DialogResult.Yes)
+                    return;
+                MouseWait();
+                var mamePath = Path.GetDirectoryName(_userPreferences.Mame.ExecutableFilePath);
+                foreach (var romset in _selectedItems)
+                {
+                    var machine = _mame.Machines.GetMachineByName(romset);
+                    if (machine is null)
+                        continue;
+                    UpdateInfo($"Pulizia romset {machine.Name} - {machine.Description}...");
+                    MameFiles.DeleteMameFiles(mamePath, machine, _mameConfig, _userPreferences.Mame.RomPaths, true);
+                }
+            }
+            else if (_userPreferences.CleanOptions.CleanMethod == CleanMethodKind.MoveFilesToFolder)
+            {
+                var destinationPath = Path.Combine(_userPreferences.CleanOptions.RemovedFilesFolder, $"{DateTime.Now:yyyy-MM-dd HH.mm.ss}");
+                var dr = MessageBox.Show($"Confermi la cancellazione di {_selectedItems.Count:#,##0} giochi?\n\nNOTA: I file verranno spostati nella cartella temporanea \n {destinationPath}",
+                    "Conferma pulizia",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning,
+                    MessageBoxDefaultButton.Button2
+                );
+                if (dr is not DialogResult.Yes)
+                    return;
+                MouseWait();
+                foreach (var romset in _selectedItems)
+                {
+                    var machine = _mame.Machines.GetMachineByName(romset);
+                    if (machine is null)
+                        continue;
+                    UpdateInfo($"Pulizia romset {machine.Name} - {machine.Description}...");
+                    MoveMameFiles(machine, destinationPath);
+                }
+            }
+            else
+            {
+                throw new NotImplementedException("Tipo di elaborazione non prevista");
+            }
+
+            LoadRomsFiles(
+                progressUpdate: (text) => Dialogs.ProgressUpdate(lblInfo, text)
+            );
+            UpdateGridItems();
+            Dialogs.ShowInfoDialog($"Operazione completata");
+        }
+        catch (Exception ex)
+        {
+            Dialogs.ShowErrorDialog(ex);
+        }
+        finally
+        {
+            MouseDefault();
+            StartClean.Enabled = true;
+            ValidateRomset.Enabled = StartClean.Enabled;
+            UpdateSelectionInfo();
+        }
+    }
+
+    private readonly WarningRomsetCollection _warningRoms = [];
+    private bool ValidateSelectedItems()
+    {
+        try
+        {
+            /*
+             * Verifiche romset:
+             * - tutte le rom selezionate che sono richieste da rom esistenti
+             * - opz. tutte le rom non selezionate che non sono più richieste da rom esistenti
+             */
+
+            //var selectedItemsHashSet = _selectedItems.ToHashSet();
+            _warningRoms.Clear();
+            UpdateInfo($"Verifica romset...");
+            if (_userPreferences.Mame.MameSetType == MameSection.MameSetKind.Auto)
+            {
+                // Parent and clone are linked by XML data
+                var index = 0;
+                var total = _selectedItems.Count;
+                foreach (var romset in _selectedItems.OrderBy(x => x))
+                {
+                    index++;
+                    var machine = _mame.Machines.GetMachineByName(romset);
+                    if (machine is null)
+                        continue;
+                    UpdateInfo($"[{index}/{total}] Verifica {machine.Name} - {machine.Description}...");
+
+                    //var requiredMachines = _mame.Machines.GetAllDependantMachinesOf(machine);
+                    //foreach (var reqMachine in requiredMachines)
+                    //{
+                    //    AddOptionalRomsetToWarningList(machine.Name, reqMachine.Name);
+                    //}
+
+                    //var requiredMachines = _mame.Machines.GetAllDependantMachinesOf(machine);
+                    var requiredMachines = _mame.Machines.GetAllParentDependantMachinesOf(machine);
+                    foreach (var reqMachine in requiredMachines)
+                    {
+                        AddMissingRomsetToWarningList(machine.Name, reqMachine.Name);
+                    }
+
+                    var romOfs = _mame.Machines.GetAllMachinesWithRomOf(machine);
+                    foreach (var romOf in romOfs)
+                    {
+                        AddMissingRomsetToWarningList(machine.Name, romOf.Name);
+                    }
+                }
+            }
+            else if (_userPreferences.Mame.MameSetType == MameSection.MameSetKind.Splitted)
+            {
+                // Parent and clone are linked
+                //    if (machine.IsClone)
+                //    {
+                //        var parent = _mame.Machines.GetParentMachineOf(machine.Name);
+                //        if (parent is not null)
+                //            AddToSelectedItems(parent.Name);
+                //    }
+            }
+            else if (_userPreferences.Mame.MameSetType == MameSection.MameSetKind.Merged)
+            {
+                // Parent and clone are stored together
+                //    if (machine.IsClone)
+                //    {
+                //        var parent = _mame.Machines.GetParentMachineOf(machine.Name);
+                //        if (parent is not null)
+                //        {
+                //            AddToSelectedItems(parent.Name);
+                //            foreach (var clone in _mame.Machines.GetCloneMachinesOf(parent.Name))
+                //            {
+                //                AddToSelectedItems(clone.Name);
+                //            }
+                //        }
+                //    }
+                //    else if (machine.IsParent)
+                //    {
+                //        foreach (var clone in _mame.Machines.GetCloneMachinesOf(machine.Name))
+                //        {
+                //            AddToSelectedItems(clone.Name);
+                //        }
+                //    }
+            }
+            else if (_userPreferences.Mame.MameSetType == MameSection.MameSetKind.NonMerged)
+            {
+                // Parent and clone are in diffetent files
+            }
+            if (_warningRoms.Count > 0)
+            {
+                var sb = new StringBuilder();
+                foreach (var wr in _warningRoms)
+                {
+                    if (wr.MissingRomsets.Any())
+                    {
+                        sb
+                            .Append(wr.Romset)
+                            .Append(" richiesto da ")
+                            .Append(string.Join(",", wr.MissingRomsets.Distinct().OrderBy(x => x)))
+                            .AppendLine();
+                    }
+                    if (wr.OptionalRomsets.Any())
+                    {
+                        sb
+                            .Append(wr.Romset)
+                            .Append(" non richiede più ")
+                            .Append(string.Join(",", wr.OptionalRomsets.Distinct().OrderBy(x => x)))
+                            .AppendLine();
+                    }
+                }
+                Dialogs.ShowInfoDialog($"I controlli hanno evidenziato degli avvisi:\n\n" + sb.ToString());
+            }
+            UpdateInfo();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Dialogs.ShowErrorDialog(new Exception($"Validazione romset fallita", ex));
+            return false;
+        }
+    }
+
+    private void AddOptionalRomsetToWarningList(string machineName, string requiredMachineName)
+    {
+        if (_selectedItems.Contains(requiredMachineName))
+            return;
+        if (_files.FirstOrDefault(x => x.Name == requiredMachineName) is null)
+            return;
+        _warningRoms.AddToOptionalRomsetList(machineName, requiredMachineName);
+    }
+
+    private void AddMissingRomsetToWarningList(string machineName, string requiredMachineName)
+    {
+        if (_selectedItems.Contains(requiredMachineName))
+            return;
+        if (_files.FirstOrDefault(x => x.Name == requiredMachineName) is null)
+            return;
+        _warningRoms.AddToMissingRomsetList(machineName, requiredMachineName);
+    }
+
+    private void MoveMameFiles(MameMachine machine, string destinationPath)
+    {
+        _ = Directory.CreateDirectory(destinationPath);
+        var mamePath = Path.GetDirectoryName(_userPreferences.Mame.ExecutableFilePath);
+        var files = MameFiles.GetAllMameMachineFiles(mamePath, _mameConfig, machine, _userPreferences.Mame.RomPaths);
+        foreach (var file in files)
+        {
+            var fi = new FileInfo(file.Filename);
+            var destFolder = Path.Combine(destinationPath, file.RelativeFolder);
+            if (!Directory.Exists(destFolder))
+                Directory.CreateDirectory(destFolder);
+            var destFile = Path.Combine(destFolder, fi.Name);
+            if (File.Exists(destFile))
+            {
+                // If already exists, find a new unique name
+                var index = 0;
+                while (index < 999)
+                {
+                    index++;
+                    var name = Path.GetFileNameWithoutExtension(fi.Name);
+                    var ext = fi.Extension;
+                    destFile = Path.Combine(destFolder, $"{name} ({index + 1}){ext}");
+                    if (!File.Exists(destFile))
+                        break;
+                }
+            }
+            File.Move(file.Filename, destFile);
+        }
+    }
+
+    private MachinesCache _mameCache = new();
+    private SnapshotsCache _snapshotsCache = new();
+
+    void SetOnlineFiltersEnabled(bool enabled)
+    {
+        // TODO: rifare il menu o seguire la definizione per poi disabilitare le voci diverse
+        var onlineFilters = new[]
+        {
+            MenuFilterTypeMamecab,
+            // TODO: MenuFilterClassificationsGenre,
+            // TODO: MenuFilterClassificationsCategories,
+            // TODO: MenuFilterRelease,
+        };
+
+        //var changed = false;
+        foreach (var item in onlineFilters)
+        {
+            if (item.Enabled == enabled)
+                continue;
+            item.Enabled = enabled;
+            //changed = true;
+        }
+    }
+
+    private async Task LoadFromArcadeDatabaseOrCache(Action<string> progressUpdate)
+    {
+        SetOnlineFiltersEnabled(false);
+
+        // Verifica online
+        if (_online != false)
+        {
+            if (await ArcadeDatabaseIsOnline())
+            {
+                try
+                {
+                    progressUpdate("Lettura sito ArcadeDatabase.net (release)...");
+                    // Check release
+                    var adbRelease = await ServiceMame.Releases();
+                    var mameRelease = string.Join(",", adbRelease.Result);
+
+                    progressUpdate("Lettura sito ArcadeDatabase.net (giochi)...");
+                    if (_mameCache.MameRelease != mameRelease || _mameCache.Items.Count == 0)
+                    {
+                        // Download categories and machine extra info
+                        // http://adb.arcadeitalia.net/service_scraper.php?ajax=query_categories&game_name=mslug;atetris;100lions;mslug3;mslug5
+                        var adbMameCache = await ServiceScraper.QueryCategories();
+                        _mameCache.Clear();
+                        if (adbMameCache.Result is not null && adbMameCache.Result.Machines.Any())
+                        {
+                            foreach (var machine in adbMameCache.Result.Machines)
+                            {
+                                _mameCache.Add(
+                                    key: machine.GameName,
+                                    genre: machine.Genre,
+                                    category: machine.Category,
+                                    release: machine.Release,
+                                    mameCab: machine.MameCab
+                                );
+                            }
+                            _mameCache.Store(adbMameCache.Release, mameRelease);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Dialogs.ShowErrorDialog($"Ci sono stati problemi nella lettura dei dati dal sito di ArcadeItalia.\nRiprovare più tardi\n\n{ex.Message}");
+                }
+            }
+        }
+
+        if (_mameCache.Items.Any())
+        {
+            foreach (var machine in _mame.Machines)
+            {
+                var item = _mameCache.GetByKey(machine.Name);
+                if (item is null)
+                    continue;
+                machine.Extra.Genre = item.Genre;
+                machine.Extra.Category = item.Category;
+                machine.Extra.FirstEmulatorRelease = item.Release;
+                machine.Extra.IsMameCab = item.MameCab;
+            }
+            SetOnlineFiltersEnabled(true);
+        }
+        progressUpdate.Invoke(string.Empty);
+    }
+
+    private async Task<bool> ArcadeDatabaseIsOnline()
+    {
+        if (_online == false)
+            return _online.Value;
+        if (_userPreferences.ArcadeDatabase.ConnectionOption == ArcadeDatabaseSection.ConnectionOptionKind.Offline)
+        {
+            _online = false;
+            return _online.Value;
+        }
+        if (_online is null)
+        {
+            try
+            {
+                var adbStatus = await ServiceGeneric.WebSiteStatus();
+                if (adbStatus.Result?.IsOnline() != true)
+                    throw new Exception("SITO IN MANUTENZIONE");
+                _online = true;
+            }
+            catch (Exception ex)
+            {
+                _online = false;
+                Dialogs.ShowInfoDialog(
+                    "Non è stato possibile connettersi al sito ArcadeDatabase, alcune funzionalità saranno disattivate.\n" +
+                    "Al prossimo riavvio dell'applicazione sarà effettuato un altro tentativo di connessione.\n" +
+                    "\n" +
+                    "Se il PC non dispone di accesso ad internet, modificare le opzioni del programma per evitare questo messaggio ad ogni avvio." +
+                    "\n" +
+                    "\n" +
+                    "Errore: " + ex.Message);
+            }
+        }
+        return _online.Value;
+    }
+
+    private string? GetSelectedGameName() => _currentSelectedItem?.Name;
+
+    private MameMachine? GetSelectedMachine() => string.IsNullOrEmpty(_currentSelectedItem?.Name) ? null : _mame.Machines.GetMachineByName(_currentSelectedItem!.Name!);
+
+    private void UpdateCurrentRomsetInfo()
+    {
+        var machine = GetSelectedMachine();
+        if (machine is null)
+        {
+            pnlRomset.Hide();
+            SelectedRomsetName.Hide();
+            OpenRomsetWebPage.Hide();
+            ClearSnapshot();
+            return;
+        }
+        try
+        {
+            var item = _gridItems.Values.FirstOrDefault(x => x.Name == machine.Name)
+                ?? throw new Exception();
+            SelectedRomsetName.Text = machine.Name.ToUpper();
+            OpenRomsetWebPage.Tag = ServiceMame.GetRomsetUrl(machine.Name);
+            SelectedRomsetName.Show();
+            OpenRomsetWebPage.Show();
+
+            var tipo = "-";
+            if (machine.IsBios)
+                tipo = "BIOS";
+            else if (machine.IsDevice)
+                tipo = "Device";
+            else if (machine.IsParentMachine)
+                tipo = "Parent";
+            else if (machine.IsCloneMachine)
+                tipo = "Clone";
+            else if (machine.IsMechanical)
+                tipo = "Mechanical";
+            var dati = new Dictionary<string, string?>
+            {
+                ["Titolo"] = item.Description,
+                ["Produttore"] = item.Manufacturer,
+                ["Stato"] = item.DriverStatus,
+                ["Anno"] = machine.Year,
+                ["Genere"] = item.Genre,
+                ["Categoriia"] = item.Category,
+                ["Release"] = item.FirstEmulatorRelease,
+                ["Clone"] = item.CloneOf,
+                ["Usa rom"] = item.RomOf,
+                ["Tipo"] = tipo,
+                ["Schermo"] = item.Display,
+                ["File"] = item.HasFiles ? item.TotalFilesSize.ToFileSizeString() : "-"
+            };
+
+            KeyValueRomset.SetData(dati);
+
+            pnlRomset.Show();
+        }
+        catch
+        {
+            pnlRomset.Hide();
+            SelectedRomsetName.Hide();
+            OpenRomsetWebPage.Hide();
+        }
+        LoadSnapshot(machine.Name);
+    }
+
+    private CancellationTokenSource _snapshotCts = new();
+    private void ClearSnapshot()
+    {
+        // Cancel current process
+        _snapshotCts.Cancel();
+        _snapshotCts.Dispose();
+        _snapshotCts = new();
+        var token = _snapshotCts.Token;
+
+        // Remove progress bar
+        Snapshot.Controls.OfType<ProgressBar>().ToList().ForEach(pb => Snapshot.Controls.Remove(pb));
+        Snapshot.Image = SnapshotPlaceholder.Image;
+    }
+
+    private async void LoadSnapshot(string romset)
+    {
+        ClearSnapshot();
+
+        // Create a progress bar
+        var progressBar = new ProgressBar
+        {
+            Style = ProgressBarStyle.Marquee,
+            MarqueeAnimationSpeed = 15,
+            Dock = DockStyle.Bottom,
+            Height = 5
+        };
+        Snapshot.Controls.Add(progressBar);
+        Snapshot.Refresh(); // Screen update required
+
+        try
+        {
+            _snapshotCts.Token.ThrowIfCancellationRequested();
+            // Jon work in background
+            var image = await Task.Run(() => GetGameSnapshotImage(romset, _snapshotCts.Token));
+            _snapshotCts.Token.ThrowIfCancellationRequested();
+            Snapshot.Image = image;
+        }
+        catch (OperationCanceledException)
+        {
+            // Ignore
+        }
+        catch
+        {
+            // If error, use a placeholder
+            Snapshot.Image = SnapshotPlaceholder.Image;
+        }
+        finally
+        {
+            Snapshot.Controls.Remove(progressBar);
+        }
+    }
+
+    private async Task<Image> GetGameSnapshotImage(string? romset, CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrEmpty(romset))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            return SnapshotPlaceholder.Image;
+        }
+        foreach (var path in _mameConfig.GetMameMachineFilenames(romset, _mameConfig.SnapshotDirectory))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            foreach (var ext in "png,jpg".Split(','))
+            {
+                var filename = $"{path}.{ext}";
+                if (File.Exists(filename))
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    return Image.FromFile(filename);
+                }
+            }
+        }
+
+        // Tento con i dati in cache
+        var file = _snapshotsCache.GetByKey(romset!);
+        if (file is not null)
+            return Image.FromFile(file.FilePath);
+
+
+        // If not found, try online resources
+        if (await ArcadeDatabaseIsOnline())
+        {
+            try
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                var imageStream = await Servicedownload.GetCurrentIngameFile(romset!, cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+                var image = ImageHelper.ConvertStreamToImage(imageStream);
+                _snapshotsCache.Add(romset!, image);
+                return image;
+            }
+            catch
+            {
+                // Ignore
+            }
+        }
+        cancellationToken.ThrowIfCancellationRequested();
+        return SnapshotPlaceholder.Image;
+    }
+
+    private void OpenRomsetWebPage_Click(object sender, EventArgs e)
+    {
+        var url = OpenRomsetWebPage.Tag?.ToString();
+        if (string.IsNullOrEmpty(url))
+            return;
+        Dialogs.OpenUrl(url!);
+    }
+
+    private void GamesListView_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        var oldValue = _currentSelectedItem;
+        if (GamesListView.SelectedIndices.Count > 0 && _gridItems.TryGetValue(GamesListView.SelectedIndices[0], out var value))
+            _currentSelectedItem = value;
+        else
+            _currentSelectedItem = null;
+        if (oldValue != _currentSelectedItem)
+            UpdateCurrentRomsetInfo();
+    }
+
+    private void GamesListView_MouseDown(object sender, MouseEventArgs e)
+    {
+        var info = GamesListView.HitTest(e.Location);
+        if (info.Item == null && _currentSelectedItem != null)
+        {
+            _currentSelectedItem = null;
+            GamesListView.SelectedIndices.Clear();
+            UpdateCurrentRomsetInfo();
+        }
+    }
+
+
+    private void MenuFiltersItem_Click(object sender, EventArgs e)
+    {
+        if (sender is not ToolStripItem menuItem)
+            return;
+        if (!menuItem.Enabled)
+            return;
+        if (!Enum.TryParse(menuItem.Tag?.ToString() ?? string.Empty, true, out FilterKind filter) || !_menuActions.ContainsKey(filter))
+            Dialogs.ShowErrorDialog($"Unsupported filter type {menuItem.Tag?.ToString()}");
+        ApplyFilters(_menuActions[filter]);
+    }
+}
