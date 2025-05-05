@@ -37,8 +37,6 @@ public partial class OptionsForm : Form
         CleanMoveToFolder.Checked = _userPreferences.CleanOptions.CleanMethod == CleanMethodKind.MoveFilesToFolder;
         CleanMoveToRecycleBin.Checked = _userPreferences.CleanOptions.CleanMethod == CleanMethodKind.MoveFilesToRecycleBin;
         CleanDeleteFiles.Checked = _userPreferences.CleanOptions.CleanMethod == CleanMethodKind.DeleteFiles;
-        //txtRemovedFilesFolder.Enabled = CleanMoveToFolder.Checked;
-        //cmdSfogliaRemovedFilesFolder.Enabled = CleanMoveToFolder.Checked;
 
         MameSetType = _userPreferences.Mame.MameSetType;
 
@@ -204,10 +202,10 @@ public partial class OptionsForm : Form
         }
         set
         {
+            MameSetTypeAuto.Checked = value == MameSetKind.Auto;
             MameSetTypeSplitted.Checked = value == MameSetKind.Splitted;
             MameSetTypeMerged.Checked = value == MameSetKind.Merged;
             MameSetTypeNonMerged.Checked = value == MameSetKind.NonMerged;
-            MameSetTypeAuto.Checked = value == MameSetKind.Splitted;
         }
     }
 
