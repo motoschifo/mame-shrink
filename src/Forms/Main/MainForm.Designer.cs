@@ -107,6 +107,9 @@
             // 
             // GamesListView
             // 
+            this.GamesListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.GamesListView.CheckBoxes = true;
             this.GamesListView.Enabled = false;
             this.GamesListView.HideSelection = false;
@@ -304,6 +307,8 @@
             // 
             // ToolbarMenuGrid
             // 
+            this.ToolbarMenuGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ToolbarMenuGrid.AutoSize = false;
             this.ToolbarMenuGrid.Dock = System.Windows.Forms.DockStyle.None;
             this.ToolbarMenuGrid.Enabled = false;
@@ -351,6 +356,7 @@
             // GridTextFilter
             // 
             this.GridTextFilter.AutoSize = false;
+            this.GridTextFilter.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.GridTextFilter.MaxLength = 100;
             this.GridTextFilter.Name = "GridTextFilter";
             this.GridTextFilter.Size = new System.Drawing.Size(100, 23);
@@ -413,6 +419,7 @@
             // 
             // SelectedRomsetName
             // 
+            this.SelectedRomsetName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SelectedRomsetName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectedRomsetName.Location = new System.Drawing.Point(654, 140);
             this.SelectedRomsetName.Name = "SelectedRomsetName";
@@ -424,6 +431,8 @@
             // 
             // pnlRomset
             // 
+            this.pnlRomset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlRomset.Controls.Add(this.KeyValueRomset);
             this.pnlRomset.Location = new System.Drawing.Point(653, 359);
             this.pnlRomset.Name = "pnlRomset";
@@ -433,16 +442,18 @@
             // 
             // KeyValueRomset
             // 
+            this.KeyValueRomset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.KeyValueRomset.AutoSize = true;
             this.KeyValueRomset.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.KeyValueRomset.Dock = System.Windows.Forms.DockStyle.Fill;
             this.KeyValueRomset.Location = new System.Drawing.Point(0, 0);
             this.KeyValueRomset.Name = "KeyValueRomset";
-            this.KeyValueRomset.Size = new System.Drawing.Size(259, 236);
+            this.KeyValueRomset.Size = new System.Drawing.Size(0, 0);
             this.KeyValueRomset.TabIndex = 63;
             // 
             // OpenRomsetWebPage
             // 
+            this.OpenRomsetWebPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.OpenRomsetWebPage.Location = new System.Drawing.Point(826, 139);
             this.OpenRomsetWebPage.Name = "OpenRomsetWebPage";
             this.OpenRomsetWebPage.Size = new System.Drawing.Size(78, 20);
@@ -505,6 +516,7 @@
             // 
             // Snapshot
             // 
+            this.Snapshot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Snapshot.Image = global::MAME_Shrink.Properties.Resources.ingame_placeholder;
             this.Snapshot.Location = new System.Drawing.Point(653, 164);
             this.Snapshot.Name = "Snapshot";
@@ -542,7 +554,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(918, 607);
+            this.ClientSize = new System.Drawing.Size(918, 601);
             this.Controls.Add(this.ValidateRomset);
             this.Controls.Add(this.SelectedRomsetName);
             this.Controls.Add(this.OpenRomsetWebPage);

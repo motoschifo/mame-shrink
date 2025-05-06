@@ -7,14 +7,14 @@ public static class Int64Extension
 
     /// <summary>
     /// Esempio di utilizzo
-    ///   long fileSize = 23500000; // 23.5MB
+    ///   long fileSize = 23500000; // 23.5 MB
     ///   Console.WriteLine(fileSize.ToFileSizeString());
     /// </summary>
     /// <param name="fileSize"></param>
     /// <returns></returns>
     public static string ToFileSizeString(this long fileSize)
     {
-        string[] suffixes = { "B", "KB", "MB", "GB", "TB" };
+        string[] suffixes = ["B", "KB", "MB", "GB", "TB"];
         double size = fileSize;
         var index = 0;
 
@@ -24,7 +24,7 @@ public static class Int64Extension
             index++;
         }
 
-        var format = (size % 1 == 0) ? "{0:0}{1}" : "{0:0.#}{1}";
+        var format = (size % 1 == 0) ? "{0:0} {1}" : "{0:0.#} {1}";
         return string.Format(format, size, suffixes[index]);
     }
 }

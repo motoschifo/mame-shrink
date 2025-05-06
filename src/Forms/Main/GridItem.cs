@@ -24,10 +24,18 @@ internal class GamesGridItem
     public int InputButtons { get; set; }
     public int InputPlayers { get; set; }
     public string? FirstEmulatorRelease { get; set; }
-    public List<RomFile> Files { get; set; } = [];
-    public bool HasFiles => Files.Count > 0;
-    public long TotalFilesSize => Files.Sum(x => x.Size);
     public bool CanBeSelected { get; set; }
+    public IReadOnlyCollection<RomFile> Files => _files.AsReadOnly();
+    private readonly List<RomFile> _files = [];
+    public bool HasFiles { get; private set; }
+    public long TotalFilesSize { get; private set; }
+    public void AddFile(RomFile file)
+    {
+        _files.Add(file);
+        HasFiles = true;
+        TotalFilesSize += file.Size;
+    }
+
 
     public GamesGridItem()
     {
@@ -84,7 +92,6 @@ internal class GamesGridItem
             InputButtons = machine.Input.Controls.FirstOrDefault()?.Buttons ?? 0,
             InputPlayers = machine.Input.Players,
             FirstEmulatorRelease = string.IsNullOrEmpty(machine.Extra.FirstEmulatorRelease) ? "-" : machine.Extra.FirstEmulatorRelease,
-            Files = [],
             CanBeSelected = false
         };
         return item;

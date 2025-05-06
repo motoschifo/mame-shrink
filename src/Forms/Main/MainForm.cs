@@ -480,6 +480,7 @@ public partial class MainForm : Form
                 GridColumnKind.Players => g.InputPlayers > 0 ? g.InputPlayers.ToString("0") : "-",
                 GridColumnKind.Buttons => g.InputButtons > 0 ? g.InputButtons.ToString("0") : "-",
                 GridColumnKind.Display => g.Display,
+                GridColumnKind.Size => g.HasFiles ? g.TotalFilesSize.ToFileSizeString() : "-",
                 _ => "-"
             };
             _ = li.SubItems.Add(text);
@@ -572,6 +573,25 @@ public partial class MainForm : Form
                     x.Description?.IndexOf(s, StringComparison.OrdinalIgnoreCase) >= 0 ||
                     x.Name.IndexOf(s, StringComparison.OrdinalIgnoreCase) >= 0)];
             }
+
+            var tmpGridItems = new List<GamesGridItem>();
+            foreach (var item in list)
+            {
+                if (_showType is ShowType.Selected && !_selectedItems.Contains(item.Name))
+                    continue;
+                else if (_showType is ShowType.NotSelected && _selectedItems.Contains(item.Name))
+                    continue;
+                var gridItem = GamesGridItem.Create(item);
+                var file = _files.FirstOrDefault(x => x.Name == item.Name);
+                if (file is not null)
+                {
+                    gridItem.AddFile(file);
+                    gridItem.CanBeSelected = true;
+                }
+                if (_showType == ShowType.ExistingFiles && !gridItem.HasFiles)
+                    continue;
+                tmpGridItems.Add(gridItem);
+            }
             Func<GamesGridItem, object?> orderByPredicate = _sortColumn switch
             {
                 GridColumnKind.Id => item => item.Description,
@@ -587,32 +607,20 @@ public partial class MainForm : Form
                 GridColumnKind.Players => item => item.InputPlayers,
                 GridColumnKind.Buttons => item => item.InputButtons,
                 GridColumnKind.Display => item => item.Display,
+                GridColumnKind.Size => item => item.TotalFilesSize,
                 _ => item => item.Description
             };
+            var orderedList = _sortAsc
+                ? tmpGridItems.OrderBy(orderByPredicate)
+                : tmpGridItems.OrderByDescending(orderByPredicate);
 
-            List<GamesGridItem> tmpList = _sortAsc
-                ? [.. list.Select(GamesGridItem.Create).OrderBy(orderByPredicate)]
-                : [.. list.Select(GamesGridItem.Create).OrderByDescending(orderByPredicate)];
-            var index = 0;
-            _gridItems = [];
-            foreach (var item in tmpList)
-            {
-                if (_showType is ShowType.Selected && !_selectedItems.Contains(item.Name))
-                    continue;
-                else if (_showType is ShowType.NotSelected && _selectedItems.Contains(item.Name))
-                    continue;
-                var file = _files.FirstOrDefault(x => x.Name == item.Name);
-                if (file is not null)
+            _gridItems = orderedList
+                .Select((item, index) =>
                 {
-                    item.Files.Add(file);
-                    item.CanBeSelected = true;
-                }
-                if (_showType == ShowType.ExistingFiles && !item.HasFiles)
-                    continue;
-                item.Index = index;
-                index++;
-                _gridItems.Add(item.Index, item);
-            }
+                    item.Index = index;
+                    return new { index, item };
+                })
+                .ToDictionary(x => x.index, x => x.item);
 
             GamesListView.VirtualListSize = _gridItems.Count();
         }
@@ -905,12 +913,12 @@ public partial class MainForm : Form
                 {
                     i++;
                     if (i % 100 == 0)
-                        progressUpdate($"Lettura file cartella roms {i}..");
+                        progressUpdate($"Lettura file cartella roms {i}...");
                     var romset = file.Substring(file.LastIndexOf(@"\") + 1);
                     _files.Add(new RomFile()
                     {
                         Name = romset.Substring(0, romset.Length - ext.Length - 1),
-                        Filename = file,
+                        FilePath = file,
                         Size = new FileInfo(file).Length
                     });
                 }
