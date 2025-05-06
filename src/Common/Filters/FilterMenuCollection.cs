@@ -23,9 +23,9 @@ internal class FilterMenuCollection : Collection<FilterMenuItem>
             {
                 new FilterMenuItem { Text = "Mamecab", Kind = FilterKind.IsMamecab },
                 new FilterMenuItem { IsSeparator = true },
-                new FilterMenuItem { Text = "Gioco", Kind = FilterKind.IsMachine },
-                new FilterMenuItem { Text = "Gioco parent", Kind = FilterKind.IsParentMachine },
-                new FilterMenuItem { Text = "Gioco clone", Kind = FilterKind.IsCloneMachine },
+                new FilterMenuItem { Text = "Macchina", Kind = FilterKind.IsMachine },
+                new FilterMenuItem { Text = "Macchina parent", Kind = FilterKind.IsParentMachine },
+                new FilterMenuItem { Text = "Macchina clone", Kind = FilterKind.IsCloneMachine },
                 new FilterMenuItem { IsSeparator = true },
                 new FilterMenuItem { Text = "Bios", Kind = FilterKind.IsBios },
                 new FilterMenuItem { Text = "Dispositivo", Kind = FilterKind.IsDevice },
