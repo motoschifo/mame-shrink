@@ -1,7 +1,10 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
+using System.Data.Sql;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
@@ -19,6 +22,7 @@ using MameTools.Net48.Machines.Displays;
 using MameTools.Net48.Machines.Drivers;
 using MameTools.Net48.Machines.Feature;
 using MameTools.Net48.Machines.Inputs;
+using MameTools.Net48.Machines.Legacy;
 using MameTools.Net48.Machines.Ports;
 using MameTools.Net48.Machines.RamOptions;
 using MameTools.Net48.Machines.Roms;
@@ -26,11 +30,14 @@ using MameTools.Net48.Machines.Samples;
 using MameTools.Net48.Machines.Shared;
 using MameTools.Net48.Machines.Slots;
 using MameTools.Net48.Machines.Sounds;
+using NLog;
 using static MameTools.Net48.Machines.Displays.Display;
 namespace MameTools.Net48.Imports;
 
 public static class ImportMachines
 {
+    private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
     public static async Task LoadFromFile(Mame mame, string filename, bool loadHeaderOnly = false, Action<string?>? progressUpdate = null,
         string? prefix = "", int loadNodes = MameMachineNodes.Defaults, CancellationToken cancellationToken = default)
     {
@@ -190,6 +197,11 @@ public static class ImportMachines
                     _ = xml.Read();
                     machine.Manufacturer = xml.Value;
                 }
+                else if ("history".EqualsIgnoreCase(xml.LocalName))
+                {
+                    _ = xml.Read();
+                    machine.History = xml.Value;
+                }
                 else if ("biosset".EqualsIgnoreCase(xml.LocalName))
                 {
                     if ((loadNodes & MameMachineNodes.BiosSet) == 0)
@@ -243,7 +255,8 @@ public static class ImportMachines
                 {
                     if ((loadNodes & MameMachineNodes.Input) == 0)
                         continue;
-                    machine.Input = ProcessNodeInput(xml);
+                    machine.Input = ProcessNodeInput(xml, out var legacyValues);
+                    machine.LegacyValues.AddRange(legacyValues);
                 }
                 else if ("dipswitch".EqualsIgnoreCase(xml.LocalName))
                 {
@@ -273,7 +286,8 @@ public static class ImportMachines
                 {
                     if ((loadNodes & MameMachineNodes.Driver) == 0)
                         continue;
-                    machine.Driver = ProcessNodeDriver(xml);
+                    machine.Driver = ProcessNodeDriver(xml, out var legacyValues);
+                    machine.LegacyValues.AddRange(legacyValues);
                 }
                 else if ("feature".EqualsIgnoreCase(xml.LocalName))
                 {
@@ -314,6 +328,8 @@ public static class ImportMachines
                 }
             }
         }
+
+        FixLegacyValues(machine);
         return machine;
     }
 
@@ -437,12 +453,15 @@ public static class ImportMachines
             Bios = xml.GetAttribute("bios"),
             Size = xml.GetAttribute<int>("size") ?? 0,
             CRC = xml.GetAttribute("crc"),
+            MD5 = xml.GetAttribute("md5"),
             SHA1 = xml.GetAttribute("sha1"),
             Merge = xml.GetAttribute("merge"),
             Region = xml.GetAttribute("region"),
             Offset = xml.GetAttribute("offset"),
             Optional = "yes".EqualsIgnoreCase(xml.GetAttribute("optional")),
-            Status = Rom.ParseStatus(xml.GetAttribute("status"))
+            Status = Rom.ParseStatus(xml.GetAttribute("status")),
+            Dispose = "yes".EqualsIgnoreCase(xml.GetAttribute("dispose")),
+            SoundOnly = "yes".EqualsIgnoreCase(xml.GetAttribute("soundonly")),
         };
     }
 
@@ -525,6 +544,7 @@ public static class ImportMachines
             Tag = xml.GetAttribute("tag"),
             Name = xml.GetAttribute("name"),
             Clock = xml.GetAttribute<int>("clock") ?? 0,
+            SoundOnly = "yes".EqualsIgnoreCase(xml.GetAttribute("soundonly")),
         };
     }
 
@@ -638,9 +658,10 @@ public static class ImportMachines
         return dipSwitch;
     }
 
-    private static Driver ProcessNodeDriver(XmlReader xml)
+    private static Driver ProcessNodeDriver(XmlReader xml, out List<LegacyValue>? legacyValues)
     {
-        return new Driver
+        legacyValues = null;
+        var driver = new Driver
         {
             Status = Driver.ParseStatus(xml.GetAttribute("status")),
             Emulation = Driver.ParseEmulation(xml.GetAttribute("emulation")),
@@ -648,8 +669,23 @@ public static class ImportMachines
             RequiresArtwork = "yes".EqualsIgnoreCase(xml.GetAttribute("requiresartwork")),
             Unofficial = "yes".EqualsIgnoreCase(xml.GetAttribute("unofficial")),
             NoSoundHardware = "yes".EqualsIgnoreCase(xml.GetAttribute("nosoundhardware")),
-            Incomplete = "yes".EqualsIgnoreCase(xml.GetAttribute("incomplete"))
+            Incomplete = "yes".EqualsIgnoreCase(xml.GetAttribute("incomplete")),
+            PaletteSize = xml.GetAttribute<int>("palettesize") ?? 0,
         };
+        var legacyColor = xml.GetAttribute("color");
+        if (!string.IsNullOrEmpty(legacyColor))
+        {
+            legacyValues =
+            [
+                new LegacyValue
+                {
+                    ParentNode = "driver",
+                    Node = "color",
+                    Value = legacyColor
+                },
+            ];
+        }
+        return driver;
     }
 
     private static Device ProcessNodeDevice(XmlReader xml)
@@ -798,12 +834,15 @@ public static class ImportMachines
             Refresh = xml.GetAttribute<decimal>("refresh") ?? 0,
             Width = orientation == DisplayOrientationKind.vertical ? height : width,
             Height = orientation == DisplayOrientationKind.vertical ? width : height,
+            AspectX = xml.GetAttribute<int>("aspectx") ?? 1,
+            AspectY = xml.GetAttribute<int>("aspecty") ?? 1,
         };
         return display;
     }
 
-    private static Input ProcessNodeInput(XmlReader xml)
+    private static Input ProcessNodeInput(XmlReader xml, out List<LegacyValue>? legacyValues)
     {
+        legacyValues = null;
         var nodeName = xml.LocalName;
         #region <!ELEMENT input (control*)>
         //	<!ATTLIST input service (yes|no) "no">
@@ -832,9 +871,31 @@ public static class ImportMachines
         {
             Service = "yes".EqualsIgnoreCase(xml.GetAttribute("service")),
             Tilt = "yes".EqualsIgnoreCase(xml.GetAttribute("tilt")),
-            Players = xml.GetAttribute<int>("players") ?? 0,
-            Coins = xml.GetAttribute<int>("coins") ?? 0
+            Coins = xml.GetAttribute<int>("coins") ?? 0,
+            Players = xml.GetAttribute<int>("players") ?? 0
         };
+        var legacyButtons = xml.GetAttribute("buttons");
+        if (legacyButtons is not null)
+        {
+            legacyValues ??= [];
+            legacyValues.Add(new LegacyValue
+            {
+                ParentNode = "input",
+                Node = "buttons",
+                Value = legacyButtons
+            });
+        }
+        var legacyControl = xml.GetAttribute("control");
+        if (!string.IsNullOrEmpty(legacyControl))
+        {
+            legacyValues ??= [];
+            legacyValues.Add(new LegacyValue
+            {
+                ParentNode = "input",
+                Node = "control",
+                Value = legacyControl
+            });
+        }
 
         if (!xml.IsEmptyElement)
         {
@@ -870,7 +931,7 @@ public static class ImportMachines
 
                 if ("control".EqualsIgnoreCase(xml.LocalName))
                 {
-                    input.Controls.Add(new Control
+                    var control = new Control
                     {
                         Type = xml.GetAttribute("type"),
                         Player = xml.GetAttribute<int>("player") ?? 0,
@@ -884,7 +945,8 @@ public static class ImportMachines
                         Ways = xml.GetAttribute<int>("ways") ?? 0,
                         Ways2 = xml.GetAttribute<int>("ways2") ?? 0,
                         Ways3 = xml.GetAttribute<int>("ways3") ?? 0
-                    });
+                    };
+                    input.Controls.Add(control);
                 }
             }
         }
@@ -897,6 +959,7 @@ public static class ImportMachines
         return new Disk
         {
             Name = xml.GetAttribute("name"),
+            MD5 = xml.GetAttribute("md5"),
             SHA1 = xml.GetAttribute("sha1"),
             Merge = xml.GetAttribute("marge"),
             Region = xml.GetAttribute("region"),
@@ -905,6 +968,178 @@ public static class ImportMachines
             Optional = "yes".EqualsIgnoreCase(xml.GetAttribute("optional")),
             Status = Disk.ParseStatus(xml.GetAttribute("status"))
         };
+    }
+
+
+    private static readonly Dictionary<string, string> _typeMap = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["dial"] = "dial",
+        ["lightgun"] = "lightgun",
+        ["paddle"] = "paddle",
+        ["stick"] = "stick",
+        ["trackball"] = "trackball",
+        ["doublejoy4way"] = "doublejoy",
+        ["doublejoy8way"] = "doublejoy",
+        ["joy2way"] = "joy",                // From release 0.101
+        ["joy4way"] = "joy",
+        ["joy8way"] = "joy",
+        ["vjoy2way"] = "joy",               // From release 0.101
+        ["vdoublejoy2way"] = "doublejoy",   // From release 0.101
+        ["doublejoy2way"] = "doublejoy",    // From release 0.101
+    };
+
+    private static readonly Dictionary<string, int> _waysMap = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["dial"] = 0,
+        ["lightgun"] = 0,
+        ["paddle"] = 0,
+        ["stick"] = 0,
+        ["trackball"] = 0,
+        ["doublejoy4way"] = 4,
+        ["doublejoy8way"] = 8,
+        ["joy2way"] = 2,                    // From release 0.101
+        ["joy4way"] = 4,
+        ["joy8way"] = 8,
+        ["vjoy2way"] = 2,                   // From release 0.101
+        ["vdoublejoy2way"] = 2,             // From release 0.101
+        ["doublejoy2way"] = 2,              // From release 0.101
+    };
+
+    private static void FixLegacyValues(MameMachine machine)
+    {
+        if (machine.LegacyValues.Count > 0)
+        {
+            var legacy = machine.LegacyValues.FirstOrDefault(x => x.ParentNode == "driver" && x.Node == "color");
+            if (legacy is not null && !"good".EqualsIgnoreCase(legacy.Value) && machine.FeatureOfType(Feature.FeatureKind.palette) is null)
+            {
+                // good|imperfect|preliminary
+                var status = Feature.FeatureStatusKind.unknown;
+                var overall = Feature.FeatureOverallKind.unknown;
+                if ("imperfect".EqualsIgnoreCase(legacy.Value))
+                {
+                    status = Feature.FeatureStatusKind.imperfect;
+                    overall = Feature.FeatureOverallKind.imperfect;
+                }
+                else if ("preliminary".EqualsIgnoreCase(legacy.Value))
+                {
+                    status = Feature.FeatureStatusKind.unemulated;
+                    overall = Feature.FeatureOverallKind.unemulated;
+                }
+                machine.Features.Add(new Feature
+                {
+                    Type = Feature.FeatureKind.palette,
+                    Status = status,
+                    Overall = overall
+                });
+            }
+
+            legacy = machine.LegacyValues.FirstOrDefault(x => x.ParentNode == "input" && x.Node == "control");
+            if (legacy is not null)
+            {
+                var control = machine.Input.Controls.FirstOrDefault();
+                if (control is null)
+                {
+                    control = new();
+                    machine.Input.Controls.Add(control);
+                }
+                if (_typeMap.TryGetValue(legacy.Value, out var typeMap))
+                    control.Type = typeMap;
+                else
+                    _logger.Warn($"Tag 'input' has an invalid value for 'control' ({legacy})");
+                if (_waysMap.TryGetValue(legacy.Value, out var waysMap))
+                    control.Ways = waysMap;
+                else
+                    _logger.Warn($"Tag 'input' has an invalid value for 'control' ({legacy})");
+            }
+
+            legacy = machine.LegacyValues.FirstOrDefault(x => x.ParentNode == "input" && x.Node == "buttons");
+            if (legacy is not null)
+            {
+                var control = machine.Input.Controls.FirstOrDefault();
+                if (control is null)
+                {
+                    control = new();
+                    machine.Input.Controls.Add(control);
+                }
+                if (int.TryParse(legacy.Value, out var value))
+                    control.Buttons = value;
+            }
+
+            //<!ATTLIST driver sound (good|imperfect|preliminary) #REQUIRED>
+            legacy = machine.LegacyValues.FirstOrDefault(x => x.ParentNode == "driver" && x.Node == "sound");
+            if (legacy is not null && !"good".EqualsIgnoreCase(legacy.Value) && machine.FeatureOfType(Feature.FeatureKind.palette) is null)
+            {
+                // good|imperfect|preliminary
+                var status = Feature.FeatureStatusKind.unknown;
+                var overall = Feature.FeatureOverallKind.unknown;
+                if ("imperfect".EqualsIgnoreCase(legacy.Value))
+                {
+                    status = Feature.FeatureStatusKind.imperfect;
+                    overall = Feature.FeatureOverallKind.imperfect;
+                }
+                else if ("preliminary".EqualsIgnoreCase(legacy.Value))
+                {
+                    status = Feature.FeatureStatusKind.unemulated;
+                    overall = Feature.FeatureOverallKind.unemulated;
+                }
+                machine.Features.Add(new Feature
+                {
+                    Type = Feature.FeatureKind.sound,
+                    Status = status,
+                    Overall = overall
+                });
+            }
+
+            //<!ATTLIST driver graphic (good|imperfect|preliminary) #REQUIRED>
+            legacy = machine.LegacyValues.FirstOrDefault(x => x.ParentNode == "driver" && x.Node == "graphic");
+            if (legacy is not null && !"good".EqualsIgnoreCase(legacy.Value) && machine.FeatureOfType(Feature.FeatureKind.palette) is null)
+            {
+                // good|imperfect|preliminary
+                var status = Feature.FeatureStatusKind.unknown;
+                var overall = Feature.FeatureOverallKind.unknown;
+                if ("imperfect".EqualsIgnoreCase(legacy.Value))
+                {
+                    status = Feature.FeatureStatusKind.imperfect;
+                    overall = Feature.FeatureOverallKind.imperfect;
+                }
+                else if ("preliminary".EqualsIgnoreCase(legacy.Value))
+                {
+                    status = Feature.FeatureStatusKind.unemulated;
+                    overall = Feature.FeatureOverallKind.unemulated;
+                }
+                machine.Features.Add(new Feature
+                {
+                    Type = Feature.FeatureKind.graphics,
+                    Status = status,
+                    Overall = overall
+                });
+            }
+
+            //<!ATTLIST driver protection (good|imperfect|preliminary) #IMPLIED>
+            legacy = machine.LegacyValues.FirstOrDefault(x => x.ParentNode == "driver" && x.Node == "protection");
+            if (legacy is not null && !"good".EqualsIgnoreCase(legacy.Value) && machine.FeatureOfType(Feature.FeatureKind.palette) is null)
+            {
+                // good|imperfect|preliminary
+                var status = Feature.FeatureStatusKind.unknown;
+                var overall = Feature.FeatureOverallKind.unknown;
+                if ("imperfect".EqualsIgnoreCase(legacy.Value))
+                {
+                    status = Feature.FeatureStatusKind.imperfect;
+                    overall = Feature.FeatureOverallKind.imperfect;
+                }
+                else if ("preliminary".EqualsIgnoreCase(legacy.Value))
+                {
+                    status = Feature.FeatureStatusKind.unemulated;
+                    overall = Feature.FeatureOverallKind.unemulated;
+                }
+                machine.Features.Add(new Feature
+                {
+                    Type = Feature.FeatureKind.protection,
+                    Status = status,
+                    Overall = overall
+                });
+            }
+        }
     }
 
 }

@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Configurations\MameConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exports\FileFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\CollectionExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\XmlReaderExtension.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Machines\Features\FeatureStatusKind.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Machines\Inputs\Control.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Machines\Inputs\Input.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Machines\Legacy\LegacyValue.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Machines\MameMachine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Machines\MameMachineCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Machines\MameMachineExtra.cs" />

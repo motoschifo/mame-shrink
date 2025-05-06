@@ -75,7 +75,7 @@ public class MachinesCache
             throw new Exception("File path not set");
         Release = release;
         MameRelease = mameRelease;
-        JsonHelper.SerializeJsonFile(_filePath, this);
+        JsonHelper.SerializeJsonFile(_filePath!, this);
     }
 
     public MachineCacheItem? GetByKey(string key) => Items.TryGetValue(key, out MachineCacheItem? item) ? item : null;

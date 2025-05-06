@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using MameTools.Net48.Common;
 using MameTools.Net48.Machines;
@@ -14,6 +15,7 @@ using MameTools.Net48.Machines.Disks;
 using MameTools.Net48.Machines.Displays;
 using MameTools.Net48.Machines.Drivers;
 using MameTools.Net48.Machines.Feature;
+using MameTools.Net48.Machines.Legacy;
 using MameTools.Net48.Machines.Ports;
 using MameTools.Net48.Machines.RamOptions;
 using MameTools.Net48.Machines.Roms;
@@ -56,6 +58,11 @@ public class MameMachine
     public bool UseSample => !string.IsNullOrEmpty(SampleOf);
     public MameCollection<Sample> Samples { get; } = [];
     public string? Manufacturer { get; set; }
+    /// <summary>
+    /// WARNING: Legacy release, up to 0.100
+    /// </summary>
+    public string? History { get; set; }
+
     //public string? ControlType { get; set; }
     //public string? ControlWays { get; set; }
     public MameCollection<Display> Displays { get; } = [];
@@ -125,5 +132,6 @@ public class MameMachine
     public MameCollection<Port> Ports { get; private set; } = [];
     public MameCollection<Adjuster> Adjusters { get; private set; } = [];
     public MameCollection<Slot> Slots { get; private set; } = [];
-    public MameMachineExtra Extra = new();
+    public MameMachineExtra Extra { get; private set; } = new();
+    public MameCollection<LegacyValue> LegacyValues { get; private set; } = [];
 }

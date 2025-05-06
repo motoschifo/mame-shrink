@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using MameTools.Net48.Extensions;
 
 namespace MameTools.Net48.Machines.Displays;
@@ -25,4 +26,12 @@ public partial class Display
     public int VTotal { get; set; }
     public int VBEnd { get; set; }
     public int VBStart { get; set; }
+    /// <summary>
+    /// WARNING: Legacy release, up to 0.100
+    /// </summary>
+    public int AspectX { get; set; }
+    /// <summary>
+    /// WARNING: Legacy release, up to 0.100
+    /// </summary>
+    public int AspectY { get; set; }
 }

@@ -1,4 +1,6 @@
 ﻿#nullable enable
+using System;
+
 namespace MameTools.Net48.Machines.Inputs;
 
 public class Control
@@ -13,6 +15,12 @@ public class Control
     public int KeyDelta { get; set; }
     public bool Reverse { get; set; }
     public int Ways { get; set; }
+    /// <summary>
+    /// WARNING: Legacy release, up to 0.100
+    /// </summary>
     public int Ways2 { get; set; }
+    /// <summary>
+    /// WARNING: Legacy release, up to 0.100
+    /// </summary>
     public int Ways3 { get; set; }
 }

@@ -1,10 +1,15 @@
 ﻿#nullable enable
+using System;
 using MameTools.Net48.Extensions;
 namespace MameTools.Net48.Machines.Disks;
 
 public partial class Disk
 {
     public string Name { get; set; } = default!;
+    /// <summary>
+    /// WARNING: Legacy release, up to 0.100
+    /// </summary>
+    public string? MD5 { get; set; }
     public string? SHA1 { get; set; }
     public string? Merge { get; set; }
     public string? Region { get; set; }

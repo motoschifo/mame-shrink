@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using MameTools.Net48.Extensions;
 
 namespace MameTools.Net48.Machines.Drivers;
@@ -17,8 +18,8 @@ public partial class Driver
     public bool Unofficial { get; set; }
     public bool NoSoundHardware { get; set; }
     public bool Incomplete { get; set; }
-    //public string? Color { get; set; }  // TODO: Vecchie versioni
-    //public string? Sound { get; set; }  // TODO: Vecchie versioni
-    //public string? Graphic { get; set; }  // TODO: Vecchie versioni
-    //public string? Protection { get; set; }  // TODO: Vecchie versioni
+    /// <summary>
+    /// WARNING: Legacy release, up to 0.100
+    /// </summary>
+    public int PaletteSize { get; set; }
 }
