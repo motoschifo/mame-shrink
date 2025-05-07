@@ -53,7 +53,7 @@ public static class ImportSoftware
         //    }
         //}
 
-        progressUpdate?.Invoke($"{prefix}Lettura file xml software...");
+        progressUpdate?.Invoke($"{prefix}Lettura xml software...");
         using XmlTextReader xml = new(filename)
         {
             WhitespaceHandling = WhitespaceHandling.None

@@ -18,6 +18,7 @@ using Extensions.Net48;
 using MAME_Shrink.Common.Cache;
 using MAME_Shrink.Common.Filters;
 using MAME_Shrink.Forms.Main;
+using MAME_Shrink.Resources;
 using MAME_Shrink.Settings;
 using MAME_Shrink.Utilities;
 using MameTools.Machine;
@@ -259,7 +260,7 @@ public partial class MainForm : Form
 
     private void GamesListView_DoubleClick(object sender, EventArgs e)
     {
-        Dialogs.DoSomethingSafe((Action)(() =>
+        Dialogs.DoSomethingSafe(() =>
         {
             if (_currentSelectedItem is null)
                 return;
@@ -272,7 +273,7 @@ public partial class MainForm : Form
             proc.StartInfo.FileName = _userPreferences.Mame.ExecutableFilePath;
             proc.StartInfo.Arguments = machine.Name;
             proc.Start();
-        }));
+        });
     }
 
 
@@ -427,14 +428,14 @@ public partial class MainForm : Form
         if (_selectedItems.Count > 0)
         {
             var totalSize = _gridItems.Values.Where(x => _selectedItems.Contains(x.Name)).Sum(x => x.TotalFilesSize);
-            parts.Add($"{_selectedItems.Count:#,##0} giochi selezionati");
-            parts.Add($"spazio disco {totalSize.ToFileSizeString()}");
+            parts.Add(string.Format(Strings.SelectedGames, _selectedItems.Count.ToFormattedString()));
+            parts.Add(string.Format(Strings.DiskSpace, totalSize.ToFileSizeString()));
         }
         else
         {
-            parts.Add("Nessuna rom selezionata");
+            parts.Add(Strings.NoRomSelected);
         }
-        parts.Add($"{_mame.Machines.Count.ToFormattedString()} giochi totali");
+        parts.Add(string.Format(Strings.TotalGames, _mame.Machines.Count.ToFormattedString()));
         StartClean.Visible = _selectedItems.Count > 0;
         ValidateRomset.Visible = StartClean.Visible;
         UpdateInfo(string.Join(", ", parts));
@@ -666,7 +667,7 @@ public partial class MainForm : Form
 
     private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
     {
-        Dialogs.DoSomethingSafe((Action)(() =>
+        Dialogs.DoSomethingSafe(() =>
         {
             try
             {
@@ -690,7 +691,7 @@ public partial class MainForm : Form
                 _logger.Error(ex, $"Failed to store user settings: {ex.Message}");
             }
             UserPreferencesManager.Set(_userPreferences);
-        }));
+        });
     }
 
     private void AddColumnsToGrid()
@@ -759,25 +760,28 @@ public partial class MainForm : Form
     {
         LabelManueExe.Text = _userPreferences.Mame.ExecutableFilePath;
         LabelGamelistXml.Text = _userPreferences.Mame.GameListFilePath;
-        LabelRomsPath.Text = _userPreferences.Mame.AutoDetectRomPaths ? "Da configurazione Mame" : string.Join(";", _userPreferences.Mame.RomPaths);
+        LabelRomsPath.Text = _userPreferences.Mame.AutoDetectRomPaths ? Strings.ByMameConfiguration : string.Join(";", _userPreferences.Mame.RomPaths);
     }
 
     private void ChangeOptions_Click(object sender, EventArgs e)
     {
-        using var form = new OptionsForm();
-        var result = form.ShowDialog();
-        var newPreferences = UserPreferencesManager.Get();
-        if (newPreferences is null)
+        Dialogs.DoSomethingSafe(() =>
         {
-            Dialogs.ShowErrorDialog($"Ci sono stati problemi nella lettura delle opzioni, saranno usati i valori predefiniti");
-            _userPreferences = new();
-        }
-        else
-        {
-            _userPreferences = newPreferences;
-        }
-        _online = null;     // Retry connection, is specified
-        ShowUpdatedSetting();
+            using var form = new OptionsForm();
+            var result = form.ShowDialog();
+            var newPreferences = UserPreferencesManager.Get();
+            if (newPreferences is null)
+            {
+                Dialogs.ShowErrorDialog(Strings.UserPreferencesLoadingFailure);
+                _userPreferences = new();
+            }
+            else
+            {
+                _userPreferences = newPreferences;
+            }
+            _online = null;     // Retry connection, if enabled
+            ShowUpdatedSetting();
+        });
     }
 
     private async void LoadGames_Click(object sender, EventArgs e)
@@ -815,8 +819,12 @@ public partial class MainForm : Form
                 if (!File.Exists(fileXml) || !string.IsNullOrEmpty(errors))
                 {
                     throw new Exception(
-                        $"Non è stato possibile leggere il file {fileXml}.\n\n{errors}\n\n" +
-                        "Prova a creare il file manualmente, digitando da una finestra di terminale questo comando:\n" +
+                        string.Format(Strings.CouldNotReadFile, fileXml) +
+                        "\n\n" +
+                        errors +
+                        "\n\n" +
+                        Strings.TryGamelistCreationCommandMessage +
+                        "\n" +
                         $"{_userPreferences.Mame.ExecutableFilePath} -listxml > {fileXml}"
                     );
                 }
@@ -829,7 +837,7 @@ public partial class MainForm : Form
             PageCancellationToken.ThrowIfCancellationRequested();
 
             if (string.IsNullOrWhiteSpace(fileXml))
-                throw new Exception("File xml non specificato");
+                throw new Exception(Strings.MissingXmlFile);
 
             await ImportMachines.LoadFromFile(
                 mame: _mame,
@@ -847,7 +855,7 @@ public partial class MainForm : Form
             await LoadFromArcadeDatabaseOrCache(
                 progressUpdate: (text) => Dialogs.ProgressUpdate(lblInfo, text)
             );
-            UpdateInfo("Aggiunta dati alla griglia...");
+            UpdateInfo(Strings.AddingDataToGrid);
             GamesListView.BeginUpdate();
 
             // Grid setup
@@ -865,7 +873,7 @@ public partial class MainForm : Form
             GamesListView.VirtualMode = true;
             GamesListView.VirtualListSize = _gridItems.Count();
 
-            UpdateInfo("Aggiornamento griglia...");
+            UpdateInfo(Strings.GridUpdate);
             AddColumnsToGrid();
             UpdateGridItems();
             UpdateSelectionInfo();
@@ -900,38 +908,44 @@ public partial class MainForm : Form
 
     private void LoadRomsFiles(Action<string> progressUpdate)
     {
-        progressUpdate("Lettura roms...");
-        _files.Clear();
-        var exePath = (string.IsNullOrEmpty(_userPreferences.Mame.ExecutableFilePath) || !File.Exists(_userPreferences.Mame.ExecutableFilePath)) ? string.Empty : Path.GetDirectoryName(_userPreferences.Mame.ExecutableFilePath);
-        foreach (var path in _userPreferences.Mame.RomPathList)
+        Dialogs.DoSomethingSafe(() =>
         {
-            progressUpdate($"Lettura {path}...");
-            foreach (var ext in "zip,7z".Split(','))
+            progressUpdate(Strings.ReadingRoms);
+            _files.Clear();
+            var exePath = (string.IsNullOrEmpty(_userPreferences.Mame.ExecutableFilePath) || !File.Exists(_userPreferences.Mame.ExecutableFilePath)) ? string.Empty : Path.GetDirectoryName(_userPreferences.Mame.ExecutableFilePath);
+            foreach (var path in _userPreferences.Mame.RomPathList)
             {
-                var i = 0;
-                foreach (var file in Directory.GetFiles(Path.Combine(exePath, path), $"*.{ext}", SearchOption.TopDirectoryOnly))
+                progressUpdate($"{Strings.Reading} {path}");
+                foreach (var ext in "zip,7z".Split(','))
                 {
-                    i++;
-                    if (i % 100 == 0)
-                        progressUpdate($"Lettura file cartella roms {i}...");
-                    var romset = file.Substring(file.LastIndexOf(@"\") + 1);
-                    _files.Add(new RomFile()
+                    var i = 0;
+                    foreach (var file in Directory.GetFiles(Path.Combine(exePath, path), $"*.{ext}", SearchOption.TopDirectoryOnly))
                     {
-                        Name = romset.Substring(0, romset.Length - ext.Length - 1),
-                        FilePath = file,
-                        Size = new FileInfo(file).Length
-                    });
+                        i++;
+                        if (i % 100 == 0)
+                            progressUpdate(string.Format(Strings.ReadingRomFolderFiles, i));
+                        var romset = file.Substring(file.LastIndexOf(@"\") + 1);
+                        _files.Add(new RomFile()
+                        {
+                            Name = romset.Substring(0, romset.Length - ext.Length - 1),
+                            FilePath = file,
+                            Size = new FileInfo(file).Length
+                        });
+                    }
                 }
             }
-        }
+        });
     }
 
     private void ToggleSelection(string name)
     {
-        if (_selectedItems.Contains(name))
-            DeselectGame(name);
-        else
-            SelectGame(name);
+        Dialogs.DoSomethingSafe(() =>
+        {
+            if (_selectedItems.Contains(name))
+                DeselectGame(name);
+            else
+                SelectGame(name);
+        });
     }
 
 
@@ -1004,7 +1018,10 @@ public partial class MainForm : Form
         ShowMenu(MenuFilters, MenuToggleSelectedGames);
     }
 
-    private void MenuColumns_Click(object sender, EventArgs e) => ShowMenu(MenuColumnItems, MenuColumns);
+    private void MenuColumns_Click(object sender, EventArgs e)
+    {
+        ShowMenu(MenuColumnItems, MenuColumns);
+    }
 
     private void ShowMenu(ContextMenuStrip menu, ToolStripMenuItem parentMenu)
     {
@@ -1053,7 +1070,7 @@ public partial class MainForm : Form
             StartClean.Enabled = false;
             ValidateRomset.Enabled = StartClean.Enabled;
             if (_selectedItems.Count == 0)
-                throw new Exception("Nessun gioco selezionato");
+                throw new Exception(Strings.NoGameSelected);
 
             if (ValidateRomset.Checked)
             {
@@ -1063,20 +1080,23 @@ public partial class MainForm : Form
 
             if (_userPreferences.CleanOptions.CleanMethod == CleanMethodKind.DeleteFiles)
             {
-                var dr = MessageBox.Show($"Confermi la cancellazione di {_selectedItems.Count:#,##0} giochi?",
-                    "Conferma pulizia",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning,
-                    MessageBoxDefaultButton.Button2
+                var dr = MessageBox.Show(
+                    text: string.Format(Strings.GamesRemovalConfirmationMessage, _selectedItems.Count.ToFormattedString()),
+                    caption: Strings.CleanConfirmation,
+                    buttons: MessageBoxButtons.YesNo,
+                    icon: MessageBoxIcon.Warning,
+                    defaultButton: MessageBoxDefaultButton.Button2
                 );
+
                 if (dr is not DialogResult.Yes)
                     return;
 
-                dr = MessageBox.Show($"Dato che l'operazione non è reversibile, ti chiedo una seconda conferma prima di procedere all'eliminazione di {_selectedItems.Count:#,##0} giochi.\n\nProcedo?",
-                    "Conferma pulizia",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Error,
-                    MessageBoxDefaultButton.Button2
+                dr = MessageBox.Show(
+                    text: string.Format(Strings.GamesRemoval2ndConfirmationMessage, _selectedItems.Count.ToFormattedString()),
+                    caption: Strings.CleanConfirmation,
+                    buttons: MessageBoxButtons.YesNo,
+                    icon: MessageBoxIcon.Error,
+                    defaultButton: MessageBoxDefaultButton.Button2
                 );
                 if (dr is not DialogResult.Yes)
                     return;
@@ -1087,18 +1107,19 @@ public partial class MainForm : Form
                     var machine = _mame.Machines.GetMachineByName(romset);
                     if (machine is null)
                         continue;
-                    UpdateInfo($"Pulizia romset {machine.Name} - {machine.Description}...");
+                    UpdateInfo(string.Format(Strings.RomsetCleaning, machine.Name, machine.Description));
                     MameFiles.DeleteMameFiles(mamePath, machine, _mameConfig, _userPreferences.Mame.RomPaths, false);
                 }
             }
             else if (_userPreferences.CleanOptions.CleanMethod == CleanMethodKind.MoveFilesToRecycleBin)
             {
                 var destinationPath = Path.Combine(Path.GetDirectoryName(_userPreferences.Mame.ExecutableFilePath), $"0-removed {DateTime.Now:yyyy-MM-dd HH-mm-ss}");
-                var dr = MessageBox.Show($"Confermi la cancellazione di {_selectedItems.Count:#,##0} giochi?\n\nNOTA: Cercherò di spostare i file nel cestino, se possibile",
-                    "Conferma pulizia",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning,
-                    MessageBoxDefaultButton.Button2
+                var dr = MessageBox.Show(
+                    text: string.Format(Strings.GamesRemovalTrashConfirmationMessage, _selectedItems.Count.ToFormattedString()),
+                    caption: Strings.CleanConfirmation,
+                    buttons: MessageBoxButtons.YesNo,
+                    icon: MessageBoxIcon.Warning,
+                    defaultButton: MessageBoxDefaultButton.Button2
                 );
                 if (dr is not DialogResult.Yes)
                     return;
@@ -1109,18 +1130,19 @@ public partial class MainForm : Form
                     var machine = _mame.Machines.GetMachineByName(romset);
                     if (machine is null)
                         continue;
-                    UpdateInfo($"Pulizia romset {machine.Name} - {machine.Description}...");
+                    UpdateInfo(string.Format(Strings.RomsetCleaning, machine.Name, machine.Description));
                     MameFiles.DeleteMameFiles(mamePath, machine, _mameConfig, _userPreferences.Mame.RomPaths, true);
                 }
             }
             else if (_userPreferences.CleanOptions.CleanMethod == CleanMethodKind.MoveFilesToFolder)
             {
                 var destinationPath = Path.Combine(_userPreferences.CleanOptions.RemovedFilesFolder, $"{DateTime.Now:yyyy-MM-dd HH.mm.ss}");
-                var dr = MessageBox.Show($"Confermi la cancellazione di {_selectedItems.Count:#,##0} giochi?\n\nNOTA: I file verranno spostati nella cartella temporanea \n {destinationPath}",
-                    "Conferma pulizia",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning,
-                    MessageBoxDefaultButton.Button2
+                var dr = MessageBox.Show(
+                    text: string.Format(Strings.GamesRemovalMoveConfirmationMessage, _selectedItems.Count.ToFormattedString(), destinationPath),
+                    caption: Strings.CleanConfirmation,
+                    buttons: MessageBoxButtons.YesNo,
+                    icon: MessageBoxIcon.Warning,
+                    defaultButton: MessageBoxDefaultButton.Button2
                 );
                 if (dr is not DialogResult.Yes)
                     return;
@@ -1130,20 +1152,20 @@ public partial class MainForm : Form
                     var machine = _mame.Machines.GetMachineByName(romset);
                     if (machine is null)
                         continue;
-                    UpdateInfo($"Pulizia romset {machine.Name} - {machine.Description}...");
+                    UpdateInfo(string.Format(Strings.RomsetCleaning, machine.Name, machine.Description));
                     MoveMameFiles(machine, destinationPath);
                 }
             }
             else
             {
-                throw new NotImplementedException("Tipo di elaborazione non prevista");
+                throw new NotImplementedException(Strings.ProcessingTypeNotSupported);
             }
 
             LoadRomsFiles(
                 progressUpdate: (text) => Dialogs.ProgressUpdate(lblInfo, text)
             );
             UpdateGridItems();
-            Dialogs.ShowInfoDialog($"Operazione completata");
+            Dialogs.ShowInfoDialog(Strings.OperationCompleted);
         }
         catch (Exception ex)
         {
@@ -1171,7 +1193,7 @@ public partial class MainForm : Form
 
             //var selectedItemsHashSet = _selectedItems.ToHashSet();
             _warningRoms.Clear();
-            UpdateInfo($"Verifica romset...");
+            UpdateInfo(Strings.CheckingRomset);
             if (_userPreferences.Mame.MameSetType == MameSection.MameSetKind.Auto)
             {
                 // Parent and clone are linked by XML data
@@ -1183,7 +1205,7 @@ public partial class MainForm : Form
                     var machine = _mame.Machines.GetMachineByName(romset);
                     if (machine is null)
                         continue;
-                    UpdateInfo($"[{index}/{total}] Verifica {machine.Name} - {machine.Description}...");
+                    UpdateInfo(string.Format(Strings.Checking, index, total, machine.Name, machine.Description));
 
                     //var requiredMachines = _mame.Machines.GetAllDependantMachinesOf(machine);
                     //foreach (var reqMachine in requiredMachines)
@@ -1251,7 +1273,9 @@ public partial class MainForm : Form
                     {
                         sb
                             .Append(wr.Romset)
-                            .Append(" richiesto da ")
+                            .Append(" ")
+                            .Append(Strings.RequiredBy)
+                            .Append(" ")
                             .Append(string.Join(",", wr.MissingRomsets.Distinct().OrderBy(x => x)))
                             .AppendLine();
                     }
@@ -1259,19 +1283,21 @@ public partial class MainForm : Form
                     {
                         sb
                             .Append(wr.Romset)
-                            .Append(" non richiede più ")
+                            .Append(" ")
+                            .Append(Strings.NotUsedAnymoreBy)
+                            .Append(" ")
                             .Append(string.Join(",", wr.OptionalRomsets.Distinct().OrderBy(x => x)))
                             .AppendLine();
                     }
                 }
-                Dialogs.ShowInfoDialog($"I controlli hanno evidenziato degli avvisi:\n\n" + sb.ToString());
+                Dialogs.ShowInfoDialog(Strings.CheckingResults + "\n\n" + sb.ToString());
             }
             UpdateInfo();
             return true;
         }
         catch (Exception ex)
         {
-            Dialogs.ShowErrorDialog(new Exception($"Validazione romset fallita", ex));
+            Dialogs.ShowErrorDialog(new Exception(Strings.RomsetValidationFailed, ex));
             return false;
         }
     }
@@ -1359,12 +1385,12 @@ public partial class MainForm : Form
             {
                 try
                 {
-                    progressUpdate("Lettura sito ArcadeDatabase.net (release)...");
+                    progressUpdate($"{Strings.LoadingArcadeItalia}({Strings.Release})");
                     // Check release
                     var adbRelease = await ServiceMame.Releases();
                     var mameRelease = string.Join(",", adbRelease.Result);
 
-                    progressUpdate("Lettura sito ArcadeDatabase.net (giochi)...");
+                    progressUpdate($"{Strings.LoadingArcadeItalia}({Strings.Games})");
                     if (_mameCache.MameRelease != mameRelease || _mameCache.Items.Count == 0)
                     {
                         // Download categories and machine extra info
@@ -1389,7 +1415,7 @@ public partial class MainForm : Form
                 }
                 catch (Exception ex)
                 {
-                    Dialogs.ShowErrorDialog($"Ci sono stati problemi nella lettura dei dati dal sito di ArcadeItalia.\nRiprovare più tardi\n\n{ex.Message}");
+                    Dialogs.ShowErrorDialog($"{Strings.ErrorLoadingArcadeItalia}\n\n{ex.Message}");
                 }
             }
         }
@@ -1426,20 +1452,13 @@ public partial class MainForm : Form
             {
                 var adbStatus = await ServiceGeneric.WebSiteStatus();
                 if (adbStatus.Result?.IsOnline() != true)
-                    throw new Exception("SITO IN MANUTENZIONE");
+                    throw new Exception(Strings.WebSiteUnderMaintenance);
                 _online = true;
             }
             catch (Exception ex)
             {
                 _online = false;
-                Dialogs.ShowInfoDialog(
-                    "Non è stato possibile connettersi al sito ArcadeDatabase, alcune funzionalità saranno disattivate.\n" +
-                    "Al prossimo riavvio dell'applicazione sarà effettuato un altro tentativo di connessione.\n" +
-                    "\n" +
-                    "Se il PC non dispone di accesso ad internet, modificare le opzioni del programma per evitare questo messaggio ad ogni avvio." +
-                    "\n" +
-                    "\n" +
-                    "Errore: " + ex.Message);
+                Dialogs.ShowInfoDialog($"{Strings.ErrorLoadingArcadeItaliaVerbose}\n\n{ex.Message}");
             }
         }
         return _online.Value;
@@ -1471,29 +1490,29 @@ public partial class MainForm : Form
 
             var tipo = "-";
             if (machine.IsBios)
-                tipo = "BIOS";
+                tipo = Strings.Bios;
             else if (machine.IsDevice)
-                tipo = "Device";
+                tipo = Strings.Device;
             else if (machine.IsParentMachine)
-                tipo = "Parent";
+                tipo = Strings.Parent;
             else if (machine.IsCloneMachine)
-                tipo = "Clone";
+                tipo = Strings.Clone;
             else if (machine.IsMechanical)
-                tipo = "Mechanical";
+                tipo = Strings.Mechanical;
             var dati = new Dictionary<string, string?>
             {
-                ["Titolo"] = item.Description,
-                ["Produttore"] = item.Manufacturer,
-                ["Stato"] = item.DriverStatus,
-                ["Anno"] = machine.Year,
-                ["Genere"] = item.Genre,
-                ["Categoriia"] = item.Category,
-                ["Release"] = item.FirstEmulatorRelease,
-                ["Clone"] = item.CloneOf,
-                ["Usa rom"] = item.RomOf,
-                ["Tipo"] = tipo,
-                ["Schermo"] = item.Display,
-                ["File"] = item.HasFiles ? item.TotalFilesSize.ToFileSizeString() : "-"
+                [Strings.Title] = item.Description,
+                [Strings.Manufacturer] = item.Manufacturer,
+                [Strings.Status] = item.DriverStatus,
+                [Strings.Year] = machine.Year,
+                [Strings.Genre] = item.Genre,
+                [Strings.Category] = item.Category,
+                [Strings.Release] = item.FirstEmulatorRelease,
+                [Strings.Clone] = item.CloneOf,
+                [Strings.UseRomOf] = item.RomOf,
+                [Strings.Type] = tipo,
+                [Strings.Screen] = item.Display,
+                [Strings.File] = item.HasFiles ? item.TotalFilesSize.ToFileSizeString() : "-"
             };
 
             KeyValueRomset.SetData(dati);

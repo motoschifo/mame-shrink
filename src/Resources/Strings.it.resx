@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ByMameConfiguration" xml:space="preserve">
+    <value>Da configurazione Mame</value>
+  </data>
+  <data name="DiskSpace" xml:space="preserve">
+    <value>Spazio disco {0}</value>
+  </data>
+  <data name="NoRomSelected" xml:space="preserve">
+    <value>Nessuna rom selezionata</value>
+  </data>
+  <data name="SelectedGames" xml:space="preserve">
+    <value>{0} giochi selezionati</value>
+  </data>
+  <data name="TotalGames" xml:space="preserve">
+    <value>{0} giochi totali</value>
+  </data>
+  <data name="UserPreferencesLoadingFailure" xml:space="preserve">
+    <value>Ci sono stati problemi nella lettura delle opzioni, saranno usati i valori predefiniti</value>
+  </data>
+  <data name="CouldNotReadFile" xml:space="preserve">
+    <value>Non è stato possibile leggere il file {0}</value>
+  </data>
+  <data name="TryGamelistCreationCommandMessage" xml:space="preserve">
+    <value>Prova a creare il file manualmente, digitando da una finestra di terminale questo comando</value>
+  </data>
+  <data name="MissingXmlFile" xml:space="preserve">
+    <value>File xml non specificato</value>
+  </data>
+  <data name="AddingDataToGrid" xml:space="preserve">
+    <value>Aggiunta dati alla griglia</value>
+  </data>
+  <data name="GridUpdate" xml:space="preserve">
+    <value>Aggiornamento griglia</value>
+  </data>
+  <data name="ReadingRoms" xml:space="preserve">
+    <value>Lettura roms</value>
+  </data>
+  <data name="Reading" xml:space="preserve">
+    <value>Lettura </value>
+  </data>
+  <data name="ReadingRomFolderFiles" xml:space="preserve">
+    <value>Lettura file cartella roms {0}</value>
+  </data>
+  <data name="NoGameSelected" xml:space="preserve">
+    <value>Nessun gioco selezionato</value>
+  </data>
+  <data name="GamesRemovalConfirmationMessage" xml:space="preserve">
+    <value>Confermi la cancellazione di {0} giochi</value>
+  </data>
+  <data name="CleanConfirmation" xml:space="preserve">
+    <value>Conferma pulizia</value>
+  </data>
+  <data name="GamesRemoval2ndConfirmationMessage" xml:space="preserve">
+    <value>Dato che l'operazione non è reversibile, ti chiedo una seconda conferma prima di procedere all'eliminazione di {0}.
+
+Procedo?</value>
+  </data>
+  <data name="RomsetCleaning" xml:space="preserve">
+    <value>Pulizia romset {0} - {1}</value>
+  </data>
+  <data name="GamesRemovalTrashConfirmationMessage" xml:space="preserve">
+    <value>Confermi la cancellazione di {0} giochi?
+
+NOTA: Cercherò di spostare i file nel cestino, se possibile</value>
+  </data>
+  <data name="GamesRemovalMoveConfirmationMessage" xml:space="preserve">
+    <value>Confermi la cancellazione di {0}giochi?
+
+NOTA: I file verranno spostati nella cartella temporanea {1}</value>
+  </data>
+  <data name="ProcessingTypeNotSupported" xml:space="preserve">
+    <value>Tipo di elaborazione non gestita</value>
+  </data>
+  <data name="OperationCompleted" xml:space="preserve">
+    <value>Operazione completata</value>
+  </data>
+  <data name="CheckingRomset" xml:space="preserve">
+    <value>Verifica romset</value>
+  </data>
+  <data name="Checking" xml:space="preserve">
+    <value>[{0/{1}] Verifica {2} - {3}</value>
+  </data>
+  <data name="RequiredBy" xml:space="preserve">
+    <value>Richiesto da</value>
+  </data>
+  <data name="NotUsedAnymoreBy" xml:space="preserve">
+    <value>Non utilizzato più da</value>
+  </data>
+  <data name="CheckingResults" xml:space="preserve">
+    <value>I controlli hanno evidenziato degli avvisi</value>
+  </data>
+  <data name="RomsetValidationFailed" xml:space="preserve">
+    <value>Validazione romset fallita</value>
+  </data>
+  <data name="LoadingArcadeItalia" xml:space="preserve">
+    <value>Lettura sito ArcadeItalia.net</value>
+  </data>
+  <data name="Release" xml:space="preserve">
+    <value>Versione</value>
+  </data>
+  <data name="Games" xml:space="preserve">
+    <value>Giochi</value>
+  </data>
+  <data name="ErrorLoadingArcadeItalia" xml:space="preserve">
+    <value>Ci sono stati problemi nella lettura dei dati dal sito di ArcadeItalia.
+Riprovare più tardi</value>
+  </data>
+  <data name="WebSiteUnderMaintenance" xml:space="preserve">
+    <value>Il sito è in manutenzione</value>
+  </data>
+  <data name="ErrorLoadingArcadeItaliaVerbose" xml:space="preserve">
+    <value>Non è stato possibile connettersi al sito web ArcadeDatabase, alcune funzionalità saranno disattivate.
+Al prossimo riavvio dell'applicazione sarà effettuato un altro tentativo di connessione.
+
+Se il PC non dispone di accesso ad internet, modificare le opzioni del programma per evitare questo messaggio ad ogni avvio.</value>
+  </data>
+  <data name="Bios" xml:space="preserve">
+    <value>Bios</value>
+  </data>
+  <data name="Device" xml:space="preserve">
+    <value>Dispositivo</value>
+  </data>
+  <data name="Mechanical" xml:space="preserve">
+    <value>Meccanico</value>
+  </data>
+  <data name="Parent" xml:space="preserve">
+    <value>Parent</value>
+  </data>
+  <data name="Clone" xml:space="preserve">
+    <value>Clone</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Titolo</value>
+  </data>
+  <data name="Manufacturer" xml:space="preserve">
+    <value>Produttore</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Stato</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Anno</value>
+  </data>
+  <data name="Genre" xml:space="preserve">
+    <value>Genere</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Categoria</value>
+  </data>
+  <data name="UseRomOf" xml:space="preserve">
+    <value>Usa rom di</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="Screen" xml:space="preserve">
+    <value>Schermo</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="AllFiles" xml:space="preserve">
+    <value>Tutti i file</value>
+  </data>
+  <data name="ErrorSelectingFile" xml:space="preserve">
+    <value>Errore durante la selezione del file</value>
+  </data>
+  <data name="ErrorSelectingFolder" xml:space="preserve">
+    <value>Errore durante la lettura del percorso</value>
+  </data>
+  <data name="ErrorLoadingFile" xml:space="preserve">
+    <value>Caricamento non riuscito per il file</value>
+  </data>
+  <data name="ErrorOpeningUrl" xml:space="preserve">
+    <value>Caricamento non riuscito</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Errore</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+</root>

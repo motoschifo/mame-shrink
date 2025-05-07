@@ -1,5 +1,7 @@
 ﻿#nullable enable
 using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 using MAME_Shrink.Forms;
 using MAME_Shrink.Settings;
@@ -19,7 +21,9 @@ internal static class Program
     {
         try
         {
-            _logger.Info("Application started.");
+            _logger.Info("Application started");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");    //  TEST
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -49,7 +53,7 @@ internal static class Program
         }
         finally
         {
-            _logger.Info("Application ended.");
+            _logger.Info("Application ended");
             LogManager.Shutdown(); // Optional but recommended
         }
     }

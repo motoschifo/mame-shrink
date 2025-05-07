@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{F59E7454-3B8E-466D-93C1-AE1A5900FBA7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{F59E7454-3B8E-466D-93C1-AE1A5900FBA7}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MameTools.Net48", "shared\MameTools.Net48\MameTools.Net48.shproj", "{B63EDA0D-41D2-4796-94F3-E85D712DA478}"
 EndProject

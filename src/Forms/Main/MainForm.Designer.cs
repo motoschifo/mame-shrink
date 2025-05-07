@@ -54,27 +54,27 @@
             this.toolStripColumnDisplay = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFilters = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolbarMenuGrid = new System.Windows.Forms.MenuStrip();
+            this.GridTextFilter = new System.Windows.Forms.ToolStripTextBox();
+            this.SelectedRomsetName = new System.Windows.Forms.Label();
+            this.pnlRomset = new System.Windows.Forms.Panel();
+            this.OpenRomsetWebPage = new System.Windows.Forms.LinkLabel();
+            this.ValidateRomset = new System.Windows.Forms.CheckBox();
+            this.SnapshotPlaceholder = new System.Windows.Forms.PictureBox();
             this.MenuAddToSelectedGames = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuRemoveFromSelectedGames = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuToggleSelectedGames = new System.Windows.Forms.ToolStripMenuItem();
-            this.GridTextFilter = new System.Windows.Forms.ToolStripTextBox();
             this.MenuShow = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuShowAllGames = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuShowExistingFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuShowSelectedGames = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuShowNotSelectedGames = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.SelectedRomsetName = new System.Windows.Forms.Label();
-            this.pnlRomset = new System.Windows.Forms.Panel();
-            this.KeyValueRomset = new MAME_Shrink.Components.KeyValueTable();
-            this.OpenRomsetWebPage = new System.Windows.Forms.LinkLabel();
-            this.ValidateRomset = new System.Windows.Forms.CheckBox();
-            this.SnapshotPlaceholder = new System.Windows.Forms.PictureBox();
             this.StartClean = new System.Windows.Forms.Button();
             this.ChangeOptions = new System.Windows.Forms.Button();
             this.Snapshot = new System.Windows.Forms.PictureBox();
             this.LoadGames = new System.Windows.Forms.Button();
             this.CancelCurrentProcess = new System.Windows.Forms.Button();
+            this.KeyValueRomset = new MAME_Shrink.Components.KeyValueTable();
             this.MenuColumnItems.SuspendLayout();
             this.ToolbarMenuGrid.SuspendLayout();
             this.pnlRomset.SuspendLayout();
@@ -84,13 +84,8 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 10);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 19);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Eseguibile Mame:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ImageList
             // 
@@ -107,16 +102,10 @@
             // 
             // GamesListView
             // 
-            this.GamesListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.GamesListView, "GamesListView");
             this.GamesListView.CheckBoxes = true;
-            this.GamesListView.Enabled = false;
             this.GamesListView.HideSelection = false;
-            this.GamesListView.Location = new System.Drawing.Point(12, 164);
             this.GamesListView.Name = "GamesListView";
-            this.GamesListView.Size = new System.Drawing.Size(635, 431);
-            this.GamesListView.TabIndex = 8;
             this.GamesListView.UseCompatibleStateImageBehavior = false;
             this.GamesListView.VirtualMode = true;
             this.GamesListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.GamesListView_ColumnClick);
@@ -132,10 +121,8 @@
             // lblInfo
             // 
             this.lblInfo.AutoEllipsis = true;
-            this.lblInfo.Location = new System.Drawing.Point(24, 110);
+            resources.ApplyResources(this.lblInfo, "lblInfo");
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(624, 18);
-            this.lblInfo.TabIndex = 5;
             this.lblInfo.UseMnemonic = false;
             // 
             // GridTextFilterTimer
@@ -145,53 +132,28 @@
             // 
             // label5
             // 
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(9, 48);
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(113, 19);
-            this.label5.TabIndex = 45;
-            this.label5.Text = "Cartella roms:";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label6
             // 
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(9, 29);
+            resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(113, 19);
-            this.label6.TabIndex = 49;
-            this.label6.Text = "Lista giochi XML:";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // LabelManueExe
             // 
-            this.LabelManueExe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelManueExe.Location = new System.Drawing.Point(126, 10);
+            resources.ApplyResources(this.LabelManueExe, "LabelManueExe");
             this.LabelManueExe.Name = "LabelManueExe";
-            this.LabelManueExe.Size = new System.Drawing.Size(522, 19);
-            this.LabelManueExe.TabIndex = 0;
-            this.LabelManueExe.Text = "LabelManueExe";
-            this.LabelManueExe.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // LabelGamelistXml
             // 
-            this.LabelGamelistXml.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelGamelistXml.Location = new System.Drawing.Point(126, 29);
+            resources.ApplyResources(this.LabelGamelistXml, "LabelGamelistXml");
             this.LabelGamelistXml.Name = "LabelGamelistXml";
-            this.LabelGamelistXml.Size = new System.Drawing.Size(522, 19);
-            this.LabelGamelistXml.TabIndex = 0;
-            this.LabelGamelistXml.Text = "LabelGamelistXml";
-            this.LabelGamelistXml.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // LabelRomsPath
             // 
-            this.LabelRomsPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelRomsPath.Location = new System.Drawing.Point(126, 48);
+            resources.ApplyResources(this.LabelRomsPath, "LabelRomsPath");
             this.LabelRomsPath.Name = "LabelRomsPath";
-            this.LabelRomsPath.Size = new System.Drawing.Size(522, 19);
-            this.LabelRomsPath.TabIndex = 0;
-            this.LabelRomsPath.Text = "LabelRomsPath";
-            this.LabelRomsPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // MenuColumnItems
             // 
@@ -207,16 +169,14 @@
             this.toolStripColumnButtons,
             this.toolStripColumnDisplay});
             this.MenuColumnItems.Name = "menuColumns";
-            this.MenuColumnItems.Size = new System.Drawing.Size(132, 224);
+            resources.ApplyResources(this.MenuColumnItems, "MenuColumnItems");
             // 
             // toolStripColumnRomset
             // 
             this.toolStripColumnRomset.Checked = true;
             this.toolStripColumnRomset.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolStripColumnRomset.Enabled = false;
+            resources.ApplyResources(this.toolStripColumnRomset, "toolStripColumnRomset");
             this.toolStripColumnRomset.Name = "toolStripColumnRomset";
-            this.toolStripColumnRomset.Size = new System.Drawing.Size(131, 22);
-            this.toolStripColumnRomset.Text = "Romset";
             // 
             // toolStripColumnYear
             // 
@@ -224,8 +184,7 @@
             this.toolStripColumnYear.CheckOnClick = true;
             this.toolStripColumnYear.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnYear.Name = "toolStripColumnYear";
-            this.toolStripColumnYear.Size = new System.Drawing.Size(131, 22);
-            this.toolStripColumnYear.Text = "Anno";
+            resources.ApplyResources(this.toolStripColumnYear, "toolStripColumnYear");
             // 
             // toolStripColumnManufacturer
             // 
@@ -233,8 +192,7 @@
             this.toolStripColumnManufacturer.CheckOnClick = true;
             this.toolStripColumnManufacturer.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnManufacturer.Name = "toolStripColumnManufacturer";
-            this.toolStripColumnManufacturer.Size = new System.Drawing.Size(131, 22);
-            this.toolStripColumnManufacturer.Text = "Produttore";
+            resources.ApplyResources(this.toolStripColumnManufacturer, "toolStripColumnManufacturer");
             // 
             // toolStripColumnCloneOf
             // 
@@ -242,8 +200,7 @@
             this.toolStripColumnCloneOf.CheckOnClick = true;
             this.toolStripColumnCloneOf.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnCloneOf.Name = "toolStripColumnCloneOf";
-            this.toolStripColumnCloneOf.Size = new System.Drawing.Size(131, 22);
-            this.toolStripColumnCloneOf.Text = "Clone";
+            resources.ApplyResources(this.toolStripColumnCloneOf, "toolStripColumnCloneOf");
             // 
             // toolStripColumnDriverStatus
             // 
@@ -251,8 +208,7 @@
             this.toolStripColumnDriverStatus.CheckOnClick = true;
             this.toolStripColumnDriverStatus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnDriverStatus.Name = "toolStripColumnDriverStatus";
-            this.toolStripColumnDriverStatus.Size = new System.Drawing.Size(131, 22);
-            this.toolStripColumnDriverStatus.Text = "Stato";
+            resources.ApplyResources(this.toolStripColumnDriverStatus, "toolStripColumnDriverStatus");
             // 
             // toolStripColumnGenre
             // 
@@ -260,8 +216,7 @@
             this.toolStripColumnGenre.CheckOnClick = true;
             this.toolStripColumnGenre.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnGenre.Name = "toolStripColumnGenre";
-            this.toolStripColumnGenre.Size = new System.Drawing.Size(131, 22);
-            this.toolStripColumnGenre.Text = "Genere";
+            resources.ApplyResources(this.toolStripColumnGenre, "toolStripColumnGenre");
             // 
             // toolStripColumnRelease
             // 
@@ -269,8 +224,7 @@
             this.toolStripColumnRelease.CheckOnClick = true;
             this.toolStripColumnRelease.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnRelease.Name = "toolStripColumnRelease";
-            this.toolStripColumnRelease.Size = new System.Drawing.Size(131, 22);
-            this.toolStripColumnRelease.Text = "Versione";
+            resources.ApplyResources(this.toolStripColumnRelease, "toolStripColumnRelease");
             // 
             // toolStripColumnPlayers
             // 
@@ -278,8 +232,7 @@
             this.toolStripColumnPlayers.CheckOnClick = true;
             this.toolStripColumnPlayers.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnPlayers.Name = "toolStripColumnPlayers";
-            this.toolStripColumnPlayers.Size = new System.Drawing.Size(131, 22);
-            this.toolStripColumnPlayers.Text = "Giocatori";
+            resources.ApplyResources(this.toolStripColumnPlayers, "toolStripColumnPlayers");
             // 
             // toolStripColumnButtons
             // 
@@ -287,8 +240,7 @@
             this.toolStripColumnButtons.CheckOnClick = true;
             this.toolStripColumnButtons.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnButtons.Name = "toolStripColumnButtons";
-            this.toolStripColumnButtons.Size = new System.Drawing.Size(131, 22);
-            this.toolStripColumnButtons.Text = "Pulsanti";
+            resources.ApplyResources(this.toolStripColumnButtons, "toolStripColumnButtons");
             // 
             // toolStripColumnDisplay
             // 
@@ -297,21 +249,16 @@
             this.toolStripColumnDisplay.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnDisplay.DoubleClickEnabled = true;
             this.toolStripColumnDisplay.Name = "toolStripColumnDisplay";
-            this.toolStripColumnDisplay.Size = new System.Drawing.Size(131, 22);
-            this.toolStripColumnDisplay.Text = "Schermo";
+            resources.ApplyResources(this.toolStripColumnDisplay, "toolStripColumnDisplay");
             // 
             // MenuFilters
             // 
             this.MenuFilters.Name = "menuFilters";
-            this.MenuFilters.Size = new System.Drawing.Size(61, 4);
+            resources.ApplyResources(this.MenuFilters, "MenuFilters");
             // 
             // ToolbarMenuGrid
             // 
-            this.ToolbarMenuGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ToolbarMenuGrid.AutoSize = false;
-            this.ToolbarMenuGrid.Dock = System.Windows.Forms.DockStyle.None;
-            this.ToolbarMenuGrid.Enabled = false;
+            resources.ApplyResources(this.ToolbarMenuGrid, "ToolbarMenuGrid");
             this.ToolbarMenuGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuAddToSelectedGames,
             this.MenuRemoveFromSelectedGames,
@@ -320,48 +267,68 @@
             this.MenuShow,
             this.MenuColumns});
             this.ToolbarMenuGrid.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.ToolbarMenuGrid.Location = new System.Drawing.Point(13, 134);
             this.ToolbarMenuGrid.Name = "ToolbarMenuGrid";
-            this.ToolbarMenuGrid.Size = new System.Drawing.Size(635, 27);
-            this.ToolbarMenuGrid.TabIndex = 58;
-            this.ToolbarMenuGrid.Text = "menuStrip1";
+            // 
+            // GridTextFilter
+            // 
+            resources.ApplyResources(this.GridTextFilter, "GridTextFilter");
+            this.GridTextFilter.Name = "GridTextFilter";
+            this.GridTextFilter.TextChanged += new System.EventHandler(this.GridTextFilter_TextChanged);
+            // 
+            // SelectedRomsetName
+            // 
+            resources.ApplyResources(this.SelectedRomsetName, "SelectedRomsetName");
+            this.SelectedRomsetName.Name = "SelectedRomsetName";
+            // 
+            // pnlRomset
+            // 
+            resources.ApplyResources(this.pnlRomset, "pnlRomset");
+            this.pnlRomset.Controls.Add(this.KeyValueRomset);
+            this.pnlRomset.Name = "pnlRomset";
+            // 
+            // OpenRomsetWebPage
+            // 
+            resources.ApplyResources(this.OpenRomsetWebPage, "OpenRomsetWebPage");
+            this.OpenRomsetWebPage.Name = "OpenRomsetWebPage";
+            this.OpenRomsetWebPage.TabStop = true;
+            this.OpenRomsetWebPage.Click += new System.EventHandler(this.OpenRomsetWebPage_Click);
+            // 
+            // ValidateRomset
+            // 
+            this.ValidateRomset.Checked = true;
+            this.ValidateRomset.CheckState = System.Windows.Forms.CheckState.Checked;
+            resources.ApplyResources(this.ValidateRomset, "ValidateRomset");
+            this.ValidateRomset.Name = "ValidateRomset";
+            this.ValidateRomset.UseVisualStyleBackColor = true;
+            // 
+            // SnapshotPlaceholder
+            // 
+            this.SnapshotPlaceholder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SnapshotPlaceholder.Image = global::MAME_Shrink.Properties.Resources.ingame_placeholder;
+            resources.ApplyResources(this.SnapshotPlaceholder, "SnapshotPlaceholder");
+            this.SnapshotPlaceholder.Name = "SnapshotPlaceholder";
+            this.SnapshotPlaceholder.TabStop = false;
             // 
             // MenuAddToSelectedGames
             // 
             this.MenuAddToSelectedGames.Image = global::MAME_Shrink.Properties.Resources.check;
             this.MenuAddToSelectedGames.Name = "MenuAddToSelectedGames";
-            this.MenuAddToSelectedGames.Size = new System.Drawing.Size(84, 23);
-            this.MenuAddToSelectedGames.Text = "Seleziona";
-            this.MenuAddToSelectedGames.ToolTipText = "Aggiungi alla selezione";
+            resources.ApplyResources(this.MenuAddToSelectedGames, "MenuAddToSelectedGames");
             this.MenuAddToSelectedGames.Click += new System.EventHandler(this.MenuAddToSelectedGames_Click);
             // 
             // MenuRemoveFromSelectedGames
             // 
             this.MenuRemoveFromSelectedGames.Image = global::MAME_Shrink.Properties.Resources.square;
             this.MenuRemoveFromSelectedGames.Name = "MenuRemoveFromSelectedGames";
-            this.MenuRemoveFromSelectedGames.Size = new System.Drawing.Size(97, 23);
-            this.MenuRemoveFromSelectedGames.Text = "Deseleziona";
-            this.MenuRemoveFromSelectedGames.ToolTipText = "Rimuovi dalla selezione";
+            resources.ApplyResources(this.MenuRemoveFromSelectedGames, "MenuRemoveFromSelectedGames");
             this.MenuRemoveFromSelectedGames.Click += new System.EventHandler(this.MenuRemoveFromSelectedGames_Click);
             // 
             // MenuToggleSelectedGames
             // 
             this.MenuToggleSelectedGames.Image = global::MAME_Shrink.Properties.Resources.true_false;
             this.MenuToggleSelectedGames.Name = "MenuToggleSelectedGames";
-            this.MenuToggleSelectedGames.Size = new System.Drawing.Size(68, 23);
-            this.MenuToggleSelectedGames.Text = "Inverti";
-            this.MenuToggleSelectedGames.ToolTipText = "Inverti la selezione";
+            resources.ApplyResources(this.MenuToggleSelectedGames, "MenuToggleSelectedGames");
             this.MenuToggleSelectedGames.Click += new System.EventHandler(this.MenuToggleSelectedGames_Click);
-            // 
-            // GridTextFilter
-            // 
-            this.GridTextFilter.AutoSize = false;
-            this.GridTextFilter.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.GridTextFilter.MaxLength = 100;
-            this.GridTextFilter.Name = "GridTextFilter";
-            this.GridTextFilter.Size = new System.Drawing.Size(100, 23);
-            this.GridTextFilter.ToolTipText = "Filtro griglia";
-            this.GridTextFilter.TextChanged += new System.EventHandler(this.GridTextFilter_TextChanged);
             // 
             // MenuShow
             // 
@@ -372,15 +339,13 @@
             this.MenuShowNotSelectedGames});
             this.MenuShow.Image = global::MAME_Shrink.Properties.Resources.folder;
             this.MenuShow.Name = "MenuShow";
-            this.MenuShow.Size = new System.Drawing.Size(72, 23);
-            this.MenuShow.Text = "Mostra";
+            resources.ApplyResources(this.MenuShow, "MenuShow");
             // 
             // MenuShowAllGames
             // 
             this.MenuShowAllGames.Name = "MenuShowAllGames";
-            this.MenuShowAllGames.Size = new System.Drawing.Size(202, 22);
+            resources.ApplyResources(this.MenuShowAllGames, "MenuShowAllGames");
             this.MenuShowAllGames.Tag = "AllGames";
-            this.MenuShowAllGames.Text = "Tutti i giochi";
             this.MenuShowAllGames.Click += new System.EventHandler(this.MenuShowType_Click);
             // 
             // MenuShowExistingFiles
@@ -388,173 +353,75 @@
             this.MenuShowExistingFiles.Checked = true;
             this.MenuShowExistingFiles.CheckState = System.Windows.Forms.CheckState.Checked;
             this.MenuShowExistingFiles.Name = "MenuShowExistingFiles";
-            this.MenuShowExistingFiles.Size = new System.Drawing.Size(202, 22);
+            resources.ApplyResources(this.MenuShowExistingFiles, "MenuShowExistingFiles");
             this.MenuShowExistingFiles.Tag = "ExistingFiles";
-            this.MenuShowExistingFiles.Text = "Solo se presenti su disco";
             this.MenuShowExistingFiles.Click += new System.EventHandler(this.MenuShowType_Click);
             // 
             // MenuShowSelectedGames
             // 
             this.MenuShowSelectedGames.Name = "MenuShowSelectedGames";
-            this.MenuShowSelectedGames.Size = new System.Drawing.Size(202, 22);
+            resources.ApplyResources(this.MenuShowSelectedGames, "MenuShowSelectedGames");
             this.MenuShowSelectedGames.Tag = "Selected";
-            this.MenuShowSelectedGames.Text = "Solo selezionati";
             this.MenuShowSelectedGames.Click += new System.EventHandler(this.MenuShowType_Click);
             // 
             // MenuShowNotSelectedGames
             // 
             this.MenuShowNotSelectedGames.Name = "MenuShowNotSelectedGames";
-            this.MenuShowNotSelectedGames.Size = new System.Drawing.Size(202, 22);
+            resources.ApplyResources(this.MenuShowNotSelectedGames, "MenuShowNotSelectedGames");
             this.MenuShowNotSelectedGames.Tag = "NotSelected";
-            this.MenuShowNotSelectedGames.Text = "Solo non selezionati";
             this.MenuShowNotSelectedGames.Click += new System.EventHandler(this.MenuShowType_Click);
             // 
             // MenuColumns
             // 
             this.MenuColumns.Image = global::MAME_Shrink.Properties.Resources.columns;
             this.MenuColumns.Name = "MenuColumns";
-            this.MenuColumns.Size = new System.Drawing.Size(80, 23);
-            this.MenuColumns.Text = "Colonne";
+            resources.ApplyResources(this.MenuColumns, "MenuColumns");
             this.MenuColumns.Click += new System.EventHandler(this.MenuColumns_Click);
-            // 
-            // SelectedRomsetName
-            // 
-            this.SelectedRomsetName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SelectedRomsetName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SelectedRomsetName.Location = new System.Drawing.Point(654, 140);
-            this.SelectedRomsetName.Name = "SelectedRomsetName";
-            this.SelectedRomsetName.Size = new System.Drawing.Size(164, 19);
-            this.SelectedRomsetName.TabIndex = 59;
-            this.SelectedRomsetName.Text = "Romset";
-            this.SelectedRomsetName.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.SelectedRomsetName.Visible = false;
-            // 
-            // pnlRomset
-            // 
-            this.pnlRomset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlRomset.Controls.Add(this.KeyValueRomset);
-            this.pnlRomset.Location = new System.Drawing.Point(653, 359);
-            this.pnlRomset.Name = "pnlRomset";
-            this.pnlRomset.Size = new System.Drawing.Size(259, 236);
-            this.pnlRomset.TabIndex = 61;
-            this.pnlRomset.Visible = false;
-            // 
-            // KeyValueRomset
-            // 
-            this.KeyValueRomset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.KeyValueRomset.AutoSize = true;
-            this.KeyValueRomset.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.KeyValueRomset.Location = new System.Drawing.Point(0, 0);
-            this.KeyValueRomset.Name = "KeyValueRomset";
-            this.KeyValueRomset.Size = new System.Drawing.Size(0, 0);
-            this.KeyValueRomset.TabIndex = 63;
-            // 
-            // OpenRomsetWebPage
-            // 
-            this.OpenRomsetWebPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.OpenRomsetWebPage.Location = new System.Drawing.Point(826, 139);
-            this.OpenRomsetWebPage.Name = "OpenRomsetWebPage";
-            this.OpenRomsetWebPage.Size = new System.Drawing.Size(78, 20);
-            this.OpenRomsetWebPage.TabIndex = 61;
-            this.OpenRomsetWebPage.TabStop = true;
-            this.OpenRomsetWebPage.Text = "Mostra sul sito";
-            this.OpenRomsetWebPage.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.OpenRomsetWebPage.Visible = false;
-            this.OpenRomsetWebPage.Click += new System.EventHandler(this.OpenRomsetWebPage_Click);
-            // 
-            // ValidateRomset
-            // 
-            this.ValidateRomset.Checked = true;
-            this.ValidateRomset.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ValidateRomset.Location = new System.Drawing.Point(410, 76);
-            this.ValidateRomset.Name = "ValidateRomset";
-            this.ValidateRomset.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.ValidateRomset.Size = new System.Drawing.Size(134, 24);
-            this.ValidateRomset.TabIndex = 63;
-            this.ValidateRomset.Text = "Verifica dipendenze";
-            this.ValidateRomset.UseVisualStyleBackColor = true;
-            this.ValidateRomset.Visible = false;
-            // 
-            // SnapshotPlaceholder
-            // 
-            this.SnapshotPlaceholder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SnapshotPlaceholder.Image = global::MAME_Shrink.Properties.Resources.ingame_placeholder;
-            this.SnapshotPlaceholder.Location = new System.Drawing.Point(715, 10);
-            this.SnapshotPlaceholder.Name = "SnapshotPlaceholder";
-            this.SnapshotPlaceholder.Size = new System.Drawing.Size(49, 38);
-            this.SnapshotPlaceholder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.SnapshotPlaceholder.TabIndex = 60;
-            this.SnapshotPlaceholder.TabStop = false;
-            this.SnapshotPlaceholder.Visible = false;
             // 
             // StartClean
             // 
-            this.StartClean.ImageKey = "waste";
+            resources.ApplyResources(this.StartClean, "StartClean");
             this.StartClean.ImageList = this.ImageList;
-            this.StartClean.Location = new System.Drawing.Point(554, 71);
             this.StartClean.Name = "StartClean";
-            this.StartClean.Size = new System.Drawing.Size(94, 32);
-            this.StartClean.TabIndex = 51;
-            this.StartClean.Text = "Pulisci";
-            this.StartClean.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.StartClean.Visible = false;
             this.StartClean.Click += new System.EventHandler(this.StartClean_Click);
             // 
             // ChangeOptions
             // 
-            this.ChangeOptions.ImageKey = "options";
+            resources.ApplyResources(this.ChangeOptions, "ChangeOptions");
             this.ChangeOptions.ImageList = this.ImageList;
-            this.ChangeOptions.Location = new System.Drawing.Point(125, 71);
             this.ChangeOptions.Name = "ChangeOptions";
-            this.ChangeOptions.Size = new System.Drawing.Size(129, 32);
-            this.ChangeOptions.TabIndex = 50;
-            this.ChangeOptions.Text = "Opzioni e percorsi";
-            this.ChangeOptions.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ChangeOptions.Click += new System.EventHandler(this.ChangeOptions_Click);
             // 
             // Snapshot
             // 
-            this.Snapshot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.Snapshot, "Snapshot");
             this.Snapshot.Image = global::MAME_Shrink.Properties.Resources.ingame_placeholder;
-            this.Snapshot.Location = new System.Drawing.Point(653, 164);
             this.Snapshot.Name = "Snapshot";
-            this.Snapshot.Size = new System.Drawing.Size(259, 189);
-            this.Snapshot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.Snapshot.TabIndex = 5;
             this.Snapshot.TabStop = false;
             // 
             // LoadGames
             // 
-            this.LoadGames.ImageKey = "right";
+            resources.ApplyResources(this.LoadGames, "LoadGames");
             this.LoadGames.ImageList = this.ImageList;
-            this.LoadGames.Location = new System.Drawing.Point(260, 71);
             this.LoadGames.Name = "LoadGames";
-            this.LoadGames.Size = new System.Drawing.Size(121, 32);
-            this.LoadGames.TabIndex = 4;
-            this.LoadGames.Text = "Carica lista";
-            this.LoadGames.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.LoadGames.Click += new System.EventHandler(this.LoadGames_Click);
             // 
             // CancelCurrentProcess
             // 
-            this.CancelCurrentProcess.ImageKey = "cancel-red";
+            resources.ApplyResources(this.CancelCurrentProcess, "CancelCurrentProcess");
             this.CancelCurrentProcess.ImageList = this.ImageList;
-            this.CancelCurrentProcess.Location = new System.Drawing.Point(260, 71);
             this.CancelCurrentProcess.Name = "CancelCurrentProcess";
-            this.CancelCurrentProcess.Size = new System.Drawing.Size(121, 32);
-            this.CancelCurrentProcess.TabIndex = 51;
-            this.CancelCurrentProcess.Text = "Interrompi";
-            this.CancelCurrentProcess.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.CancelCurrentProcess.Visible = false;
             this.CancelCurrentProcess.Click += new System.EventHandler(this.CancelCurrentProcess_Click);
+            // 
+            // KeyValueRomset
+            // 
+            resources.ApplyResources(this.KeyValueRomset, "KeyValueRomset");
+            this.KeyValueRomset.Name = "KeyValueRomset";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(918, 601);
             this.Controls.Add(this.ValidateRomset);
             this.Controls.Add(this.SelectedRomsetName);
             this.Controls.Add(this.OpenRomsetWebPage);
@@ -574,19 +441,14 @@
             this.Controls.Add(this.GamesListView);
             this.Controls.Add(this.LoadGames);
             this.Controls.Add(this.CancelCurrentProcess);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.ToolbarMenuGrid;
-            this.MinimumSize = new System.Drawing.Size(630, 480);
             this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MAME Shrink";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.MenuColumnItems.ResumeLayout(false);
             this.ToolbarMenuGrid.ResumeLayout(false);
             this.ToolbarMenuGrid.PerformLayout();
             this.pnlRomset.ResumeLayout(false);
-            this.pnlRomset.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SnapshotPlaceholder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Snapshot)).EndInit();
             this.ResumeLayout(false);
@@ -637,8 +499,8 @@
         private System.Windows.Forms.PictureBox SnapshotPlaceholder;
         private System.Windows.Forms.Panel pnlRomset;
         private System.Windows.Forms.LinkLabel OpenRomsetWebPage;
-        private Components.KeyValueTable KeyValueRomset;
         private System.Windows.Forms.CheckBox ValidateRomset;
+        private Components.KeyValueTable KeyValueRomset;
     }
 }
 

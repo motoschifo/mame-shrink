@@ -141,10 +141,29 @@
     <Compile Include="Settings\Common\Defaults.cs" />
     <Compile Include="Settings\UserPreferences.cs" />
     <Compile Include="Settings\UserPreferencesManager.cs" />
+    <Compile Include="Resources\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\Dialogs.cs" />
     <Compile Include="Utilities\ApplicationHelper.cs" />
     <Compile Include="Utilities\FileUtilities.cs" />
+    <EmbeddedResource Include="Resources\Strings.it.resx" />
+    <EmbeddedResource Include="Resources\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Resources\Icons\link.png" />
+    <EmbeddedResource Include="Components\KeyValueTable.resx">
+      <DependentUpon>KeyValueTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main\MainForm.it.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Options\OptionsForm.it.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Options\OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </EmbeddedResource>

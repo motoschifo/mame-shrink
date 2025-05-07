@@ -85,9 +85,21 @@ public partial class KeyValueTable : UserControl
     {
         if (_flowControl.Controls.Count > 0 && _flowControl.Controls[0] is TableLayoutPanel tbl)
         {
-            tbl.Width = _flowControl.ClientSize.Width - 20;
+            if (_flowControl.ClientSize.Width> 30)
+                tbl.Width = _flowControl.ClientSize.Width - 20;
         }
     }
 
+    private void InitializeComponent()
+    {
+            this.SuspendLayout();
+            // 
+            // KeyValueTable
+            // 
+            this.Name = "KeyValueTable";
+            this.Size = new System.Drawing.Size(274, 135);
+            this.ResumeLayout(false);
+
+    }
 }
 

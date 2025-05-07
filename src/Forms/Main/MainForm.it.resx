@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Eseguibile Mame IT:</value>
+  </data>
+  <data name="ImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
+        EwAAAk1TRnQBSQFMAgEBCAEAAdABAQHQAQEBGAEAARgBAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        AwABYAMAAUgDAAEBAQABCAYAARsYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
+        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
+        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
+        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
+        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
+        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
+        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
+        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
+        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
+        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
+        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
+        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
+        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
+        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
+        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
+        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
+        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
+        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
+        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
+        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
+        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
+        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
+        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
+        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
+        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
+        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
+        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
+        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD//8A/wD/AP8A/wD/AP8A
+        /wD/ANEAAf8B8QHtARQCDgEUAe0B8QH/DQAB8AEQCAABEAHwPAAB8QEVCAABFQHxCwAB/wEOCgABDgH/
+        OQAB/wHvDAAB7wH/CQAB8wwAAfQ5AAHvDgAB7wkAAfEDAAHzBAAB8wMAAfEIAAFtARIC/wESAW0SAAFt
+        ARIC/wESAW0SAAHxEAAB8QgAAQcMAAEHCAABEgEAAhMBAAESEgABEgEAAhMBAAESEQAB/wEVBwAC/wcA
+        ARUB/wcAAe8MAAHvCAAB/wETAgABEwH/AwABbQgAAW0FAAH/ARMCAAETAf8DAAFtCAABbQQAAfEIAAL/
+        CAAB8QcAAe0MAAHtCAAB/wETAgABEwH/AwAB6ggAAW0FAAH/ARMCAAETAf8DAAHqCAABbQQAAe0SAAHt
+        BwAB6gwAAW0IAAESAQACEwEAARISAAESAQACEwEAARIRAAEUEgABFAcAAREMAAFDCAABbQESAv8BEgFt
+        EgABbQESAv8BEgFtEQABDggAAvMIAAEOBgAB/w4AAf82AAEOEgABDgYAAfQOAAH0NgABFBIAARQGAAHy
+        DgAB8zYAAe0SAAHtBgAB8AQAAvMCAALzBAAB8AkAAfQXAAH0FAAB8BIAAfEGAAEHDgABBwcAAf8B7QEA
+        Ae0B/wQAAW0IAAFtBQAB/wHtAQAB7QH/BAABbQgAAW0EAAH/ARUHAALzBwABFQH/BgABkg4AAZIHAAGS
+        AwAB6wH/AwAB6ggAAW0FAAGSAwAB6wH/AwAB6ggAAW0FAAHxEAAB8R4AARABDgG8AREBAAHqAf8RAAEQ
+        AQ4BvAERAQAB6gH/EgAB9w4AAe8fAAL0AQAB9AEVAQABEhEAAvQBAAH0ARUBAAESEgAB/wH3DAAB7wH/
+        BwABbRAAAW0KAAH/ARIB6hUAAf8BEgHqFAAB8QEVCAABFQHxCQAB6hAAAW06AAH/AfAB7QEUAg4BFAHt
+        AfEB/xAAAe8EAAHv/wBiAAH/AfQB8gLxAfIB9FkAAfQB8gHqAQ4BAAFtAQdYAAH0AfEBkgEVAgABFQHt
+        AvQjAAHzAfIC9AgAAfQB8wHxAfIB9AcAAfQB8wL0CAAC9AHzAvQFAAH/AfQC8wH0AfEB9wETAQ8CAAEO
+        ARMB7wHxA/MB9BAAA/QB/wsAAQcB9wEHAfMB9AcAAfMBvAHtAQcB8gcAAb0BtwG9AvQHAAH0Ab0BlAG9
+        AfQFAAH0Af8BBwHvAfEB7QEVBwAB7AHvAewBBwHzEAAB8QHwAf8B9AsAAe0BQwETAQcB9AcAAfEB7AEA
+        Ae0B8QcAAZQCFwG9AfQHAAHzAZQB+QGUAfMEAAH0AfIBBwHqARUBEwERAQ4HAAERARUBEQFtAe8C9AwA
+        AvQB9wHsAe0B8AH0CgABvAHsAUMB7AG8AvQCAAH0AfMB8QHtAW0B7AG8AfMHAAEaAZQBFwGUAb0C9AIA
+        AvQB8wGUARYBlAG9AfQEAAH0AQcBbQEQBAABDgEVAhIBFQEQBAABEAHrAfMB9AwAAvQB7wFtARUB7QHw
+        AfQB/wgAAfMBvAHrAW0B7AEHAfMB9AEAAfMBBwHsAW0B7QHxAfMB9AcAAfQBvQIWAZQBvQL0AQAB9AG9
+        AZQBFgGUAfMC9AQAAfMBkgUAAQ4BQwHvAfQB/wEHAW0FAAEUAQcB8w4AAfMBkgEAARUB7QH/AfQJAAH0
+        Af8B6wERARQBBwH0AQAB8QHsAQAB7AHxCwAB9AH/ARYCFwG9AfQBAAHzAZQB+QGUAfMHAAH0AQcBbQEQ
+        AgABEQHrAQcB8gL0AfIB7wFtARACAAERAewB8wH0DgAB9AHxAZIBbQHqAe0B8AH0CAAB/wH0AbwB7AER
+        AewBBwHxAe0BbQHsAQcB8wsAAf8B9AG9AZQBFwGUAb0B8wGUARYBlAG9AfQHAAH0AfIBvAESAgABEgHv
+        AvQCAAH0AfIBBwEVAgABEgHvAvQDAAH/AfIK8QEHAZIBEgFDARUBkgHxCgAB8wG8AesBbQHrAewBbQHt
+        AfEB8wH0DQAB9AG9AxYBlAEWAZQB8wL0CgAB7QEOAQAB6wHwBQAB9AH/ARICAAHsAfEFAAHyAW0BEA4A
+        ARMBBwsAAfQB/wHrAQ4BAAHsAfERAAH0Af8BFgFHAfkBlAHzCwAC9AHrAQ4BAAHrAbwFAAL0ARICAAHs
+        AfAFAAHzAe8B7QvrARQBDwEAAesBvAoAAfQB8wHwAeoBDwEOAesBBwL0DgAC9AHzARYCRwEWAb0C9AgA
+        AfQB8gHvARQBDgEAARMB7wH0Af8CAAH0AfIB7wEVAgABEgHvAfQB/wMAAfQB8QrwAbwBBwHqAREBQwGS
+        AfEKAAHzAQcB7AFtAeoB6wFtAewBBwHzAfQNAAH0Ab0BlAQWAZQBvQL0BwAB8wHvAQ4DAAEOAesB/wH0
+        AgAB9AEHAUMBDgIAAQ4B6gHzAfQPAAH0AbwBFAFDAZIB8QH0CgAB8QHsAQAB7AHwAf8B6wERARQBBwH0
+        DQAB8wGUAfkBlAHzAf8BFgIXAb0B9AcAAfMB7wEOBAABEQHrAe8BvAHwAe8B6wEOAwABDgHqAfMB9A4A
+        AfMB7wEUAW0BkgHxAfMB9AcAAfQB8wHxAe0BbQHsAQcB8wH0AbwB7AERAewBvAL0CAAC9AHzAZQBFgGU
+        Ab0C9AG9AZQBFwGUAb0C9AUAAfQBBwESAQ8EAAEOARMC6wESAREEAAERAewB8wH0DAAB/wH0Ae8BbQFD
+        AZIB8QL0CAAB8wEHAewBbQHtAfEB8wH0AQAB8wG8AesBbQHsAQcB8wH0BwAB9AG9AZQBFgGUAfMC9AEA
+        AfQBvQIWAZQBvQL0BQAB9AHwARMOAAHqAQcOAAH0Af8BEgFDAfcB8QH0CgAB8QHsAQAB7AHxBQAB9AH/
+        AesBEQEUAQcB9AcAAfMBlAH5AZQB8wUAAfQB/wEWAhcBvQH0BQAC9AHvAZIB9wHtAeoBDgMAAQ4BEQFt
+        Ae0BkgHtAQcB8Q4AAf8B9AEHAe8B8QHzAfQKAAHvAesB7AEHAfMFAAH/AfQBvAHsAUMB9wHyBwABvQEW
+        AZQBvQH0BQAB/wH0Ab0BlAEXAbcB8wUAAvQD8wHyAe8BFAEOAgABDwHrAbwB8gHzAfIB8wH0EAAB9AHz
+        AvQLAAG8Ae8B8QHzAfQHAAHzAbwB7QEHAfMHAAEbAb0B8wL0BwAB9AEaAZQBvQH0CwAB8wHtAUMCAAEV
+        Ae9ZAAH0AfAB7QLrAZIB8FkAAfQB8wHxAvAB8gHzsQABQgFNAT4HAAE+AwABKAMAAWADAAFIAwABAQEA
+        AQEFAAFgAQMWAAP//wAiABj/Af4BAAF/AfwBAAE/Bv8B/AEAAT8B+AEAAR8G/wHwAQABDwH4AQABHwb/
+        AfABAAEPAfgBJAEfAeABfwH/AeABfwH/AeABAAEHAfgBZgEfAeABfwH/AeABfwH/AcABAAEDAfgBZgEf
+        AeABcAEDAeABcAEDAcABAAEDAfgBZgEfAeABcAEDAeABcAEDAcABAAEDAfgBZgEfAeABfwH/AeABfwH/
+        AcABAAEDAfgBZgEfAeABfwH/AeABfwH/AcABAAEDAfABZgEPBv8BwAEYAQMB8AFmAQ8G/wHAARgBAwHw
+        AWYBDwb/AcABGAEDAfABAAEPAfsC/wH7Av8BwAEYAQMB8AEAAQ8B4AHwAQMB4AHwAQMBwAEAAQMB8AEA
+        AQ8B4AFwAQMB4AFwAQMB4AEAAQcD/wHgAT8B/wHgAT8B/wHwAQABDwP/AeQBPwH/AeQBPwH/AfABAAEP
+        AeABAAEHAf4BPwH/Af4BPwH/AfwBAAE/AeABAAEHBv8B/gEAAX8B/wGBLP8BAQv/AQEK/wH+AQABfwP/
+        AfAB/wEHAfAB/wEHAcABAAEHAf8B+AF/AfABfwEHAfABfwEHAcABAAEHAf8B+AF/AfABfwEHAfABfwEH
+        AYABAAEBAf8B4AE/AfABGAEHAfABGAEHAYABAAEBAf8B4AEPAfABCAEHAfABCAEHAYABAAEBAf8B+AEP
+        AfgBCAE/AfgBCAE/AYABAAEBAf8B+AEHAfgBAAE/AfgBAAE/AYABGAEBAcABAAEHAf4BAAE/Af4BAAE/
+        AfABfAEHAcABAAEHAf8BAQL/AQEB/wHAAXwBBwHAAQABBwH+AQABfwH+AQABfwGAARgBAQHAAQABBwH+
+        AQABPwH+AQABPwGAARgBAQH/AfwBBwH+AQABPwH+AQABPwGAAQABAQH/AfgBBwHwAQABDwHwAQABDwGA
+        AQABAQH/AeABDwHwAQgBBwHwAQgBBwHAAQABBwH/AeABPwHwAXwBBwHwAXwBBwHAAQABBwH/AeABPwHw
+        AXwBBwHwAXwBBwHAAQABBwH/AfgBfwHwAX8BBwHwAX8BBwH/AQEL/wEBC/8BARb/Cw==
+</value>
+  </data>
+  <data name="lblInfo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Cartella roms:</value>
+  </data>
+  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Lista giochi XML:</value>
+  </data>
+  <data name="LabelManueExe.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LabelGamelistXml.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LabelRomsPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="toolStripColumnYear.Text" xml:space="preserve">
+    <value>Anno</value>
+  </data>
+  <data name="toolStripColumnManufacturer.Text" xml:space="preserve">
+    <value>Produttore</value>
+  </data>
+  <data name="toolStripColumnDriverStatus.Text" xml:space="preserve">
+    <value>Stato</value>
+  </data>
+  <data name="toolStripColumnGenre.Text" xml:space="preserve">
+    <value>Genere</value>
+  </data>
+  <data name="toolStripColumnRelease.Text" xml:space="preserve">
+    <value>Versione</value>
+  </data>
+  <data name="toolStripColumnPlayers.Text" xml:space="preserve">
+    <value>Giocatori</value>
+  </data>
+  <data name="toolStripColumnButtons.Text" xml:space="preserve">
+    <value>Pulsanti</value>
+  </data>
+  <data name="toolStripColumnDisplay.Text" xml:space="preserve">
+    <value>Schermo</value>
+  </data>
+  <data name="MenuAddToSelectedGames.Text" xml:space="preserve">
+    <value>Seleziona</value>
+  </data>
+  <data name="MenuAddToSelectedGames.ToolTipText" xml:space="preserve">
+    <value>Aggiungi alla selezione</value>
+  </data>
+  <data name="MenuRemoveFromSelectedGames.Text" xml:space="preserve">
+    <value>Deseleziona</value>
+  </data>
+  <data name="MenuRemoveFromSelectedGames.ToolTipText" xml:space="preserve">
+    <value>Rimuovi dalla selezione</value>
+  </data>
+  <data name="MenuToggleSelectedGames.Text" xml:space="preserve">
+    <value>Inverti</value>
+  </data>
+  <data name="MenuToggleSelectedGames.ToolTipText" xml:space="preserve">
+    <value>Inverti la selezione</value>
+  </data>
+  <data name="GridTextFilter.ToolTipText" xml:space="preserve">
+    <value>Filtro griglia</value>
+  </data>
+  <data name="MenuShowAllGames.Text" xml:space="preserve">
+    <value>Tutti i giochi</value>
+  </data>
+  <data name="MenuShowExistingFiles.Text" xml:space="preserve">
+    <value>Solo se presenti su disco</value>
+  </data>
+  <data name="MenuShowSelectedGames.Text" xml:space="preserve">
+    <value>Solo selezionati</value>
+  </data>
+  <data name="MenuShowNotSelectedGames.Text" xml:space="preserve">
+    <value>Solo non selezionati</value>
+  </data>
+  <data name="MenuShow.Text" xml:space="preserve">
+    <value>Mostra</value>
+  </data>
+  <data name="MenuColumns.Text" xml:space="preserve">
+    <value>Colonne</value>
+  </data>
+  <data name="SelectedRomsetName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="OpenRomsetWebPage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="OpenRomsetWebPage.Text" xml:space="preserve">
+    <value>Mostra sul sito</value>
+  </data>
+  <data name="ValidateRomset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ValidateRomset.Text" xml:space="preserve">
+    <value>Verifica dipendenze</value>
+  </data>
+  <data name="SnapshotPlaceholder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="StartClean.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="StartClean.Text" xml:space="preserve">
+    <value>Pulisci</value>
+  </data>
+  <data name="ChangeOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ChangeOptions.Text" xml:space="preserve">
+    <value>Opzioni e percorsi</value>
+  </data>
+  <data name="Snapshot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LoadGames.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LoadGames.Text" xml:space="preserve">
+    <value>Carica lista</value>
+  </data>
+  <data name="CancelCurrentProcess.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CancelCurrentProcess.Text" xml:space="preserve">
+    <value>Interrompi</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAICAEAAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAgICAAMDAwAAAAP8AAP8AAAD//wD/AAAA/wD/AP//
+        AAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB2ZmZmZmYxPzMzZmZmZmYAdmZmZmYB
+        Mz+7szFmZmZmAHZmZmZzMzM/u7uzN2ZmZgB2ZmZm8zMQP7u7u7NmZmYAdmZmZvMwAD+7u7uzZmZmAHZm
+        ZmbzEAA/u7u7s2ZmZgB2ZmZm8zAAP7u7u7NmZmYAdmZmZvMwcD+7u7uzZmZmAHZmZmbzMHc/u7u7s2Zm
+        ZgB2ZmZm8zcHP7u7u7NmZmYAdmZmZvMTE/u7u7uzZmZmAHZmZm8zMzP7u7u7s2ZmZgB2ZmZvMzMz+7u7
+        u7NmZmYAdmZmbzM4+Pu7hzuzZmZmAHZmZm/4h4h/u5eHs2ZmZgB2ZmZvCIdmAPt4eLNmZmYAdmZmZvRw
+        AAD4d4hzZmZmAHZmZmZvBmY2+HeIg2ZmZgB2ZmZmb2YABveIeINmZmYAdmZmZm9zAAb7h3izZmZmAHZm
+        ZmZvcAAD+Id4c2ZmZgB2ZmZmb0YABvh3d4dmZmYAdmZmZm9mAAD3iIiHZmZmAHZmZmZvQ2Y2+Ih4h2Zm
+        ZgB2ZmZmb0ZmZPiI+IdmZmYAdmZmZm9mZ2b7iIiDZmZmAHZmZmZvd7t3+3iIu2ZmZgB2ZmZmb3e7iI+7
+        e7tmZmYAdmZmZmb3d3d3///2ZmZmAHd3d3d3d3d3d3d3d3d3dwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+</root>

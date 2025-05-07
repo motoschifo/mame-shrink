@@ -4,16 +4,21 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using MAME_Shrink.Resources;
+using NLog;
 
 namespace MAME_Shrink.Utilities;
 
 public class Dialogs
 {
+    private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
     public static void ProgressUpdate(Label label, string? text = null, string? step = null)
     {
-        label.Text = string.IsNullOrEmpty(step) ?
-            (text ?? string.Empty) :
-            string.IsNullOrEmpty(text) ? $"[{step!.ToUpper()}]" : $"[{step!.ToUpper()}] - {text}";
+        if (string.IsNullOrEmpty(step))
+            label.Text = string.IsNullOrEmpty(text) ? string.Empty : text + "...";
+        else
+            label.Text = string.IsNullOrEmpty(text) ? $"[{step}] ..." : $"[{step}] - {text}...";
         Application.DoEvents();
     }
 
@@ -24,7 +29,7 @@ public class Dialogs
             OpenFileDialog openFileDialog = new()
             {
                 FileName = filterName,
-                Filter = string.Join("|", filters) + "|Tutti i file|*.*",
+                Filter = $"{string.Join("|", filters)}|{Strings.AllFiles}|*.*",
                 FilterIndex = 0,
                 Multiselect = false,
                 InitialDirectory = string.IsNullOrEmpty(initialFolder) ? null : initialFolder
@@ -34,7 +39,7 @@ public class Dialogs
         }
         catch (Exception ex)
         {
-            _ = MessageBox.Show($"Errore durante la selezione del file.\n{ex.Message}");
+            _ = MessageBox.Show(Strings.ErrorSelectingFile + $"\n{ex.Message}");
             return null;
         }
     }
@@ -54,7 +59,7 @@ public class Dialogs
         }
         catch (Exception ex)
         {
-            _ = MessageBox.Show($"Errore durante la lettura del percorso.\n\n{ex.Message}");
+            _ = MessageBox.Show(Strings.ErrorSelectingFolder + $"\n\n{ex.Message}");
             return null;
         }
     }
@@ -77,7 +82,7 @@ public class Dialogs
         }
         catch (Exception ex)
         {
-            _ = MessageBox.Show($"Caricamento non riuscito per il file \n{filename}\n\n{ex.Message}");
+            _ = MessageBox.Show(Strings.ErrorLoadingFile + $"\n{filename}\n\n{ex.Message}");
         }
     }
 
@@ -95,23 +100,23 @@ public class Dialogs
         }
         catch (Exception ex)
         {
-            _ = MessageBox.Show($"Caricamento non riuscito\n\n{ex.Message}");
+            _ = MessageBox.Show(Strings.ErrorOpeningUrl + $"\n{url}\n\n{ex.Message}");
         }
     }
 
     public static void ShowErrorDialog(Exception ex)
     {
-        MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show(ex.Message, Strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     public static void ShowErrorDialog(string error)
     {
-        MessageBox.Show(error, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show(error, Strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     public static void ShowInfoDialog(string text)
     {
-        MessageBox.Show(text, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show(text, Strings.Info, MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     public static void DoSomethingSafe(Action action)
@@ -122,6 +127,7 @@ public class Dialogs
         }
         catch (Exception ex)
         {
+            _logger.Error(ex);
             ShowErrorDialog(ex);
         }
     }
