@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-namespace ArcadeDatabaseSdk.Net48.Common;
+namespace MAME_Shrink.Extensions;
 
 public class JsonHelper
 {
