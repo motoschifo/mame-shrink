@@ -106,6 +106,9 @@
     <Compile Include="Common\Filters\FilterKind.cs" />
     <Compile Include="Common\Filters\FilterMenuCollection.cs" />
     <Compile Include="Common\Filters\FilterMenuItem.cs" />
+    <Compile Include="Extensions\ImageHelper.cs" />
+    <Compile Include="Extensions\Int32Extension.cs" />
+    <Compile Include="Extensions\Int64Extension.cs" />
     <Compile Include="Forms\Main\WarningRomsetItem.cs" />
     <Compile Include="Forms\Main\WarningRomsetCollection.cs" />
     <Compile Include="Forms\Options\OptionsForm.cs">
@@ -123,6 +126,7 @@
     <Compile Include="Forms\Main\GridItem.cs" />
     <Compile Include="Common\Cache\MachinesCache\MachinesCache.cs" />
     <Compile Include="Forms\Main\RomFile.cs" />
+    <Compile Include="Extensions\JsonHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -247,9 +251,16 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <Import Project="..\shared\ArcadeDatabaseSdk.Net48\ArcadeDatabaseSdk.projitems" Label="Shared" />
-  <Import Project="..\shared\MameTools.Net48\MameTools.projitems" Label="Shared" />
-  <Import Project="..\shared\Extensions.Net48\Extensions.Net48.projitems" Label="Shared" />
+  <ItemGroup>
+    <ProjectReference Include="..\shared\ArcadeDatabaseSdk.Net48\ArcadeDatabaseSdk.Net48.csproj">
+      <Project>{7efc7f4a-80e1-42a6-9526-c8b3a3b3485b}</Project>
+      <Name>ArcadeDatabaseSdk.Net48</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\shared\MameTools.Net48\MameTools.Net48.csproj">
+      <Project>{3e21e1e2-4bf4-4d5e-b527-5ac259c6452a}</Project>
+      <Name>MameTools.Net48</Name>
+    </ProjectReference>
+  </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

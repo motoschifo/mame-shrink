@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using ArcadeDatabaseSdk.Net48.Common;
+using MAME_Shrink.Extensions;
 using Newtonsoft.Json;
 namespace MAME_Shrink.Common.Cache;
 

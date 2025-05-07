@@ -12,11 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{F59E7454-3B8E-466D-93C1-AE1A5900FBA7}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MameTools.Net48", "shared\MameTools.Net48\MameTools.Net48.shproj", "{B63EDA0D-41D2-4796-94F3-E85D712DA478}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcadeDatabaseSdk.Net48", "shared\ArcadeDatabaseSdk.Net48\ArcadeDatabaseSdk.Net48.csproj", "{7EFC7F4A-80E1-42A6-9526-C8B3A3B3485B}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ArcadeDatabaseSdk.Net48", "shared\ArcadeDatabaseSdk.Net48\ArcadeDatabaseSdk.Net48.shproj", "{EDE2B36D-CA3B-4FCC-A69E-700A15648063}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MameTools.Net48", "shared\MameTools.Net48\MameTools.Net48.csproj", "{3E21E1E2-4BF4-4D5E-B527-5AC259C6452A}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Extensions.Net48", "shared\Extensions.Net48\Extensions.Net48.shproj", "{11587639-ED89-44D6-A090-9AA5FF9D57F8}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Extensions.Net48-old", "shared\Extensions.Net48-old\Extensions.Net48-old.shproj", "{11587639-ED89-44D6-A090-9AA5FF9D57F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,24 +34,32 @@ Global
 		{8754902F-850F-46DC-9FD8-7CFB1C0B4D6D}.Release|x64.Build.0 = Release|x64
 		{8754902F-850F-46DC-9FD8-7CFB1C0B4D6D}.Release|x86.ActiveCfg = Release|x86
 		{8754902F-850F-46DC-9FD8-7CFB1C0B4D6D}.Release|x86.Build.0 = Release|x86
+		{7EFC7F4A-80E1-42A6-9526-C8B3A3B3485B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7EFC7F4A-80E1-42A6-9526-C8B3A3B3485B}.Debug|x64.Build.0 = Debug|Any CPU
+		{7EFC7F4A-80E1-42A6-9526-C8B3A3B3485B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7EFC7F4A-80E1-42A6-9526-C8B3A3B3485B}.Debug|x86.Build.0 = Debug|Any CPU
+		{7EFC7F4A-80E1-42A6-9526-C8B3A3B3485B}.Release|x64.ActiveCfg = Release|Any CPU
+		{7EFC7F4A-80E1-42A6-9526-C8B3A3B3485B}.Release|x64.Build.0 = Release|Any CPU
+		{7EFC7F4A-80E1-42A6-9526-C8B3A3B3485B}.Release|x86.ActiveCfg = Release|Any CPU
+		{7EFC7F4A-80E1-42A6-9526-C8B3A3B3485B}.Release|x86.Build.0 = Release|Any CPU
+		{3E21E1E2-4BF4-4D5E-B527-5AC259C6452A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3E21E1E2-4BF4-4D5E-B527-5AC259C6452A}.Debug|x64.Build.0 = Debug|Any CPU
+		{3E21E1E2-4BF4-4D5E-B527-5AC259C6452A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E21E1E2-4BF4-4D5E-B527-5AC259C6452A}.Debug|x86.Build.0 = Debug|Any CPU
+		{3E21E1E2-4BF4-4D5E-B527-5AC259C6452A}.Release|x64.ActiveCfg = Release|Any CPU
+		{3E21E1E2-4BF4-4D5E-B527-5AC259C6452A}.Release|x64.Build.0 = Release|Any CPU
+		{3E21E1E2-4BF4-4D5E-B527-5AC259C6452A}.Release|x86.ActiveCfg = Release|Any CPU
+		{3E21E1E2-4BF4-4D5E-B527-5AC259C6452A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B63EDA0D-41D2-4796-94F3-E85D712DA478} = {F59E7454-3B8E-466D-93C1-AE1A5900FBA7}
-		{EDE2B36D-CA3B-4FCC-A69E-700A15648063} = {F59E7454-3B8E-466D-93C1-AE1A5900FBA7}
+		{7EFC7F4A-80E1-42A6-9526-C8B3A3B3485B} = {F59E7454-3B8E-466D-93C1-AE1A5900FBA7}
+		{3E21E1E2-4BF4-4D5E-B527-5AC259C6452A} = {F59E7454-3B8E-466D-93C1-AE1A5900FBA7}
 		{11587639-ED89-44D6-A090-9AA5FF9D57F8} = {F59E7454-3B8E-466D-93C1-AE1A5900FBA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BA5CE638-E9F6-4BF3-B6A0-66747490E20D}
-	EndGlobalSection
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		shared\Extensions.Net48\Extensions.Net48.projitems*{11587639-ed89-44d6-a090-9aa5ff9d57f8}*SharedItemsImports = 13
-		shared\ArcadeDatabaseSdk.Net48\ArcadeDatabaseSdk.projitems*{8754902f-850f-46dc-9fd8-7cfb1c0b4d6d}*SharedItemsImports = 4
-		shared\Extensions.Net48\Extensions.Net48.projitems*{8754902f-850f-46dc-9fd8-7cfb1c0b4d6d}*SharedItemsImports = 4
-		shared\MameTools.Net48\MameTools.projitems*{8754902f-850f-46dc-9fd8-7cfb1c0b4d6d}*SharedItemsImports = 4
-		shared\MameTools.Net48\MameTools.projitems*{b63eda0d-41d2-4796-94f3-e85d712da478}*SharedItemsImports = 13
-		shared\ArcadeDatabaseSdk.Net48\ArcadeDatabaseSdk.projitems*{ede2b36d-ca3b-4fcc-a69e-700a15648063}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

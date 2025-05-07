@@ -3,7 +3,7 @@ using System;
 using System.Drawing;
 using System.IO;
 
-namespace ArcadeDatabaseSdk.Net48.Common;
+namespace MAME_Shrink.Extensions;
 internal class ImageHelper
 {
     public static Image ConvertStreamToImage(Stream stream)

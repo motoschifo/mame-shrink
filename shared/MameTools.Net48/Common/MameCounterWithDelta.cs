@@ -1,6 +1,6 @@
 ﻿#nullable enable
 using System.Collections.Generic;
-using Extensions.Net48;
+using MameTools.Net48.Extensions;
 namespace MameTools.Net48.Common;
 
 public class MameCounterWithDelta(string text, int? count = null, int? removed = null, int? added = null, bool trustDatValues = false, bool isSoftware = false)

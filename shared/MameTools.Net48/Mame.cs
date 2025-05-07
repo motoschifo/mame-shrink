@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Extensions.Net48;
 using MameTools.Machine;
 using MameTools.Net48.Common;
 using MameTools.Net48.Config;
+using MameTools.Net48.Extensions;
 using MameTools.Net48.Machines.Samples;
 using MameTools.Net48.SoftwareList;
 
