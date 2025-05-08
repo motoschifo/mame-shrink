@@ -6,102 +6,106 @@ permissions:
   pull-requests: write
   issues: write
   packages: write
-  
+
 on:
   push:
     tags:
-      - "v*"  # Triggered when a tag starting with "v" is created (e.g., v1.0.0)
+      - "v*"
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-      # Display current project workspace
       - name: Current project workspace
         shell: cmd
         run: |
           echo Current project workspace:
           echo %GITHUB_WORKSPACE%
-          
-      # Display current folder
+
       - name: Current folder
         shell: cmd
         run: |
           echo Current folder:
           echo %CD%
 
-      # Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Setup MSBuild
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1
 
-      # Setup NuGet
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1
 
-      # Restore NuGet packages
       - name: Restore NuGet packages
         run: nuget restore "MAME Shrink.sln"
 
-      # Create Release Directory
-      - name: Create Release Directory
-        run: mkdir -p release
+      - name: Clean and Create Release Directory
+        shell: pwsh
+        run: |
+          $releaseBase = "$env:GITHUB_WORKSPACE\release"
+          $releaseX64 = Join-Path $releaseBase "x64"
+          $releaseX86 = Join-Path $releaseBase "x86"
+          if (Test-Path $releaseBase) {
+            Remove-Item $releaseBase -Recurse -Force
+          }
+          New-Item -ItemType Directory -Path $releaseX64 | Out-Null
+          New-Item -ItemType Directory -Path $releaseX86 | Out-Null
 
-      # Build for x64
       - name: Build Solution x64
         run: msbuild "MAME Shrink.sln" /p:Configuration=Release /p:Platform="x64"
 
-      # Copy Output Files for x64
       - name: Copy Output Files x64
-        shell: cmd
+        shell: pwsh
         run: |
-          copy "%GITHUB_WORKSPACE%\src\bin\x64\Release\MAME Shrink.exe" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\x64\Release\MAME Shrink.exe.config" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\x64\Release\MAME Shrink.exe.manifest" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\x64\Release\Newtonsoft.Json.dll" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\x64\Release\NLog.config" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\x64\Release\NLog.dll" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\x64\Release\System.Buffers.dll" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\x64\Release\System.Memory.dll" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\x64\Release\System.Numerics.Vectors.dll" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\x64\Release\System.Runtime.CompilerServices.Unsafe.dll" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\x64\Release\System.Text.Encoding.CodePages.dll" release\
+          $sourceDir = Join-Path $env:GITHUB_WORKSPACE "src\bin\x64\Release"
+          $destDir = Join-Path $env:GITHUB_WORKSPACE "release\x64"
+          $fileListPath = "$env:GITHUB_WORKSPACE\build-filelist.txt"
+          Get-Content $fileListPath | ForEach-Object {
+              $sourcePath = Join-Path $sourceDir $_
+              $destPath = Join-Path $destDir $_
+              if (Test-Path $sourcePath) {
+                  $destSubDir = Split-Path $destPath -Parent
+                  if (-not (Test-Path $destSubDir)) {
+                      New-Item -ItemType Directory -Path $destSubDir -Force | Out-Null
+                  }
+                  Copy-Item -Path $sourcePath -Destination $destPath -Force
+              } else {
+                  Write-Error "❌ File missing: $sourcePath"
+              }
+          }
 
-      # Compress Release Files for x64
+
       - name: Compress Release Files x64
-        run: Compress-Archive -Path release\* -DestinationPath release_x64.zip
+        run: Compress-Archive -Path release\x64\* -DestinationPath release_x64.zip
 
-      # Build for x86 (32-bit)
       - name: Build Solution x86
         run: msbuild "MAME Shrink.sln" /p:Configuration=Release /p:Platform="x86"
 
-      # Copy Output Files for x86
       - name: Copy Output Files x86
-        shell: cmd
+        shell: pwsh
         run: |
-          copy "%GITHUB_WORKSPACE%\src\bin\Release\Newtonsoft.Json.dll" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\Release\MAME Shrink.exe" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\Release\MAME Shrink.exe" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\Release\MAME Shrink.exe.config" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\Release\MAME Shrink.exe.manifest" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\Release\Newtonsoft.Json.dll" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\Release\NLog.config" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\Release\NLog.dll" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\Release\System.Buffers.dll" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\Release\System.Memory.dll" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\Release\System.Numerics.Vectors.dll" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\Release\System.Runtime.CompilerServices.Unsafe.dll" release\
-          copy "%GITHUB_WORKSPACE%\src\bin\Release\System.Text.Encoding.CodePages.dll" release\
+          $sourceDir = Join-Path $env:GITHUB_WORKSPACE "src\bin\Release"
+          $destDir = Join-Path $env:GITHUB_WORKSPACE "release\x86"
+          $fileListPath = "$env:GITHUB_WORKSPACE\build-filelist.txt"
+          Get-Content $fileListPath | ForEach-Object {
+              $sourcePath = Join-Path $sourceDir $_
+              $destPath = Join-Path $destDir $_
+              if (Test-Path $sourcePath) {
+                  $destSubDir = Split-Path $destPath -Parent
+                  if (-not (Test-Path $destSubDir)) {
+                      New-Item -ItemType Directory -Path $destSubDir -Force | Out-Null
+                  }
+                  Copy-Item -Path $sourcePath -Destination $destPath -Force
+              } else {
+                  Write-Error "❌ File missing: $sourcePath"
+              }
+          }
 
-      # Compress Release Files for x86
       - name: Compress Release Files x86
-        run: Compress-Archive -Path release\* -DestinationPath release_x86.zip
+        run: Compress-Archive -Path release\x86\* -DestinationPath release_x86.zip
 
-      # Create GitHub Release
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:

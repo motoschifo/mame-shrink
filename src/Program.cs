@@ -22,7 +22,7 @@ internal static class Program
         try
         {
             _logger.Info("Application started");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");    //  TEST
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");    //  TEST
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

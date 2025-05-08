@@ -1384,12 +1384,12 @@ public partial class MainForm : Form
             {
                 try
                 {
-                    progressUpdate($"{Strings.LoadingArcadeItalia}({Strings.Release})");
+                    progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Release})");
                     // Check release
                     var adbRelease = await ServiceMame.Releases();
                     var mameRelease = string.Join(",", adbRelease.Result);
 
-                    progressUpdate($"{Strings.LoadingArcadeItalia}({Strings.Games})");
+                    progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Games})");
                     if (_mameCache.MameRelease != mameRelease || _mameCache.Items.Count == 0)
                     {
                         // Download categories and machine extra info
