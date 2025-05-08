@@ -12,6 +12,7 @@ using MameTools.Net48.Common;
 using MameTools.Net48.Config;
 using MameTools.Net48.Extensions;
 using MameTools.Net48.Machines.Samples;
+using MameTools.Net48.Resources;
 using MameTools.Net48.SoftwareList;
 
 namespace MameTools.Net48;
@@ -259,12 +260,12 @@ public class Mame
         OrphansSoftwareLists.ResetCount();
         OrphansSoftware.ResetCount();
         //OrphansSoftwareLists.IncrementCount(SoftwareListHashes.Where(x => !SoftwareLists.Any(y => y.Name == x.Name)).Select(x => x.Name).ToList());
-        foreach (SoftwareList.MameSoftwareList listHash in SoftwareListHashes)
+        foreach (MameSoftwareList listHash in SoftwareListHashes)
         {
             index++;
             progressUpdate?.Invoke($"{Convert.ToInt32(index * 100.0 / total)}%");
 
-            SoftwareList.MameSoftwareList? listXml = SoftwareLists.FirstOrDefault(x => x.Name == listHash.Name);
+            MameSoftwareList? listXml = SoftwareLists.FirstOrDefault(x => x.Name == listHash.Name);
             if (listXml is null)
             {
                 // Lista non trovata: aggiungo tutti i software come orfani
@@ -551,9 +552,9 @@ public class Mame
 
     public async static Task<MameConfiguration> LoadMameConfiguration(string executableFilePath, CancellationToken cancellationToken = default)
     {
-        var ret = new Config.MameConfiguration(executableFilePath);
+        var ret = new MameConfiguration(executableFilePath);
         if (string.IsNullOrEmpty(executableFilePath) || !File.Exists(executableFilePath))
-            throw new Exception($"File {executableFilePath} non trovato");
+            throw new Exception(string.Format(Strings.FileNotFound, executableFilePath));
         FileInfo fi = new(executableFilePath);
         using var proc = new Process();
         proc.StartInfo.WorkingDirectory = fi.Directory.FullName;

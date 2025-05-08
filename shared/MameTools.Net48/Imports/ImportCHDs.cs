@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
+using MameTools.Net48.Resources;
 namespace MameTools.Net48.Imports;
 
 public static class ImportCHDs
@@ -16,7 +17,7 @@ public static class ImportCHDs
         if (string.IsNullOrEmpty(filename) || !File.Exists(filename)) return;
         if (string.IsNullOrEmpty(prefix) && !string.IsNullOrEmpty(mame.ReleaseNumber)) prefix = $"[{mame.ReleaseNumber}] ";
 
-        progressUpdate?.Invoke($"{prefix} Lettura file xml CHD...");
+        progressUpdate?.Invoke($"{prefix}{Strings.ChdXmlLoading}");
 
         foreach (var m in mame.Machines)
         {
@@ -37,7 +38,7 @@ public static class ImportCHDs
         if (xml.NodeType == XmlNodeType.Element && "mame".Equals(xml.LocalName, StringComparison.InvariantCultureIgnoreCase))
         {
             var build = xml.GetAttribute("build");
-            progressUpdate?.Invoke($"{prefix}Rilevata versione {mame.ReleaseNumber}: {build}");
+            progressUpdate?.Invoke($"{prefix}{string.Format(Strings.DetectedReleaseBuild, mame.ReleaseNumber, build)}");
             ok = true;
             if (loadHeaderOnly) return;
         }
@@ -51,30 +52,31 @@ public static class ImportCHDs
                 {
                     _ = xml.Read();
                     var build = xml.Value ?? string.Empty;
-                    progressUpdate?.Invoke($"{prefix}Rilevata versione {mame.ReleaseNumber}: {build}");
+                    progressUpdate?.Invoke($"{prefix}{string.Format(Strings.DetectedReleaseBuild, mame.ReleaseNumber, build)}");
                     ok = true;
                 }
             }
             if (loadHeaderOnly) return;
         }
-        if (!ok) throw new Exception($"Errore durante la lettura del file {filename}: nodo principale mame o datafile non trovato!");
+        if (!ok) throw new Exception(string.Format(Strings.MissingRootNode, filename, "mame/datafile"));
         cancellationToken.ThrowIfCancellationRequested();
         Machine.MameMachine? machine = null;
         while (xml.Read())
         {
             cancellationToken.ThrowIfCancellationRequested();
             if (xml.NodeType is not XmlNodeType.Element) continue;
-            if ("game".Equals(xml.LocalName, StringComparison.InvariantCultureIgnoreCase) || "machine".Equals(xml.LocalName, StringComparison.InvariantCultureIgnoreCase))
+            if ("game".Equals(xml.LocalName, StringComparison.InvariantCultureIgnoreCase) ||
+                "machine".Equals(xml.LocalName, StringComparison.InvariantCultureIgnoreCase))
             {
                 // Inizio di un nodo "game" o "machine"
                 i++;
                 if (i % 1000 == 0)
-                    progressUpdate?.Invoke(prefix + string.Format("Lettura file xml CHD [{0}] - {1}...", i.ToString("#,##0"), machine?.Description));
+                    progressUpdate?.Invoke(prefix + Strings.ChdXmlLoading + $" [{i:#,##0}] - {machine?.Description}");
 
                 var name = xml.GetAttribute("name");
                 if (string.IsNullOrEmpty(name)) continue;
                 machine = mame.Machines.FirstOrDefault(x => x.Name == name);
-                if (machine is null) throw new Exception($"Macchina {name} non trovata nel Mame, processo interrotto (file {filename})");
+                if (machine is null) throw new Exception($"{string.Format(Strings.MameMachineNotFound, name)} ({filename})");
                 //if (machine.RequiresDisks) continue;
                 machine.RequiresDisks = true;
                 mame.Machines.Totals.RequiresDisks.IncrementCount(name);

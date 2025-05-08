@@ -5,6 +5,8 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using MameTools.Net48.Extensions;
+using MameTools.Net48.Resources;
 namespace MameTools.Net48.Exports;
 
 public static class FileFactory
@@ -15,16 +17,12 @@ public static class FileFactory
         try
         {
             if (string.IsNullOrEmpty(executableFilePath) || !File.Exists(executableFilePath))
-                throw new Exception($"File {executableFilePath} non trovato");
+                throw new Exception(string.Format(Strings.FileNotFound, executableFilePath));
             FileInfo fi = new(executableFilePath);
-            progressUpdate?.Invoke($"{prefix}Creazione file xml macchine...");
+            progressUpdate?.Invoke($"{prefix}{Strings.MachinesFileCreation}");
             using var proc = new Process();
             proc.StartInfo.WorkingDirectory = fi.Directory.FullName;
             proc.StartInfo.UseShellExecute = false;
-            //if (!File.Exists(folder + @"\mame.exe"))
-            //    throw new Exception("Scaricare il file MAME.EXE corrispondente alla versione in uso.\n" +
-            //        "http://www.mamedev.org/release.html oppure\n" + 
-            //        "http://www.mamedev.org/oldrel.html.");
             proc.StartInfo.FileName = executableFilePath;
             proc.StartInfo.Arguments = "-listxml";
             proc.StartInfo.RedirectStandardOutput = true;
@@ -46,15 +44,12 @@ public static class FileFactory
                     if (j % 1000 == 0)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
-                        progressUpdate?.Invoke(
-                            prefix + string.Format("Creazione file xml macchine ({0}MB)...",
-                            (size / 1024 / 1024).ToString("#,##0"))
-                        );
+                        progressUpdate?.Invoke($"{prefix}{Strings.MachinesFileCreation} ({size.ToFormattedString()})");
                     }
                 }
                 w.Close();
             }
-            return !File.Exists(outputFile) ? throw new Exception("Nessun file di output generato") : await proc.StandardError.ReadToEndAsync();
+            return !File.Exists(outputFile) ? throw new Exception(Strings.FileGenerationFailed) : await proc.StandardError.ReadToEndAsync();
         }
         catch (Exception ex)
         {
@@ -70,9 +65,9 @@ public static class FileFactory
         try
         {
             if (string.IsNullOrEmpty(executableFilePath) || !File.Exists(executableFilePath))
-                throw new Exception($"File {executableFilePath} non trovato");
+                throw new Exception(string.Format(Strings.FileNotFound, executableFilePath));
             FileInfo fi = new(executableFilePath);
-            progressUpdate?.Invoke($"{prefix}Creazione file xml software...");
+            progressUpdate?.Invoke($"{prefix}{Strings.SoftwareFileCreation}");
             Process proc = new();
             proc.StartInfo.WorkingDirectory = fi.Directory.FullName;
             proc.StartInfo.UseShellExecute = false;
@@ -102,12 +97,7 @@ public static class FileFactory
                     j++;
                     size += line.Length;
                     if (j % 1000 == 0)
-                    {
-                        progressUpdate?.Invoke(
-                            prefix + string.Format("Creazione file xml software ({0}MB)...",
-                            (size / 1024 / 1024).ToString("#,##0"))
-                        );
-                    }
+                        progressUpdate?.Invoke($"{prefix}{Strings.SoftwareFileCreation} ({size.ToFormattedString()})");
                 }
                 w.Close();
                 if (size == 39) // No software lists found for this system
@@ -115,7 +105,7 @@ public static class FileFactory
                     File.Delete(outputFile);
                 }
             }
-            return !File.Exists(outputFile) ? throw new Exception($"Nessun file di output generato") : await proc.StandardError.ReadToEndAsync();
+            return !File.Exists(outputFile) ? throw new Exception(Strings.FileGenerationFailed) : await proc.StandardError.ReadToEndAsync();
         }
         catch (Exception ex)
         {

@@ -1,8 +1,6 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
-using System.Data.Sql;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -30,6 +28,7 @@ using MameTools.Net48.Machines.Samples;
 using MameTools.Net48.Machines.Shared;
 using MameTools.Net48.Machines.Slots;
 using MameTools.Net48.Machines.Sounds;
+using MameTools.Net48.Resources;
 using NLog;
 using static MameTools.Net48.Machines.Displays.Display;
 namespace MameTools.Net48.Imports;
@@ -50,7 +49,7 @@ public static class ImportMachines
         //CacheManager<MameMachineCollection>? cache = null;
         //if (useCache)
         //{
-        //    progressUpdate?.Invoke($"{prefix} Lettura file xml giochi dalla cache...");
+        //    progressUpdate?.Invoke($"{prefix} Lettura file xml giochi dalla cache");
         //    cache = new(cachePath!);
         //    var machines = cache.GetCachedFile(cacheType!, new FileInfo(filename).Name);
         //    if (machines is not null && machines.Any())
@@ -61,14 +60,14 @@ public static class ImportMachines
         //        {
         //            i++;
         //            if (i % 1000 == 0)
-        //                progressUpdate?.Invoke(prefix + string.Format("Lettura file xml giochi [{0}] - {1}...", i.ToString("#,##0"), m?.Description));
+        //                progressUpdate?.Invoke(prefix + string.Format("Lettura file xml giochi [{0}] - {1}", i.ToString("#,##0"), m?.Description));
         //            mame.Machines.Add(m);
         //        }
         //        return;
         //    }
         //}
 
-        progressUpdate?.Invoke($"{prefix} Lettura file xml giochi...");
+        progressUpdate?.Invoke($"{prefix}{Strings.MachinesFileLoading}");
 
         using XmlTextReader xml = new(filename)
         {
@@ -83,7 +82,7 @@ public static class ImportMachines
             mame.Build = xml.GetAttribute("build");
             mame.Debug = "yes".EqualsIgnoreCase(xml.GetAttribute("debug"));
             mame.MameConfig = xml.GetAttribute("mameconfig");
-            progressUpdate?.Invoke($"{prefix}Rilevata versione {mame.ReleaseNumber}: {mame.Build}");
+            progressUpdate?.Invoke(string.Format(Strings.DetectedReleaseBuild, mame.ReleaseNumber, mame.Build));
             isOfficialMame = true;
             if (loadHeaderOnly) return;
         }
@@ -97,7 +96,7 @@ public static class ImportMachines
                 {
                     _ = xml.Read();
                     mame.Build = xml.Value ?? string.Empty;
-                    progressUpdate?.Invoke($"{prefix}Rilevata versione {mame.ReleaseNumber}: {mame.Build}");
+                    progressUpdate?.Invoke(string.Format(Strings.DetectedReleaseBuild, mame.ReleaseNumber, mame.Build));
                     isPsDataFile = true;
                 }
             }
@@ -106,7 +105,7 @@ public static class ImportMachines
 
         cancellationToken.ThrowIfCancellationRequested();
         MameMachine? machine = null;
-        var stopwatch = Stopwatch.StartNew();
+        //var stopwatch = Stopwatch.StartNew();
 
         if (!xml.IsEmptyElement)
         {
@@ -120,7 +119,7 @@ public static class ImportMachines
                     // Inizio di un nodo "game" o "machine"
                     i++;
                     if (i % 1000 == 0)
-                        progressUpdate?.Invoke(prefix + string.Format("Lettura file xml giochi [{0}] - {1}...", i.ToString("#,##0"), machine?.Description));
+                        progressUpdate?.Invoke(prefix + Strings.MachinesFileLoading + $"[{i:#,##0}] - {machine?.Description}");
 
                     machine = ProcessNodeMachine(xml, mame.ReleaseSequence, loadNodes);
                     mame.Machines.Add(machine);
@@ -130,8 +129,8 @@ public static class ImportMachines
         }
         cancellationToken.ThrowIfCancellationRequested();
         xml.Close();
-        stopwatch.Stop();
-        Console.WriteLine($"{mame.Machines.Count} nodi letti ({stopwatch.ElapsedMilliseconds} ms)");
+        //stopwatch.Stop();
+        //Console.WriteLine($"{mame.Machines.Count} nodes read ({stopwatch.ElapsedMilliseconds} ms)");
 
         //// Se una macchina ha dischi, anche il bios/romof viene segnata come requires CHD
         //foreach (var m in mame.Machines.Where(x => x.RequiresCHD))
@@ -144,7 +143,7 @@ public static class ImportMachines
 
         //if (useCache)
         //{
-        //    progressUpdate?.Invoke($"{prefix} Scrittura file xml giochi nella cache...");
+        //    progressUpdate?.Invoke($"{prefix} Scrittura file xml giochi nella cache");
         //    cache!.SetCacheFile(cacheType!, new FileInfo(filename).Name, mame.Machines);
         //}
         await Task.CompletedTask;
@@ -167,11 +166,11 @@ public static class ImportMachines
             SampleOf = xml.GetAttribute("sampleof")
         };
         if (machine.IsMechanical)
-            machine.Extra.Genre = "Mechanical";
+            machine.Extra.Genre = Strings.Mechanical;
         else if (machine.IsDevice)
-            machine.Extra.Genre = "Device";
+            machine.Extra.Genre = Strings.DetectedReleaseBuild;
         else if (machine.IsBios)
-            machine.Extra.Genre = "BIOS";
+            machine.Extra.Genre = Strings.Bios;
 
         if (!xml.IsEmptyElement)
         {
@@ -219,7 +218,7 @@ public static class ImportMachines
                     if ((loadNodes & MameMachineNodes.Disk) == 0)
                         continue;
                     machine.Disks.Add(ProcessNodeDisk(xml));
-                    machine.RequiresDisks = true;   // Se esiste un disco, allora abilito il flag
+                    machine.RequiresDisks = true;
                 }
                 else if ("device_ref".EqualsIgnoreCase(xml.LocalName))
                 {

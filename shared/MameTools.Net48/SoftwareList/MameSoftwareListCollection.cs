@@ -43,7 +43,7 @@ public class MameSoftwareListCollection : ICollection<MameSoftwareList>
     }
     IEnumerator IEnumerable.GetEnumerator() => _softwareList.GetEnumerator();
 
-    public void AddSoftware(MameSoftwareList list, Software.MameSoftware software)
+    public void AddSoftware(MameSoftwareList list, MameSoftware software)
     {
         list.Software.Add(software);
 

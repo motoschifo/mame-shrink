@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using MameTools.Net48.Extensions;
+using MameTools.Net48.Resources;
 using MameTools.Net48.Software;
 using MameTools.Net48.Software.Info;
 using MameTools.Net48.Software.Parts;
@@ -33,7 +34,7 @@ public static class ImportSoftware
         //CacheManager<MameSoftwareListCollection>? cache = null;
         //if (useCache)
         //{
-        //    progressUpdate?.Invoke($"{prefix} Lettura file xml software dalla cache...");
+        //    progressUpdate?.Invoke($"{prefix} Lettura file xml software dalla cache");
         //    cache = new(cachePath!);
         //    var list = cache.GetCachedFile(cacheType!, new FileInfo(filename).Name);
         //    if (list is not null)
@@ -42,7 +43,7 @@ public static class ImportSoftware
         //        {
         //            i++;
         //            if (i % 100 == 0)
-        //                progressUpdate?.Invoke(prefix + string.Format("Lettura file xml software dalla cache [{0}] - {1} - {2}...", i.ToString("#,##0"), sl.Name, sl.Description));
+        //                progressUpdate?.Invoke(prefix + string.Format("Lettura file xml software dalla cache [{0}] - {1} - {2}", i.ToString("#,##0"), sl.Name, sl.Description));
         //            mame.AddSoftwareList(sl.Name, sl.Description);
         //            foreach (var s in sl.Software)
         //            {
@@ -53,7 +54,7 @@ public static class ImportSoftware
         //    }
         //}
 
-        progressUpdate?.Invoke($"{prefix}Lettura xml software...");
+        progressUpdate?.Invoke($"{prefix}{Strings.SoftwareFileLoading}");
         using XmlTextReader xml = new(filename)
         {
             WhitespaceHandling = WhitespaceHandling.None
@@ -61,7 +62,7 @@ public static class ImportSoftware
         _ = xml.MoveToContent();
 
         MameSoftwareList? sl = null;
-        var stopwatch = Stopwatch.StartNew();
+        //var stopwatch = Stopwatch.StartNew();
 
         if (!xml.IsEmptyElement)
         {
@@ -75,7 +76,7 @@ public static class ImportSoftware
                     // Inizio di un nodo "game" o "machine"
                     i++;
                     if (i % 1000 == 0)
-                        progressUpdate?.Invoke(prefix + $"Lettura file xml software [{i:#,##0}] - {sl?.Name} - {sl?.Description}...");
+                        progressUpdate?.Invoke($"{prefix}{Strings.SoftwareFileLoading} [{i:#,##0}] - {sl?.Name} - {sl?.Description}");
 
                     sl = ProcessNodeSoftwareList(xml, loadNodes);
                     mame.SoftwareLists.Add(sl);
@@ -85,12 +86,12 @@ public static class ImportSoftware
         }
         cancellationToken.ThrowIfCancellationRequested();
         xml.Close();
-        stopwatch.Stop();
-        Console.WriteLine($"{mame.Machines.Count} nodi letti ({stopwatch.ElapsedMilliseconds} ms)");
+        //stopwatch.Stop();
+        //Console.WriteLine($"{mame.Machines.Count} nodes read ({stopwatch.ElapsedMilliseconds} ms)");
 
         //if (useCache)
         //{
-        //    progressUpdate?.Invoke($"{prefix} Scrittura file xml software nella cache...");
+        //    progressUpdate?.Invoke($"{prefix} Scrittura file xml software nella cache");
         //    cache!.SetCacheFile(cacheType!, new FileInfo(filename).Name, mame.SoftwareLists);
         //}
         await Task.CompletedTask;
@@ -381,7 +382,7 @@ public static class ImportSoftware
         //CacheManager<MameSoftwareListCollection>? cache = null;
         //if (useCache)
         //{
-        //    progressUpdate?.Invoke($"{prefix} Lettura file xml software hash dalla cache...");
+        //    progressUpdate?.Invoke($"{prefix} Lettura file xml software hash dalla cache");
         //    cache = new(cachePath!);
         //    var list = cache.GetCachedFile(cacheType!, new FileInfo(folder).Name);
         //    if (list is not null)
@@ -390,7 +391,7 @@ public static class ImportSoftware
         //        {
         //            i++;
         //            if (i % 100 == 0)
-        //                progressUpdate?.Invoke(prefix + string.Format("Lettura file xml software hash dalla cache [{0}] - {1} - {2}...", i.ToString("#,##0"), sl.Name, sl.Description));
+        //                progressUpdate?.Invoke(prefix + string.Format("Lettura file xml software hash dalla cache [{0}] - {1} - {2}", i.ToString("#,##0"), sl.Name, sl.Description));
         //            mame.AddSoftwareListFromHash(sl.Name, sl.Description);
         //            foreach (var s in sl.Software)
         //            {
@@ -401,7 +402,7 @@ public static class ImportSoftware
         //    }
         //}
 
-        progressUpdate?.Invoke($"{prefix}Lettura file xml software hash...");
+        progressUpdate?.Invoke($"{prefix}{Strings.SoftwareHashFileLoading}");
 
         foreach (var file in Directory.GetFiles(folder, "*.xml", SearchOption.TopDirectoryOnly))
         {
@@ -409,7 +410,7 @@ public static class ImportSoftware
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 var fiHash = new FileInfo(file);
-                progressUpdate?.Invoke(prefix + string.Format("Lettura file xml software hash {0}...", fiHash.Name));
+                progressUpdate?.Invoke($"{prefix}{Strings.SoftwareHashFileLoading} {fiHash.Name}");
 
                 var filename = Path.Combine(folder, fiHash.Name);
                 using XmlTextReader xml = new(filename)
@@ -433,7 +434,7 @@ public static class ImportSoftware
                             // Inizio di un nodo "game" o "machine"
                             i++;
                             if (i % 1000 == 0)
-                                progressUpdate?.Invoke(prefix + $"Lettura file xml software [{i:#,##0}] - {sl?.Name} - {sl?.Description}...");
+                                progressUpdate?.Invoke(prefix + Strings.SoftwareHashFileLoading + $" [{i:#,##0}] - {sl?.Name} - {sl?.Description}");
 
                             sl = ProcessNodeSoftwareList(xml, loadNodes);
                             mame.SoftwareListHashes.Add(sl);
@@ -453,7 +454,7 @@ public static class ImportSoftware
         }
         //if (useCache)
         //{
-        //    progressUpdate?.Invoke($"{prefix} Scrittura file xml software hash nella cache...");
+        //    progressUpdate?.Invoke($"{prefix} Scrittura file xml software hash nella cache");
         //    cache!.SetCacheFile(cacheType!, new FileInfo(folder).Name, mame.SoftwareListHashes);
         //}
         await Task.CompletedTask;
