@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using MameTools.Net48.Common;
 using MameTools.Net48.Machines;

@@ -97,7 +97,7 @@ public partial class KeyValueTable : UserControl
             // KeyValueTable
             // 
             this.Name = "KeyValueTable";
-            this.Size = new System.Drawing.Size(274, 135);
+            this.Size = new Size(274, 135);
             this.ResumeLayout(false);
 
     }

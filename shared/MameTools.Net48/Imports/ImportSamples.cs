@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using MameTools.Net48.Extensions;
 using MameTools.Net48.Machines.Samples;
+using MameTools.Net48.Resources;
 namespace MameTools.Net48.Imports;
 
 public static class ImportSamples
@@ -17,7 +18,7 @@ public static class ImportSamples
         if (string.IsNullOrEmpty(filename) || !File.Exists(filename)) return;
         if (string.IsNullOrEmpty(prefix) && !string.IsNullOrEmpty(mame.ReleaseNumber)) prefix = $"[{mame.ReleaseNumber}] ";
 
-        progressUpdate?.Invoke($"{prefix} Lettura file xml Samples...");
+        progressUpdate?.Invoke($"{prefix}{Strings.SamplesFileLoading}");
 
         mame.MachineSamples.Clear();
         mame.Machines.Totals.SampleFiles.ResetCount();
@@ -34,7 +35,7 @@ public static class ImportSamples
         if (xml.NodeType == XmlNodeType.Element && "mame".Equals(xml.LocalName, StringComparison.InvariantCultureIgnoreCase))
         {
             var build = xml.GetAttribute("build");
-            progressUpdate?.Invoke($"{prefix}Rilevata versione {mame.ReleaseNumber}: {build}");
+            progressUpdate?.Invoke($"{prefix}{string.Format(Strings.DetectedReleaseBuild, mame.ReleaseNumber, build)}");
             ok = true;
             if (loadHeaderOnly) return;
         }
@@ -48,13 +49,13 @@ public static class ImportSamples
                 {
                     _ = xml.Read();
                     var build = xml.Value ?? string.Empty;
-                    progressUpdate?.Invoke($"{prefix}Rilevata versione {mame.ReleaseNumber}: {build}");
+                    progressUpdate?.Invoke($"{prefix}{string.Format(Strings.DetectedReleaseBuild, mame.ReleaseNumber, build)}");
                     ok = true;
                 }
             }
             if (loadHeaderOnly) return;
         }
-        if (!ok) throw new Exception($"Errore durante la lettura del file {filename}: nodo principale mame o datafile non trovato!");
+        if (!ok) throw new Exception(string.Format(Strings.MissingRootNode, filename, "mame/datafile"));
         cancellationToken.ThrowIfCancellationRequested();
         Sample? sample = null;
         while (xml.Read())
@@ -66,7 +67,7 @@ public static class ImportSamples
                 // Inizio di un nodo "machine"
                 i++;
                 if (i % 1000 == 0)
-                    progressUpdate?.Invoke(prefix + string.Format("Lettura file xml CHD [{0}] - {1}...", i.ToString("#,##0"), sample?.Description));
+                    progressUpdate?.Invoke($"{prefix}{Strings.SamplesFileLoading} [{i:#,##0}] - {sample?.Description}");
 
                 var name = xml.GetAttribute("name");
                 if (string.IsNullOrEmpty(name)) continue;
@@ -79,7 +80,8 @@ public static class ImportSamples
             }
             else if ("rom".Equals(xml.LocalName, StringComparison.InvariantCultureIgnoreCase))
             {
-                if (sample is null) throw new Exception($"XML non valido: nodo machine/game richiesto sopra al nodo 'disk' (file {filename})");
+                if (sample is null)
+                    throw new Exception(string.Format(Strings.InvalidXmlNodeRelation, "machine/game", "disk") + $" ({filename})");
                 // Inizio di un nodo "rom"
                 // <rom name="vg_voi-3.wav" size="80940" crc="f8040659" sha1="6a5512c23c81a51db60eed65fc8b19c6776daaa8"/>
                 var rom = new SampleRom()
