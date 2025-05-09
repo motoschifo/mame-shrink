@@ -117,51 +117,468 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label6.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="pnlRomset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>653, 359</value>
+  </data>
+  <data name="MenuShowNotSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 22</value>
+  </data>
+  <data name="toolStripColumnPlayers.Text" xml:space="preserve">
+    <value>Players</value>
+  </data>
+  <data name="SelectedRomsetName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>654, 140</value>
+  </data>
+  <data name="&gt;&gt;LabelGamelistXml.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;SelectedRomsetName.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;GridTextFilter.Name" xml:space="preserve">
+    <value>GridTextFilter</value>
+  </data>
+  <data name="&gt;&gt;OpenRomsetWebPage.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;MenuShowNotSelectedGames.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="ToolbarMenuGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
+  <data name="StartClean.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 32</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 19</value>
+  <data name="&gt;&gt;toolStripColumnYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CancelCurrentProcess.Location" type="System.Drawing.Point, System.Drawing">
+    <value>276, 71</value>
+  </data>
+  <data name="&gt;&gt;OpenRomsetWebPage.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LoadGames.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;MenuFilters.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SnapshotPlaceholder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>715, 10</value>
+  </data>
+  <data name="LabelRomsPath.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ValidateRomset.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="MenuShowSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 22</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="StartClean.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="&gt;&gt;SnapshotPlaceholder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="MenuShow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 23</value>
+  </data>
+  <data name="&gt;&gt;LabelManueExe.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolbarMenuGrid.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;GridTextFilterTimer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="MenuShowExistingFiles.Text" xml:space="preserve">
+    <value>With files on disk only</value>
+  </data>
+  <data name="&gt;&gt;ValidateRomset.Name" xml:space="preserve">
+    <value>ValidateRomset</value>
+  </data>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="&gt;&gt;MenuRemoveFromSelectedGames.Name" xml:space="preserve">
+    <value>MenuRemoveFromSelectedGames</value>
+  </data>
+  <data name="&gt;&gt;LabelRomsPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="KeyValueRomset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 236</value>
+  </data>
+  <data name="toolStripColumnRomset.Text" xml:space="preserve">
+    <value>Romset</value>
+  </data>
+  <data name="&gt;&gt;MenuFilters.Name" xml:space="preserve">
+    <value>MenuFilters</value>
+  </data>
+  <data name="&gt;&gt;MenuAddToSelectedGames.Name" xml:space="preserve">
+    <value>MenuAddToSelectedGames</value>
+  </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="LabelGamelistXml.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;KeyValueRomset.Type" xml:space="preserve">
+    <value>MAME_Shrink.Components.KeyValueTable, MAME Shrink, Version=3.2.9260.39938, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="LoadGames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 32</value>
+  </data>
+  <data name="&gt;&gt;GamesListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OpenRomsetWebPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="MenuShow.Text" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="KeyValueRomset.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="&gt;&gt;MenuShowSelectedGames.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ToolbarMenuGrid.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;ToolbarMenuGrid.Name" xml:space="preserve">
+    <value>ToolbarMenuGrid</value>
+  </data>
+  <data name="&gt;&gt;StartClean.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SnapshotPlaceholder.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStripColumnGenre.Name" xml:space="preserve">
+    <value>toolStripColumnGenre</value>
+  </data>
+  <data name="&gt;&gt;LabelManueExe.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="Snapshot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 189</value>
+  </data>
+  <data name="toolStripColumnPlayers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="LabelManueExe.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;LabelGamelistXml.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="MenuToggleSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 23</value>
+  </data>
+  <data name="lblInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="pnlRomset.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="StartClean.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ChangeOptions.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="GamesListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 164</value>
+  </data>
+  <data name="GamesListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>635, 431</value>
+  </data>
+  <data name="GridTextFilter.ToolTipText" xml:space="preserve">
+    <value>Grid filter</value>
+  </data>
+  <data name="&gt;&gt;LabelGamelistXml.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;CancelCurrentProcess.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Snapshot.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;KeyValueRomset.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="StartClean.Text" xml:space="preserve">
+    <value>Clean</value>
+  </data>
+  <data name="&gt;&gt;GridTextFilterTimer.Name" xml:space="preserve">
+    <value>GridTextFilterTimer</value>
+  </data>
+  <data name="MenuShowAllGames.Text" xml:space="preserve">
+    <value>All games</value>
+  </data>
+  <data name="&gt;&gt;toolStripColumnDisplay.Name" xml:space="preserve">
+    <value>toolStripColumnDisplay</value>
+  </data>
+  <data name="SnapshotPlaceholder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 38</value>
+  </data>
+  <data name="MenuRemoveFromSelectedGames.Text" xml:space="preserve">
+    <value>Unselect</value>
+  </data>
+  <data name="GridTextFilter.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="&gt;&gt;Tooltips.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LabelRomsPath.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;MenuShowNotSelectedGames.Name" xml:space="preserve">
+    <value>MenuShowNotSelectedGames</value>
+  </data>
+  <data name="CancelCurrentProcess.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>918, 601</value>
+  </data>
+  <data name="KeyValueRomset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;MenuColumns.Name" xml:space="preserve">
+    <value>MenuColumns</value>
+  </data>
+  <data name="pnlRomset.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Right</value>
+  </data>
+  <data name="&gt;&gt;pnlRomset.Name" xml:space="preserve">
+    <value>pnlRomset</value>
+  </data>
+  <data name="SelectedRomsetName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>BottomLeft</value>
+  </data>
+  <data name="&gt;&gt;CancelCurrentProcess.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStripColumnDisplay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Snapshot.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="ToolbarMenuGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>635, 27</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 48</value>
+  </data>
+  <data name="SelectedRomsetName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;lblInfo.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Mame executable:</value>
   </data>
-  <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="ValidateRomset.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="&gt;&gt;MenuToggleSelectedGames.Name" xml:space="preserve">
+    <value>MenuToggleSelectedGames</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="SelectedRomsetName.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="toolStripColumnManufacturer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="&gt;&gt;toolStripColumnManufacturer.Name" xml:space="preserve">
+    <value>toolStripColumnManufacturer</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="&gt;&gt;SelectedRomsetName.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name="OpenRomsetWebPage.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="Snapshot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>653, 164</value>
+  </data>
+  <data name="LabelRomsPath.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;MenuShowSelectedGames.Name" xml:space="preserve">
+    <value>MenuShowSelectedGames</value>
+  </data>
+  <data name="GridTextFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="&gt;&gt;SnapshotPlaceholder.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="SelectedRomsetName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  </data>
+  <data name="LoadGames.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;MenuShowExistingFiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripColumnGenre.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="OpenRomsetWebPage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;SelectedRomsetName.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>17</value>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <metadata name="ImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>593, 15</value>
-  </metadata>
+  <data name="&gt;&gt;LabelGamelistXml.Name" xml:space="preserve">
+    <value>LabelGamelistXml</value>
+  </data>
+  <data name="MenuAddToSelectedGames.ToolTipText" xml:space="preserve">
+    <value>Add to selection</value>
+  </data>
+  <data name="LabelManueExe.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 10</value>
+  </data>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="GamesListView.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ValidateRomset.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="toolStripColumnButtons.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="GridTextFilter.MaxLength" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="&gt;&gt;ImageList.Name" xml:space="preserve">
+    <value>ImageList</value>
+  </data>
+  <data name="lblInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 110</value>
+  </data>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="ChangeOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LabelRomsPath.Text" xml:space="preserve">
+    <value>LabelRomsPath</value>
+  </data>
+  <data name="ValidateRomset.Text" xml:space="preserve">
+    <value>Check dependencies</value>
+  </data>
+  <data name="MenuColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 23</value>
+  </data>
+  <data name="&gt;&gt;ChangeOptions.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;LabelRomsPath.Name" xml:space="preserve">
+    <value>LabelRomsPath</value>
+  </data>
+  <data name="&gt;&gt;MenuShowExistingFiles.Name" xml:space="preserve">
+    <value>MenuShowExistingFiles</value>
+  </data>
+  <data name="&gt;&gt;toolStripColumnDriverStatus.Name" xml:space="preserve">
+    <value>toolStripColumnDriverStatus</value>
+  </data>
+  <data name="toolStripColumnRomset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 29</value>
+  </data>
+  <data name="GridTextFilter.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;MenuShow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="StartClean.ImageKey" xml:space="preserve">
+    <value>waste</value>
+  </data>
+  <data name="&gt;&gt;ToolbarMenuGrid.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="lblInfo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LabelGamelistXml.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="toolStripColumnManufacturer.Text" xml:space="preserve">
+    <value>Menufacturer</value>
+  </data>
+  <data name="&gt;&gt;pnlRomset.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="MenuAddToSelectedGames.Text" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="CancelCurrentProcess.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="lblInfo.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="toolStripColumnDisplay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="LoadGames.ImageKey" xml:space="preserve">
+    <value>right</value>
+  </data>
+  <data name="CancelCurrentProcess.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="ImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        EwAAAk1TRnQBSQFMAgEBCAEAAdQBAQHUAQEBGAEAARgBAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACi
+        EwAAAk1TRnQBSQFMAgEBCAEAAdwBAQHgAQEBGAEAARgBAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABYAMAAUgDAAEBAQABCAYAARsYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -244,800 +661,284 @@
         AfABfAEHAcABAAEHAf8BAQL/AQEB/wHAAXwBBwHAAQABBwH+AQABfwH+AQABfwGAARgBAQHAAQABBwH+
         AQABPwH+AQABPwGAARgBAQH/AfwBBwH+AQABPwH+AQABPwGAAQABAQH/AfgBBwHwAQABDwHwAQABDwGA
         AQABAQH/AeABDwHwAQgBBwHwAQgBBwHAAQABBwH/AeABPwHwAXwBBwHwAXwBBwHAAQABBwH/AeABPwHw
-        AXwBBwHwAXwBBwHAAQABBwH/AfgBfwHwAX8BBwHwAX8BBwH/AQEL/wEBC/8BARb/Cw==
+        AXwBBwHwAXwBBwHAAQABBwH/AfgBfwHwAX8BBwHwAX8BBwH/AQEL/wEBC/8BARb/FgAL
 </value>
-  </data>
-  <data name="GamesListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="GamesListView.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="GamesListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 164</value>
-  </data>
-  <data name="GamesListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>635, 431</value>
-  </data>
-  <data name="GamesListView.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;GamesListView.Name" xml:space="preserve">
-    <value>GamesListView</value>
-  </data>
-  <data name="&gt;&gt;GamesListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GamesListView.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;GamesListView.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="lblInfo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 110</value>
-  </data>
-  <data name="lblInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 18</value>
-  </data>
-  <data name="lblInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;lblInfo.Name" xml:space="preserve">
-    <value>lblInfo</value>
-  </data>
-  <data name="&gt;&gt;lblInfo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblInfo.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblInfo.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <metadata name="GridTextFilterTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="Tooltips.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>163, 17</value>
-  </metadata>
-  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 48</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 19</value>
-  </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Roms folders:</value>
-  </data>
-  <data name="label5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
-  </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 29</value>
-  </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 19</value>
-  </data>
-  <data name="label6.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>Gamelist XML:</value>
-  </data>
-  <data name="label6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
-    <value>label6</value>
-  </data>
-  <data name="&gt;&gt;label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="LabelManueExe.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="LabelManueExe.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LabelManueExe.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 10</value>
-  </data>
-  <data name="LabelManueExe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>522, 19</value>
-  </data>
-  <data name="LabelManueExe.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="LabelManueExe.Text" xml:space="preserve">
-    <value>LabelManueExe</value>
-  </data>
-  <data name="LabelManueExe.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;LabelManueExe.Name" xml:space="preserve">
-    <value>LabelManueExe</value>
-  </data>
-  <data name="&gt;&gt;LabelManueExe.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LabelManueExe.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;LabelManueExe.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="LabelGamelistXml.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="LabelGamelistXml.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LabelGamelistXml.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 29</value>
-  </data>
-  <data name="LabelGamelistXml.Size" type="System.Drawing.Size, System.Drawing">
-    <value>522, 19</value>
-  </data>
-  <data name="LabelGamelistXml.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="LabelGamelistXml.Text" xml:space="preserve">
-    <value>LabelGamelistXml</value>
-  </data>
-  <data name="LabelGamelistXml.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;LabelGamelistXml.Name" xml:space="preserve">
-    <value>LabelGamelistXml</value>
-  </data>
-  <data name="&gt;&gt;LabelGamelistXml.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LabelGamelistXml.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;LabelGamelistXml.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="LabelRomsPath.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="LabelRomsPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LabelRomsPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 48</value>
-  </data>
-  <data name="LabelRomsPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>522, 19</value>
-  </data>
-  <data name="LabelRomsPath.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="LabelRomsPath.Text" xml:space="preserve">
-    <value>LabelRomsPath</value>
-  </data>
-  <data name="LabelRomsPath.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;LabelRomsPath.Name" xml:space="preserve">
-    <value>LabelRomsPath</value>
-  </data>
-  <data name="&gt;&gt;LabelRomsPath.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LabelRomsPath.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;LabelRomsPath.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <metadata name="MenuColumnItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>243, 15</value>
-  </metadata>
-  <data name="MenuColumnItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 224</value>
-  </data>
-  <data name="&gt;&gt;MenuColumnItems.Name" xml:space="preserve">
-    <value>MenuColumnItems</value>
-  </data>
-  <data name="&gt;&gt;MenuColumnItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="toolStripColumnRomset.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="toolStripColumnRomset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="toolStripColumnRomset.Text" xml:space="preserve">
-    <value>Romset</value>
-  </data>
-  <data name="toolStripColumnYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="toolStripColumnYear.Text" xml:space="preserve">
-    <value>Year</value>
-  </data>
-  <data name="toolStripColumnManufacturer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="toolStripColumnManufacturer.Text" xml:space="preserve">
-    <value>Menufacturer</value>
-  </data>
-  <data name="toolStripColumnCloneOf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="toolStripColumnCloneOf.Text" xml:space="preserve">
-    <value>Clone</value>
-  </data>
-  <data name="toolStripColumnDriverStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="toolStripColumnDriverStatus.Text" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="toolStripColumnGenre.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="toolStripColumnGenre.Text" xml:space="preserve">
-    <value>Genre</value>
-  </data>
-  <data name="toolStripColumnRelease.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="toolStripColumnRelease.Text" xml:space="preserve">
-    <value>Release</value>
-  </data>
-  <data name="toolStripColumnPlayers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="toolStripColumnPlayers.Text" xml:space="preserve">
-    <value>Players</value>
-  </data>
-  <data name="toolStripColumnButtons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="toolStripColumnButtons.Text" xml:space="preserve">
-    <value>Buttons</value>
-  </data>
-  <data name="toolStripColumnDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="toolStripColumnDisplay.Text" xml:space="preserve">
-    <value>Screen</value>
-  </data>
-  <metadata name="MenuFilters.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>376, 15</value>
-  </metadata>
-  <data name="MenuFilters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 4</value>
-  </data>
-  <data name="&gt;&gt;MenuFilters.Name" xml:space="preserve">
-    <value>MenuFilters</value>
-  </data>
-  <data name="&gt;&gt;MenuFilters.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <metadata name="ToolbarMenuGrid.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>486, 15</value>
-  </metadata>
-  <data name="ToolbarMenuGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="ToolbarMenuGrid.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="ToolbarMenuGrid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="ToolbarMenuGrid.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="ToolbarMenuGrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 134</value>
-  </data>
-  <data name="ToolbarMenuGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>635, 27</value>
-  </data>
-  <data name="ToolbarMenuGrid.TabIndex" type="System.Int32, mscorlib">
-    <value>58</value>
-  </data>
-  <data name="ToolbarMenuGrid.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;ToolbarMenuGrid.Name" xml:space="preserve">
-    <value>ToolbarMenuGrid</value>
-  </data>
-  <data name="&gt;&gt;ToolbarMenuGrid.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolbarMenuGrid.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ToolbarMenuGrid.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="GridTextFilter.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="GridTextFilter.MaxLength" type="System.Int32, mscorlib">
-    <value>100</value>
-  </data>
-  <data name="GridTextFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="GridTextFilter.ToolTipText" xml:space="preserve">
-    <value>Grid filter</value>
-  </data>
-  <data name="SelectedRomsetName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="SelectedRomsetName.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
-  </data>
-  <data name="SelectedRomsetName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="SelectedRomsetName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>654, 140</value>
-  </data>
-  <data name="SelectedRomsetName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 19</value>
-  </data>
-  <data name="SelectedRomsetName.TabIndex" type="System.Int32, mscorlib">
-    <value>59</value>
-  </data>
-  <data name="SelectedRomsetName.Text" xml:space="preserve">
-    <value>Romset</value>
-  </data>
-  <data name="SelectedRomsetName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>BottomLeft</value>
-  </data>
-  <data name="SelectedRomsetName.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;SelectedRomsetName.Name" xml:space="preserve">
-    <value>SelectedRomsetName</value>
-  </data>
-  <data name="&gt;&gt;SelectedRomsetName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SelectedRomsetName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;SelectedRomsetName.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="pnlRomset.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Right</value>
-  </data>
-  <data name="KeyValueRomset.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="KeyValueRomset.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="KeyValueRomset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="KeyValueRomset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 236</value>
-  </data>
-  <data name="KeyValueRomset.TabIndex" type="System.Int32, mscorlib">
-    <value>63</value>
-  </data>
-  <data name="&gt;&gt;KeyValueRomset.Name" xml:space="preserve">
-    <value>KeyValueRomset</value>
-  </data>
-  <data name="&gt;&gt;KeyValueRomset.Type" xml:space="preserve">
-    <value>MAME_Shrink.Components.KeyValueTable, MAME Shrink, Version=3.1.9258.34233, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;KeyValueRomset.Parent" xml:space="preserve">
-    <value>pnlRomset</value>
-  </data>
-  <data name="&gt;&gt;KeyValueRomset.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pnlRomset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>653, 359</value>
-  </data>
-  <data name="pnlRomset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 236</value>
-  </data>
-  <data name="pnlRomset.TabIndex" type="System.Int32, mscorlib">
-    <value>61</value>
-  </data>
-  <data name="pnlRomset.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;pnlRomset.Name" xml:space="preserve">
-    <value>pnlRomset</value>
-  </data>
-  <data name="&gt;&gt;pnlRomset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlRomset.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pnlRomset.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="OpenRomsetWebPage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="OpenRomsetWebPage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="OpenRomsetWebPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>803, 139</value>
-  </data>
-  <data name="OpenRomsetWebPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 20</value>
-  </data>
-  <data name="OpenRomsetWebPage.TabIndex" type="System.Int32, mscorlib">
-    <value>61</value>
-  </data>
-  <data name="OpenRomsetWebPage.Text" xml:space="preserve">
-    <value>Open on website</value>
-  </data>
-  <data name="OpenRomsetWebPage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>BottomRight</value>
-  </data>
-  <data name="OpenRomsetWebPage.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;OpenRomsetWebPage.Name" xml:space="preserve">
-    <value>OpenRomsetWebPage</value>
-  </data>
-  <data name="&gt;&gt;OpenRomsetWebPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OpenRomsetWebPage.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;OpenRomsetWebPage.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ValidateRomset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ValidateRomset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>403, 76</value>
-  </data>
-  <data name="ValidateRomset.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="ValidateRomset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 24</value>
-  </data>
-  <data name="ValidateRomset.TabIndex" type="System.Int32, mscorlib">
-    <value>63</value>
-  </data>
-  <data name="ValidateRomset.Text" xml:space="preserve">
-    <value>Check dependencies</value>
-  </data>
-  <data name="ValidateRomset.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;ValidateRomset.Name" xml:space="preserve">
-    <value>ValidateRomset</value>
-  </data>
-  <data name="&gt;&gt;ValidateRomset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ValidateRomset.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ValidateRomset.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="SnapshotPlaceholder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="SnapshotPlaceholder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>715, 10</value>
-  </data>
-  <data name="SnapshotPlaceholder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 38</value>
-  </data>
-  <data name="SnapshotPlaceholder.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="SnapshotPlaceholder.TabIndex" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-  <data name="SnapshotPlaceholder.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;SnapshotPlaceholder.Name" xml:space="preserve">
-    <value>SnapshotPlaceholder</value>
-  </data>
-  <data name="&gt;&gt;SnapshotPlaceholder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SnapshotPlaceholder.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;SnapshotPlaceholder.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="MenuAddToSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 23</value>
-  </data>
-  <data name="MenuAddToSelectedGames.Text" xml:space="preserve">
-    <value>Select</value>
-  </data>
-  <data name="MenuAddToSelectedGames.ToolTipText" xml:space="preserve">
-    <value>Add to selection</value>
-  </data>
-  <data name="MenuRemoveFromSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 23</value>
-  </data>
-  <data name="MenuRemoveFromSelectedGames.Text" xml:space="preserve">
-    <value>Unselect</value>
-  </data>
-  <data name="MenuRemoveFromSelectedGames.ToolTipText" xml:space="preserve">
-    <value>Remove from selection</value>
-  </data>
-  <data name="MenuToggleSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 23</value>
-  </data>
-  <data name="MenuToggleSelectedGames.Text" xml:space="preserve">
-    <value>Toggle</value>
-  </data>
-  <data name="MenuToggleSelectedGames.ToolTipText" xml:space="preserve">
-    <value>Toggle the selection</value>
-  </data>
-  <data name="MenuShow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 23</value>
-  </data>
-  <data name="MenuShow.Text" xml:space="preserve">
-    <value>Show</value>
-  </data>
-  <data name="MenuShowAllGames.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 22</value>
-  </data>
-  <data name="MenuShowAllGames.Text" xml:space="preserve">
-    <value>All games</value>
-  </data>
-  <data name="MenuShowExistingFiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 22</value>
-  </data>
-  <data name="MenuShowExistingFiles.Text" xml:space="preserve">
-    <value>With files on disk only</value>
-  </data>
-  <data name="MenuShowSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 22</value>
-  </data>
-  <data name="MenuShowSelectedGames.Text" xml:space="preserve">
-    <value>Selected only</value>
-  </data>
-  <data name="MenuShowNotSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 22</value>
-  </data>
-  <data name="MenuShowNotSelectedGames.Text" xml:space="preserve">
-    <value>Not selected only</value>
-  </data>
-  <data name="MenuColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 23</value>
-  </data>
-  <data name="MenuColumns.Text" xml:space="preserve">
-    <value>Columns</value>
-  </data>
-  <data name="StartClean.ImageKey" xml:space="preserve">
-    <value>waste</value>
-  </data>
-  <data name="StartClean.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="StartClean.Location" type="System.Drawing.Point, System.Drawing">
-    <value>554, 71</value>
-  </data>
-  <data name="StartClean.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 32</value>
-  </data>
-  <data name="StartClean.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="StartClean.Text" xml:space="preserve">
-    <value>Clean</value>
-  </data>
-  <data name="StartClean.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="StartClean.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;StartClean.Name" xml:space="preserve">
-    <value>StartClean</value>
-  </data>
-  <data name="&gt;&gt;StartClean.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;StartClean.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;StartClean.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="ChangeOptions.ImageKey" xml:space="preserve">
-    <value>options</value>
-  </data>
-  <data name="ChangeOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ChangeOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 71</value>
-  </data>
-  <data name="ChangeOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 32</value>
-  </data>
-  <data name="ChangeOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="ChangeOptions.Text" xml:space="preserve">
-    <value>Options and folders</value>
-  </data>
-  <data name="ChangeOptions.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;ChangeOptions.Name" xml:space="preserve">
-    <value>ChangeOptions</value>
   </data>
   <data name="&gt;&gt;ChangeOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ChangeOptions.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="LabelManueExe.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;ChangeOptions.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="LabelGamelistXml.Text" xml:space="preserve">
+    <value>LabelGamelistXml</value>
   </data>
-  <data name="Snapshot.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 19</value>
+  </data>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="Snapshot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Snapshot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>653, 164</value>
+  <data name="LabelManueExe.Size" type="System.Drawing.Size, System.Drawing">
+    <value>522, 19</value>
   </data>
-  <data name="Snapshot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 189</value>
+  <data name="Snapshot.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="Snapshot.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+  <data name="LoadGames.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="Snapshot.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="toolStripColumnDriverStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
   </data>
-  <data name="&gt;&gt;Snapshot.Name" xml:space="preserve">
-    <value>Snapshot</value>
+  <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;Snapshot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="StartClean.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
   </data>
-  <data name="&gt;&gt;Snapshot.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;ValidateRomset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Snapshot.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="LoadGames.ImageKey" xml:space="preserve">
-    <value>right</value>
-  </data>
-  <data name="LoadGames.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LoadGames.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 71</value>
-  </data>
-  <data name="LoadGames.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 32</value>
-  </data>
-  <data name="LoadGames.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="LabelRomsPath.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="LoadGames.Text" xml:space="preserve">
     <value>Load files</value>
   </data>
-  <data name="LoadGames.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>TextBeforeImage</value>
+  <data name="&gt;&gt;KeyValueRomset.Name" xml:space="preserve">
+    <value>KeyValueRomset</value>
   </data>
-  <data name="&gt;&gt;LoadGames.Name" xml:space="preserve">
-    <value>LoadGames</value>
+  <data name="&gt;&gt;Tooltips.Name" xml:space="preserve">
+    <value>Tooltips</value>
   </data>
-  <data name="&gt;&gt;LoadGames.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label1.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="&gt;&gt;LoadGames.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="lblInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>624, 18</value>
+  </data>
+  <data name="&gt;&gt;Snapshot.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;LoadGames.ZOrder" xml:space="preserve">
-    <value>19</value>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pnlRomset.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="ToolbarMenuGrid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 134</value>
+  </data>
+  <data name="KeyValueRomset.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="OpenRomsetWebPage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="SelectedRomsetName.Text" xml:space="preserve">
+    <value>Romset</value>
+  </data>
+  <data name="toolStripColumnButtons.Text" xml:space="preserve">
+    <value>Buttons</value>
+  </data>
+  <data name="toolStripColumnDriverStatus.Text" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="ChangeOptions.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OpenRomsetWebPage.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;toolStripColumnDriverStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Snapshot.Name" xml:space="preserve">
+    <value>Snapshot</value>
+  </data>
+  <data name="ChangeOptions.ImageKey" xml:space="preserve">
+    <value>options</value>
+  </data>
+  <data name="&gt;&gt;MenuAddToSelectedGames.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SnapshotPlaceholder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;ValidateRomset.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;MenuShow.Name" xml:space="preserve">
+    <value>MenuShow</value>
+  </data>
+  <data name="&gt;&gt;Snapshot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GridTextFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="StartClean.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="CancelCurrentProcess.ImageKey" xml:space="preserve">
     <value>cancel-red</value>
   </data>
-  <data name="CancelCurrentProcess.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="GamesListView.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="KeyValueRomset.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;MenuColumnItems.Name" xml:space="preserve">
+    <value>MenuColumnItems</value>
+  </data>
+  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CancelCurrentProcess.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 71</value>
+  <data name="ChangeOptions.Text" xml:space="preserve">
+    <value>Options and folders</value>
+  </data>
+  <data name="&gt;&gt;MenuToggleSelectedGames.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="SnapshotPlaceholder.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="&gt;&gt;ToolbarMenuGrid.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GamesListView.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;lblInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;KeyValueRomset.Parent" xml:space="preserve">
+    <value>pnlRomset</value>
+  </data>
+  <data name="MenuAddToSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 23</value>
+  </data>
+  <data name="&gt;&gt;toolStripColumnYear.Name" xml:space="preserve">
+    <value>toolStripColumnYear</value>
+  </data>
+  <data name="MenuColumnItems.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OpenRomsetWebPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 20</value>
+  </data>
+  <data name="LabelGamelistXml.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;toolStripColumnPlayers.Name" xml:space="preserve">
+    <value>toolStripColumnPlayers</value>
+  </data>
+  <data name="toolStripColumnRelease.Text" xml:space="preserve">
+    <value>Release</value>
+  </data>
+  <data name="SelectedRomsetName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 19</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LabelRomsPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>522, 19</value>
   </data>
   <data name="CancelCurrentProcess.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 32</value>
   </data>
-  <data name="CancelCurrentProcess.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
+  <data name="MenuShowExistingFiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 22</value>
   </data>
-  <data name="CancelCurrentProcess.Text" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="&gt;&gt;toolStripColumnRelease.Name" xml:space="preserve">
+    <value>toolStripColumnRelease</value>
   </data>
   <data name="CancelCurrentProcess.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
   </data>
-  <data name="CancelCurrentProcess.Visible" type="System.Boolean, mscorlib">
+  <data name="&gt;&gt;LoadGames.Name" xml:space="preserve">
+    <value>LoadGames</value>
+  </data>
+  <data name="MenuColumns.Text" xml:space="preserve">
+    <value>Columns</value>
+  </data>
+  <data name="LabelRomsPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>MainForm</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;LoadGames.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="LabelGamelistXml.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OpenRomsetWebPage.Name" xml:space="preserve">
+    <value>OpenRomsetWebPage</value>
+  </data>
+  <data name="toolStripColumnYear.Text" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="SnapshotPlaceholder.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;CancelCurrentProcess.Name" xml:space="preserve">
-    <value>CancelCurrentProcess</value>
+  <data name="&gt;&gt;toolStripColumnButtons.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CancelCurrentProcess.Type" xml:space="preserve">
+  <data name="toolStripColumnGenre.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="LabelGamelistXml.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 29</value>
+  </data>
+  <data name="LabelManueExe.Text" xml:space="preserve">
+    <value>LabelManueExe</value>
+  </data>
+  <data name="LabelRomsPath.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;LoadGames.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CancelCurrentProcess.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;toolStripColumnManufacturer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CancelCurrentProcess.ZOrder" xml:space="preserve">
-    <value>20</value>
+  <data name="ValidateRomset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="ToolbarMenuGrid.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>918, 601</value>
+  <data name="&gt;&gt;ChangeOptions.Name" xml:space="preserve">
+    <value>ChangeOptions</value>
+  </data>
+  <data name="LoadGames.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>TextBeforeImage</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1056,157 +957,331 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 </value>
   </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>630, 480</value>
+  <data name="toolStripColumnYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
   </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
+  <data name="&gt;&gt;CancelCurrentProcess.ZOrder" xml:space="preserve">
+    <value>20</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>MAME Shrink</value>
+  <data name="toolStripColumnCloneOf.Text" xml:space="preserve">
+    <value>Clone</value>
   </data>
-  <data name="&gt;&gt;ImageList.Name" xml:space="preserve">
-    <value>ImageList</value>
+  <data name="&gt;&gt;LabelManueExe.Name" xml:space="preserve">
+    <value>LabelManueExe</value>
   </data>
-  <data name="&gt;&gt;ImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="SnapshotPlaceholder.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="&gt;&gt;GridTextFilterTimer.Name" xml:space="preserve">
-    <value>GridTextFilterTimer</value>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="&gt;&gt;GridTextFilterTimer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Snapshot.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;Tooltips.Name" xml:space="preserve">
-    <value>Tooltips</value>
+  <data name="OpenRomsetWebPage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>BottomRight</value>
   </data>
-  <data name="&gt;&gt;Tooltips.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;pnlRomset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripColumnRomset.Name" xml:space="preserve">
     <value>toolStripColumnRomset</value>
   </data>
-  <data name="&gt;&gt;toolStripColumnRomset.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblInfo.Name" xml:space="preserve">
+    <value>lblInfo</value>
+  </data>
+  <data name="&gt;&gt;toolStripColumnRelease.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripColumnYear.Name" xml:space="preserve">
-    <value>toolStripColumnYear</value>
+  <data name="LabelManueExe.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;toolStripColumnYear.Type" xml:space="preserve">
+  <data name="MenuFilters.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SelectedRomsetName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;pnlRomset.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStripColumnPlayers.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripColumnManufacturer.Name" xml:space="preserve">
-    <value>toolStripColumnManufacturer</value>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Roms folders:</value>
   </data>
-  <data name="&gt;&gt;toolStripColumnManufacturer.Type" xml:space="preserve">
+  <data name="MenuToggleSelectedGames.ToolTipText" xml:space="preserve">
+    <value>Toggle the selection</value>
+  </data>
+  <data name="CancelCurrentProcess.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ValidateRomset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 24</value>
+  </data>
+  <data name="&gt;&gt;MenuShowAllGames.Name" xml:space="preserve">
+    <value>MenuShowAllGames</value>
+  </data>
+  <data name="toolStripColumnRelease.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="ToolbarMenuGrid.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LabelManueExe.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="&gt;&gt;MenuColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ChangeOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 71</value>
+  </data>
+  <data name="MenuRemoveFromSelectedGames.ToolTipText" xml:space="preserve">
+    <value>Remove from selection</value>
+  </data>
+  <data name="ValidateRomset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>403, 76</value>
+  </data>
+  <data name="&gt;&gt;lblInfo.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;GamesListView.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="SnapshotPlaceholder.TabIndex" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="toolStripColumnRomset.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;CancelCurrentProcess.Name" xml:space="preserve">
+    <value>CancelCurrentProcess</value>
+  </data>
+  <data name="toolStripColumnCloneOf.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="SelectedRomsetName.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="KeyValueRomset.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;MenuColumnItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LabelRomsPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 48</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>MAME Shrink</value>
+  </data>
+  <data name="&gt;&gt;SelectedRomsetName.Name" xml:space="preserve">
+    <value>SelectedRomsetName</value>
+  </data>
+  <data name="KeyValueRomset.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="OpenRomsetWebPage.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="&gt;&gt;StartClean.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="ValidateRomset.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;MenuRemoveFromSelectedGames.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;StartClean.Name" xml:space="preserve">
+    <value>StartClean</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Gamelist XML:</value>
+  </data>
+  <data name="StartClean.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="LoadGames.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;ChangeOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="ToolbarMenuGrid.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;ImageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LabelGamelistXml.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LoadGames.Location" type="System.Drawing.Point, System.Drawing">
+    <value>276, 71</value>
+  </data>
+  <data name="&gt;&gt;ValidateRomset.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;toolStripColumnButtons.Name" xml:space="preserve">
+    <value>toolStripColumnButtons</value>
+  </data>
+  <data name="MenuFilters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="CancelCurrentProcess.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="&gt;&gt;SnapshotPlaceholder.Name" xml:space="preserve">
+    <value>SnapshotPlaceholder</value>
+  </data>
+  <data name="&gt;&gt;MenuShowAllGames.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripColumnCloneOf.Name" xml:space="preserve">
     <value>toolStripColumnCloneOf</value>
   </data>
+  <data name="toolStripColumnGenre.Text" xml:space="preserve">
+    <value>Genre</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 19</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 19</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>630, 480</value>
+  </data>
+  <data name="toolStripColumnDisplay.Text" xml:space="preserve">
+    <value>Screen</value>
+  </data>
+  <data name="&gt;&gt;Snapshot.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;toolStripColumnRomset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pnlRomset.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="SelectedRomsetName.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MenuShowSelectedGames.Text" xml:space="preserve">
+    <value>Selected only</value>
+  </data>
+  <data name="MenuShowAllGames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 22</value>
+  </data>
+  <data name="GamesListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="OpenRomsetWebPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>803, 139</value>
+  </data>
+  <data name="ChangeOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="pnlRomset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 236</value>
+  </data>
+  <data name="ToolbarMenuGrid.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="MenuToggleSelectedGames.Text" xml:space="preserve">
+    <value>Toggle</value>
+  </data>
+  <data name="OpenRomsetWebPage.Text" xml:space="preserve">
+    <value>Open on website</value>
+  </data>
+  <data name="&gt;&gt;StartClean.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="StartClean.Location" type="System.Drawing.Point, System.Drawing">
+    <value>554, 71</value>
+  </data>
+  <data name="&gt;&gt;LabelManueExe.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;LabelRomsPath.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="LabelManueExe.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ChangeOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 32</value>
+  </data>
+  <data name="&gt;&gt;GamesListView.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="ToolbarMenuGrid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="LabelGamelistXml.Size" type="System.Drawing.Size, System.Drawing">
+    <value>522, 19</value>
+  </data>
+  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
   <data name="&gt;&gt;toolStripColumnCloneOf.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripColumnDriverStatus.Name" xml:space="preserve">
-    <value>toolStripColumnDriverStatus</value>
+  <data name="MenuShowNotSelectedGames.Text" xml:space="preserve">
+    <value>Not selected only</value>
   </data>
-  <data name="&gt;&gt;toolStripColumnDriverStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="MenuRemoveFromSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 23</value>
   </data>
-  <data name="&gt;&gt;toolStripColumnGenre.Name" xml:space="preserve">
-    <value>toolStripColumnGenre</value>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripColumnGenre.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;GamesListView.Name" xml:space="preserve">
+    <value>GamesListView</value>
   </data>
-  <data name="&gt;&gt;toolStripColumnRelease.Name" xml:space="preserve">
-    <value>toolStripColumnRelease</value>
+  <data name="MenuColumnItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 224</value>
   </data>
-  <data name="&gt;&gt;toolStripColumnRelease.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripColumnPlayers.Name" xml:space="preserve">
-    <value>toolStripColumnPlayers</value>
-  </data>
-  <data name="&gt;&gt;toolStripColumnPlayers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripColumnButtons.Name" xml:space="preserve">
-    <value>toolStripColumnButtons</value>
-  </data>
-  <data name="&gt;&gt;toolStripColumnButtons.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripColumnDisplay.Name" xml:space="preserve">
-    <value>toolStripColumnDisplay</value>
-  </data>
-  <data name="&gt;&gt;toolStripColumnDisplay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GridTextFilter.Name" xml:space="preserve">
-    <value>GridTextFilter</value>
-  </data>
-  <data name="&gt;&gt;GridTextFilter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MenuAddToSelectedGames.Name" xml:space="preserve">
-    <value>MenuAddToSelectedGames</value>
-  </data>
-  <data name="&gt;&gt;MenuAddToSelectedGames.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MenuRemoveFromSelectedGames.Name" xml:space="preserve">
-    <value>MenuRemoveFromSelectedGames</value>
-  </data>
-  <data name="&gt;&gt;MenuRemoveFromSelectedGames.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MenuToggleSelectedGames.Name" xml:space="preserve">
-    <value>MenuToggleSelectedGames</value>
-  </data>
-  <data name="&gt;&gt;MenuToggleSelectedGames.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MenuShow.Name" xml:space="preserve">
-    <value>MenuShow</value>
-  </data>
-  <data name="&gt;&gt;MenuShow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MenuShowAllGames.Name" xml:space="preserve">
-    <value>MenuShowAllGames</value>
-  </data>
-  <data name="&gt;&gt;MenuShowAllGames.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MenuShowExistingFiles.Name" xml:space="preserve">
-    <value>MenuShowExistingFiles</value>
-  </data>
-  <data name="&gt;&gt;MenuShowExistingFiles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MenuShowSelectedGames.Name" xml:space="preserve">
-    <value>MenuShowSelectedGames</value>
-  </data>
-  <data name="&gt;&gt;MenuShowSelectedGames.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MenuShowNotSelectedGames.Name" xml:space="preserve">
-    <value>MenuShowNotSelectedGames</value>
-  </data>
-  <data name="&gt;&gt;MenuShowNotSelectedGames.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MenuColumns.Name" xml:space="preserve">
-    <value>MenuColumns</value>
-  </data>
-  <data name="&gt;&gt;MenuColumns.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>MainForm</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
+  <metadata name="MenuFilters.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>376, 15</value>
+  </metadata>
+  <metadata name="Tooltips.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>163, 17</value>
+  </metadata>
+  <metadata name="ToolbarMenuGrid.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>486, 15</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>593, 15</value>
+  </metadata>
+  <metadata name="MenuColumnItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>243, 15</value>
+  </metadata>
+  <metadata name="GridTextFilterTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

@@ -117,19 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Eseguibile Mame IT:</value>
+    <value>Eseguibile Mame:</value>
+  </data>
+  <data name="label1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="ImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        EwAAAk1TRnQBSQFMAgEBCAEAAdABAQHQAQEBGAEAARgBAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        EwAAAk1TRnQBSQFMAgEBCAEAAdgBAQHYAQEBGAEAARgBAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABYAMAAUgDAAEBAQABCAYAARsYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -215,53 +214,99 @@
         AXwBBwHwAXwBBwHAAQABBwH/AfgBfwHwAX8BBwHwAX8BBwH/AQEL/wEBC/8BARb/Cw==
 </value>
   </data>
-  <data name="lblInfo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="GamesListView.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="lblInfo.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Cartella roms:</value>
   </data>
-  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="label5.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Lista giochi XML:</value>
   </data>
-  <data name="LabelManueExe.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="label6.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="LabelGamelistXml.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="LabelManueExe.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="LabelRomsPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="LabelGamelistXml.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelRomsPath.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="toolStripColumnRomset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 22</value>
+  </data>
+  <data name="toolStripColumnYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 22</value>
   </data>
   <data name="toolStripColumnYear.Text" xml:space="preserve">
     <value>Anno</value>
   </data>
+  <data name="toolStripColumnManufacturer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 22</value>
+  </data>
   <data name="toolStripColumnManufacturer.Text" xml:space="preserve">
     <value>Produttore</value>
+  </data>
+  <data name="toolStripColumnCloneOf.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 22</value>
+  </data>
+  <data name="toolStripColumnDriverStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 22</value>
   </data>
   <data name="toolStripColumnDriverStatus.Text" xml:space="preserve">
     <value>Stato</value>
   </data>
+  <data name="toolStripColumnGenre.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 22</value>
+  </data>
   <data name="toolStripColumnGenre.Text" xml:space="preserve">
     <value>Genere</value>
+  </data>
+  <data name="toolStripColumnRelease.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 22</value>
   </data>
   <data name="toolStripColumnRelease.Text" xml:space="preserve">
     <value>Versione</value>
   </data>
+  <data name="toolStripColumnPlayers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 22</value>
+  </data>
   <data name="toolStripColumnPlayers.Text" xml:space="preserve">
     <value>Giocatori</value>
+  </data>
+  <data name="toolStripColumnButtons.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 22</value>
   </data>
   <data name="toolStripColumnButtons.Text" xml:space="preserve">
     <value>Pulsanti</value>
   </data>
+  <data name="toolStripColumnDisplay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 22</value>
+  </data>
   <data name="toolStripColumnDisplay.Text" xml:space="preserve">
     <value>Schermo</value>
+  </data>
+  <data name="MenuColumnItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 224</value>
+  </data>
+  <data name="MenuColumnItems.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MenuFilters.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MenuAddToSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 23</value>
   </data>
   <data name="MenuAddToSelectedGames.Text" xml:space="preserve">
     <value>Seleziona</value>
@@ -269,11 +314,17 @@
   <data name="MenuAddToSelectedGames.ToolTipText" xml:space="preserve">
     <value>Aggiungi alla selezione</value>
   </data>
+  <data name="MenuRemoveFromSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 23</value>
+  </data>
   <data name="MenuRemoveFromSelectedGames.Text" xml:space="preserve">
     <value>Deseleziona</value>
   </data>
   <data name="MenuRemoveFromSelectedGames.ToolTipText" xml:space="preserve">
     <value>Rimuovi dalla selezione</value>
+  </data>
+  <data name="MenuToggleSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 23</value>
   </data>
   <data name="MenuToggleSelectedGames.Text" xml:space="preserve">
     <value>Inverti</value>
@@ -284,70 +335,96 @@
   <data name="GridTextFilter.ToolTipText" xml:space="preserve">
     <value>Filtro griglia</value>
   </data>
+  <data name="MenuShowAllGames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
   <data name="MenuShowAllGames.Text" xml:space="preserve">
     <value>Tutti i giochi</value>
+  </data>
+  <data name="MenuShowExistingFiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
   </data>
   <data name="MenuShowExistingFiles.Text" xml:space="preserve">
     <value>Solo se presenti su disco</value>
   </data>
+  <data name="MenuShowSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
   <data name="MenuShowSelectedGames.Text" xml:space="preserve">
     <value>Solo selezionati</value>
+  </data>
+  <data name="MenuShowNotSelectedGames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
   </data>
   <data name="MenuShowNotSelectedGames.Text" xml:space="preserve">
     <value>Solo non selezionati</value>
   </data>
+  <data name="MenuShow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 23</value>
+  </data>
   <data name="MenuShow.Text" xml:space="preserve">
     <value>Mostra</value>
+  </data>
+  <data name="MenuColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 23</value>
   </data>
   <data name="MenuColumns.Text" xml:space="preserve">
     <value>Colonne</value>
   </data>
-  <data name="SelectedRomsetName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="ToolbarMenuGrid.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="OpenRomsetWebPage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="SelectedRomsetName.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="KeyValueRomset.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="pnlRomset.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="OpenRomsetWebPage.Text" xml:space="preserve">
     <value>Mostra sul sito</value>
   </data>
-  <data name="ValidateRomset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="OpenRomsetWebPage.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="ValidateRomset.Text" xml:space="preserve">
     <value>Verifica dipendenze</value>
   </data>
-  <data name="SnapshotPlaceholder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="ValidateRomset.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="StartClean.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="SnapshotPlaceholder.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="StartClean.Text" xml:space="preserve">
     <value>Pulisci</value>
   </data>
-  <data name="ChangeOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="StartClean.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="ChangeOptions.Text" xml:space="preserve">
     <value>Opzioni e percorsi</value>
   </data>
-  <data name="Snapshot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="ChangeOptions.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="LoadGames.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Snapshot.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="LoadGames.Text" xml:space="preserve">
     <value>Carica lista</value>
   </data>
-  <data name="CancelCurrentProcess.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="LoadGames.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="CancelCurrentProcess.Text" xml:space="preserve">
     <value>Interrompi</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="CancelCurrentProcess.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAICAEAAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA
@@ -365,7 +442,7 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

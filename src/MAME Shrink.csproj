@@ -100,6 +100,7 @@
     <Compile Include="Common\Cache\SnapshotsCache\SnapshotCacheItem.cs" />
     <Compile Include="Common\Cache\SnapshotsCache\SnapshotsCache.cs" />
     <Compile Include="Common\Cache\MachinesCache\MachineCacheItem.cs" />
+    <Compile Include="Common\Filters\FilterMenuDefinition.cs" />
     <Compile Include="Components\KeyValueTable.cs">
       <SubType>UserControl</SubType>
     </Compile>

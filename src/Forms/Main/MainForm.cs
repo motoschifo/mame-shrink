@@ -81,8 +81,7 @@ public partial class MainForm : Form
     {
         InitializeComponent();
         _userPreferences = UserPreferencesManager.Get() ?? new();
-        _filters.Initialize();
-        _filters.BuildMenuItems(MenuFilters.Items, MenuFiltersItem_Click);
+        _filters.BuildMenuItems(MenuFilters.Items, MenuFiltersItem_Click, _menuActions);
         CheckMenuActions();
     }
 
@@ -854,6 +853,7 @@ public partial class MainForm : Form
             await LoadFromArcadeDatabaseOrCache(
                 progressUpdate: (text) => Dialogs.ProgressUpdate(lblInfo, text)
             );
+
             UpdateInfo(Strings.AddingDataToGrid);
             GamesListView.BeginUpdate();
 
@@ -875,6 +875,9 @@ public partial class MainForm : Form
             UpdateInfo(Strings.GridUpdate);
             AddColumnsToGrid();
             UpdateGridItems();
+            UpdateInfo("Aggiornamento filtri...");
+            var machines = _gridItems.Select(x => x.Value).Where(x => x.CanBeSelected && x.Machine is not null).Select(x => x.Machine).ToDictionary(x => x!.Name, x => x);
+            _filters.UpdateFilterMenuCounters(machines!);
             UpdateSelectionInfo();
         }
         catch (Exception ex)

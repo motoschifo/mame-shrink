@@ -35,6 +35,7 @@ internal class GamesGridItem
         HasFiles = true;
         TotalFilesSize += file.Size;
     }
+    public MameMachine? Machine { get; private set; }
 
 
     public GamesGridItem()
@@ -77,6 +78,7 @@ internal class GamesGridItem
         var item = new GamesGridItem()
         {
             Index = 0,
+            Machine = machine,
             Name = machine.Name,
             Description = string.IsNullOrEmpty(machine.Description) ? "-" : machine.Description,
             RomOf = string.IsNullOrEmpty(machine.RomOf) ? "-" : machine.RomOf,
