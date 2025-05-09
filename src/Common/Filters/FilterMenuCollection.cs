@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Forms;
+using MAME_Shrink.Resources;
 
 namespace MAME_Shrink.Common.Filters;
 internal class FilterMenuCollection : Collection<FilterMenuItem>
@@ -12,116 +13,116 @@ internal class FilterMenuCollection : Collection<FilterMenuItem>
     {
         Clear();
 
-        Add(new FilterMenuItem { Text = "Tutti", Kind = FilterKind.All });
+        Add(new FilterMenuItem { Text = Strings.FilterAll, Kind = FilterKind.All });
 
         Add(new FilterMenuItem { IsSeparator = true });
 
         Add(new FilterMenuItem
         {
-            Text = "Tipo",
+            Text = Strings.Type,
             Children =
             {
-                new FilterMenuItem { Text = "Mamecab", Kind = FilterKind.IsMamecab },
+                new FilterMenuItem { Text = Strings.FilterMameCab, Kind = FilterKind.IsMamecab },
                 new FilterMenuItem { IsSeparator = true },
-                new FilterMenuItem { Text = "Macchina", Kind = FilterKind.IsMachine },
-                new FilterMenuItem { Text = "Macchina parent", Kind = FilterKind.IsParentMachine },
-                new FilterMenuItem { Text = "Macchina clone", Kind = FilterKind.IsCloneMachine },
+                new FilterMenuItem { Text = Strings.FilterMachine, Kind = FilterKind.IsMachine },
+                new FilterMenuItem { Text = Strings.FilterParentMachine, Kind = FilterKind.IsParentMachine },
+                new FilterMenuItem { Text = Strings.FilterCloneMachine, Kind = FilterKind.IsCloneMachine },
                 new FilterMenuItem { IsSeparator = true },
-                new FilterMenuItem { Text = "Bios", Kind = FilterKind.IsBios },
-                new FilterMenuItem { Text = "Dispositivo", Kind = FilterKind.IsDevice },
-                new FilterMenuItem { Text = "Meccanico", Kind = FilterKind.IsMechanical },
+                new FilterMenuItem { Text = Strings.FilterBios, Kind = FilterKind.IsBios },
+                new FilterMenuItem { Text = Strings.FilterDevice, Kind = FilterKind.IsDevice },
+                new FilterMenuItem { Text = Strings.FilterMechanical, Kind = FilterKind.IsMechanical },
             }
         });
 
         Add(new FilterMenuItem
         {
-            Text = "Audio",
+            Text = Strings.FilterAudio,
             Children =
             {
-                new FilterMenuItem { Text = "Audio non supportato", Kind = FilterKind.AudioUnsupported },
+                new FilterMenuItem { Text = Strings.FilterAudioNotSupported, Kind = FilterKind.AudioUnsupported },
                 new FilterMenuItem { IsSeparator = true },
-                new FilterMenuItem { Text = "Audio mono", Kind = FilterKind.AudioChannelMono },
-                new FilterMenuItem { Text = "Audio stereo", Kind = FilterKind.AudioChannelStereo },
-                new FilterMenuItem { Text = "Audio multicanale", Kind = FilterKind.AudioMultichannel },
+                new FilterMenuItem { Text = Strings.FilterAudioMono, Kind = FilterKind.AudioChannelMono },
+                new FilterMenuItem { Text = Strings.FilterAudioStereo, Kind = FilterKind.AudioChannelStereo },
+                new FilterMenuItem { Text = Strings.FilterAudioMultichannel, Kind = FilterKind.AudioMultichannel },
                 new FilterMenuItem { IsSeparator = true },
-                new FilterMenuItem { Text = "Suono emulato correttamente", Kind = FilterKind.SoundEmulated },
-                new FilterMenuItem { Text = "Suono imperfetto", Kind = FilterKind.SoundImperfect },
-                new FilterMenuItem { Text = "Suono non emulato", Kind = FilterKind.SoundUnemulated },
+                new FilterMenuItem { Text = Strings.FilterSoundEmulated, Kind = FilterKind.SoundEmulated },
+                new FilterMenuItem { Text = Strings.FilterSoundImperfect, Kind = FilterKind.SoundImperfect },
+                new FilterMenuItem { Text = Strings.FilterSoundUnemulated, Kind = FilterKind.SoundUnemulated },
             }
         });
 
         Add(new FilterMenuItem
         {
-            Text = "Video",
+            Text = Strings.FilterVideo,
             Children =
                 [
                  new FilterMenuItem
                  {
-                    Text = "Tipo schermo",
+                    Text = Strings.FilterDisplayType,
                     Children =
                     {
-                        new FilterMenuItem { Text = "Raster", Kind = FilterKind.DisplayTypeRaster },
-                        new FilterMenuItem { Text = "Vettoriale", Kind = FilterKind.DisplayTypeVector },
-                        new FilterMenuItem { Text = "LCD", Kind = FilterKind.DisplayTypeLCD },
-                        new FilterMenuItem { Text = "SVG", Kind = FilterKind.DisplayTypeSVG },
+                        new FilterMenuItem { Text = Strings.FilterDisplayRaster, Kind = FilterKind.DisplayTypeRaster },
+                        new FilterMenuItem { Text = Strings.FilterDisplayVector, Kind = FilterKind.DisplayTypeVector },
+                        new FilterMenuItem { Text = Strings.FilterDisplayLCD, Kind = FilterKind.DisplayTypeLCD },
+                        new FilterMenuItem { Text = Strings.FilterDisplaySVG, Kind = FilterKind.DisplayTypeSVG },
                         new FilterMenuItem { IsSeparator = true },
-                        new FilterMenuItem { Text = "Sconosciuto", Kind = FilterKind.DisplayTypeUnknown },
+                        new FilterMenuItem { Text = Strings.FilterDisplayUnknown, Kind = FilterKind.DisplayTypeUnknown },
                     }
                 },
                 new FilterMenuItem
                 {
-                    Text = "Numero di schermi",
+                    Text = Strings.FilterScreensNumber,
                     Children =
                     {
-                        new FilterMenuItem { Text = "Nessuno", Kind = FilterKind.Screenless },
+                        new FilterMenuItem { Text = Strings.FilterScreenless, Kind = FilterKind.Screenless },
                         new FilterMenuItem { IsSeparator = true },
-                        new FilterMenuItem { Text = "Uno", Kind = FilterKind.ScreensOne },
-                        new FilterMenuItem { Text = "Uno o più", Kind = FilterKind.ScreensOneOrMore },
+                        new FilterMenuItem { Text = Strings.FilterScreenOne, Kind = FilterKind.ScreensOne },
+                        new FilterMenuItem { Text = Strings.FilterScreenOneOrMore, Kind = FilterKind.ScreensOneOrMore },
                         new FilterMenuItem { IsSeparator = true },
-                        new FilterMenuItem { Text = "Due", Kind = FilterKind.ScreensTwo },
-                        new FilterMenuItem { Text = "Due o più", Kind = FilterKind.ScreensTwoOrMore },
+                        new FilterMenuItem { Text = Strings.FilterScreenTwo, Kind = FilterKind.ScreensTwo },
+                        new FilterMenuItem { Text = Strings.FilterScreenTwoOrMore, Kind = FilterKind.ScreensTwoOrMore },
                         new FilterMenuItem { IsSeparator = true },
-                        new FilterMenuItem { Text = "Tre", Kind = FilterKind.ScreensThree },
-                        new FilterMenuItem { Text = "Tre o più", Kind = FilterKind.ScreensThreeOrMore },
+                        new FilterMenuItem { Text = Strings.FilterScreenThree, Kind = FilterKind.ScreensThree },
+                        new FilterMenuItem { Text = Strings.FilterScreenThreeOrMore, Kind = FilterKind.ScreensThreeOrMore },
                         new FilterMenuItem { IsSeparator = true },
-                        new FilterMenuItem { Text = "Quattro", Kind = FilterKind.ScreensFour },
-                        new FilterMenuItem { Text = "Quattro o più", Kind = FilterKind.ScreensFourOrMore },
+                        new FilterMenuItem { Text = Strings.FilterScreenFour, Kind = FilterKind.ScreensFour },
+                        new FilterMenuItem { Text = Strings.FilterScreenFourOrMore, Kind = FilterKind.ScreensFourOrMore },
                         new FilterMenuItem { IsSeparator = true },
-                        new FilterMenuItem { Text = "Più di quattro", Kind = FilterKind.ScreensFiveOrMore },
+                        new FilterMenuItem { Text = Strings.FilterScreenMoreThanFour, Kind = FilterKind.ScreensFiveOrMore },
                     }
                 },
                 new FilterMenuItem
                 {
-                    Text = "Orientamento",
+                    Text = Strings.FilterScreenOrientation,
                     Children =
                     {
-                        new FilterMenuItem { Text = "Orizzontale", Kind = FilterKind.HorizontalScreen },
-                        new FilterMenuItem { Text = "Verticale", Kind = FilterKind.VerticalScreen },
+                        new FilterMenuItem { Text = Strings.FilterScreenHorizontal, Kind = FilterKind.HorizontalScreen },
+                        new FilterMenuItem { Text = Strings.FilterScreenVertical, Kind = FilterKind.VerticalScreen },
                         new FilterMenuItem { IsSeparator = true },
-                        new FilterMenuItem { Text = "Nessuna rotazione", Kind = FilterKind.ScreenRotated0 },
-                        new FilterMenuItem { Text = "Rotazione 90°", Kind = FilterKind.ScreenRotated90 },
-                        new FilterMenuItem { Text = "Rotazione 180°", Kind = FilterKind.ScreenRotated180 },
-                        new FilterMenuItem { Text = "Rotazione 270°", Kind = FilterKind.ScreenRotated270 },
+                        new FilterMenuItem { Text = Strings.FilterScreenNoRotation, Kind = FilterKind.ScreenRotated0 },
+                        new FilterMenuItem { Text = Strings.FilterScreenRotated90, Kind = FilterKind.ScreenRotated90 },
+                        new FilterMenuItem { Text = Strings.FilterScreenRotated180, Kind = FilterKind.ScreenRotated180 },
+                        new FilterMenuItem { Text = Strings.FilterScreenRotated270, Kind = FilterKind.ScreenRotated270 },
                     }
                 },
                 new FilterMenuItem
                 {
-                    Text = "Grafica",
+                    Text = Strings.FilterGraphic,
                     Children =
                     {
-                        new FilterMenuItem { Text = "Emulata correttamente", Kind = FilterKind.GraphicEmulated },
-                        new FilterMenuItem { Text = "Con imperfezioni", Kind = FilterKind.GraphicImperfect },
-                        new FilterMenuItem { Text = "Non emulata", Kind = FilterKind.GraphicNotEmulated },
+                        new FilterMenuItem { Text = Strings.FilterGraphicEmulated, Kind = FilterKind.GraphicEmulated },
+                        new FilterMenuItem { Text = Strings.FilterGraphicImperfect, Kind = FilterKind.GraphicImperfect },
+                        new FilterMenuItem { Text = Strings.FilterGraphicUnemulated, Kind = FilterKind.GraphicNotEmulated },
                     }
                 },
                 new FilterMenuItem
                 {
-                    Text = "Colore",
+                    Text = Strings.FilterColor,
                     Children =
                     {
-                        new FilterMenuItem { Text = "Emulato correttamente", Kind = FilterKind.ColorEmulated },
-                        new FilterMenuItem { Text = "Con imperfezioni", Kind = FilterKind.ColorImperfect },
-                        new FilterMenuItem { Text = "Non emulato", Kind = FilterKind.ColorUnemulated },
+                        new FilterMenuItem { Text = Strings.FilterColorEmulated, Kind = FilterKind.ColorEmulated },
+                        new FilterMenuItem { Text = Strings.FilterColorImperfect, Kind = FilterKind.ColorImperfect },
+                        new FilterMenuItem { Text = Strings.FilterColorUnemulated, Kind = FilterKind.ColorUnemulated },
                     }
                 }
             ],
@@ -131,90 +132,90 @@ internal class FilterMenuCollection : Collection<FilterMenuItem>
 
         Add(new FilterMenuItem
         {
-            Text = "Driver",
+            Text = Strings.FilterDriver,
             Children =
             {
                 new FilterMenuItem
                 {
-                    Text = "Stato",
+                    Text = Strings.FilterDriverStatus,
                     Children =
                     {
-                        new FilterMenuItem { Text = "Funzionante", Kind = FilterKind.DriverWorking },
-                        new FilterMenuItem { Text = "Con imperfezioni", Kind = FilterKind.DriverImperfect },
-                        new FilterMenuItem { Text = "Non funzionante", Kind = FilterKind.DriverNotWorking },
+                        new FilterMenuItem { Text = Strings.FilterDriverStatusWorking, Kind = FilterKind.DriverWorking },
+                        new FilterMenuItem { Text = Strings.FilterDriverStatusImperfect, Kind = FilterKind.DriverImperfect },
+                        new FilterMenuItem { Text = Strings.FilterDriverStatusNotWorking, Kind = FilterKind.DriverNotWorking },
                         new FilterMenuItem { IsSeparator = true },
-                        new FilterMenuItem { Text = "Sconosciuto", Kind = FilterKind.DriverUnknown },
+                        new FilterMenuItem { Text = Strings.FilterDriverStatusUnknown, Kind = FilterKind.DriverUnknown },
                     }
                 },
                 new FilterMenuItem
                 {
-                    Text = "Emulazione",
+                    Text = Strings.FilterDriverStatus,
                     Children =
                     {
-                        new FilterMenuItem { Text = "Buona", Kind = FilterKind.EmulationGood },
-                        new FilterMenuItem { Text = "Con imperfezioni", Kind = FilterKind.EmulationImperfect },
-                        new FilterMenuItem { Text = "Non funzionante", Kind = FilterKind.EmulationPreliminary },
+                        new FilterMenuItem { Text = Strings.FilterEmulationGood, Kind = FilterKind.EmulationGood },
+                        new FilterMenuItem { Text = Strings.FilterEmulationImperfect, Kind = FilterKind.EmulationImperfect },
+                        new FilterMenuItem { Text = Strings.FilterEmulationPreliminary, Kind = FilterKind.EmulationPreliminary },
                         new FilterMenuItem { IsSeparator = true },
-                        new FilterMenuItem { Text = "Sconosciuta", Kind = FilterKind.EmulationUnknown },
+                        new FilterMenuItem { Text = Strings.FilterEmulationUnknown, Kind = FilterKind.EmulationUnknown },
                     }
                 },
                 new FilterMenuItem
                 {
-                    Text = "Cocktail",
+                    Text = Strings.FilterDriverCocktail,
                     Children =
                     {
-                        new FilterMenuItem { Text = "Buono", Kind = FilterKind.CocktailGood },
-                        new FilterMenuItem { Text = "Con imperfezioni", Kind = FilterKind.CocktailImperfect },
-                        new FilterMenuItem { Text = "Preliminare", Kind = FilterKind.CocktailPreliminary},
+                        new FilterMenuItem { Text = Strings.FilterDriverCocktailGood, Kind = FilterKind.CocktailGood },
+                        new FilterMenuItem { Text = Strings.FilterDriverCocktailImperfect, Kind = FilterKind.CocktailImperfect },
+                        new FilterMenuItem { Text = Strings.FilterDriverCocktailPreliminary, Kind = FilterKind.CocktailPreliminary},
                         new FilterMenuItem { IsSeparator = true },
-                        new FilterMenuItem { Text = "Sconosciuto", Kind = FilterKind.CocktailUnknown },
+                        new FilterMenuItem { Text = Strings.FilterDriverCocktailUnknown, Kind = FilterKind.CocktailUnknown },
                     }
                 },
                 new FilterMenuItem
                 {
-                    Text = "Salvataggio",
+                    Text = Strings.FilterSaveState,
                     Children =
                     {
-                        new FilterMenuItem { Text = "Supportato", Kind = FilterKind.SaveStateSupported },
-                        new FilterMenuItem { Text = "Non supportato", Kind = FilterKind.SaveStateUnsupported },
+                        new FilterMenuItem { Text = Strings.FilterSaveStateSupported, Kind = FilterKind.SaveStateSupported },
+                        new FilterMenuItem { Text = Strings.FilterSaveStateUnupported, Kind = FilterKind.SaveStateUnsupported },
                         new FilterMenuItem { IsSeparator = true },
-                        new FilterMenuItem { Text = "Sconosciuto", Kind = FilterKind.SaveStateUnknown },
+                        new FilterMenuItem { Text = Strings.FilterSaveStateUnknown, Kind = FilterKind.SaveStateUnknown },
                     }
                 },
                 new FilterMenuItem
                 {
-                    Text = "Artwork",
+                    Text = Strings.FilterArtwork,
                     Children =
                     {
-                        new FilterMenuItem { Text = "Richiesto", Kind = FilterKind.ArtworkRequired },
-                        new FilterMenuItem { Text = "Non richiesto", Kind = FilterKind.ArtworkNotRequired },
+                        new FilterMenuItem { Text = Strings.FilterArtworkRequired, Kind = FilterKind.ArtworkRequired },
+                        new FilterMenuItem { Text = Strings.FilterArtworkNotRequired, Kind = FilterKind.ArtworkNotRequired },
                     }
                 },
                 new FilterMenuItem
                 {
-                    Text = "Licenza",
+                    Text = Strings.FilterLicense,
                     Children =
                     {
-                        new FilterMenuItem { Text = "Ufficiale", Kind = FilterKind.DriverOfficial },
-                        new FilterMenuItem { Text = "Non ufficiale", Kind = FilterKind.DriverUnofficial },
+                        new FilterMenuItem { Text = Strings.FilterLicenseOfficial, Kind = FilterKind.DriverOfficial },
+                        new FilterMenuItem { Text = Strings.FilterLicenseUnofficial, Kind = FilterKind.DriverUnofficial },
                     }
                 },
                 new FilterMenuItem
                 {
-                    Text = "Hardware",
+                    Text = Strings.FilterHardware,
                     Children =
                     {
-                        new FilterMenuItem { Text = "Dispositivi sonori presenti", Kind = FilterKind.SoundHardwareYes },
-                        new FilterMenuItem { Text = "Dispositivi sonori non presenti", Kind = FilterKind.SoundHardwareNo },
+                        new FilterMenuItem { Text = Strings.FilterSoundHardwareYes, Kind = FilterKind.SoundHardwareYes },
+                        new FilterMenuItem { Text = Strings.FilterSoundHardwareNo, Kind = FilterKind.SoundHardwareNo },
                     }
                 },
                 new FilterMenuItem
                 {
-                    Text = "Stato lavori",
+                    Text = Strings.FilterCompletion,
                     Children =
                     {
-                        new FilterMenuItem { Text = "Completa", Kind = FilterKind.DriverComplete },
-                        new FilterMenuItem { Text = "Parziale", Kind = FilterKind.DriverIncomplete },
+                        new FilterMenuItem { Text = Strings.FilterComplete, Kind = FilterKind.DriverComplete },
+                        new FilterMenuItem { Text = Strings.FilterInomplete, Kind = FilterKind.DriverIncomplete },
                     }
                 },
             }
@@ -222,50 +223,50 @@ internal class FilterMenuCollection : Collection<FilterMenuItem>
 
         Add(new FilterMenuItem
         {
-            Text = "Classificazioni",
+            Text = Strings.FilterCategories,
             Children =
             {
-                new FilterMenuItem { Text = "Senza genere", Kind = FilterKind.NoGenre },
-                new FilterMenuItem { Text = "Genere", Kind = FilterKind.Genre, Enabled = false },
+                new FilterMenuItem { Text = Strings.FilterNoGenre, Kind = FilterKind.NoGenre },
+                new FilterMenuItem { Text = Strings.FilterByGenre, Kind = FilterKind.Genre, Enabled = false },
                 new FilterMenuItem { IsSeparator = true },
-                new FilterMenuItem { Text = "Senza categoria", Kind = FilterKind.NoCategory },
-                new FilterMenuItem { Text = "Categoria", Kind = FilterKind.Category, Enabled = false },
+                new FilterMenuItem { Text = Strings.FilterNoCategories, Kind = FilterKind.NoCategory },
+                new FilterMenuItem { Text = Strings.FilterByCategory, Kind = FilterKind.Category, Enabled = false },
                 new FilterMenuItem { IsSeparator = true },
-                new FilterMenuItem { Text = "Non appartenente ad una serie specifica", Kind = FilterKind.NoSerie, Enabled = false },
-                new FilterMenuItem { Text = "Serie", Kind = FilterKind.Serie, Enabled = false },
+                new FilterMenuItem { Text = Strings.FilterNoSeries, Kind = FilterKind.NoSerie, Enabled = false },
+                new FilterMenuItem { Text = Strings.FilterBySerie, Kind = FilterKind.Serie, Enabled = false },
             }
         });
 
         Add(new FilterMenuItem
         {
-            Text = "Sample",
+            Text = Strings.FilterSample,
             Children =
             {
-                new FilterMenuItem { Text = "Usa sample", Kind = FilterKind.UseSample },
-                new FilterMenuItem { Text = "Non usa sample", Kind = FilterKind.DoNotUseSample },
+                new FilterMenuItem { Text = Strings.FilterUseSample, Kind = FilterKind.UseSample },
+                new FilterMenuItem { Text = Strings.FilterDoNotUseSample, Kind = FilterKind.DoNotUseSample },
             }
         });
 
         Add(new FilterMenuItem
         {
-            Text = "Dischi",
+            Text = Strings.FilterDisks,
             Children =
             {
-                new FilterMenuItem { Text = "Richiede CHD", Kind = FilterKind.RequiresDisk },
-                new FilterMenuItem { Text = "Non richiede CHD", Kind = FilterKind.DoNotRequiresDisk },
+                new FilterMenuItem { Text = Strings.FilterRequiresCHD, Kind = FilterKind.RequiresDisk },
+                new FilterMenuItem { Text = Strings.FilterDoNotRequiresCHD, Kind = FilterKind.DoNotRequiresDisk },
                 new FilterMenuItem { IsSeparator = true },
-                new FilterMenuItem { Text = "Usa CHD good", Kind = FilterKind.DiskStatusGood },
-                new FilterMenuItem { Text = "Usa CHD bad dump", Kind = FilterKind.DiskStatusBadDump },
-                new FilterMenuItem { Text = "Usa CHD no dump", Kind = FilterKind.DiskStatusNoDump },
+                new FilterMenuItem { Text = Strings.FilterDiskStatusGood, Kind = FilterKind.DiskStatusGood },
+                new FilterMenuItem { Text = Strings.FilterDiskStatusBadDump, Kind = FilterKind.DiskStatusBadDump },
+                new FilterMenuItem { Text = Strings.FilterDiskStatusNoDump, Kind = FilterKind.DiskStatusNoDump },
             }
         });
 
         Add(new FilterMenuItem
         {
-            Text = "Versione Mame",
+            Text = Strings.Release,
             Children =
             {
-                new FilterMenuItem { Text = "Per numero di versione", Kind = FilterKind.Release, Enabled = false },
+                new FilterMenuItem { Text = Strings.FilterByReleaseNumber, Kind = FilterKind.Release, Enabled = false },
             }
         });
 
@@ -273,12 +274,12 @@ internal class FilterMenuCollection : Collection<FilterMenuItem>
 
         Add(new FilterMenuItem
         {
-            Text = "Protezione",
+            Text = Strings.FilterProtection,
             Children =
             {
-                new FilterMenuItem { Text = "Emulata correttamente", Kind = FilterKind.ProtectionEmulated},
-                new FilterMenuItem { Text = "Con imperfezioni", Kind = FilterKind.ProtectionImperfect},
-                new FilterMenuItem { Text = "Non emulata", Kind = FilterKind.ProtectionUnemulated },
+                new FilterMenuItem { Text = Strings.FilterProtectionEmulated, Kind = FilterKind.ProtectionEmulated},
+                new FilterMenuItem { Text = Strings.FilterProtectionImperfect, Kind = FilterKind.ProtectionImperfect},
+                new FilterMenuItem { Text = Strings.FilterProtectionUnemulated, Kind = FilterKind.ProtectionUnemulated },
             }
         });
     }

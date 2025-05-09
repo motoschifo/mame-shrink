@@ -254,6 +254,942 @@ namespace MAME_Shrink.Resources {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a All.
+        /// </summary>
+        internal static string FilterAll {
+            get {
+                return ResourceManager.GetString("FilterAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Artwork.
+        /// </summary>
+        internal static string FilterArtwork {
+            get {
+                return ResourceManager.GetString("FilterArtwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Not required.
+        /// </summary>
+        internal static string FilterArtworkNotRequired {
+            get {
+                return ResourceManager.GetString("FilterArtworkNotRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Required.
+        /// </summary>
+        internal static string FilterArtworkRequired {
+            get {
+                return ResourceManager.GetString("FilterArtworkRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Audio.
+        /// </summary>
+        internal static string FilterAudio {
+            get {
+                return ResourceManager.GetString("FilterAudio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Audio mono.
+        /// </summary>
+        internal static string FilterAudioMono {
+            get {
+                return ResourceManager.GetString("FilterAudioMono", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Audio multichannel.
+        /// </summary>
+        internal static string FilterAudioMultichannel {
+            get {
+                return ResourceManager.GetString("FilterAudioMultichannel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Audio not supported.
+        /// </summary>
+        internal static string FilterAudioNotSupported {
+            get {
+                return ResourceManager.GetString("FilterAudioNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Audio stereo.
+        /// </summary>
+        internal static string FilterAudioStereo {
+            get {
+                return ResourceManager.GetString("FilterAudioStereo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Bios.
+        /// </summary>
+        internal static string FilterBios {
+            get {
+                return ResourceManager.GetString("FilterBios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a By category.
+        /// </summary>
+        internal static string FilterByCategory {
+            get {
+                return ResourceManager.GetString("FilterByCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a By genre.
+        /// </summary>
+        internal static string FilterByGenre {
+            get {
+                return ResourceManager.GetString("FilterByGenre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a By release number.
+        /// </summary>
+        internal static string FilterByReleaseNumber {
+            get {
+                return ResourceManager.GetString("FilterByReleaseNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a By serie.
+        /// </summary>
+        internal static string FilterBySerie {
+            get {
+                return ResourceManager.GetString("FilterBySerie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Categories.
+        /// </summary>
+        internal static string FilterCategories {
+            get {
+                return ResourceManager.GetString("FilterCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Clone machine.
+        /// </summary>
+        internal static string FilterCloneMachine {
+            get {
+                return ResourceManager.GetString("FilterCloneMachine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Color.
+        /// </summary>
+        internal static string FilterColor {
+            get {
+                return ResourceManager.GetString("FilterColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Emulated.
+        /// </summary>
+        internal static string FilterColorEmulated {
+            get {
+                return ResourceManager.GetString("FilterColorEmulated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Imperfect.
+        /// </summary>
+        internal static string FilterColorImperfect {
+            get {
+                return ResourceManager.GetString("FilterColorImperfect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Unemulated.
+        /// </summary>
+        internal static string FilterColorUnemulated {
+            get {
+                return ResourceManager.GetString("FilterColorUnemulated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Complete.
+        /// </summary>
+        internal static string FilterComplete {
+            get {
+                return ResourceManager.GetString("FilterComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Completion.
+        /// </summary>
+        internal static string FilterCompletion {
+            get {
+                return ResourceManager.GetString("FilterCompletion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Device.
+        /// </summary>
+        internal static string FilterDevice {
+            get {
+                return ResourceManager.GetString("FilterDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Disks.
+        /// </summary>
+        internal static string FilterDisks {
+            get {
+                return ResourceManager.GetString("FilterDisks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Use CHD bad dump.
+        /// </summary>
+        internal static string FilterDiskStatusBadDump {
+            get {
+                return ResourceManager.GetString("FilterDiskStatusBadDump", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Use CHD good.
+        /// </summary>
+        internal static string FilterDiskStatusGood {
+            get {
+                return ResourceManager.GetString("FilterDiskStatusGood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Use CHD no dump.
+        /// </summary>
+        internal static string FilterDiskStatusNoDump {
+            get {
+                return ResourceManager.GetString("FilterDiskStatusNoDump", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a LCD.
+        /// </summary>
+        internal static string FilterDisplayLCD {
+            get {
+                return ResourceManager.GetString("FilterDisplayLCD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Raster.
+        /// </summary>
+        internal static string FilterDisplayRaster {
+            get {
+                return ResourceManager.GetString("FilterDisplayRaster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a SVG.
+        /// </summary>
+        internal static string FilterDisplaySVG {
+            get {
+                return ResourceManager.GetString("FilterDisplaySVG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Display type.
+        /// </summary>
+        internal static string FilterDisplayType {
+            get {
+                return ResourceManager.GetString("FilterDisplayType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Unknown.
+        /// </summary>
+        internal static string FilterDisplayUnknown {
+            get {
+                return ResourceManager.GetString("FilterDisplayUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Vector.
+        /// </summary>
+        internal static string FilterDisplayVector {
+            get {
+                return ResourceManager.GetString("FilterDisplayVector", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Do not requires CHD.
+        /// </summary>
+        internal static string FilterDoNotRequiresCHD {
+            get {
+                return ResourceManager.GetString("FilterDoNotRequiresCHD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Do not use sample.
+        /// </summary>
+        internal static string FilterDoNotUseSample {
+            get {
+                return ResourceManager.GetString("FilterDoNotUseSample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Driver.
+        /// </summary>
+        internal static string FilterDriver {
+            get {
+                return ResourceManager.GetString("FilterDriver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Cocktail.
+        /// </summary>
+        internal static string FilterDriverCocktail {
+            get {
+                return ResourceManager.GetString("FilterDriverCocktail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Good.
+        /// </summary>
+        internal static string FilterDriverCocktailGood {
+            get {
+                return ResourceManager.GetString("FilterDriverCocktailGood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Imperfect.
+        /// </summary>
+        internal static string FilterDriverCocktailImperfect {
+            get {
+                return ResourceManager.GetString("FilterDriverCocktailImperfect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Preliminary.
+        /// </summary>
+        internal static string FilterDriverCocktailPreliminary {
+            get {
+                return ResourceManager.GetString("FilterDriverCocktailPreliminary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Unknown.
+        /// </summary>
+        internal static string FilterDriverCocktailUnknown {
+            get {
+                return ResourceManager.GetString("FilterDriverCocktailUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Status.
+        /// </summary>
+        internal static string FilterDriverStatus {
+            get {
+                return ResourceManager.GetString("FilterDriverStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Imperfect.
+        /// </summary>
+        internal static string FilterDriverStatusImperfect {
+            get {
+                return ResourceManager.GetString("FilterDriverStatusImperfect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Not working.
+        /// </summary>
+        internal static string FilterDriverStatusNotWorking {
+            get {
+                return ResourceManager.GetString("FilterDriverStatusNotWorking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Unknown.
+        /// </summary>
+        internal static string FilterDriverStatusUnknown {
+            get {
+                return ResourceManager.GetString("FilterDriverStatusUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Working.
+        /// </summary>
+        internal static string FilterDriverStatusWorking {
+            get {
+                return ResourceManager.GetString("FilterDriverStatusWorking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Emulation.
+        /// </summary>
+        internal static string FilterEmulation {
+            get {
+                return ResourceManager.GetString("FilterEmulation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Good.
+        /// </summary>
+        internal static string FilterEmulationGood {
+            get {
+                return ResourceManager.GetString("FilterEmulationGood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Imperfect.
+        /// </summary>
+        internal static string FilterEmulationImperfect {
+            get {
+                return ResourceManager.GetString("FilterEmulationImperfect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Preliminary.
+        /// </summary>
+        internal static string FilterEmulationPreliminary {
+            get {
+                return ResourceManager.GetString("FilterEmulationPreliminary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Unknown.
+        /// </summary>
+        internal static string FilterEmulationUnknown {
+            get {
+                return ResourceManager.GetString("FilterEmulationUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Graphic.
+        /// </summary>
+        internal static string FilterGraphic {
+            get {
+                return ResourceManager.GetString("FilterGraphic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Emulated.
+        /// </summary>
+        internal static string FilterGraphicEmulated {
+            get {
+                return ResourceManager.GetString("FilterGraphicEmulated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Imperfect.
+        /// </summary>
+        internal static string FilterGraphicImperfect {
+            get {
+                return ResourceManager.GetString("FilterGraphicImperfect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Unemulated.
+        /// </summary>
+        internal static string FilterGraphicUnemulated {
+            get {
+                return ResourceManager.GetString("FilterGraphicUnemulated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Hardware.
+        /// </summary>
+        internal static string FilterHardware {
+            get {
+                return ResourceManager.GetString("FilterHardware", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Incomplete.
+        /// </summary>
+        internal static string FilterInomplete {
+            get {
+                return ResourceManager.GetString("FilterInomplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a License.
+        /// </summary>
+        internal static string FilterLicense {
+            get {
+                return ResourceManager.GetString("FilterLicense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Official.
+        /// </summary>
+        internal static string FilterLicenseOfficial {
+            get {
+                return ResourceManager.GetString("FilterLicenseOfficial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Unofficial.
+        /// </summary>
+        internal static string FilterLicenseUnofficial {
+            get {
+                return ResourceManager.GetString("FilterLicenseUnofficial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Machine.
+        /// </summary>
+        internal static string FilterMachine {
+            get {
+                return ResourceManager.GetString("FilterMachine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Mamecab.
+        /// </summary>
+        internal static string FilterMameCab {
+            get {
+                return ResourceManager.GetString("FilterMameCab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Mechanical.
+        /// </summary>
+        internal static string FilterMechanical {
+            get {
+                return ResourceManager.GetString("FilterMechanical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a No categories.
+        /// </summary>
+        internal static string FilterNoCategories {
+            get {
+                return ResourceManager.GetString("FilterNoCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a No genre.
+        /// </summary>
+        internal static string FilterNoGenre {
+            get {
+                return ResourceManager.GetString("FilterNoGenre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a No series.
+        /// </summary>
+        internal static string FilterNoSeries {
+            get {
+                return ResourceManager.GetString("FilterNoSeries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Parent machine.
+        /// </summary>
+        internal static string FilterParentMachine {
+            get {
+                return ResourceManager.GetString("FilterParentMachine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Protection.
+        /// </summary>
+        internal static string FilterProtection {
+            get {
+                return ResourceManager.GetString("FilterProtection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Emulated.
+        /// </summary>
+        internal static string FilterProtectionEmulated {
+            get {
+                return ResourceManager.GetString("FilterProtectionEmulated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Imperfect.
+        /// </summary>
+        internal static string FilterProtectionImperfect {
+            get {
+                return ResourceManager.GetString("FilterProtectionImperfect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Unemulated.
+        /// </summary>
+        internal static string FilterProtectionUnemulated {
+            get {
+                return ResourceManager.GetString("FilterProtectionUnemulated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Release.
+        /// </summary>
+        internal static string FilterRelease {
+            get {
+                return ResourceManager.GetString("FilterRelease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Requires CHD.
+        /// </summary>
+        internal static string FilterRequiresCHD {
+            get {
+                return ResourceManager.GetString("FilterRequiresCHD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Sample.
+        /// </summary>
+        internal static string FilterSample {
+            get {
+                return ResourceManager.GetString("FilterSample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Save state.
+        /// </summary>
+        internal static string FilterSaveState {
+            get {
+                return ResourceManager.GetString("FilterSaveState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Supported.
+        /// </summary>
+        internal static string FilterSaveStateSupported {
+            get {
+                return ResourceManager.GetString("FilterSaveStateSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Unknown.
+        /// </summary>
+        internal static string FilterSaveStateUnknown {
+            get {
+                return ResourceManager.GetString("FilterSaveStateUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Unsupported.
+        /// </summary>
+        internal static string FilterSaveStateUnupported {
+            get {
+                return ResourceManager.GetString("FilterSaveStateUnupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Four.
+        /// </summary>
+        internal static string FilterScreenFour {
+            get {
+                return ResourceManager.GetString("FilterScreenFour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a For or more.
+        /// </summary>
+        internal static string FilterScreenFourOrMore {
+            get {
+                return ResourceManager.GetString("FilterScreenFourOrMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Horizontal.
+        /// </summary>
+        internal static string FilterScreenHorizontal {
+            get {
+                return ResourceManager.GetString("FilterScreenHorizontal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Screenless.
+        /// </summary>
+        internal static string FilterScreenless {
+            get {
+                return ResourceManager.GetString("FilterScreenless", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a More than four.
+        /// </summary>
+        internal static string FilterScreenMoreThanFour {
+            get {
+                return ResourceManager.GetString("FilterScreenMoreThanFour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a No rotation.
+        /// </summary>
+        internal static string FilterScreenNoRotation {
+            get {
+                return ResourceManager.GetString("FilterScreenNoRotation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a One.
+        /// </summary>
+        internal static string FilterScreenOne {
+            get {
+                return ResourceManager.GetString("FilterScreenOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a One or more.
+        /// </summary>
+        internal static string FilterScreenOneOrMore {
+            get {
+                return ResourceManager.GetString("FilterScreenOneOrMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Orientation.
+        /// </summary>
+        internal static string FilterScreenOrientation {
+            get {
+                return ResourceManager.GetString("FilterScreenOrientation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Rotated 180 degrees.
+        /// </summary>
+        internal static string FilterScreenRotated180 {
+            get {
+                return ResourceManager.GetString("FilterScreenRotated180", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Rotated 270 degrees.
+        /// </summary>
+        internal static string FilterScreenRotated270 {
+            get {
+                return ResourceManager.GetString("FilterScreenRotated270", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Rotated 90 degrees.
+        /// </summary>
+        internal static string FilterScreenRotated90 {
+            get {
+                return ResourceManager.GetString("FilterScreenRotated90", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Number of screens.
+        /// </summary>
+        internal static string FilterScreensNumber {
+            get {
+                return ResourceManager.GetString("FilterScreensNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Three.
+        /// </summary>
+        internal static string FilterScreenThree {
+            get {
+                return ResourceManager.GetString("FilterScreenThree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Three or more.
+        /// </summary>
+        internal static string FilterScreenThreeOrMore {
+            get {
+                return ResourceManager.GetString("FilterScreenThreeOrMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Two.
+        /// </summary>
+        internal static string FilterScreenTwo {
+            get {
+                return ResourceManager.GetString("FilterScreenTwo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Two or more.
+        /// </summary>
+        internal static string FilterScreenTwoOrMore {
+            get {
+                return ResourceManager.GetString("FilterScreenTwoOrMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Vertical.
+        /// </summary>
+        internal static string FilterScreenVertical {
+            get {
+                return ResourceManager.GetString("FilterScreenVertical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Sound emulated.
+        /// </summary>
+        internal static string FilterSoundEmulated {
+            get {
+                return ResourceManager.GetString("FilterSoundEmulated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a No.
+        /// </summary>
+        internal static string FilterSoundHardwareNo {
+            get {
+                return ResourceManager.GetString("FilterSoundHardwareNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Yes.
+        /// </summary>
+        internal static string FilterSoundHardwareYes {
+            get {
+                return ResourceManager.GetString("FilterSoundHardwareYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Sound imperfect.
+        /// </summary>
+        internal static string FilterSoundImperfect {
+            get {
+                return ResourceManager.GetString("FilterSoundImperfect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Sound unemulated.
+        /// </summary>
+        internal static string FilterSoundUnemulated {
+            get {
+                return ResourceManager.GetString("FilterSoundUnemulated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Type.
+        /// </summary>
+        internal static string FilterType {
+            get {
+                return ResourceManager.GetString("FilterType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Use sample.
+        /// </summary>
+        internal static string FilterUseSample {
+            get {
+                return ResourceManager.GetString("FilterUseSample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Video.
+        /// </summary>
+        internal static string FilterVideo {
+            get {
+                return ResourceManager.GetString("FilterVideo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Games.
         /// </summary>
         internal static string Games {

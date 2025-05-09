@@ -298,4 +298,316 @@ If your PC does not have internet access, change the program options to avoid th
   <data name="Info" xml:space="preserve">
     <value>Info</value>
   </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="FilterMameCab" xml:space="preserve">
+    <value>Mamecab</value>
+  </data>
+  <data name="FilterMachine" xml:space="preserve">
+    <value>Machine</value>
+  </data>
+  <data name="FilterParentMachine" xml:space="preserve">
+    <value>Parent machine</value>
+  </data>
+  <data name="FilterCloneMachine" xml:space="preserve">
+    <value>Clone machine</value>
+  </data>
+  <data name="FilterBios" xml:space="preserve">
+    <value>Bios</value>
+  </data>
+  <data name="FilterDevice" xml:space="preserve">
+    <value>Device</value>
+  </data>
+  <data name="FilterMechanical" xml:space="preserve">
+    <value>Mechanical</value>
+  </data>
+  <data name="FilterAudioNotSupported" xml:space="preserve">
+    <value>Audio not supported</value>
+  </data>
+  <data name="FilterAudioMono" xml:space="preserve">
+    <value>Audio mono</value>
+  </data>
+  <data name="FilterAudioStereo" xml:space="preserve">
+    <value>Audio stereo</value>
+  </data>
+  <data name="FilterAudioMultichannel" xml:space="preserve">
+    <value>Audio multichannel</value>
+  </data>
+  <data name="FilterSoundEmulated" xml:space="preserve">
+    <value>Sound emulated</value>
+  </data>
+  <data name="FilterSoundImperfect" xml:space="preserve">
+    <value>Sound imperfect</value>
+  </data>
+  <data name="FilterSoundUnemulated" xml:space="preserve">
+    <value>Sound unemulated</value>
+  </data>
+  <data name="FilterDisplayRaster" xml:space="preserve">
+    <value>Raster</value>
+  </data>
+  <data name="FilterDisplayVector" xml:space="preserve">
+    <value>Vector</value>
+  </data>
+  <data name="FilterDisplayLCD" xml:space="preserve">
+    <value>LCD</value>
+  </data>
+  <data name="FilterDisplaySVG" xml:space="preserve">
+    <value>SVG</value>
+  </data>
+  <data name="FilterDisplayUnknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="FilterScreenless" xml:space="preserve">
+    <value>Screenless</value>
+  </data>
+  <data name="FilterScreenOne" xml:space="preserve">
+    <value>One</value>
+  </data>
+  <data name="FilterScreenOneOrMore" xml:space="preserve">
+    <value>One or more</value>
+  </data>
+  <data name="FilterScreenTwo" xml:space="preserve">
+    <value>Two</value>
+  </data>
+  <data name="FilterScreenTwoOrMore" xml:space="preserve">
+    <value>Two or more</value>
+  </data>
+  <data name="FilterScreenThree" xml:space="preserve">
+    <value>Three</value>
+  </data>
+  <data name="FilterScreenThreeOrMore" xml:space="preserve">
+    <value>Three or more</value>
+  </data>
+  <data name="FilterScreenFour" xml:space="preserve">
+    <value>Four</value>
+  </data>
+  <data name="FilterScreenFourOrMore" xml:space="preserve">
+    <value>For or more</value>
+  </data>
+  <data name="FilterScreenMoreThanFour" xml:space="preserve">
+    <value>More than four</value>
+  </data>
+  <data name="FilterScreenHorizontal" xml:space="preserve">
+    <value>Horizontal</value>
+  </data>
+  <data name="FilterScreenVertical" xml:space="preserve">
+    <value>Vertical</value>
+  </data>
+  <data name="FilterScreenNoRotation" xml:space="preserve">
+    <value>No rotation</value>
+  </data>
+  <data name="FilterScreenRotated90" xml:space="preserve">
+    <value>Rotated 90 degrees</value>
+  </data>
+  <data name="FilterScreenRotated180" xml:space="preserve">
+    <value>Rotated 180 degrees</value>
+  </data>
+  <data name="FilterScreenRotated270" xml:space="preserve">
+    <value>Rotated 270 degrees</value>
+  </data>
+  <data name="FilterGraphicEmulated" xml:space="preserve">
+    <value>Emulated</value>
+  </data>
+  <data name="FilterGraphicImperfect" xml:space="preserve">
+    <value>Imperfect</value>
+  </data>
+  <data name="FilterGraphicUnemulated" xml:space="preserve">
+    <value>Unemulated</value>
+  </data>
+  <data name="FilterColorEmulated" xml:space="preserve">
+    <value>Emulated</value>
+  </data>
+  <data name="FilterColorImperfect" xml:space="preserve">
+    <value>Imperfect</value>
+  </data>
+  <data name="FilterColorUnemulated" xml:space="preserve">
+    <value>Unemulated</value>
+  </data>
+  <data name="FilterDriverStatusWorking" xml:space="preserve">
+    <value>Working</value>
+  </data>
+  <data name="FilterDriverStatusImperfect" xml:space="preserve">
+    <value>Imperfect</value>
+  </data>
+  <data name="FilterDriverStatusNotWorking" xml:space="preserve">
+    <value>Not working</value>
+  </data>
+  <data name="FilterDriverStatusUnknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="FilterEmulationGood" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="FilterEmulationImperfect" xml:space="preserve">
+    <value>Imperfect</value>
+  </data>
+  <data name="FilterEmulationPreliminary" xml:space="preserve">
+    <value>Preliminary</value>
+  </data>
+  <data name="FilterEmulationUnknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="FilterEmulation" xml:space="preserve">
+    <value>Emulation</value>
+  </data>
+  <data name="FilterDriverStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="FilterDriver" xml:space="preserve">
+    <value>Driver</value>
+  </data>
+  <data name="FilterDriverCocktail" xml:space="preserve">
+    <value>Cocktail</value>
+  </data>
+  <data name="FilterDriverCocktailGood" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="FilterDriverCocktailImperfect" xml:space="preserve">
+    <value>Imperfect</value>
+  </data>
+  <data name="FilterDriverCocktailUnknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="FilterDriverCocktailPreliminary" xml:space="preserve">
+    <value>Preliminary</value>
+  </data>
+  <data name="FilterSaveStateSupported" xml:space="preserve">
+    <value>Supported</value>
+  </data>
+  <data name="FilterSaveStateUnupported" xml:space="preserve">
+    <value>Unsupported</value>
+  </data>
+  <data name="FilterSaveStateUnknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="FilterSaveState" xml:space="preserve">
+    <value>Save state</value>
+  </data>
+  <data name="FilterArtworkRequired" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="FilterArtworkNotRequired" xml:space="preserve">
+    <value>Not required</value>
+  </data>
+  <data name="FilterArtwork" xml:space="preserve">
+    <value>Artwork</value>
+  </data>
+  <data name="FilterLicense" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="FilterLicenseOfficial" xml:space="preserve">
+    <value>Official</value>
+  </data>
+  <data name="FilterLicenseUnofficial" xml:space="preserve">
+    <value>Unofficial</value>
+  </data>
+  <data name="FilterHardware" xml:space="preserve">
+    <value>Hardware</value>
+  </data>
+  <data name="FilterSoundHardwareYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="FilterSoundHardwareNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="FilterCompletion" xml:space="preserve">
+    <value>Completion</value>
+  </data>
+  <data name="FilterComplete" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="FilterInomplete" xml:space="preserve">
+    <value>Incomplete</value>
+  </data>
+  <data name="FilterColor" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="FilterGraphic" xml:space="preserve">
+    <value>Graphic</value>
+  </data>
+  <data name="FilterScreenOrientation" xml:space="preserve">
+    <value>Orientation</value>
+  </data>
+  <data name="FilterVideo" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="FilterDisplayType" xml:space="preserve">
+    <value>Display type</value>
+  </data>
+  <data name="FilterScreensNumber" xml:space="preserve">
+    <value>Number of screens</value>
+  </data>
+  <data name="FilterAudio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="FilterType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="FilterCategories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="FilterNoGenre" xml:space="preserve">
+    <value>No genre</value>
+  </data>
+  <data name="FilterByGenre" xml:space="preserve">
+    <value>By genre</value>
+  </data>
+  <data name="FilterByCategory" xml:space="preserve">
+    <value>By category</value>
+  </data>
+  <data name="FilterNoCategories" xml:space="preserve">
+    <value>No categories</value>
+  </data>
+  <data name="FilterBySerie" xml:space="preserve">
+    <value>By serie</value>
+  </data>
+  <data name="FilterNoSeries" xml:space="preserve">
+    <value>No series</value>
+  </data>
+  <data name="FilterSample" xml:space="preserve">
+    <value>Sample</value>
+  </data>
+  <data name="FilterUseSample" xml:space="preserve">
+    <value>Use sample</value>
+  </data>
+  <data name="FilterDoNotUseSample" xml:space="preserve">
+    <value>Do not use sample</value>
+  </data>
+  <data name="FilterDisks" xml:space="preserve">
+    <value>Disks</value>
+  </data>
+  <data name="FilterRequiresCHD" xml:space="preserve">
+    <value>Requires CHD</value>
+  </data>
+  <data name="FilterDoNotRequiresCHD" xml:space="preserve">
+    <value>Do not requires CHD</value>
+  </data>
+  <data name="FilterDiskStatusGood" xml:space="preserve">
+    <value>Use CHD good</value>
+  </data>
+  <data name="FilterDiskStatusBadDump" xml:space="preserve">
+    <value>Use CHD bad dump</value>
+  </data>
+  <data name="FilterDiskStatusNoDump" xml:space="preserve">
+    <value>Use CHD no dump</value>
+  </data>
+  <data name="FilterRelease" xml:space="preserve">
+    <value>Release</value>
+  </data>
+  <data name="FilterByReleaseNumber" xml:space="preserve">
+    <value>By release number</value>
+  </data>
+  <data name="FilterProtection" xml:space="preserve">
+    <value>Protection</value>
+  </data>
+  <data name="FilterProtectionEmulated" xml:space="preserve">
+    <value>Emulated</value>
+  </data>
+  <data name="FilterProtectionImperfect" xml:space="preserve">
+    <value>Imperfect</value>
+  </data>
+  <data name="FilterProtectionUnemulated" xml:space="preserve">
+    <value>Unemulated</value>
+  </data>
 </root>
