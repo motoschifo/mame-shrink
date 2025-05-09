@@ -121,26 +121,124 @@
   <data name="ForceGeneration.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="ForceGeneration.Text" xml:space="preserve">
+    <value>Forza sempre la generazione del file XML (metodo più lento)</value>
+  </data>
   <data name="OptionXmlManual.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="OptionXmlManual.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 17</value>
+  </data>
+  <data name="OptionXmlManual.Text" xml:space="preserve">
+    <value>Seleziona un file manualmente</value>
   </data>
   <data name="OptionXmlAuto.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="OptionXmlAuto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 17</value>
+  </data>
+  <data name="OptionXmlAuto.Text" xml:space="preserve">
+    <value>Genera dall'eseguibile del Mame</value>
+  </data>
   <data name="RomPathsManual.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="RomPathsManual.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 17</value>
+  </data>
+  <data name="RomPathsManual.Text" xml:space="preserve">
+    <value>Imposta manualmente</value>
   </data>
   <data name="RomPathsAuto.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="RomPathsAuto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 17</value>
+  </data>
+  <data name="RomPathsAuto.Text" xml:space="preserve">
+    <value>Rileva in automatico</value>
+  </data>
   <data name="CleanDeleteFiles.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="CleanDeleteFiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 17</value>
+  </data>
+  <data name="CleanDeleteFiles.Text" xml:space="preserve">
+    <value>Cancella i file (sconsigliato)</value>
   </data>
   <data name="CleanMoveToFolder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="CleanMoveToFolder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 28</value>
+  </data>
+  <data name="CleanMoveToFolder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 17</value>
+  </data>
+  <data name="CleanMoveToFolder.Text" xml:space="preserve">
+    <value>Sposta i file in una cartella</value>
+  </data>
   <data name="CleanMoveToRecycleBin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="CleanMoveToRecycleBin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 17</value>
+  </data>
+  <data name="CleanMoveToRecycleBin.Text" xml:space="preserve">
+    <value>Sposta i file nel cestino, se possibile</value>
+  </data>
+  <data name="TabPageGamelist.Text" xml:space="preserve">
+    <value>Formato dei file</value>
+  </data>
+  <data name="TabPageRoms.Text" xml:space="preserve">
+    <value>Cartelle roms</value>
+  </data>
+  <data name="TabPageMame.Text" xml:space="preserve">
+    <value>Set Mame</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TabPageClean.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="TabPageClean.Text" xml:space="preserve">
+    <value>Pulizia</value>
+  </data>
+  <data name="ArcadeDatabaseConnectionOffline.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ArcadeDatabaseConnectionOffline.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 17</value>
+  </data>
+  <data name="ArcadeDatabaseConnectionOffline.Text" xml:space="preserve">
+    <value>La connessione ad internet non è disponibile</value>
+  </data>
+  <data name="ArcadeDatabaseConnectionAuto.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ArcadeDatabaseConnectionAuto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 17</value>
+  </data>
+  <data name="ArcadeDatabaseConnectionAuto.Text" xml:space="preserve">
+    <value>Utilizza la connessione, se presente</value>
+  </data>
+  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Sito Arcade Database</value>
+  </data>
+  <data name="OpenRomsetWebPage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="TabPageConnections.Text" xml:space="preserve">
+    <value>Connessioni</value>
   </data>
   <data name="cmdSfogliaGamelistXml.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -148,23 +246,35 @@
   <data name="cmdSfogliaMameExe.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="TabPageGamelist.Text" xml:space="preserve">
-    <value>Formato dei file</value>
-  </data>
   <data name="cmdSfogliaRomsPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Il file XML generato dal Mame decide i legami tra i set, quindi potrebbero esserci uno o due file per parent e clone</value>
+  </data>
   <data name="MameSetTypeAuto.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="MameSetTypeAuto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 17</value>
+  </data>
+  <data name="MameSetTypeAuto.Text" xml:space="preserve">
+    <value>Automatico</value>
   </data>
   <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Questa scelta influenza il modo in cui i giochi vengono selezionati, prestare la massima attenzione per evitare di fare danni</value>
+  </data>
   <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>I set parent e cloni non condividono file, quindi ogni set è indipendente. Ci sono due file zip</value>
   </data>
   <data name="MameSetTypeNonMerged.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -172,28 +282,22 @@
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>I due set clone e parent sono nello stesso file zip</value>
+  </data>
   <data name="MameSetTypeMerged.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Il set clone contiene solo la parte che differisce rispetto al set parent, ci sono due file zip ed uno è generalmente molto più piccolo</value>
+  </data>
   <data name="MameSetTypeSplitted.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdSfogliaRemovedFilesFolder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ArcadeDatabaseConnectionOffline.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ArcadeDatabaseConnectionAuto.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="OpenRomsetWebPage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdLoadData.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">

@@ -43,7 +43,10 @@ partial class OptionsForm
             this.txtRemovedFilesFolder = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TabPageGamelist = new System.Windows.Forms.TabPage();
+            this.cmdSfogliaGamelistXml = new System.Windows.Forms.Button();
+            this.cmdSfogliaMameExe = new System.Windows.Forms.Button();
             this.TabPageRoms = new System.Windows.Forms.TabPage();
+            this.cmdSfogliaRomsPath = new System.Windows.Forms.Button();
             this.TabPageMame = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
             this.MameSetTypeAuto = new System.Windows.Forms.RadioButton();
@@ -55,15 +58,12 @@ partial class OptionsForm
             this.label1 = new System.Windows.Forms.Label();
             this.MameSetTypeSplitted = new System.Windows.Forms.RadioButton();
             this.TabPageClean = new System.Windows.Forms.TabPage();
+            this.cmdSfogliaRemovedFilesFolder = new System.Windows.Forms.Button();
             this.TabPageConnections = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ArcadeDatabaseConnectionOffline = new System.Windows.Forms.RadioButton();
             this.ArcadeDatabaseConnectionAuto = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
-            this.cmdSfogliaGamelistXml = new System.Windows.Forms.Button();
-            this.cmdSfogliaMameExe = new System.Windows.Forms.Button();
-            this.cmdSfogliaRomsPath = new System.Windows.Forms.Button();
-            this.cmdSfogliaRemovedFilesFolder = new System.Windows.Forms.Button();
             this.OpenRomsetWebPage = new System.Windows.Forms.LinkLabel();
             this.cmdLoadData = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
@@ -177,6 +177,22 @@ partial class OptionsForm
             this.TabPageGamelist.Name = "TabPageGamelist";
             this.TabPageGamelist.UseVisualStyleBackColor = true;
             // 
+            // cmdSfogliaGamelistXml
+            // 
+            resources.ApplyResources(this.cmdSfogliaGamelistXml, "cmdSfogliaGamelistXml");
+            this.cmdSfogliaGamelistXml.Image = global::MAME_Shrink.Properties.Resources.folder;
+            this.cmdSfogliaGamelistXml.Name = "cmdSfogliaGamelistXml";
+            this.cmdSfogliaGamelistXml.UseVisualStyleBackColor = true;
+            this.cmdSfogliaGamelistXml.Click += new System.EventHandler(this.CmdSfogliaGamelistXml_Click);
+            // 
+            // cmdSfogliaMameExe
+            // 
+            resources.ApplyResources(this.cmdSfogliaMameExe, "cmdSfogliaMameExe");
+            this.cmdSfogliaMameExe.Image = global::MAME_Shrink.Properties.Resources.folder;
+            this.cmdSfogliaMameExe.Name = "cmdSfogliaMameExe";
+            this.cmdSfogliaMameExe.UseVisualStyleBackColor = true;
+            this.cmdSfogliaMameExe.Click += new System.EventHandler(this.CmdSfogliaMameExe_Click);
+            // 
             // TabPageRoms
             // 
             resources.ApplyResources(this.TabPageRoms, "TabPageRoms");
@@ -186,6 +202,14 @@ partial class OptionsForm
             this.TabPageRoms.Controls.Add(this.cmdSfogliaRomsPath);
             this.TabPageRoms.Name = "TabPageRoms";
             this.TabPageRoms.UseVisualStyleBackColor = true;
+            // 
+            // cmdSfogliaRomsPath
+            // 
+            resources.ApplyResources(this.cmdSfogliaRomsPath, "cmdSfogliaRomsPath");
+            this.cmdSfogliaRomsPath.Image = global::MAME_Shrink.Properties.Resources.folder;
+            this.cmdSfogliaRomsPath.Name = "cmdSfogliaRomsPath";
+            this.cmdSfogliaRomsPath.UseVisualStyleBackColor = true;
+            this.cmdSfogliaRomsPath.Click += new System.EventHandler(this.CmdSfogliaRomPath_Click);
             // 
             // TabPageMame
             // 
@@ -265,6 +289,14 @@ partial class OptionsForm
             this.TabPageClean.Name = "TabPageClean";
             this.TabPageClean.UseVisualStyleBackColor = true;
             // 
+            // cmdSfogliaRemovedFilesFolder
+            // 
+            resources.ApplyResources(this.cmdSfogliaRemovedFilesFolder, "cmdSfogliaRemovedFilesFolder");
+            this.cmdSfogliaRemovedFilesFolder.Image = global::MAME_Shrink.Properties.Resources.folder;
+            this.cmdSfogliaRemovedFilesFolder.Name = "cmdSfogliaRemovedFilesFolder";
+            this.cmdSfogliaRemovedFilesFolder.UseVisualStyleBackColor = true;
+            this.cmdSfogliaRemovedFilesFolder.Click += new System.EventHandler(this.CmdSfogliaRemovedFilesFolder_Click);
+            // 
             // TabPageConnections
             // 
             resources.ApplyResources(this.TabPageConnections, "TabPageConnections");
@@ -300,44 +332,11 @@ partial class OptionsForm
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
             // 
-            // cmdSfogliaGamelistXml
-            // 
-            resources.ApplyResources(this.cmdSfogliaGamelistXml, "cmdSfogliaGamelistXml");
-            this.cmdSfogliaGamelistXml.Image = global::MAME_Shrink.Properties.Resources.folder;
-            this.cmdSfogliaGamelistXml.Name = "cmdSfogliaGamelistXml";
-            this.cmdSfogliaGamelistXml.UseVisualStyleBackColor = true;
-            this.cmdSfogliaGamelistXml.Click += new System.EventHandler(this.CmdSfogliaGamelistXml_Click);
-            // 
-            // cmdSfogliaMameExe
-            // 
-            resources.ApplyResources(this.cmdSfogliaMameExe, "cmdSfogliaMameExe");
-            this.cmdSfogliaMameExe.Image = global::MAME_Shrink.Properties.Resources.folder;
-            this.cmdSfogliaMameExe.Name = "cmdSfogliaMameExe";
-            this.cmdSfogliaMameExe.UseVisualStyleBackColor = true;
-            this.cmdSfogliaMameExe.Click += new System.EventHandler(this.CmdSfogliaMameExe_Click);
-            // 
-            // cmdSfogliaRomsPath
-            // 
-            resources.ApplyResources(this.cmdSfogliaRomsPath, "cmdSfogliaRomsPath");
-            this.cmdSfogliaRomsPath.Image = global::MAME_Shrink.Properties.Resources.folder;
-            this.cmdSfogliaRomsPath.Name = "cmdSfogliaRomsPath";
-            this.cmdSfogliaRomsPath.UseVisualStyleBackColor = true;
-            this.cmdSfogliaRomsPath.Click += new System.EventHandler(this.CmdSfogliaRomPath_Click);
-            // 
-            // cmdSfogliaRemovedFilesFolder
-            // 
-            resources.ApplyResources(this.cmdSfogliaRemovedFilesFolder, "cmdSfogliaRemovedFilesFolder");
-            this.cmdSfogliaRemovedFilesFolder.Image = global::MAME_Shrink.Properties.Resources.folder;
-            this.cmdSfogliaRemovedFilesFolder.Name = "cmdSfogliaRemovedFilesFolder";
-            this.cmdSfogliaRemovedFilesFolder.UseVisualStyleBackColor = true;
-            this.cmdSfogliaRemovedFilesFolder.Click += new System.EventHandler(this.CmdSfogliaRemovedFilesFolder_Click);
-            // 
             // OpenRomsetWebPage
             // 
             resources.ApplyResources(this.OpenRomsetWebPage, "OpenRomsetWebPage");
             this.OpenRomsetWebPage.Image = global::MAME_Shrink.Properties.Resources.link;
             this.OpenRomsetWebPage.Name = "OpenRomsetWebPage";
-            this.OpenRomsetWebPage.TabStop = true;
             this.OpenRomsetWebPage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.OpenRomsetWebPage_LinkClicked);
             // 
             // cmdLoadData

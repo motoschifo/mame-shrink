@@ -119,7 +119,7 @@ public static class ImportMachines
                     // Inizio di un nodo "game" o "machine"
                     i++;
                     if (i % 1000 == 0)
-                        progressUpdate?.Invoke(prefix + Strings.MachinesFileLoading + $"[{i:#,##0}] - {machine?.Description}");
+                        progressUpdate?.Invoke($"{prefix}{Strings.MachinesFileLoading} [{i:#,##0}] - {machine?.Description}");
 
                     machine = ProcessNodeMachine(xml, mame.ReleaseSequence, loadNodes);
                     mame.Machines.Add(machine);
