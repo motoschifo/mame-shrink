@@ -7,4 +7,5 @@ public class MameMachineExtra
     public bool IsMameCab { get; set; }
     public string? Genre { get; set; }
     public string? Category { get; set; }
+    public string? Serie { get; set; }
 }

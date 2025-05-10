@@ -32,6 +32,8 @@ public class QueryMameDataResult : IApiResult
 
         [JsonProperty("category")]
         public string? Category { get; set; }
+        [JsonProperty("serie")]
+        public string? Serie { get; set; }
 
         [JsonProperty("release")]
         public string? Release { get; set; }

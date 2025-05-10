@@ -42,6 +42,7 @@ public partial class MainForm : Form
     private readonly Mame _mame = new();
     private MameConfiguration _mameConfig = new();
     private string _applicationPath = string.Empty;
+    private string _applicationName = string.Empty;
     private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
     private CancellationToken PageCancellationToken => _pageCancellationTokenSource.Token;
@@ -76,14 +77,163 @@ public partial class MainForm : Form
     private bool? _online;
 
     private readonly FilterMenuCollection _filters = [];
+    private readonly Dictionary<FilterKind, Func<MameMachine, bool>> _menuActions = [];
 
     public MainForm()
     {
         InitializeComponent();
         _userPreferences = UserPreferencesManager.Get() ?? new();
+        InitializeMenuActions();
         _filters.BuildMenuItems(MenuFilters.Items, MenuFiltersItem_Click, _menuActions);
         CheckMenuActions();
     }
+
+    private void InitializeMenuActions()
+    {
+        _menuActions.Clear();
+        _menuActions.Add(FilterKind.All, (machine) => true);
+        _menuActions.Add(FilterKind.IsParentMachine, (machine) => machine.IsParentMachine);
+        _menuActions.Add(FilterKind.IsCloneMachine, (machine) => machine.IsCloneMachine);
+        _menuActions.Add(FilterKind.IsMamecab, (machine) => machine.Extra.IsMameCab);
+        _menuActions.Add(FilterKind.IsMachine, (machine) => machine.IsMachine);
+        _menuActions.Add(FilterKind.IsBios, (machine) => machine.IsBios);
+        _menuActions.Add(FilterKind.IsDevice, (machine) => machine.IsDevice);
+        _menuActions.Add(FilterKind.IsMechanical, (machine) => machine.IsMechanical);
+        _menuActions.Add(FilterKind.AudioUnsupported, (machine) => machine.Sound.HasAudio);
+        _menuActions.Add(FilterKind.AudioChannelMono, (machine) => machine.Sound.IsMono);
+        _menuActions.Add(FilterKind.AudioChannelStereo, (machine) => machine.Sound.IsStereo);
+        _menuActions.Add(FilterKind.AudioMultichannel, (machine) => machine.Sound.IsMultiChannel);
+        _menuActions.Add(FilterKind.SoundEmulated, (machine) => machine.FeatureOfType(FeatureKind.sound) is null);
+        _menuActions.Add(FilterKind.SoundImperfect, (machine) => machine.FeatureOfType(FeatureKind.sound)?.Imperfect == true);
+        _menuActions.Add(FilterKind.SoundUnemulated, (machine) => machine.FeatureOfType(FeatureKind.sound)?.Unemulated == true);
+        _menuActions.Add(FilterKind.DisplayTypeRaster, (machine) =>
+        {
+            var display = machine.GetMainDisplay();
+            return display is not null && display.Type == DisplayKind.raster;
+        });
+        _menuActions.Add(FilterKind.DisplayTypeVector, (machine) =>
+        {
+            var display = machine.GetMainDisplay();
+            return display is not null && display.Type == DisplayKind.vector;
+        });
+        _menuActions.Add(FilterKind.DisplayTypeLCD, (machine) =>
+        {
+            var display = machine.GetMainDisplay();
+            return display is not null && display.Type == DisplayKind.lcd;
+        });
+        _menuActions.Add(FilterKind.DisplayTypeSVG, (machine) =>
+        {
+            var display = machine.GetMainDisplay();
+            return display is not null && display.Type == DisplayKind.svg;
+        });
+        _menuActions.Add(FilterKind.DisplayTypeUnknown, (machine) =>
+        {
+            var display = machine.GetMainDisplay();
+            return display is not null && display.Type == DisplayKind.unknown;
+        });
+        _menuActions.Add(FilterKind.Screenless, (machine) => machine.Screenless);
+        _menuActions.Add(FilterKind.ScreensOne, (machine) => machine.Displays.Count == 1);
+        _menuActions.Add(FilterKind.ScreensOneOrMore, (machine) => machine.Displays.Count >= 1);
+        _menuActions.Add(FilterKind.ScreensTwo, (machine) => machine.Displays.Count == 2);
+        _menuActions.Add(FilterKind.ScreensTwoOrMore, (machine) => machine.Displays.Count >= 2);
+        _menuActions.Add(FilterKind.ScreensThree, (machine) => machine.Displays.Count == 3);
+        _menuActions.Add(FilterKind.ScreensThreeOrMore, (machine) => machine.Displays.Count >= 3);
+        _menuActions.Add(FilterKind.ScreensFour, (machine) => machine.Displays.Count == 4);
+        _menuActions.Add(FilterKind.ScreensFourOrMore, (machine) => machine.Displays.Count >= 4);
+        _menuActions.Add(FilterKind.ScreensFiveOrMore, (machine) => machine.Displays.Count >= 5);
+        _menuActions.Add(FilterKind.HorizontalScreen, (machine) =>
+        {
+            var display = machine.GetMainDisplay();
+            if (display is null) return false;
+            return display.Orientation == DisplayOrientationKind.horizontal;
+        });
+        _menuActions.Add(FilterKind.VerticalScreen, (machine) =>
+        {
+            var display = machine.GetMainDisplay();
+            if (display is null) return false;
+            return display.Orientation == DisplayOrientationKind.vertical;
+        });
+        _menuActions.Add(FilterKind.ScreenRotated0, (machine) =>
+        {
+            var display = machine.GetMainDisplay();
+            if (display is null) return false;
+            return display.Rotate == 0;
+        });
+        _menuActions.Add(FilterKind.ScreenRotated90, (machine) =>
+        {
+            var display = machine.GetMainDisplay();
+            if (display is null) return false;
+            return display.Rotate == 90;
+        });
+        _menuActions.Add(FilterKind.ScreenRotated180, (machine) =>
+        {
+            var display = machine.GetMainDisplay();
+            if (display is null) return false;
+            return display.Rotate == 180;
+        });
+        _menuActions.Add(FilterKind.ScreenRotated270, (machine) =>
+        {
+            var display = machine.GetMainDisplay();
+            if (display is null) return false;
+            return display.Rotate == 270;
+        });
+        _menuActions.Add(FilterKind.GraphicEmulated, (machine) => machine.FeatureOfType(FeatureKind.graphics) is null);
+        _menuActions.Add(FilterKind.GraphicImperfect, (machine) => machine.FeatureOfType(FeatureKind.graphics)?.Imperfect == true);
+        _menuActions.Add(FilterKind.GraphicNotEmulated, (machine) => machine.FeatureOfType(FeatureKind.graphics)?.Unemulated == true);
+        _menuActions.Add(FilterKind.ProtectionEmulated, (machine) => machine.FeatureOfType(FeatureKind.protection) is null);
+        _menuActions.Add(FilterKind.ProtectionImperfect, (machine) => machine.FeatureOfType(FeatureKind.protection)?.Imperfect == true);
+        _menuActions.Add(FilterKind.ProtectionUnemulated, (machine) => machine.FeatureOfType(FeatureKind.protection)?.Unemulated == true);
+        _menuActions.Add(FilterKind.ColorEmulated, (machine) => machine.FeatureOfType(FeatureKind.palette) is null);
+        _menuActions.Add(FilterKind.ColorImperfect, (machine) => machine.FeatureOfType(FeatureKind.palette)?.Imperfect == true);
+        _menuActions.Add(FilterKind.ColorUnemulated, (machine) => machine.FeatureOfType(FeatureKind.palette)?.Unemulated == true);
+        _menuActions.Add(FilterKind.DriverWorking, (machine) => machine.Driver.Status == DriverStatusKind.good);
+        _menuActions.Add(FilterKind.DriverImperfect, (machine) => machine.Driver.Status == DriverStatusKind.imperfect);
+        _menuActions.Add(FilterKind.DriverNotWorking, (machine) => machine.Driver.Status == DriverStatusKind.preliminary);
+        _menuActions.Add(FilterKind.DriverUnknown, (machine) => machine.Driver.Status == DriverStatusKind.unknown);
+        _menuActions.Add(FilterKind.CocktailGood, (machine) => machine.Driver.Cocktail == CocktailKind.good);
+        _menuActions.Add(FilterKind.CocktailImperfect, (machine) => machine.Driver.Cocktail == CocktailKind.imperfect);
+        _menuActions.Add(FilterKind.CocktailPreliminary, (machine) => machine.Driver.Cocktail == CocktailKind.preliminary);
+        _menuActions.Add(FilterKind.CocktailUnknown, (machine) => machine.Driver.Cocktail == CocktailKind.unknown);
+        _menuActions.Add(FilterKind.SaveStateSupported, (machine) => machine.Driver.SaveState == SaveStateKind.supported);
+        _menuActions.Add(FilterKind.SaveStateUnsupported, (machine) => machine.Driver.SaveState == SaveStateKind.unsupported);
+        _menuActions.Add(FilterKind.SaveStateUnknown, (machine) => machine.Driver.SaveState == SaveStateKind.unknown);
+        _menuActions.Add(FilterKind.RequiresDisk, (machine) => machine.RequiresDisks);
+        _menuActions.Add(FilterKind.DoNotRequiresDisk, (machine) => !machine.RequiresDisks);
+        _menuActions.Add(FilterKind.DiskStatusGood, (machine) => machine.RequiresDisks && machine.Disks.Any(x => x.Status == DiskStatusKind.good));
+        _menuActions.Add(FilterKind.DiskStatusBadDump, (machine) => machine.RequiresDisks && machine.Disks.Any(x => x.Status == DiskStatusKind.baddump));
+        _menuActions.Add(FilterKind.DiskStatusNoDump, (machine) => machine.RequiresDisks && machine.Disks.Any(x => x.Status == DiskStatusKind.nodump));
+        _menuActions.Add(FilterKind.EmulationGood, (machine) => machine.Driver.Emulation == EmulationKind.good);
+        _menuActions.Add(FilterKind.EmulationImperfect, (machine) => machine.Driver.Emulation == EmulationKind.imperfect);
+        _menuActions.Add(FilterKind.EmulationPreliminary, (machine) => machine.Driver.Emulation == EmulationKind.preliminary);
+        _menuActions.Add(FilterKind.EmulationUnknown, (machine) => machine.Driver.Emulation == EmulationKind.unknown);
+        _menuActions.Add(FilterKind.ArtworkRequired, (machine) => machine.Driver.RequiresArtwork);
+        _menuActions.Add(FilterKind.ArtworkNotRequired, (machine) => !machine.Driver.RequiresArtwork);
+        _menuActions.Add(FilterKind.DriverOfficial, (machine) => !machine.Driver.Unofficial);
+        _menuActions.Add(FilterKind.DriverUnofficial, (machine) => machine.Driver.Unofficial);
+        _menuActions.Add(FilterKind.SoundHardwareYes, (machine) => !machine.Driver.NoSoundHardware);
+        _menuActions.Add(FilterKind.SoundHardwareNo, (machine) => machine.Driver.NoSoundHardware);
+        _menuActions.Add(FilterKind.DriverComplete, (machine) => !machine.Driver.Incomplete);
+        _menuActions.Add(FilterKind.DriverIncomplete, (machine) => machine.Driver.Incomplete);
+        _menuActions.Add(FilterKind.UseSample, (machine) => machine.UseSample);
+        _menuActions.Add(FilterKind.DoNotUseSample, (machine) => !machine.UseSample);
+        _menuActions.Add(FilterKind.NoGenre, (machine) => string.IsNullOrEmpty(machine.Extra.Genre));
+        _menuActions.Add(FilterKind.Genre, (machine) =>
+        {
+            return !string.IsNullOrEmpty(machine.Extra.Genre) && _selectedGenres.Contains(machine.Extra.Genre!);
+        });
+        _menuActions.Add(FilterKind.NoCategory, (machine) => string.IsNullOrEmpty(machine.Extra.Category));
+        _menuActions.Add(FilterKind.Category, (machine) =>
+        {
+            return !string.IsNullOrEmpty(machine.Extra.Category) && _selectedGenres.Contains(machine.Extra.Category!);
+        });
+        _menuActions.Add(FilterKind.NoSerie, (machine) => string.IsNullOrEmpty(machine.Extra.Serie));
+        _menuActions.Add(FilterKind.Serie, (machine) =>
+        {
+            return !string.IsNullOrEmpty(machine.Extra.Serie) && _selectedGenres.Contains(machine.Extra.Serie!);
+        });
+        _menuActions.Add(FilterKind.Release, (machine) => false);    // TODO
+    }
+
 
     private void CheckMenuActions()
     {
@@ -99,130 +249,9 @@ public partial class MainForm : Form
             Dialogs.ShowErrorDialog("Not implemented filters actions:\n\n" + string.Join("\n", errors));
     }
 
-    private readonly Dictionary<FilterKind, Func<MameMachine, bool>> _menuActions = new()
-    {
-        { FilterKind.All, (machine) => true },
-        { FilterKind.IsParentMachine, (machine) => machine.IsParentMachine },
-        { FilterKind.IsCloneMachine, (machine) => machine.IsCloneMachine },
-        { FilterKind.IsMamecab, (machine) => machine.Extra.IsMameCab },
-        { FilterKind.IsMachine, (machine) => machine.IsMachine },
-        { FilterKind.IsBios, (machine) => machine.IsBios },
-        { FilterKind.IsDevice, (machine) => machine.IsDevice },
-        { FilterKind.IsMechanical, (machine) => machine.IsMechanical },
-        { FilterKind.AudioUnsupported, (machine) => machine.Sound.HasAudio },
-        { FilterKind.AudioChannelMono, (machine) => machine.Sound.IsMono },
-        { FilterKind.AudioChannelStereo, (machine) => machine.Sound.IsStereo },
-        { FilterKind.AudioMultichannel, (machine) => machine.Sound.IsMultiChannel },
-        { FilterKind.SoundEmulated, (machine) => machine.FeatureOfType(FeatureKind.sound) is null },
-        { FilterKind.SoundImperfect, (machine) => machine.FeatureOfType(FeatureKind.sound)?.Imperfect == true },
-        { FilterKind.SoundUnemulated, (machine) => machine.FeatureOfType(FeatureKind.sound)?.Unemulated == true },
-        { FilterKind.DisplayTypeRaster, (machine) => {
-            var display = machine.GetMainDisplay();
-            return display is not null && display.Type == DisplayKind.raster;
-        } },
-        { FilterKind.DisplayTypeVector, (machine) => {
-            var display = machine.GetMainDisplay();
-            return display is not null && display.Type == DisplayKind.vector;
-        } },
-        { FilterKind.DisplayTypeLCD, (machine) => {
-            var display = machine.GetMainDisplay();
-            return display is not null && display.Type == DisplayKind.lcd;
-        } },
-        { FilterKind.DisplayTypeSVG, (machine) => {
-            var display = machine.GetMainDisplay();
-            return display is not null && display.Type == DisplayKind.svg;
-        } },
-        { FilterKind.DisplayTypeUnknown, (machine) => {
-            var display = machine.GetMainDisplay();
-            return display is not null && display.Type == DisplayKind.unknown;
-        } },
-        { FilterKind.Screenless, (machine) => machine.Screenless },
-        { FilterKind.ScreensOne, (machine) => machine.Displays.Count == 1 },
-        { FilterKind.ScreensOneOrMore, (machine) => machine.Displays.Count >= 1 },
-        { FilterKind.ScreensTwo, (machine) => machine.Displays.Count == 2 },
-        { FilterKind.ScreensTwoOrMore, (machine) => machine.Displays.Count>= 2 },
-        { FilterKind.ScreensThree, (machine) => machine.Displays.Count == 3 },
-        { FilterKind.ScreensThreeOrMore, (machine) => machine.Displays.Count>= 3 },
-        { FilterKind.ScreensFour, (machine) => machine.Displays.Count == 4 },
-        { FilterKind.ScreensFourOrMore, (machine) => machine.Displays.Count>= 4 },
-        { FilterKind.ScreensFiveOrMore, (machine) => machine.Displays.Count>= 5 },
-        { FilterKind.HorizontalScreen, (machine) => {
-            var display = machine.GetMainDisplay();
-            if (display is null) return false;
-            return display.Orientation == DisplayOrientationKind.horizontal;
-        } },
-        { FilterKind.VerticalScreen, (machine) => {
-            var display = machine.GetMainDisplay();
-            if (display is null) return false;
-            return display.Orientation == DisplayOrientationKind.vertical;
-        } },
-        { FilterKind.ScreenRotated0, (machine) => {
-            var display = machine.GetMainDisplay();
-            if (display is null) return false;
-            return display.Rotate == 0;
-        } },
-        { FilterKind.ScreenRotated90, (machine) => {
-            var display = machine.GetMainDisplay();
-            if (display is null) return false;
-            return display.Rotate == 90;
-        } },
-        { FilterKind.ScreenRotated180, (machine) => {
-            var display = machine.GetMainDisplay();
-            if (display is null) return false;
-            return display.Rotate == 180;
-        } },
-        { FilterKind.ScreenRotated270, (machine) => {
-            var display = machine.GetMainDisplay();
-            if (display is null) return false;
-            return display.Rotate == 270;
-        } },
-        { FilterKind.GraphicEmulated, (machine) => machine.FeatureOfType(FeatureKind.graphics) is null },
-        { FilterKind.GraphicImperfect, (machine) => machine.FeatureOfType(FeatureKind.graphics)?.Imperfect == true },
-        { FilterKind.GraphicNotEmulated, (machine) => machine.FeatureOfType(FeatureKind.graphics)?.Unemulated == true },
-        { FilterKind.ProtectionEmulated, (machine) => machine.FeatureOfType(FeatureKind.protection) is null },
-        { FilterKind.ProtectionImperfect, (machine) => machine.FeatureOfType(FeatureKind.protection)?.Imperfect == true },
-        { FilterKind.ProtectionUnemulated, (machine) => machine.FeatureOfType(FeatureKind.protection)?.Unemulated == true },
-        { FilterKind.ColorEmulated, (machine) => machine.FeatureOfType(FeatureKind.palette) is null },
-        { FilterKind.ColorImperfect, (machine) => machine.FeatureOfType(FeatureKind.palette)?.Imperfect == true },
-        { FilterKind.ColorUnemulated, (machine) => machine.FeatureOfType(FeatureKind.palette)?.Unemulated == true },
-        { FilterKind.DriverWorking, (machine) => machine.Driver.Status == DriverStatusKind.good },
-        { FilterKind.DriverImperfect, (machine) => machine.Driver.Status == DriverStatusKind.imperfect },
-        { FilterKind.DriverNotWorking, (machine) => machine.Driver.Status == DriverStatusKind.preliminary },
-        { FilterKind.DriverUnknown, (machine) => machine.Driver.Status == DriverStatusKind.unknown },
-        { FilterKind.CocktailGood, (machine) => machine.Driver.Cocktail == CocktailKind.good },
-        { FilterKind.CocktailImperfect, (machine) => machine.Driver.Cocktail== CocktailKind.imperfect },
-        { FilterKind.CocktailPreliminary, (machine) => machine.Driver.Cocktail == CocktailKind.preliminary },
-        { FilterKind.CocktailUnknown, (machine) => machine.Driver.Cocktail== CocktailKind.unknown },
-        { FilterKind.SaveStateSupported, (machine) => machine.Driver.SaveState == SaveStateKind.supported },
-        { FilterKind.SaveStateUnsupported, (machine) => machine.Driver.SaveState == SaveStateKind.unsupported },
-        { FilterKind.SaveStateUnknown, (machine) => machine.Driver.SaveState == SaveStateKind.unknown },
-        { FilterKind.RequiresDisk, (machine) => machine.RequiresDisks },
-        { FilterKind.DoNotRequiresDisk, (machine) => !machine.RequiresDisks },
-        { FilterKind.DiskStatusGood, (machine) => machine.RequiresDisks && machine.Disks.Any(x => x.Status == DiskStatusKind.good) },
-        { FilterKind.DiskStatusBadDump, (machine) => machine.RequiresDisks && machine.Disks.Any(x => x.Status == DiskStatusKind.baddump) },
-        { FilterKind.DiskStatusNoDump, (machine) => machine.RequiresDisks && machine.Disks.Any(x => x.Status == DiskStatusKind.nodump) },
-        { FilterKind.EmulationGood, (machine) => machine.Driver.Emulation==EmulationKind.good },
-        { FilterKind.EmulationImperfect, (machine) => machine.Driver.Emulation==EmulationKind.imperfect},
-        { FilterKind.EmulationPreliminary, (machine) => machine.Driver.Emulation==EmulationKind.preliminary },
-        { FilterKind.EmulationUnknown, (machine) => machine.Driver.Emulation==EmulationKind.unknown },
-        { FilterKind.ArtworkRequired, (machine) => machine.Driver.RequiresArtwork },
-        { FilterKind.ArtworkNotRequired, (machine) => !machine.Driver.RequiresArtwork },
-        { FilterKind.DriverOfficial, (machine) => !machine.Driver.Unofficial },
-        { FilterKind.DriverUnofficial, (machine) => machine.Driver.Unofficial },
-        { FilterKind.SoundHardwareYes, (machine) => !machine.Driver.NoSoundHardware },
-        { FilterKind.SoundHardwareNo, (machine) => machine.Driver.NoSoundHardware },
-        { FilterKind.DriverComplete, (machine) => !machine.Driver.Incomplete },
-        { FilterKind.DriverIncomplete, (machine) => machine.Driver.Incomplete },
-        { FilterKind.UseSample, (machine) => machine.UseSample },
-        { FilterKind.DoNotUseSample, (machine) => !machine.UseSample },
-        { FilterKind.NoGenre, (machine) => string.IsNullOrEmpty(machine.Extra.Genre) },   // TODO
-        { FilterKind.Genre, (machine) => false },   // TODO
-        { FilterKind.NoCategory, (machine) => string.IsNullOrEmpty(machine.Extra.Category) },  // TODO
-        { FilterKind.Category, (machine) => false },  // TODO
-        { FilterKind.NoSerie, (machine) => false },  // TODO
-        { FilterKind.Serie, (machine) => false },  // TODO
-        { FilterKind.Release, (machine) => false },    // TODO
-    };
+    private readonly HashSet<string> _selectedGenres = [];
+    private readonly HashSet<string> _selectedCategories = [];
+    private readonly HashSet<string> _selectedSeries = [];
 
     ~MainForm()
     {
@@ -711,7 +740,8 @@ public partial class MainForm : Form
     private void FrmMain_Load(object sender, EventArgs e)
     {
         _applicationPath = ApplicationHelper.GetApplicationPath(Assembly.GetEntryAssembly());
-        Text = ApplicationHelper.GetApplicationTitle(Assembly.GetExecutingAssembly());
+        _applicationName = ApplicationHelper.GetApplicationTitle(Assembly.GetExecutingAssembly());
+        Text = _applicationName;
         ShowUpdatedSetting();
 
         // Columns selection menu
@@ -748,7 +778,7 @@ public partial class MainForm : Form
         ValidateRomset.Checked = _userPreferences.CleanOptions.ValidateBeforeCleaning;
 
         // Cache
-        _mameCache.SetFilePath(Path.Combine(_applicationPath, "local-cache", "mame-cache.json"));
+        _mameCache.Initialize(_applicationName, Path.Combine(_applicationPath, "local-cache", "mame-cache.json"));
         _snapshotsCache.SetFilePath(Path.Combine(_applicationPath, "local-cache", "snapshots"));
 
         EnableControls(false);
@@ -1393,7 +1423,7 @@ public partial class MainForm : Form
                     var mameRelease = string.Join(",", adbRelease.Result);
 
                     progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Games})");
-                    if (_mameCache.MameRelease != mameRelease || _mameCache.Items.Count == 0)
+                    if (!_mameCache.IsValid(_applicationName, mameRelease))
                     {
                         // Download categories and machine extra info
                         // http://adb.arcadeitalia.net/service_scraper.php?ajax=query_categories&game_name=mslug;atetris;100lions;mslug3;mslug5
@@ -1406,12 +1436,13 @@ public partial class MainForm : Form
                                 _mameCache.Add(
                                     key: machine.GameName,
                                     genre: machine.Genre,
+                                    serie: machine.Serie,
                                     category: machine.Category,
                                     release: machine.Release,
                                     mameCab: machine.MameCab
                                 );
                             }
-                            _mameCache.Store(adbMameCache.Release, mameRelease);
+                            _mameCache.Store(_applicationName, mameRelease);
                         }
                     }
                 }

@@ -16,4 +16,10 @@ public static class ApplicationHelper
     {
         return Path.GetDirectoryName(assembly.Location);
     }
+
+    public static string GetApplicationRelease(Assembly assembly)
+    {
+        var version = assembly.GetName().Version;
+        return $"{version.Major:0}.{version.Minor:0} build {version.Build}";
+    }
 }

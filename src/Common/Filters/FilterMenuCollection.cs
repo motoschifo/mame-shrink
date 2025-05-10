@@ -64,7 +64,7 @@ internal class FilterMenuCollection : Collection<FilterMenuItem>
         {
             var menu = filter.MenuItem!;
             menu.Enabled = false;
-            if (!filter.Enabled || filter.Action is null)
+            if (!filter.Enabled || filter.Action is null || !filter.UpdateCounter)
                 continue;
             var count = machines.Count(x => filter.Action.Invoke(x.Value));
             if (count > 0)

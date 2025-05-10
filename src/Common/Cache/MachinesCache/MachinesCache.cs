@@ -10,11 +10,11 @@ public class MachinesCache
 {
     private string? _filePath;
 
-    [JsonRequired] public int Release { get; private set; }
+    [JsonRequired] public string? ApplicationName { get; private set; }
     [JsonRequired] public string? MameRelease { get; private set; }
     [JsonRequired] public Dictionary<string, MachineCacheItem> Items { get; } = [];
 
-    public void SetFilePath(string filePath)
+    public void Initialize(string applicationName, string filePath)
     {
         _filePath = filePath;
         var folder = Path.GetDirectoryName(_filePath);
@@ -29,8 +29,8 @@ public class MachinesCache
                 var cat = JsonHelper.DeserializeJsonFileExact<MachinesCache>(_filePath);
                 if (cat is not null)
                 {
-                    Release = cat.Release;
                     MameRelease = cat.MameRelease;
+                    ApplicationName = applicationName;
                     Items.Clear();
                     foreach (var item in cat.Items)
                     {
@@ -48,17 +48,17 @@ public class MachinesCache
 
     public void Clear()
     {
-        Release = 0;
         MameRelease = null;
         Items.Clear();
     }
 
-    public void Add(string key, string? genre, string? category, string? release, bool mameCab)
+    public void Add(string key, string? genre, string? category, string? serie, string? release, bool mameCab)
     {
         Items[key] = new MachineCacheItem
         {
             Genre = genre,
             Category = category,
+            Serie = serie,
             Release = release,
             MameCab = mameCab
         };
@@ -69,14 +69,19 @@ public class MachinesCache
         Items.Remove(key);
     }
 
-    public void Store(int release, string mameRelease)
+    public void Store(string applicationName, string mameRelease)
     {
         if (string.IsNullOrEmpty(_filePath))
-            throw new Exception("File path not set");
-        Release = release;
+            throw new Exception("Missing file path");
+        ApplicationName = applicationName;
         MameRelease = mameRelease;
         JsonHelper.SerializeJsonFile(_filePath!, this);
     }
 
     public MachineCacheItem? GetByKey(string key) => Items.TryGetValue(key, out MachineCacheItem? item) ? item : null;
+
+    public bool IsValid(string applicationName, string mameRelease)
+    {
+        return applicationName == ApplicationName && mameRelease == MameRelease && Items.Count > 0;
+    }
 }
