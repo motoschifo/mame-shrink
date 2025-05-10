@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using NLog;
 
 namespace ArcadeDatabaseSdk.Net48.Common;
 
@@ -14,6 +15,8 @@ public class HttpClientReader
 {
     private static readonly HttpClient _client;
     private static int _timeoutSeconds = 30;
+
+    private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
     static HttpClientReader()
     {
@@ -30,7 +33,7 @@ public class HttpClientReader
         _client.Timeout = TimeSpan.FromSeconds(_timeoutSeconds);
     }
 
-    public static async Task<T?> GetDataFromUrlAsync<T>(string url) where T : class
+    public static async Task<T?> GetDataFromUrlAsync<T>(string url)
     {
         try
         {
@@ -47,12 +50,11 @@ public class HttpClientReader
         }
     }
 
-    public static async Task<T?> GetService<T>(string url, string operation, Dictionary<string, string?>? parameters = null)
+    private static async Task<ApiResponse<T>> GetService<T>(string url, Dictionary<string, string?>? parameters = null)
     {
         try
         {
             var query = new QueryBuilder(url);
-            query.AddParameter(Constants.AjaxParameter, operation);
             if (parameters is not null && parameters.Count > 0)
             {
                 foreach (KeyValuePair<string, string?> parameter in parameters)
@@ -68,10 +70,16 @@ public class HttpClientReader
             var responseBody = await ReadResponseContentAsync(response);
             if (response.Content.Headers.ContentType.MediaType == "application/json")
             {
+                if (string.IsNullOrEmpty(responseBody))
+                    throw new Exception("Missing response");
                 try
                 {
                     // Deserializza la risposta se Json
-                    return JsonConvert.DeserializeObject<T>(responseBody);
+                    var result = JsonConvert.DeserializeObject<ApiResponse<T>>(responseBody)!;
+                    if (result.Status != ApiResponse.ResponseStatus.Success)
+                        throw new Exception(result.Message);
+                    result.Data ??= [];
+                    return result;
                 }
                 catch (JsonException ex)
                 {
@@ -82,10 +90,12 @@ public class HttpClientReader
         }
         catch (TimeoutException ex)
         {
-            throw new Exception($"Timeout: {ex.Message}");
+            _logger.Error(ex, $"Connection timeout, url: {url}");
+            throw new Exception($"Connection timeout: {ex.Message}");
         }
         catch (Exception ex)
         {
+            _logger.Error(ex, $"Error reading data from website, url: {url}");
             throw new Exception($"Error reading data from website: {ex.Message}");
         }
     }
@@ -141,18 +151,13 @@ public class HttpClientReader
     }
 
 
-    public static async Task<T?> GetServiceScraper<T>(string operation, Dictionary<string, string?>? parameters = null)
+    public static async Task<ApiResponse<T>> GetServiceGeneric<T>(string operation, Dictionary<string, string?>? parameters = null)
     {
-        return await GetService<T>(Constants.ServiceScraperUrl, operation, parameters);
+        return await GetService<T>($"{Constants.GenericApiUrl}/{operation}", parameters);
     }
 
-    public static async Task<T?> GetServiceGeneric<T>(string operation, Dictionary<string, string?>? parameters = null)
+    public static async Task<ApiResponse<T>> GetServiceMame<T>(string operation, Dictionary<string, string?>? parameters = null)
     {
-        return await GetService<T>(Constants.ServiceGenericUrl, operation, parameters);
-    }
-
-    public static async Task<T?> GetServiceMame<T>(string operation, Dictionary<string, string?>? parameters = null)
-    {
-        return await GetService<T>(Constants.ServiceMameUrl, operation, parameters);
+        return await GetService<T>($"{Constants.MameApiUrl}/{operation}", parameters);
     }
 }

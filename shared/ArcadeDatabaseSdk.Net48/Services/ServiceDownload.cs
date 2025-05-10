@@ -10,7 +10,7 @@ public static class Servicedownload
 {
     public static async Task<Stream> GetCurrentIngameFile(string romset, CancellationToken cancellationToken = default)
     {
-        return await HttpClientReader.GetFile(Constants.ServiceDownloadUrl, new Dictionary<string, string?> {
+        return await HttpClientReader.GetFile(Constants.LegacyServiceDownloadUrl, new Dictionary<string, string?> {
             { "tipo", "mame_current" },
             { "codice", romset },
             { "entity", "ingame" },

@@ -1420,26 +1420,26 @@ public partial class MainForm : Form
                     progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Release})");
                     // Check release
                     var adbRelease = await ServiceMame.Releases();
-                    var mameRelease = string.Join(",", adbRelease.Result);
+                    var mameRelease = string.Join(",", adbRelease.Data);
 
                     progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Games})");
                     if (!_mameCache.IsValid(_applicationName, mameRelease))
                     {
                         // Download categories and machine extra info
                         // http://adb.arcadeitalia.net/service_scraper.php?ajax=query_categories&game_name=mslug;atetris;100lions;mslug3;mslug5
-                        var adbMameCache = await ServiceScraper.QueryCategories();
+                        var adbMameCache = await ServiceMame.Categories();
                         _mameCache.Clear();
-                        if (adbMameCache.Result is not null && adbMameCache.Result.Machines.Any())
+                        if (adbMameCache.Data.Any())
                         {
-                            foreach (var machine in adbMameCache.Result.Machines)
+                            foreach (var machine in adbMameCache.Data)
                             {
                                 _mameCache.Add(
-                                    key: machine.GameName,
+                                    key: machine.Name,
                                     genre: machine.Genre,
                                     serie: machine.Serie,
                                     category: machine.Category,
                                     release: machine.Release,
-                                    mameCab: machine.MameCab
+                                    mameCab: machine.IsMameCab
                                 );
                             }
                             _mameCache.Store(_applicationName, mameRelease);
@@ -1483,8 +1483,8 @@ public partial class MainForm : Form
         {
             try
             {
-                var adbStatus = await ServiceGeneric.WebSiteStatus();
-                if (adbStatus.Result?.IsOnline() != true)
+                var adbStatus = await ServiceGeneric.Status();
+                if (adbStatus.Data.FirstOrDefault().ApiOnline != true)
                     throw new Exception(Strings.WebSiteUnderMaintenance);
                 _online = true;
             }
