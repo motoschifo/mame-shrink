@@ -1,6 +1,6 @@
 ﻿#nullable enable
 using System;
-namespace MAME_Shrink.Common.Cache;
+namespace MAME_Shrink.Common.Cache.SnapshotCache;
 
 public class SnapshotCacheItem
 {

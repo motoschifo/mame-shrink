@@ -97,9 +97,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Cache\JsonFileCache.cs" />
+    <Compile Include="Common\Cache\ClassificationCacheItem.cs" />
     <Compile Include="Common\Cache\SnapshotsCache\SnapshotCacheItem.cs" />
     <Compile Include="Common\Cache\SnapshotsCache\SnapshotsCache.cs" />
-    <Compile Include="Common\Cache\MachinesCache\MachineCacheItem.cs" />
+    <Compile Include="Common\Cache\MachineCacheItem.cs" />
     <Compile Include="Common\Filters\FilterMenuDefinition.cs" />
     <Compile Include="Components\KeyValueTable.cs">
       <SubType>UserControl</SubType>
@@ -125,7 +127,6 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Main\GridItem.cs" />
-    <Compile Include="Common\Cache\MachinesCache\MachinesCache.cs" />
     <Compile Include="Forms\Main\RomFile.cs" />
     <Compile Include="Extensions\JsonHelper.cs" />
     <Compile Include="Program.cs" />

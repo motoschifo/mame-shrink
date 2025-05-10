@@ -97,6 +97,15 @@ namespace MAME_Shrink.Resources {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Categories.
+        /// </summary>
+        internal static string Categories {
+            get {
+                return ResourceManager.GetString("Categories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Category.
         /// </summary>
         internal static string Category {
@@ -1250,6 +1259,15 @@ namespace MAME_Shrink.Resources {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Genres.
+        /// </summary>
+        internal static string Genres {
+            get {
+                return ResourceManager.GetString("Genres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Grid update.
         /// </summary>
         internal static string GridUpdate {
@@ -1435,6 +1453,15 @@ namespace MAME_Shrink.Resources {
         internal static string SelectedGames {
             get {
                 return ResourceManager.GetString("SelectedGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Series.
+        /// </summary>
+        internal static string Series {
+            get {
+                return ResourceManager.GetString("Series", resourceCulture);
             }
         }
         

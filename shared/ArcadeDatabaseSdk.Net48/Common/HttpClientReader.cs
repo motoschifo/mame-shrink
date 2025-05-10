@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NLog;
+using static ArcadeDatabaseSdk.Net48.Common.ApiResponse;
 
 namespace ArcadeDatabaseSdk.Net48.Common;
 
@@ -159,5 +160,10 @@ public class HttpClientReader
     public static async Task<ApiResponse<T>> GetServiceMame<T>(string operation, Dictionary<string, string?>? parameters = null)
     {
         return await GetService<T>($"{Constants.MameApiUrl}/{operation}", parameters);
+    }
+
+    public static async Task<ApiResponse<T>> GetServiceClassifications<T>(ClassificationType classificationType, Dictionary<string, string?>? parameters = null)
+    {
+        return await GetService<T>($"{Constants.ClassificationsApiUrl}/{classificationType.ToString().ToLower()}", parameters);
     }
 }

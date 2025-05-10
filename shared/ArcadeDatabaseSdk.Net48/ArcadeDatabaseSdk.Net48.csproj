@@ -71,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ApiResponse.cs" />
+    <Compile Include="Common\ClassificationType.cs" />
+    <Compile Include="Common\LanguageKind.cs" />
     <Compile Include="Common\ResponseStatus.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\HttpClientReader.cs" />
@@ -83,9 +85,11 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\Generic\StatusApiResult.cs" />
+    <Compile Include="Services\Classifications\ClassificationsApiResult.cs" />
     <Compile Include="Services\Mame\CategoriesApiResult.cs" />
     <Compile Include="Services\ServiceDownload.cs" />
     <Compile Include="Services\ServiceGeneric.cs" />
+    <Compile Include="Services\ServiceClassifications.cs" />
     <Compile Include="Services\ServiceMame.cs" />
     <Compile Include="Extenrions\StringExtension.cs" />
   </ItemGroup>

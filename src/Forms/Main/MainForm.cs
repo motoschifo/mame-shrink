@@ -11,9 +11,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ArcadeDatabaseSdk.Net48.Mame;
 using ArcadeDatabaseSdk.Net48.Services;
 using MAME_Shrink.Common.Cache;
+using MAME_Shrink.Common.Cache.SnapshotCache;
 using MAME_Shrink.Common.Filters;
 using MAME_Shrink.Extensions;
 using MAME_Shrink.Forms.Main;
@@ -27,6 +27,7 @@ using MameTools.Net48.Exports;
 using MameTools.Net48.Helpers;
 using MameTools.Net48.Imports;
 using NLog;
+using static ArcadeDatabaseSdk.Net48.Common.ApiResponse;
 using static MAME_Shrink.Settings.UserPreferences;
 using static MAME_Shrink.Settings.UserPreferences.GridColumnDefinition;
 using static MameTools.Net48.Machines.Disks.Disk;
@@ -779,6 +780,9 @@ public partial class MainForm : Form
 
         // Cache
         _mameCache.Initialize(_applicationName, Path.Combine(_applicationPath, "local-cache", "mame-cache.json"));
+        _genresCache.Initialize(_applicationName, Path.Combine(_applicationPath, "local-cache", "genres-cache.json"));
+        _categoriesCache.Initialize(_applicationName, Path.Combine(_applicationPath, "local-cache", "categories-cache.json"));
+        _seriesCache.Initialize(_applicationName, Path.Combine(_applicationPath, "local-cache", "series-cache.json"));
         _snapshotsCache.SetFilePath(Path.Combine(_applicationPath, "local-cache", "snapshots"));
 
         EnableControls(false);
@@ -1382,7 +1386,10 @@ public partial class MainForm : Form
         }
     }
 
-    private readonly MachinesCache _mameCache = new();
+    private readonly JsonFileCache<MachineCacheItem> _mameCache = new();
+    private readonly JsonFileCache<ClassificationCacheItem> _categoriesCache = new();
+    private readonly JsonFileCache<ClassificationCacheItem> _genresCache = new();
+    private readonly JsonFileCache<ClassificationCacheItem> _seriesCache = new();
     private readonly SnapshotsCache _snapshotsCache = new();
 
     void SetOnlineFiltersEnabled(bool enabled)
@@ -1418,28 +1425,99 @@ public partial class MainForm : Form
                 try
                 {
                     progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Release})");
-                    // Check release
                     var adbRelease = await ServiceMame.Releases();
                     var mameRelease = string.Join(",", adbRelease.Data);
+
+                    progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Categories})");
+                    if (!_categoriesCache.IsValid(_applicationName, mameRelease))
+                    {
+                        var adbCategories = await ServiceClassifications.Get(classificationType: ClassificationType.Category, language: GetCurrentLanguage());
+                        _categoriesCache.Clear();
+                        if (adbCategories.Data.Any())
+                        {
+                            foreach (var item in adbCategories.Data)
+                            {
+                                _categoriesCache.Add(
+                                    key: item.Title ?? string.Empty,
+                                    item: new ClassificationCacheItem
+                                    {
+                                        Code = item.Code,
+                                        Title = item.Title,
+                                        IsObsolete = item.IsObsolete,
+                                    }
+                                );
+                            }
+                            _categoriesCache.Store(_applicationName, mameRelease);
+                        }
+                    }
+
+                    progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Genres})");
+                    if (!_genresCache.IsValid(_applicationName, mameRelease))
+                    {
+                        var adbGenres = await ServiceClassifications.Get(classificationType: ClassificationType.Genre, language: GetCurrentLanguage());
+                        _genresCache.Clear();
+                        if (adbGenres.Data.Any())
+                        {
+                            foreach (var item in adbGenres.Data)
+                            {
+                                _genresCache.Add(
+                                    key: item.Title ?? string.Empty,
+                                    item: new ClassificationCacheItem
+                                    {
+                                        Code = item.Code,
+                                        Title = item.Title,
+                                        IsObsolete = item.IsObsolete,
+                                    }
+                                );
+                            }
+                            _genresCache.Store(_applicationName, mameRelease);
+                        }
+                    }
+
+                    progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Series})");
+                    if (!_seriesCache.IsValid(_applicationName, mameRelease))
+                    {
+                        var adbSeries = await ServiceClassifications.Get(classificationType: ClassificationType.Serie, language: GetCurrentLanguage());
+                        _seriesCache.Clear();
+                        if (adbSeries.Data.Any())
+                        {
+                            foreach (var item in adbSeries.Data)
+                            {
+                                _seriesCache.Add(
+                                    key: item.Title ?? string.Empty,
+                                    item: new ClassificationCacheItem
+                                    {
+                                        Code = item.Code,
+                                        Title = item.Title,
+                                        IsObsolete = item.IsObsolete,
+                                    }
+                                );
+                            }
+                            _seriesCache.Store(_applicationName, mameRelease);
+                        }
+                    }
 
                     progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Games})");
                     if (!_mameCache.IsValid(_applicationName, mameRelease))
                     {
                         // Download categories and machine extra info
                         // http://adb.arcadeitalia.net/service_scraper.php?ajax=query_categories&game_name=mslug;atetris;100lions;mslug3;mslug5
-                        var adbMameCache = await ServiceMame.Categories();
+                        var adbMameCategories = await ServiceMame.Categories(language: GetCurrentLanguage());
                         _mameCache.Clear();
-                        if (adbMameCache.Data.Any())
+                        if (adbMameCategories.Data.Any())
                         {
-                            foreach (var machine in adbMameCache.Data)
+                            foreach (var machine in adbMameCategories.Data)
                             {
                                 _mameCache.Add(
                                     key: machine.Name,
-                                    genre: machine.Genre,
-                                    serie: machine.Serie,
-                                    category: machine.Category,
-                                    release: machine.Release,
-                                    mameCab: machine.IsMameCab
+                                    item: new MachineCacheItem
+                                    {
+                                        Genre = machine.Genre,
+                                        Category = machine.Category,
+                                        Serie = machine.Serie,
+                                        Release = machine.Release,
+                                        MameCab = machine.IsMameCab
+                                    }
                                 );
                             }
                             _mameCache.Store(_applicationName, mameRelease);

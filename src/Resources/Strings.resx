@@ -610,4 +610,13 @@ If your PC does not have internet access, change the program options to avoid th
   <data name="FilterProtectionUnemulated" xml:space="preserve">
     <value>Unemulated</value>
   </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="Genres" xml:space="preserve">
+    <value>Genres</value>
+  </data>
+  <data name="Series" xml:space="preserve">
+    <value>Series</value>
+  </data>
 </root>

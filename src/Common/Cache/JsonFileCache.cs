@@ -6,13 +6,12 @@ using MAME_Shrink.Extensions;
 using Newtonsoft.Json;
 namespace MAME_Shrink.Common.Cache;
 
-public class MachinesCache
+public class JsonFileCache<T> where T : class
 {
     private string? _filePath;
-
     [JsonRequired] public string? ApplicationName { get; private set; }
-    [JsonRequired] public string? MameRelease { get; private set; }
-    [JsonRequired] public Dictionary<string, MachineCacheItem> Items { get; } = [];
+    [JsonRequired] public string? Release { get; private set; }
+    [JsonRequired] public Dictionary<string, T> Items { get; } = [];
 
     public void Initialize(string applicationName, string filePath)
     {
@@ -26,10 +25,10 @@ public class MachinesCache
         {
             try
             {
-                var cat = JsonHelper.DeserializeJsonFileExact<MachinesCache>(_filePath);
+                var cat = JsonHelper.DeserializeJsonFileExact<JsonFileCache<T>>(_filePath);
                 if (cat is not null)
                 {
-                    MameRelease = cat.MameRelease;
+                    Release = cat.Release;
                     ApplicationName = applicationName;
                     Items.Clear();
                     foreach (var item in cat.Items)
@@ -48,20 +47,13 @@ public class MachinesCache
 
     public void Clear()
     {
-        MameRelease = null;
+        Release = null;
         Items.Clear();
     }
 
-    public void Add(string key, string? genre, string? category, string? serie, string? release, bool mameCab)
+    public void Add(string key, T item)
     {
-        Items[key] = new MachineCacheItem
-        {
-            Genre = genre,
-            Category = category,
-            Serie = serie,
-            Release = release,
-            MameCab = mameCab
-        };
+        Items[key] = item;
     }
 
     public void Remove(string key)
@@ -69,19 +61,19 @@ public class MachinesCache
         Items.Remove(key);
     }
 
-    public void Store(string applicationName, string mameRelease)
+    public T? GetByKey(string key) => Items.TryGetValue(key, out T? item) ? item : null;
+
+    public void Store(string applicationName, string release)
     {
         if (string.IsNullOrEmpty(_filePath))
             throw new Exception("Missing file path");
         ApplicationName = applicationName;
-        MameRelease = mameRelease;
+        Release = release;
         JsonHelper.SerializeJsonFile(_filePath!, this);
     }
 
-    public MachineCacheItem? GetByKey(string key) => Items.TryGetValue(key, out MachineCacheItem? item) ? item : null;
-
-    public bool IsValid(string applicationName, string mameRelease)
+    public bool IsValid(string applicationName, string release)
     {
-        return applicationName == ApplicationName && mameRelease == MameRelease && Items.Count > 0;
+        return applicationName == ApplicationName && release == Release && Items.Count > 0;
     }
 }

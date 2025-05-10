@@ -610,4 +610,13 @@ Se il PC non dispone di accesso ad internet, modificare le opzioni del programma
   <data name="FilterProtectionUnemulated" xml:space="preserve">
     <value>Non emulata</value>
   </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categorie</value>
+  </data>
+  <data name="Genres" xml:space="preserve">
+    <value>Generi</value>
+  </data>
+  <data name="Series" xml:space="preserve">
+    <value>Serie</value>
+  </data>
 </root>

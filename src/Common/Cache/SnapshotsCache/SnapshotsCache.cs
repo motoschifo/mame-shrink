@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-namespace MAME_Shrink.Common.Cache;
+namespace MAME_Shrink.Common.Cache.SnapshotCache;
 
 public class SnapshotsCache
 {
     public Dictionary<string, SnapshotCacheItem> Items { get; } = [];
     private string? _baseFilePath;
+    private const int _retentionDays = 7;
+    private const string _extension = "png";
 
     public void SetFilePath(string filePath)
     {
@@ -20,11 +22,11 @@ public class SnapshotsCache
         }
         else
         {
-            var files = Directory.GetFiles(_baseFilePath, "*.png", SearchOption.TopDirectoryOnly);
+            var files = Directory.GetFiles(_baseFilePath, $"*.{_extension}", SearchOption.TopDirectoryOnly);
             foreach (string file in files)
             {
                 var dateLastUpdate = File.GetLastWriteTime(file);
-                if (dateLastUpdate < DateTime.Now.AddDays(-7))
+                if (dateLastUpdate < DateTime.Now.AddDays(-_retentionDays))
                 {
                     File.Delete(file);
                     continue;
@@ -62,7 +64,7 @@ public class SnapshotsCache
     {
         if (!Items.TryGetValue(key, out SnapshotCacheItem? item))
             return null;
-        if (item.DateLastUpdate > DateTime.Now.AddDays(-7) && File.Exists(item.FilePath))
+        if (item.DateLastUpdate > DateTime.Now.AddDays(-_retentionDays) && File.Exists(item.FilePath))
             return item;
         return null;
     }
@@ -71,8 +73,8 @@ public class SnapshotsCache
     {
         if (string.IsNullOrEmpty(_baseFilePath))
             throw new Exception("File path not set");
-        var filePath = Path.Combine(_baseFilePath, $"{key}.png");
-        image.Save(filePath, ImageFormat.Png);
+        var filePath = Path.Combine(_baseFilePath, $"{key}.{_extension}");
+        image.Save(filePath, ImageFormat.Png);  // PNG only
         Items[key] = new SnapshotCacheItem
         {
             DateLastUpdate = DateTime.Now,
