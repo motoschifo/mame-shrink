@@ -65,7 +65,7 @@ partial class OptionsForm
             this.ArcadeDatabaseConnectionAuto = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
             this.OpenRomsetWebPage = new System.Windows.Forms.LinkLabel();
-            this.cmdLoadData = new System.Windows.Forms.Button();
+            this.SaveOptions = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.TabPageGamelist.SuspendLayout();
             this.TabPageRoms.SuspendLayout();
@@ -337,22 +337,23 @@ partial class OptionsForm
             resources.ApplyResources(this.OpenRomsetWebPage, "OpenRomsetWebPage");
             this.OpenRomsetWebPage.Image = global::MAME_Shrink.Properties.Resources.link;
             this.OpenRomsetWebPage.Name = "OpenRomsetWebPage";
+            this.OpenRomsetWebPage.TabStop = true;
             this.OpenRomsetWebPage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.OpenRomsetWebPage_LinkClicked);
             // 
-            // cmdLoadData
+            // SaveOptions
             // 
-            resources.ApplyResources(this.cmdLoadData, "cmdLoadData");
-            this.cmdLoadData.Image = global::MAME_Shrink.Properties.Resources.confirm;
-            this.cmdLoadData.Name = "cmdLoadData";
-            this.cmdLoadData.UseVisualStyleBackColor = true;
-            this.cmdLoadData.Click += new System.EventHandler(this.CmdSaveData_Click);
+            resources.ApplyResources(this.SaveOptions, "SaveOptions");
+            this.SaveOptions.Image = global::MAME_Shrink.Properties.Resources.confirm;
+            this.SaveOptions.Name = "SaveOptions";
+            this.SaveOptions.UseVisualStyleBackColor = true;
+            this.SaveOptions.Click += new System.EventHandler(this.SaveOptions_Click);
             // 
             // OptionsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.cmdLoadData);
+            this.Controls.Add(this.SaveOptions);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OptionsForm";
@@ -384,7 +385,7 @@ partial class OptionsForm
     private System.Windows.Forms.TextBox txtRomsPath;
     private System.Windows.Forms.Button cmdSfogliaGamelistXml;
     private System.Windows.Forms.Button cmdSfogliaMameExe;
-    private System.Windows.Forms.Button cmdLoadData;
+    private System.Windows.Forms.Button SaveOptions;
     private System.Windows.Forms.TextBox txtMameExe;
     private System.Windows.Forms.CheckBox ForceGeneration;
     private System.Windows.Forms.TextBox txtRemovedFilesFolder;

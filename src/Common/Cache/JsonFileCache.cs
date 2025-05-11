@@ -63,7 +63,7 @@ public class JsonFileCache<T> where T : class
 
     public T? GetByKey(string key) => Items.TryGetValue(key, out T? item) ? item : null;
 
-    public void Store(string applicationName, string release)
+    public void Store(string applicationName, string? release)
     {
         if (string.IsNullOrEmpty(_filePath))
             throw new Exception("Missing file path");
@@ -72,7 +72,7 @@ public class JsonFileCache<T> where T : class
         JsonHelper.SerializeJsonFile(_filePath!, this);
     }
 
-    public bool IsValid(string applicationName, string release)
+    public bool IsValid(string applicationName, string? release)
     {
         return applicationName == ApplicationName && release == Release && Items.Count > 0;
     }

@@ -622,4 +622,49 @@ Se il PC non dispone di accesso ad internet, modificare le opzioni del programma
   <data name="UpdateSelection" xml:space="preserve">
     <value>Aggiornamento selezione</value>
   </data>
+  <data name="NoItemSelected" xml:space="preserve">
+    <value>Nessun elemento selezionato</value>
+  </data>
+  <data name="ColumnRomset" xml:space="preserve">
+    <value>Romset</value>
+  </data>
+  <data name="ColumnTitle" xml:space="preserve">
+    <value>Titolo</value>
+  </data>
+  <data name="ColumnYear" xml:space="preserve">
+    <value>Anno</value>
+  </data>
+  <data name="ColumnManufacturer" xml:space="preserve">
+    <value>Produttore</value>
+  </data>
+  <data name="ColumnClone" xml:space="preserve">
+    <value>Clone</value>
+  </data>
+  <data name="ColumnFileSize" xml:space="preserve">
+    <value>Dimensione</value>
+  </data>
+  <data name="ColumnStatus" xml:space="preserve">
+    <value>Stato</value>
+  </data>
+  <data name="ColumnGenre" xml:space="preserve">
+    <value>Genere</value>
+  </data>
+  <data name="ColumnCategory" xml:space="preserve">
+    <value>Categoria</value>
+  </data>
+  <data name="ColumnRelease" xml:space="preserve">
+    <value>Versione</value>
+  </data>
+  <data name="ColumnPlayers" xml:space="preserve">
+    <value>Giocatori</value>
+  </data>
+  <data name="ColumnButtons" xml:space="preserve">
+    <value>Pulsanti</value>
+  </data>
+  <data name="ColumnScreen" xml:space="preserve">
+    <value>Schermo</value>
+  </data>
+  <data name="ColumnSerie" xml:space="preserve">
+    <value>Serie</value>
+  </data>
 </root>

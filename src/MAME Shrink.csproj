@@ -129,6 +129,13 @@
     <Compile Include="Forms\Main\GridItem.cs" />
     <Compile Include="Forms\Main\RomFile.cs" />
     <Compile Include="Extensions\JsonHelper.cs" />
+    <Compile Include="Forms\Selections\ItemsSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Selections\ItemsSelectionForm.Designer.cs">
+      <DependentUpon>ItemsSelectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Selections\SelectionListItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -155,6 +162,9 @@
     <Compile Include="Utilities\Dialogs.cs" />
     <Compile Include="Utilities\ApplicationHelper.cs" />
     <Compile Include="Utilities\FileUtilities.cs" />
+    <EmbeddedResource Include="Forms\Selections\ItemsSelectionForm.resx">
+      <DependentUpon>ItemsSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings.it.resx" />
     <EmbeddedResource Include="Resources\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -191,63 +191,20 @@
   <data name="CleanMoveToRecycleBin.Text" xml:space="preserve">
     <value>Sposta i file nel cestino, se possibile</value>
   </data>
-  <data name="TabPageGamelist.Text" xml:space="preserve">
-    <value>Formato dei file</value>
-  </data>
-  <data name="TabPageRoms.Text" xml:space="preserve">
-    <value>Cartelle roms</value>
-  </data>
-  <data name="TabPageMame.Text" xml:space="preserve">
-    <value>Set Mame</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TabPageClean.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="TabPageClean.Text" xml:space="preserve">
-    <value>Pulizia</value>
-  </data>
-  <data name="ArcadeDatabaseConnectionOffline.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ArcadeDatabaseConnectionOffline.Size" type="System.Drawing.Size, System.Drawing">
-    <value>235, 17</value>
-  </data>
-  <data name="ArcadeDatabaseConnectionOffline.Text" xml:space="preserve">
-    <value>La connessione ad internet non è disponibile</value>
-  </data>
-  <data name="ArcadeDatabaseConnectionAuto.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ArcadeDatabaseConnectionAuto.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 17</value>
-  </data>
-  <data name="ArcadeDatabaseConnectionAuto.Text" xml:space="preserve">
-    <value>Utilizza la connessione, se presente</value>
-  </data>
-  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label6.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>Sito Arcade Database</value>
-  </data>
-  <data name="OpenRomsetWebPage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="TabPageConnections.Text" xml:space="preserve">
-    <value>Connessioni</value>
-  </data>
   <data name="cmdSfogliaGamelistXml.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdSfogliaMameExe.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="TabPageGamelist.Text" xml:space="preserve">
+    <value>Formato dei file</value>
+  </data>
   <data name="cmdSfogliaRomsPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="TabPageRoms.Text" xml:space="preserve">
+    <value>Cartelle roms</value>
   </data>
   <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -297,14 +254,66 @@
   <data name="MameSetTypeSplitted.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="TabPageMame.Text" xml:space="preserve">
+    <value>Set Mame</value>
+  </data>
   <data name="cmdSfogliaRemovedFilesFolder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdLoadData.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TabPageClean.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="TabPageClean.Text" xml:space="preserve">
+    <value>Pulizia</value>
+  </data>
+  <data name="ArcadeDatabaseConnectionOffline.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdLoadData.Text" xml:space="preserve">
+  <data name="ArcadeDatabaseConnectionOffline.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 17</value>
+  </data>
+  <data name="ArcadeDatabaseConnectionOffline.Text" xml:space="preserve">
+    <value>La connessione ad internet non è disponibile</value>
+  </data>
+  <data name="ArcadeDatabaseConnectionAuto.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ArcadeDatabaseConnectionAuto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 17</value>
+  </data>
+  <data name="ArcadeDatabaseConnectionAuto.Text" xml:space="preserve">
+    <value>Utilizza la connessione, se presente</value>
+  </data>
+  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Sito Arcade Database</value>
+  </data>
+  <data name="OpenRomsetWebPage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="TabPageConnections.Text" xml:space="preserve">
+    <value>Connessioni</value>
+  </data>
+  <data name="SaveOptions.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="SaveOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="SaveOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 35</value>
+  </data>
+  <data name="SaveOptions.Text" xml:space="preserve">
     <value>Conferma</value>
+  </data>
+  <data name="SaveOptions.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

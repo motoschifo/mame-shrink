@@ -43,7 +43,7 @@ public partial class OptionsForm : Form
         ArcadeDatabaseConnectionOption = _userPreferences.ArcadeDatabase.ConnectionOption;
     }
 
-    private async void CmdSaveData_Click(object sender, EventArgs e)
+    private async void SaveOptions_Click(object sender, EventArgs e)
     {
         try
         {

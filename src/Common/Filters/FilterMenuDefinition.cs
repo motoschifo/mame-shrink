@@ -222,13 +222,13 @@ internal static class FilterMenuDefinition
             Children =
             {
                 new FilterMenuItem { Text = Strings.FilterNoGenre, Kind = FilterKind.NoGenre },
-                new FilterMenuItem { Text = Strings.FilterByGenre, Kind = FilterKind.Genre, UpdateCounter = false, NotImplemented = true},
+                new FilterMenuItem { Text = Strings.FilterByGenre, Kind = FilterKind.Genre, UpdateCounter = false },
                 new FilterMenuItem { IsSeparator = true },
                 new FilterMenuItem { Text = Strings.FilterNoCategories, Kind = FilterKind.NoCategory },
-                new FilterMenuItem { Text = Strings.FilterByCategory, Kind = FilterKind.Category, UpdateCounter = false, NotImplemented = true },
+                new FilterMenuItem { Text = Strings.FilterByCategory, Kind = FilterKind.Category, UpdateCounter = false },
                 new FilterMenuItem { IsSeparator = true },
                 new FilterMenuItem { Text = Strings.FilterNoSeries, Kind = FilterKind.NoSerie, NotImplemented = true },
-                new FilterMenuItem { Text = Strings.FilterBySerie, Kind = FilterKind.Serie, UpdateCounter = false, NotImplemented = true },
+                new FilterMenuItem { Text = Strings.FilterBySerie, Kind = FilterKind.Serie, UpdateCounter = false },
             }
         });
 

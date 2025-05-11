@@ -24,6 +24,7 @@ public partial class UserPreferences
             Buttons,
             Display,
             Category,
+            Serie,
         }
 
         public static GridColumnKind ParseGridColumn(string? value) => value.ToEnum(GridColumnKind.Unknown, GridColumnKind.Unknown);

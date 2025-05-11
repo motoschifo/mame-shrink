@@ -191,6 +191,9 @@
   <data name="cmdSfogliaGamelistXml.Location" type="System.Drawing.Point, System.Drawing">
     <value>400, 143</value>
   </data>
+  <data name="&gt;&gt;SaveOptions.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="&gt;&gt;RomPathsManual.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -208,9 +211,6 @@
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>381, 36</value>
-  </data>
-  <data name="CleanDeleteFiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 100</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -738,6 +738,9 @@
   <data name="cmdSfogliaRemovedFilesFolder.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="&gt;&gt;SaveOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="&gt;&gt;ArcadeDatabaseConnectionAuto.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
@@ -873,8 +876,8 @@
   <data name="MameSetTypeSplitted.Text" xml:space="preserve">
     <value>Splitted</value>
   </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="CleanDeleteFiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 100</value>
   </data>
   <data name="cmdLoadData.Text" xml:space="preserve">
     <value>Confirm</value>
@@ -890,6 +893,9 @@
   </data>
   <data name="ForceGeneration.Location" type="System.Drawing.Point, System.Drawing">
     <value>59, 81</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="TabPageConnections.Size" type="System.Drawing.Size, System.Drawing">
     <value>454, 307</value>
@@ -960,6 +966,9 @@
   <data name="cmdSfogliaMameExe.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="&gt;&gt;SaveOptions.Name" xml:space="preserve">
+    <value>SaveOptions</value>
+  </data>
   <data name="txtMameExe.Location" type="System.Drawing.Point, System.Drawing">
     <value>43, 52</value>
   </data>
@@ -986,6 +995,9 @@
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
+  </data>
+  <data name="&gt;&gt;SaveOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1020,13 +1032,13 @@
   <data name="&gt;&gt;cmdSfogliaRomsPath.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
-  </data>
   <data name="&gt;&gt;TabPageMame.Parent" xml:space="preserve">
     <value>tabControl1</value>
   </data>
   <data name="TabPageClean.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="SaveOptions.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="OpenRomsetWebPage.Location" type="System.Drawing.Point, System.Drawing">
@@ -1041,14 +1053,20 @@
   <data name="OpenRomsetWebPage.Text" xml:space="preserve">
     <value>adb.arcadedatabase.net</value>
   </data>
+  <data name="RomPathsManual.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 56</value>
+  </data>
   <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
   <data name="CleanMoveToRecycleBin.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="RomPathsManual.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 56</value>
+  <data name="SaveOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 351</value>
+  </data>
+  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
   </data>
   <data name="txtRomsPath.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

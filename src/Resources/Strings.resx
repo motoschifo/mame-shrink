@@ -622,4 +622,49 @@ If your PC does not have internet access, change the program options to avoid th
   <data name="UpdateSelection" xml:space="preserve">
     <value>Update selection</value>
   </data>
+  <data name="NoItemSelected" xml:space="preserve">
+    <value>No item selected</value>
+  </data>
+  <data name="ColumnRomset" xml:space="preserve">
+    <value>Romset</value>
+  </data>
+  <data name="ColumnTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="ColumnYear" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="ColumnManufacturer" xml:space="preserve">
+    <value>Manufacturer</value>
+  </data>
+  <data name="ColumnClone" xml:space="preserve">
+    <value>Clone</value>
+  </data>
+  <data name="ColumnFileSize" xml:space="preserve">
+    <value>File size</value>
+  </data>
+  <data name="ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="ColumnGenre" xml:space="preserve">
+    <value>Genre</value>
+  </data>
+  <data name="ColumnCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="ColumnRelease" xml:space="preserve">
+    <value>Release</value>
+  </data>
+  <data name="ColumnPlayers" xml:space="preserve">
+    <value>Players</value>
+  </data>
+  <data name="ColumnButtons" xml:space="preserve">
+    <value>Buttons</value>
+  </data>
+  <data name="ColumnScreen" xml:space="preserve">
+    <value>Screen</value>
+  </data>
+  <data name="ColumnSerie" xml:space="preserve">
+    <value>Serie</value>
+  </data>
 </root>

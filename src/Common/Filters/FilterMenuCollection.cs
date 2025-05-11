@@ -66,18 +66,24 @@ internal class FilterMenuCollection : Collection<FilterMenuItem>
         foreach (var filter in _filterKindMap.Values)
         {
             var menu = filter.MenuItem!;
-            menu.Enabled = false;
-            if (!filter.Enabled || filter.Action is null || !filter.UpdateCounter)
+            if (!filter.Enabled || filter.NotImplemented || filter.Action is null)
+            {
+                menu.Enabled = false;
                 continue;
-            var count = machines.Count(x => filter.Action.Invoke(x.Value));
-            if (count > 0)
-            {
-                menu.Enabled = true;
-                menu.ShortcutKeyDisplayString = count.ToFormattedString();
             }
-            else
+            menu.Enabled = true;
+            if (filter.UpdateCounter)
             {
-                menu.ShortcutKeyDisplayString = "-";
+                var count = machines.Count(x => filter.Action.Invoke(x.Value));
+                if (count > 0)
+                {
+                    menu.Enabled = true;
+                    menu.ShortcutKeyDisplayString = count.ToFormattedString();
+                }
+                else
+                {
+                    menu.ShortcutKeyDisplayString = "-";
+                }
             }
         }
     }

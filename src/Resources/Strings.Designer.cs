@@ -160,6 +160,132 @@ namespace MAME_Shrink.Resources {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Buttons.
+        /// </summary>
+        internal static string ColumnButtons {
+            get {
+                return ResourceManager.GetString("ColumnButtons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Category.
+        /// </summary>
+        internal static string ColumnCategory {
+            get {
+                return ResourceManager.GetString("ColumnCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Clone.
+        /// </summary>
+        internal static string ColumnClone {
+            get {
+                return ResourceManager.GetString("ColumnClone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a File size.
+        /// </summary>
+        internal static string ColumnFileSize {
+            get {
+                return ResourceManager.GetString("ColumnFileSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Genre.
+        /// </summary>
+        internal static string ColumnGenre {
+            get {
+                return ResourceManager.GetString("ColumnGenre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Manufacturer.
+        /// </summary>
+        internal static string ColumnManufacturer {
+            get {
+                return ResourceManager.GetString("ColumnManufacturer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Players.
+        /// </summary>
+        internal static string ColumnPlayers {
+            get {
+                return ResourceManager.GetString("ColumnPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Release.
+        /// </summary>
+        internal static string ColumnRelease {
+            get {
+                return ResourceManager.GetString("ColumnRelease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Romset.
+        /// </summary>
+        internal static string ColumnRomset {
+            get {
+                return ResourceManager.GetString("ColumnRomset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Screen.
+        /// </summary>
+        internal static string ColumnScreen {
+            get {
+                return ResourceManager.GetString("ColumnScreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Serie.
+        /// </summary>
+        internal static string ColumnSerie {
+            get {
+                return ResourceManager.GetString("ColumnSerie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Status.
+        /// </summary>
+        internal static string ColumnStatus {
+            get {
+                return ResourceManager.GetString("ColumnStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Title.
+        /// </summary>
+        internal static string ColumnTitle {
+            get {
+                return ResourceManager.GetString("ColumnTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Year.
+        /// </summary>
+        internal static string ColumnYear {
+            get {
+                return ResourceManager.GetString("ColumnYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Could not read file {0}.
         /// </summary>
         internal static string CouldNotReadFile {
@@ -1327,6 +1453,15 @@ namespace MAME_Shrink.Resources {
         internal static string NoGameSelected {
             get {
                 return ResourceManager.GetString("NoGameSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a No item selected.
+        /// </summary>
+        internal static string NoItemSelected {
+            get {
+                return ResourceManager.GetString("NoItemSelected", resourceCulture);
             }
         }
         
