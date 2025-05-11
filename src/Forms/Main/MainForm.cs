@@ -51,7 +51,10 @@ public partial class MainForm : Form
 
     private readonly List<RomFile> _files = [];
     private Dictionary<int, GamesGridItem> _gridItems = [];
+    private HashSet<string> _gridItemsWithFiles = [];
     private readonly List<string> _selectedItems = [];
+    private long _selectedItemsFileSize = 0;
+    private readonly Dictionary<string, MameMachine> _selectableMachines = [];
     private enum FilterOperation
     {
         AddToSelected,
@@ -176,7 +179,6 @@ public partial class MainForm : Form
         _menuActions[FilterKind.Release] = (machine) => false;    // TODO
     }
 
-
     private void CheckMenuActions()
     {
         if (!Debugger.IsAttached)
@@ -245,22 +247,19 @@ public partial class MainForm : Form
         });
     }
 
+    private void AddItemToSelection(string name)
+    {
+        _selectedItems.Add(name);
+        var files = _files.Where(x => x.Name == name);
+        _selectedItemsFileSize += files.Sum(x => x.Size);
+    }
 
-    //private void AddToSelectedItems(string name)
-    //{
-    //    var item = _gridItems.Values.FirstOrDefault(x => x.Name == name);
-    //    if (item is null || !item.CanBeSelected || !item.HasFiles || _selectedItems.Contains(item.Name))
-    //        return;
-    //    _selectedItems.Add(item.Name);
-    //}
-
-    //private void RemoveFromSelectedItems(string name)
-    //{
-    //    var item = _gridItems.Values.FirstOrDefault(x => x.Name == name);
-    //    if (item is null || !item.CanBeSelected || !item.HasFiles || !_selectedItems.Contains(item.Name))
-    //        return;
-    //    _selectedItems.Remove(item.Name);
-    //}
+    private void RemoveItemFromSelection(string name)
+    {
+        _selectedItems.Remove(name);
+        var files = _files.Where(x => x.Name == name);
+        _selectedItemsFileSize -= files.Sum(x => x.Size);
+    }
 
     public void SelectGame(string name)
     {
@@ -269,10 +268,10 @@ public partial class MainForm : Form
         var machine = _mame.Machines.GetMachineByName(name);
         if (machine is null)
             return;
-        var item = _gridItems.Values.FirstOrDefault(x => x.Name == name);
-        if (!item.CanBeSelected || !item.HasFiles)
+        var item = _selectableMachines[name];
+        if (item is null)
             return;
-        _selectedItems.Add(item.Name);
+        AddItemToSelection(item.Name);
 
         //if (_config.Mame.MameSet == MameSection.MameSetKind.Auto)
         //{
@@ -330,10 +329,10 @@ public partial class MainForm : Form
         var machine = _mame.Machines.GetMachineByName(name);
         if (machine is null)
             return;
-        var item = _gridItems.Values.FirstOrDefault(x => x.Name == name);
-        if (!item.CanBeSelected || !item.HasFiles)
+        var item = _selectableMachines[name];
+        if (item is null)
             return;
-        _selectedItems.Remove(item.Name);
+        RemoveItemFromSelection(item.Name);
 
         //if (_config.Mame.MameSet == MameSection.MameSetKind.Auto)
         //{
@@ -391,14 +390,12 @@ public partial class MainForm : Form
 
     public void UpdateSelectionInfo()
     {
-        UpdateInfo("...");
+        UpdateInfo(Strings.UpdateSelection);
         List<string> parts = [];
-        var text = string.Empty;
         if (_selectedItems.Count > 0)
         {
-            var totalSize = _gridItems.Values.Where(x => _selectedItems.Contains(x.Name)).Sum(x => x.TotalFilesSize);
             parts.Add(string.Format(Strings.SelectedGames, _selectedItems.Count.ToFormattedString()));
-            parts.Add(string.Format(Strings.DiskSpace, totalSize.ToFileSizeString()));
+            parts.Add(string.Format(Strings.DiskSpace, _selectedItemsFileSize.ToFileSizeString()));
         }
         else
         {
@@ -495,33 +492,19 @@ public partial class MainForm : Form
     private void GamesListView_ColumnClick(object sender, ColumnClickEventArgs e)
     {
         if (e.Column == 0)
+            return;
+        var ch = GamesListView.Columns[e.Column];
+        if (Enum.TryParse<GridColumnKind>(ch.Tag.ToString(), out var newColumn))
         {
-            if (!bool.TryParse(GamesListView.Columns[e.Column].Tag?.ToString(), out var value))
-                return;
-            GamesListView.Columns[e.Column].Tag = !value;
-            _selectedItems.Clear();
-            if (value)
-                _selectedItems.AddRange(_gridItems.Values.Select(x => x.Name));
-            GamesListView.Invalidate();
+            _sortAsc = newColumn != _sortColumn || !_sortAsc;
+            _sortColumn = newColumn;
         }
         else
         {
-
-            if (e.Column == 0)
-                return;
-            var ch = GamesListView.Columns[e.Column];
-            if (Enum.TryParse<GridColumnKind>(ch.Tag.ToString(), out var newColumn))
-            {
-                _sortAsc = newColumn != _sortColumn || !_sortAsc;
-                _sortColumn = newColumn;
-            }
-            else
-            {
-                _sortAsc = true;
-                _sortColumn = GridColumnKind.Description;
-            }
-            UpdateGridItems();
+            _sortAsc = true;
+            _sortColumn = GridColumnKind.Description;
         }
+        UpdateGridItems();
     }
 
     public void UpdateGridItems()
@@ -591,7 +574,9 @@ public partial class MainForm : Form
                     return new { index, item };
                 })
                 .ToDictionary(x => x.index, x => x.item);
-
+            _gridItemsWithFiles = [.. _gridItems.Values
+                .Where(x => x.CanBeSelected && x.HasFiles)
+                .Select(x => x.Name)];
             GamesListView.VirtualListSize = _gridItems.Count();
         }
         catch (Exception ex)
@@ -613,10 +598,21 @@ public partial class MainForm : Form
         e.DrawDefault = true;
     }
 
-    public void EnableControls(bool enable)
+    public void DisableFormControls(bool enable)
     {
-        GridTextFilter.Enabled = enable;
+        if (!enable)
+            MouseWait();
+        ToolbarMenuGrid.Enabled = enable;
         GamesListView.Enabled = enable;
+        ChangeOptions.Enabled = enable;
+        LoadGames.Enabled = enable;
+        CancelCurrentProcess.Enabled = enable;
+        ValidateRomset.Enabled = enable;
+        StartClean.Enabled = enable;
+        OpenRomsetWebPage.Enabled = enable;
+        if (enable)
+            MouseDefault();
+        Application.DoEvents();
     }
 
     private void GridTextFilter_TextChanged(object sender, EventArgs e)
@@ -725,8 +721,6 @@ public partial class MainForm : Form
         _categoriesCache.Initialize(_applicationName, Path.Combine(_applicationPath, "local-cache", "categories-cache.json"));
         _seriesCache.Initialize(_applicationName, Path.Combine(_applicationPath, "local-cache", "series-cache.json"));
         _snapshotsCache.SetFilePath(Path.Combine(_applicationPath, "local-cache", "snapshots"));
-
-        EnableControls(false);
     }
 
     private void ShowUpdatedSetting()
@@ -760,7 +754,7 @@ public partial class MainForm : Form
     private async void LoadGames_Click(object sender, EventArgs e)
     {
         MouseWait();
-        EnableControls(false);
+        DisableFormControls(false);
 
         try
         {
@@ -830,9 +824,18 @@ public partial class MainForm : Form
             );
 
             UpdateInfo(Strings.AddingDataToGrid);
-            GamesListView.BeginUpdate();
+
+            _selectableMachines.Clear();
+            var files = new HashSet<string>(_files.Select(x => x.Name));
+            foreach (var item in _mame.Machines)
+            {
+                if (files.Contains(item.Name))
+                    _selectableMachines.Add(item.Name, item);
+            }
+
 
             // Grid setup
+            GamesListView.BeginUpdate();
             _selectedItems.Clear();
             GamesListView.Items.Clear();
             GamesListView.FullRowSelect = true;
@@ -851,8 +854,7 @@ public partial class MainForm : Form
             AddColumnsToGrid();
             UpdateGridItems();
             UpdateInfo("Aggiornamento filtri...");
-            var machines = _gridItems.Select(x => x.Value).Where(x => x.CanBeSelected && x.Machine is not null).Select(x => x.Machine).ToDictionary(x => x!.Name, x => x);
-            _filters.UpdateFilterMenuCounters(machines!);
+            _filters.UpdateFilterMenuCounters(_selectableMachines);
             UpdateSelectionInfo();
         }
         catch (Exception ex)
@@ -861,7 +863,7 @@ public partial class MainForm : Form
         }
         finally
         {
-            EnableControls(true);
+            DisableFormControls(true);
             MouseDefault();
             LoadGames.Show();
             CancelCurrentProcess.Hide();
@@ -931,44 +933,40 @@ public partial class MainForm : Form
         Dialogs.DoSomethingSafe(() =>
         {
             var changed = false;
-            foreach (var item in _gridItems.Values.Where(x => x.HasFiles))
+            foreach (var item in _selectableMachines)
             {
-                var machine = _mame.Machines.GetMachineByName(item.Name);
-                if (machine is null) continue;
-                if (!func.Invoke(machine)) continue;
+                var machine = item.Value;
+                var machineName = machine.Name;
+                if (!func.Invoke(machine))
+                    continue;
 
                 if (_filterOperation == FilterOperation.AddToSelected)
                 {
-                    if (_selectedItems.Contains(machine.Name))
+                    if (_selectedItems.Contains(machineName))
                         continue;
-                    _selectedItems.Add(machine.Name);
-                    //SelectGame(machine.Name);
+                    AddItemToSelection(machineName);
                     changed = true;
                 }
                 else if (_filterOperation == FilterOperation.RemoveFromSelected)
                 {
-                    if (!_selectedItems.Contains(machine.Name))
+                    if (!_selectedItems.Contains(machineName))
                         continue;
-                    _selectedItems.Remove(machine.Name);
-                    //DeselectGame(machine.Name);
+                    RemoveItemFromSelection(machineName);
                     changed = true;
                 }
                 else if (_filterOperation == FilterOperation.ToggleSelected)
                 {
-                    if (_selectedItems.Contains(machine.Name))
+                    if (_selectedItems.Contains(machineName))
                     {
-                        _selectedItems.Remove(machine.Name);
-                        //DeselectGame(machine.Name);
+                        RemoveItemFromSelection(machineName);
                     }
                     else
                     {
-                        _selectedItems.Add(machine.Name);
-                        //SelectGame(machine.Name);
+                        AddItemToSelection(machineName);
                     }
                     changed = true;
                 }
             }
-
             if (changed)
             {
                 UpdateGridItems();
@@ -1333,30 +1331,19 @@ public partial class MainForm : Form
     private readonly JsonFileCache<ClassificationCacheItem> _seriesCache = new();
     private readonly SnapshotsCache _snapshotsCache = new();
 
-    void SetOnlineFiltersEnabled(bool enabled)
+    void UpdateOnlineFilters(bool enabled)
     {
-        // TODO: rifare il menu o seguire la definizione per poi disabilitare le voci diverse
-        //var onlineFilters = new[]
-        //{
-        //    MenuFilterTypeMamecab,
-        //    MenuFilterClassificationsGenre,
-        //    MenuFilterClassificationsCategories,
-        //    MenuFilterRelease,
-        //};
-
-        ////var changed = false;
-        //foreach (var item in onlineFilters)
-        //{
-        //    if (item.Enabled == enabled)
-        //        continue;
-        //    item.Enabled = enabled;
-        //    //changed = true;
-        //}
+        _filters[(int)FilterKind.IsMamecab].Enabled = enabled;
+        _filters[(int)FilterKind.Genre].Enabled = enabled;
+        _filters[(int)FilterKind.Category].Enabled = enabled;
+        _filters[(int)FilterKind.Serie].Enabled = enabled;
+        _filters[(int)FilterKind.Release].Enabled = enabled;
+        _filters.UpdateFilterMenuHandlers();
     }
 
     private async Task LoadFromArcadeDatabaseOrCache(Action<string> progressUpdate)
     {
-        SetOnlineFiltersEnabled(false);
+        UpdateOnlineFilters(false);
 
         // Verifica online
         if (_online != false)
@@ -1484,7 +1471,7 @@ public partial class MainForm : Form
                 machine.Extra.FirstEmulatorRelease = item.Release;
                 machine.Extra.IsMameCab = item.MameCab;
             }
-            SetOnlineFiltersEnabled(true);
+            UpdateOnlineFilters(true);
         }
         progressUpdate.Invoke(string.Empty);
     }
@@ -1719,6 +1706,70 @@ public partial class MainForm : Form
             return;
         if (!Enum.TryParse(menuItem.Tag?.ToString() ?? string.Empty, true, out FilterKind filter) || !_menuActions.ContainsKey(filter))
             Dialogs.ShowErrorDialog($"Unsupported filter type {menuItem.Tag?.ToString()}");
-        ApplyFilters(_menuActions[filter]);
+        try
+        {
+            DisableFormControls(false);
+            ApplyFilters(_menuActions[filter]);
+        }
+        finally
+        {
+            DisableFormControls(true);
+        }
+    }
+
+    private void MenuShowFilteredGames_Click(object sender, EventArgs e)
+    {
+        //if (parentMenu is not ToolStripMenuItem menuItem)
+        //    return;
+        //if (menuItem.Owner is ToolStripDropDown dropDown)
+        //{
+        //    var menuPosition = dropDown.PointToScreen(Point.Empty);
+        //    var itemIndex = menuItem.Owner.Items.IndexOf(menuItem);
+        //    var yOffset = 0;
+        //    for (var i = 0; i < itemIndex; i++)
+        //    {
+        //        yOffset += menuItem.Owner.Items[i].GetPreferredSize(Size.Empty).Height;
+        //    }
+
+        //    menu.Show(menuPosition.X, menuPosition.Y + yOffset + menuItem.Height);
+        //    return;
+        //}
+        //else if (menuItem.Owner is MenuStrip menuStrip)
+        //{
+        //    var menuPosition = menuStrip.PointToScreen(menuItem.Bounds.Location);
+        //    menu.Show(menuPosition.X, menuPosition.Y + menuItem.Bounds.Height);
+        //}
+        //var menuPosition = MenuShowFilteredGames.PointToScreen(menuItem.Bounds.Location);
+        //MenuFilters.Show(menuPosition.X, menuPosition.Y + MenuShowFilteredGames.Bounds.Height);
+
+        //ShowMenu(MenuFilters, );
+    }
+
+    private ToolStripMenuItem CloneMenuItem(ToolStripMenuItem original)
+    {
+        var clone = new ToolStripMenuItem(original.Text)
+        {
+            Tag = original.Tag,
+            Checked = original.Checked,
+            Enabled = original.Enabled,
+            ShortcutKeys = original.ShortcutKeys,
+            CheckOnClick = original.CheckOnClick
+        };
+        //clone.Click += MenuFiltersItem_Click;
+        foreach (ToolStripItem subItem in original.DropDownItems)
+        {
+            if (subItem is ToolStripMenuItem subMenuItem)
+                clone.DropDownItems.Add(CloneMenuItem(subMenuItem));
+        }
+        return clone;
+    }
+
+    private void MenuShowFilteredGames_DropDownOpening(object sender, EventArgs e)
+    {
+        MenuShowFilteredGames.DropDownItems.Clear();
+        foreach (ToolStripMenuItem item in MenuFilters.Items)
+        {
+            MenuShowFilteredGames.DropDownItems.Add(CloneMenuItem(item));
+        }
     }
 }

@@ -15,6 +15,8 @@ internal class FilterMenuCollection : Collection<FilterMenuItem>
         FilterMenuDefinition.Initialize(this);
     }
 
+    public new FilterMenuItem this[int index] => _filterKindMap[(FilterKind)index];
+
     public void BuildMenuItems(ToolStripItemCollection target, EventHandler clickHandler, Dictionary<FilterKind, Func<MameMachine, bool>> actions)
     {
         target.Clear();
@@ -22,6 +24,7 @@ internal class FilterMenuCollection : Collection<FilterMenuItem>
         BuildMenuItems([.. this], target, clickHandler, actions, 0);
     }
 
+    public List<FilterMenuItem> ToList() => [.. Items];
 
     private readonly Dictionary<FilterKind, FilterMenuItem> _filterKindMap = [];
 
@@ -76,6 +79,21 @@ internal class FilterMenuCollection : Collection<FilterMenuItem>
             {
                 menu.ShortcutKeyDisplayString = "-";
             }
+        }
+    }
+
+    public void UpdateFilterMenuHandlers()
+    {
+        foreach (var filter in _filterKindMap.Values.Where(x => x.MenuItem is not null))
+        {
+            var menu = filter.MenuItem!;
+            if (filter.NotImplemented)
+            {
+                menu.Enabled = false;
+                continue;
+            }
+            if (menu.Enabled != filter.Enabled)
+                menu.Enabled = filter.Enabled;
         }
     }
 }

@@ -1,6 +1,4 @@
 ﻿#nullable enable
-using ArcadeDatabaseSdk.Net48.Extensions;
-
 namespace ArcadeDatabaseSdk.Net48.Common;
 
 public partial class ApiResponse

@@ -311,7 +311,7 @@ Se il PC non dispone di accesso ad internet, modificare le opzioni del programma
     <value>Macchina parent</value>
   </data>
   <data name="FilterCloneMachine" xml:space="preserve">
-    <value>Macchina parent</value>
+    <value>Macchina clone</value>
   </data>
   <data name="FilterBios" xml:space="preserve">
     <value>Bios</value>
@@ -618,5 +618,8 @@ Se il PC non dispone di accesso ad internet, modificare le opzioni del programma
   </data>
   <data name="Series" xml:space="preserve">
     <value>Serie</value>
+  </data>
+  <data name="UpdateSelection" xml:space="preserve">
+    <value>Aggiornamento selezione</value>
   </data>
 </root>

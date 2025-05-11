@@ -619,4 +619,7 @@ If your PC does not have internet access, change the program options to avoid th
   <data name="Series" xml:space="preserve">
     <value>Series</value>
   </data>
+  <data name="UpdateSelection" xml:space="preserve">
+    <value>Update selection</value>
+  </data>
 </root>

@@ -1511,6 +1511,15 @@ namespace MAME_Shrink.Resources {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Update selection.
+        /// </summary>
+        internal static string UpdateSelection {
+            get {
+                return ResourceManager.GetString("UpdateSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Use rom of.
         /// </summary>
         internal static string UseRomOf {

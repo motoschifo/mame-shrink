@@ -1,5 +1,4 @@
 ﻿#nullable enable
-using System;
 using MameTools.Net48.Extensions;
 
 namespace MameTools.Net48.Machines.Displays;

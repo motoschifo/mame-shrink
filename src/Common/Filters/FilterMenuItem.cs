@@ -9,9 +9,10 @@ internal class FilterMenuItem
 {
     public string? Text { get; set; }
     public FilterKind? Kind { get; set; }
-    public bool IsSeparator { get; set; } = false;
+    public bool IsSeparator { get; set; }
     public bool Enabled { get; set; } = true;
     public bool UpdateCounter { get; set; } = true;
+    public bool NotImplemented { get; set; }
     public List<FilterMenuItem> Children { get; set; } = [];
     public Func<MameMachine, bool>? Action { get; set; }
     public ToolStripMenuItem? MenuItem { get; set; }

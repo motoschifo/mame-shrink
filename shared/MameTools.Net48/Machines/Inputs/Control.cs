@@ -1,6 +1,4 @@
 ﻿#nullable enable
-using System;
-
 namespace MameTools.Net48.Machines.Inputs;
 
 public class Control

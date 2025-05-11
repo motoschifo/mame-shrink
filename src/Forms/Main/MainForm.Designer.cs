@@ -63,6 +63,7 @@
             this.MenuShowExistingFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuShowSelectedGames = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuShowNotSelectedGames = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuShowFilteredGames = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.SelectedRomsetName = new System.Windows.Forms.Label();
             this.pnlRomset = new System.Windows.Forms.Panel();
@@ -75,6 +76,8 @@
             this.Snapshot = new System.Windows.Forms.PictureBox();
             this.LoadGames = new System.Windows.Forms.Button();
             this.CancelCurrentProcess = new System.Windows.Forms.Button();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuColumnItems.SuspendLayout();
             this.ToolbarMenuGrid.SuspendLayout();
             this.pnlRomset.SuspendLayout();
@@ -86,7 +89,6 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.Tooltips.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // ImageList
             // 
@@ -107,7 +109,6 @@
             this.GamesListView.CheckBoxes = true;
             this.GamesListView.HideSelection = false;
             this.GamesListView.Name = "GamesListView";
-            this.Tooltips.SetToolTip(this.GamesListView, resources.GetString("GamesListView.ToolTip"));
             this.GamesListView.UseCompatibleStateImageBehavior = false;
             this.GamesListView.VirtualMode = true;
             this.GamesListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.GamesListView_ColumnClick);
@@ -122,10 +123,9 @@
             // 
             // lblInfo
             // 
-            resources.ApplyResources(this.lblInfo, "lblInfo");
             this.lblInfo.AutoEllipsis = true;
+            resources.ApplyResources(this.lblInfo, "lblInfo");
             this.lblInfo.Name = "lblInfo";
-            this.Tooltips.SetToolTip(this.lblInfo, resources.GetString("lblInfo.ToolTip"));
             this.lblInfo.UseMnemonic = false;
             // 
             // GridTextFilterTimer
@@ -137,35 +137,29 @@
             // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.Tooltips.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
             // 
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
-            this.Tooltips.SetToolTip(this.label6, resources.GetString("label6.ToolTip"));
             // 
             // LabelManueExe
             // 
             resources.ApplyResources(this.LabelManueExe, "LabelManueExe");
             this.LabelManueExe.Name = "LabelManueExe";
-            this.Tooltips.SetToolTip(this.LabelManueExe, resources.GetString("LabelManueExe.ToolTip"));
             // 
             // LabelGamelistXml
             // 
             resources.ApplyResources(this.LabelGamelistXml, "LabelGamelistXml");
             this.LabelGamelistXml.Name = "LabelGamelistXml";
-            this.Tooltips.SetToolTip(this.LabelGamelistXml, resources.GetString("LabelGamelistXml.ToolTip"));
             // 
             // LabelRomsPath
             // 
             resources.ApplyResources(this.LabelRomsPath, "LabelRomsPath");
             this.LabelRomsPath.Name = "LabelRomsPath";
-            this.Tooltips.SetToolTip(this.LabelRomsPath, resources.GetString("LabelRomsPath.ToolTip"));
             // 
             // MenuColumnItems
             // 
-            resources.ApplyResources(this.MenuColumnItems, "MenuColumnItems");
             this.MenuColumnItems.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripColumnRomset,
             this.toolStripColumnYear,
@@ -178,93 +172,92 @@
             this.toolStripColumnButtons,
             this.toolStripColumnDisplay});
             this.MenuColumnItems.Name = "menuColumns";
-            this.Tooltips.SetToolTip(this.MenuColumnItems, resources.GetString("MenuColumnItems.ToolTip"));
+            resources.ApplyResources(this.MenuColumnItems, "MenuColumnItems");
             // 
             // toolStripColumnRomset
             // 
-            resources.ApplyResources(this.toolStripColumnRomset, "toolStripColumnRomset");
             this.toolStripColumnRomset.Checked = true;
             this.toolStripColumnRomset.CheckState = System.Windows.Forms.CheckState.Checked;
+            resources.ApplyResources(this.toolStripColumnRomset, "toolStripColumnRomset");
             this.toolStripColumnRomset.Name = "toolStripColumnRomset";
             // 
             // toolStripColumnYear
             // 
-            resources.ApplyResources(this.toolStripColumnYear, "toolStripColumnYear");
             this.toolStripColumnYear.Checked = true;
             this.toolStripColumnYear.CheckOnClick = true;
             this.toolStripColumnYear.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnYear.Name = "toolStripColumnYear";
+            resources.ApplyResources(this.toolStripColumnYear, "toolStripColumnYear");
             // 
             // toolStripColumnManufacturer
             // 
-            resources.ApplyResources(this.toolStripColumnManufacturer, "toolStripColumnManufacturer");
             this.toolStripColumnManufacturer.Checked = true;
             this.toolStripColumnManufacturer.CheckOnClick = true;
             this.toolStripColumnManufacturer.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnManufacturer.Name = "toolStripColumnManufacturer";
+            resources.ApplyResources(this.toolStripColumnManufacturer, "toolStripColumnManufacturer");
             // 
             // toolStripColumnCloneOf
             // 
-            resources.ApplyResources(this.toolStripColumnCloneOf, "toolStripColumnCloneOf");
             this.toolStripColumnCloneOf.Checked = true;
             this.toolStripColumnCloneOf.CheckOnClick = true;
             this.toolStripColumnCloneOf.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnCloneOf.Name = "toolStripColumnCloneOf";
+            resources.ApplyResources(this.toolStripColumnCloneOf, "toolStripColumnCloneOf");
             // 
             // toolStripColumnDriverStatus
             // 
-            resources.ApplyResources(this.toolStripColumnDriverStatus, "toolStripColumnDriverStatus");
             this.toolStripColumnDriverStatus.Checked = true;
             this.toolStripColumnDriverStatus.CheckOnClick = true;
             this.toolStripColumnDriverStatus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnDriverStatus.Name = "toolStripColumnDriverStatus";
+            resources.ApplyResources(this.toolStripColumnDriverStatus, "toolStripColumnDriverStatus");
             // 
             // toolStripColumnGenre
             // 
-            resources.ApplyResources(this.toolStripColumnGenre, "toolStripColumnGenre");
             this.toolStripColumnGenre.Checked = true;
             this.toolStripColumnGenre.CheckOnClick = true;
             this.toolStripColumnGenre.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnGenre.Name = "toolStripColumnGenre";
+            resources.ApplyResources(this.toolStripColumnGenre, "toolStripColumnGenre");
             // 
             // toolStripColumnRelease
             // 
-            resources.ApplyResources(this.toolStripColumnRelease, "toolStripColumnRelease");
             this.toolStripColumnRelease.Checked = true;
             this.toolStripColumnRelease.CheckOnClick = true;
             this.toolStripColumnRelease.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnRelease.Name = "toolStripColumnRelease";
+            resources.ApplyResources(this.toolStripColumnRelease, "toolStripColumnRelease");
             // 
             // toolStripColumnPlayers
             // 
-            resources.ApplyResources(this.toolStripColumnPlayers, "toolStripColumnPlayers");
             this.toolStripColumnPlayers.Checked = true;
             this.toolStripColumnPlayers.CheckOnClick = true;
             this.toolStripColumnPlayers.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnPlayers.Name = "toolStripColumnPlayers";
+            resources.ApplyResources(this.toolStripColumnPlayers, "toolStripColumnPlayers");
             // 
             // toolStripColumnButtons
             // 
-            resources.ApplyResources(this.toolStripColumnButtons, "toolStripColumnButtons");
             this.toolStripColumnButtons.Checked = true;
             this.toolStripColumnButtons.CheckOnClick = true;
             this.toolStripColumnButtons.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnButtons.Name = "toolStripColumnButtons";
+            resources.ApplyResources(this.toolStripColumnButtons, "toolStripColumnButtons");
             // 
             // toolStripColumnDisplay
             // 
-            resources.ApplyResources(this.toolStripColumnDisplay, "toolStripColumnDisplay");
             this.toolStripColumnDisplay.Checked = true;
             this.toolStripColumnDisplay.CheckOnClick = true;
             this.toolStripColumnDisplay.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripColumnDisplay.DoubleClickEnabled = true;
             this.toolStripColumnDisplay.Name = "toolStripColumnDisplay";
+            resources.ApplyResources(this.toolStripColumnDisplay, "toolStripColumnDisplay");
             // 
             // MenuFilters
             // 
-            resources.ApplyResources(this.MenuFilters, "MenuFilters");
             this.MenuFilters.Name = "menuFilters";
-            this.Tooltips.SetToolTip(this.MenuFilters, resources.GetString("MenuFilters.ToolTip"));
+            resources.ApplyResources(this.MenuFilters, "MenuFilters");
             // 
             // ToolbarMenuGrid
             // 
@@ -278,27 +271,26 @@
             this.MenuColumns});
             this.ToolbarMenuGrid.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.ToolbarMenuGrid.Name = "ToolbarMenuGrid";
-            this.Tooltips.SetToolTip(this.ToolbarMenuGrid, resources.GetString("ToolbarMenuGrid.ToolTip"));
             // 
             // MenuAddToSelectedGames
             // 
-            resources.ApplyResources(this.MenuAddToSelectedGames, "MenuAddToSelectedGames");
             this.MenuAddToSelectedGames.Image = global::MAME_Shrink.Properties.Resources.check;
             this.MenuAddToSelectedGames.Name = "MenuAddToSelectedGames";
+            resources.ApplyResources(this.MenuAddToSelectedGames, "MenuAddToSelectedGames");
             this.MenuAddToSelectedGames.Click += new System.EventHandler(this.MenuAddToSelectedGames_Click);
             // 
             // MenuRemoveFromSelectedGames
             // 
-            resources.ApplyResources(this.MenuRemoveFromSelectedGames, "MenuRemoveFromSelectedGames");
             this.MenuRemoveFromSelectedGames.Image = global::MAME_Shrink.Properties.Resources.square;
             this.MenuRemoveFromSelectedGames.Name = "MenuRemoveFromSelectedGames";
+            resources.ApplyResources(this.MenuRemoveFromSelectedGames, "MenuRemoveFromSelectedGames");
             this.MenuRemoveFromSelectedGames.Click += new System.EventHandler(this.MenuRemoveFromSelectedGames_Click);
             // 
             // MenuToggleSelectedGames
             // 
-            resources.ApplyResources(this.MenuToggleSelectedGames, "MenuToggleSelectedGames");
             this.MenuToggleSelectedGames.Image = global::MAME_Shrink.Properties.Resources.true_false;
             this.MenuToggleSelectedGames.Name = "MenuToggleSelectedGames";
+            resources.ApplyResources(this.MenuToggleSelectedGames, "MenuToggleSelectedGames");
             this.MenuToggleSelectedGames.Click += new System.EventHandler(this.MenuToggleSelectedGames_Click);
             // 
             // GridTextFilter
@@ -309,103 +301,108 @@
             // 
             // MenuShow
             // 
-            resources.ApplyResources(this.MenuShow, "MenuShow");
             this.MenuShow.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuShowAllGames,
             this.MenuShowExistingFiles,
             this.MenuShowSelectedGames,
-            this.MenuShowNotSelectedGames});
+            this.MenuShowNotSelectedGames,
+            this.toolStripMenuItem1,
+            this.MenuShowFilteredGames});
             this.MenuShow.Image = global::MAME_Shrink.Properties.Resources.folder;
             this.MenuShow.Name = "MenuShow";
+            resources.ApplyResources(this.MenuShow, "MenuShow");
             // 
             // MenuShowAllGames
             // 
-            resources.ApplyResources(this.MenuShowAllGames, "MenuShowAllGames");
             this.MenuShowAllGames.Name = "MenuShowAllGames";
+            resources.ApplyResources(this.MenuShowAllGames, "MenuShowAllGames");
             this.MenuShowAllGames.Tag = "AllGames";
             this.MenuShowAllGames.Click += new System.EventHandler(this.MenuShowType_Click);
             // 
             // MenuShowExistingFiles
             // 
-            resources.ApplyResources(this.MenuShowExistingFiles, "MenuShowExistingFiles");
             this.MenuShowExistingFiles.Checked = true;
             this.MenuShowExistingFiles.CheckState = System.Windows.Forms.CheckState.Checked;
             this.MenuShowExistingFiles.Name = "MenuShowExistingFiles";
+            resources.ApplyResources(this.MenuShowExistingFiles, "MenuShowExistingFiles");
             this.MenuShowExistingFiles.Tag = "ExistingFiles";
             this.MenuShowExistingFiles.Click += new System.EventHandler(this.MenuShowType_Click);
             // 
             // MenuShowSelectedGames
             // 
-            resources.ApplyResources(this.MenuShowSelectedGames, "MenuShowSelectedGames");
             this.MenuShowSelectedGames.Name = "MenuShowSelectedGames";
+            resources.ApplyResources(this.MenuShowSelectedGames, "MenuShowSelectedGames");
             this.MenuShowSelectedGames.Tag = "Selected";
             this.MenuShowSelectedGames.Click += new System.EventHandler(this.MenuShowType_Click);
             // 
             // MenuShowNotSelectedGames
             // 
-            resources.ApplyResources(this.MenuShowNotSelectedGames, "MenuShowNotSelectedGames");
             this.MenuShowNotSelectedGames.Name = "MenuShowNotSelectedGames";
+            resources.ApplyResources(this.MenuShowNotSelectedGames, "MenuShowNotSelectedGames");
             this.MenuShowNotSelectedGames.Tag = "NotSelected";
             this.MenuShowNotSelectedGames.Click += new System.EventHandler(this.MenuShowType_Click);
             // 
+            // MenuShowFilteredGames
+            // 
+            this.MenuShowFilteredGames.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2});
+            this.MenuShowFilteredGames.Name = "MenuShowFilteredGames";
+            resources.ApplyResources(this.MenuShowFilteredGames, "MenuShowFilteredGames");
+            this.MenuShowFilteredGames.Tag = "View";
+            this.MenuShowFilteredGames.DropDownOpening += new System.EventHandler(this.MenuShowFilteredGames_DropDownOpening);
+            this.MenuShowFilteredGames.Click += new System.EventHandler(this.MenuShowFilteredGames_Click);
+            // 
             // MenuColumns
             // 
-            resources.ApplyResources(this.MenuColumns, "MenuColumns");
             this.MenuColumns.Image = global::MAME_Shrink.Properties.Resources.columns;
             this.MenuColumns.Name = "MenuColumns";
+            resources.ApplyResources(this.MenuColumns, "MenuColumns");
             this.MenuColumns.Click += new System.EventHandler(this.MenuColumns_Click);
             // 
             // SelectedRomsetName
             // 
             resources.ApplyResources(this.SelectedRomsetName, "SelectedRomsetName");
             this.SelectedRomsetName.Name = "SelectedRomsetName";
-            this.Tooltips.SetToolTip(this.SelectedRomsetName, resources.GetString("SelectedRomsetName.ToolTip"));
             // 
             // pnlRomset
             // 
             resources.ApplyResources(this.pnlRomset, "pnlRomset");
             this.pnlRomset.Controls.Add(this.KeyValueRomset);
             this.pnlRomset.Name = "pnlRomset";
-            this.Tooltips.SetToolTip(this.pnlRomset, resources.GetString("pnlRomset.ToolTip"));
             // 
             // KeyValueRomset
             // 
             resources.ApplyResources(this.KeyValueRomset, "KeyValueRomset");
             this.KeyValueRomset.Name = "KeyValueRomset";
-            this.Tooltips.SetToolTip(this.KeyValueRomset, resources.GetString("KeyValueRomset.ToolTip"));
             // 
             // OpenRomsetWebPage
             // 
             resources.ApplyResources(this.OpenRomsetWebPage, "OpenRomsetWebPage");
             this.OpenRomsetWebPage.Name = "OpenRomsetWebPage";
             this.OpenRomsetWebPage.TabStop = true;
-            this.Tooltips.SetToolTip(this.OpenRomsetWebPage, resources.GetString("OpenRomsetWebPage.ToolTip"));
             this.OpenRomsetWebPage.Click += new System.EventHandler(this.OpenRomsetWebPage_Click);
             // 
             // ValidateRomset
             // 
-            resources.ApplyResources(this.ValidateRomset, "ValidateRomset");
             this.ValidateRomset.Checked = true;
             this.ValidateRomset.CheckState = System.Windows.Forms.CheckState.Checked;
+            resources.ApplyResources(this.ValidateRomset, "ValidateRomset");
             this.ValidateRomset.Name = "ValidateRomset";
-            this.Tooltips.SetToolTip(this.ValidateRomset, resources.GetString("ValidateRomset.ToolTip"));
             this.ValidateRomset.UseVisualStyleBackColor = true;
             // 
             // SnapshotPlaceholder
             // 
-            resources.ApplyResources(this.SnapshotPlaceholder, "SnapshotPlaceholder");
             this.SnapshotPlaceholder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SnapshotPlaceholder.Image = global::MAME_Shrink.Properties.Resources.ingame_placeholder;
+            resources.ApplyResources(this.SnapshotPlaceholder, "SnapshotPlaceholder");
             this.SnapshotPlaceholder.Name = "SnapshotPlaceholder";
             this.SnapshotPlaceholder.TabStop = false;
-            this.Tooltips.SetToolTip(this.SnapshotPlaceholder, resources.GetString("SnapshotPlaceholder.ToolTip"));
             // 
             // StartClean
             // 
             resources.ApplyResources(this.StartClean, "StartClean");
             this.StartClean.ImageList = this.ImageList;
             this.StartClean.Name = "StartClean";
-            this.Tooltips.SetToolTip(this.StartClean, resources.GetString("StartClean.ToolTip"));
             this.StartClean.Click += new System.EventHandler(this.StartClean_Click);
             // 
             // ChangeOptions
@@ -413,7 +410,6 @@
             resources.ApplyResources(this.ChangeOptions, "ChangeOptions");
             this.ChangeOptions.ImageList = this.ImageList;
             this.ChangeOptions.Name = "ChangeOptions";
-            this.Tooltips.SetToolTip(this.ChangeOptions, resources.GetString("ChangeOptions.ToolTip"));
             this.ChangeOptions.Click += new System.EventHandler(this.ChangeOptions_Click);
             // 
             // Snapshot
@@ -422,14 +418,12 @@
             this.Snapshot.Image = global::MAME_Shrink.Properties.Resources.ingame_placeholder;
             this.Snapshot.Name = "Snapshot";
             this.Snapshot.TabStop = false;
-            this.Tooltips.SetToolTip(this.Snapshot, resources.GetString("Snapshot.ToolTip"));
             // 
             // LoadGames
             // 
             resources.ApplyResources(this.LoadGames, "LoadGames");
             this.LoadGames.ImageList = this.ImageList;
             this.LoadGames.Name = "LoadGames";
-            this.Tooltips.SetToolTip(this.LoadGames, resources.GetString("LoadGames.ToolTip"));
             this.LoadGames.Click += new System.EventHandler(this.LoadGames_Click);
             // 
             // CancelCurrentProcess
@@ -437,8 +431,17 @@
             resources.ApplyResources(this.CancelCurrentProcess, "CancelCurrentProcess");
             this.CancelCurrentProcess.ImageList = this.ImageList;
             this.CancelCurrentProcess.Name = "CancelCurrentProcess";
-            this.Tooltips.SetToolTip(this.CancelCurrentProcess, resources.GetString("CancelCurrentProcess.ToolTip"));
             this.CancelCurrentProcess.Click += new System.EventHandler(this.CancelCurrentProcess_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
             // 
             // MainForm
             // 
@@ -465,7 +468,6 @@
             this.Controls.Add(this.CancelCurrentProcess);
             this.MainMenuStrip = this.ToolbarMenuGrid;
             this.Name = "MainForm";
-            this.Tooltips.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.MenuColumnItems.ResumeLayout(false);
@@ -525,6 +527,9 @@
         private System.Windows.Forms.LinkLabel OpenRomsetWebPage;
         private System.Windows.Forms.CheckBox ValidateRomset;
         private Components.KeyValueTable KeyValueRomset;
+        private System.Windows.Forms.ToolStripMenuItem MenuShowFilteredGames;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
     }
 }
 
