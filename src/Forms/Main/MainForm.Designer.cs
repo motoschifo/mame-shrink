@@ -63,6 +63,7 @@
             this.MenuShowExistingFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuShowSelectedGames = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuShowNotSelectedGames = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuShowFilteredGames = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.SelectedRomsetName = new System.Windows.Forms.Label();
@@ -76,8 +77,6 @@
             this.Snapshot = new System.Windows.Forms.PictureBox();
             this.LoadGames = new System.Windows.Forms.Button();
             this.CancelCurrentProcess = new System.Windows.Forms.Button();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuColumnItems.SuspendLayout();
             this.ToolbarMenuGrid.SuspendLayout();
             this.pnlRomset.SuspendLayout();
@@ -342,14 +341,16 @@
             this.MenuShowNotSelectedGames.Tag = "NotSelected";
             this.MenuShowNotSelectedGames.Click += new System.EventHandler(this.MenuShowType_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            // 
             // MenuShowFilteredGames
             // 
-            this.MenuShowFilteredGames.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2});
             this.MenuShowFilteredGames.Name = "MenuShowFilteredGames";
             resources.ApplyResources(this.MenuShowFilteredGames, "MenuShowFilteredGames");
             this.MenuShowFilteredGames.Tag = "View";
-            this.MenuShowFilteredGames.DropDownOpening += new System.EventHandler(this.MenuShowFilteredGames_DropDownOpening);
             this.MenuShowFilteredGames.Click += new System.EventHandler(this.MenuShowFilteredGames_Click);
             // 
             // MenuColumns
@@ -432,16 +433,6 @@
             this.CancelCurrentProcess.ImageList = this.ImageList;
             this.CancelCurrentProcess.Name = "CancelCurrentProcess";
             this.CancelCurrentProcess.Click += new System.EventHandler(this.CancelCurrentProcess_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
             // 
             // MainForm
             // 
@@ -529,7 +520,6 @@
         private Components.KeyValueTable KeyValueRomset;
         private System.Windows.Forms.ToolStripMenuItem MenuShowFilteredGames;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
     }
 }
 

@@ -161,7 +161,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        EwAAAk1TRnQBSQFMAgEBCAEAAQQBAgEEAQIBGAEAARgBAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        EwAAAk1TRnQBSQFMAgEBCAEAAQwBAgEMAQIBGAEAARgBAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABYAMAAUgDAAEBAQABCAYAARsYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -601,6 +601,9 @@
   <data name="GridTextFilter.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="GridTextFilter.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="GridTextFilter.MaxLength" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
@@ -639,9 +642,6 @@
   </data>
   <data name="toolStripMenuItem1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
   </data>
   <data name="MenuShowFilteredGames.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 22</value>
@@ -734,7 +734,7 @@
     <value>KeyValueRomset</value>
   </data>
   <data name="&gt;&gt;KeyValueRomset.Type" xml:space="preserve">
-    <value>MAME_Shrink.Components.KeyValueTable, MAME Shrink, Version=3.2.9262.28526, Culture=neutral, PublicKeyToken=null</value>
+    <value>MAME_Shrink.Components.KeyValueTable, MAME Shrink, Version=3.3.9262.29726, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;KeyValueRomset.Parent" xml:space="preserve">
     <value>pnlRomset</value>
@@ -788,7 +788,7 @@
     <value>KeyValueRomset</value>
   </data>
   <data name="&gt;&gt;KeyValueRomset.Type" xml:space="preserve">
-    <value>MAME_Shrink.Components.KeyValueTable, MAME Shrink, Version=3.2.9262.28526, Culture=neutral, PublicKeyToken=null</value>
+    <value>MAME_Shrink.Components.KeyValueTable, MAME Shrink, Version=3.3.9262.29726, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;KeyValueRomset.Parent" xml:space="preserve">
     <value>pnlRomset</value>
@@ -1230,6 +1230,12 @@
   <data name="&gt;&gt;MenuShowNotSelectedGames.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
+    <value>toolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;MenuShowFilteredGames.Name" xml:space="preserve">
     <value>MenuShowFilteredGames</value>
   </data>
@@ -1241,18 +1247,6 @@
   </data>
   <data name="&gt;&gt;MenuColumns.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
-    <value>toolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem2.Name" xml:space="preserve">
-    <value>toolStripMenuItem2</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

@@ -1030,9 +1030,10 @@ public partial class MainForm : Form
             return;
         if (_showType == showType)
             return;
-        foreach (ToolStripMenuItem item in MenuShow.DropDownItems)
+        foreach (ToolStripItem item in MenuShow.DropDownItems)
         {
-            item.Checked = item.Tag == menuItem.Tag;
+            if (item is ToolStripMenuItem menu)
+                menu.Checked = item.Tag == menuItem.Tag;
         }
         _showType = showType;
         UpdateGridItems();
@@ -1764,12 +1765,8 @@ public partial class MainForm : Form
         return clone;
     }
 
-    private void MenuShowFilteredGames_DropDownOpening(object sender, EventArgs e)
-    {
-        MenuShowFilteredGames.DropDownItems.Clear();
-        foreach (ToolStripMenuItem item in MenuFilters.Items)
-        {
-            MenuShowFilteredGames.DropDownItems.Add(CloneMenuItem(item));
-        }
-    }
+    //private void MenuShowFilteredGames_DropDownOpening(object sender, EventArgs e)
+    //{
+
+    //}
 }
