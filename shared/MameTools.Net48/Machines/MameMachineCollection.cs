@@ -64,7 +64,7 @@ public class MameMachineCollection : ICollection<MameMachine>
             Totals.MachineRoms.IncrementCount([.. item.Roms.Select(x => x.Name)]);
         }
         // NOTA: Il Mame considera orizzontale ciò che non è verticale
-        var mainDisplay = item.GetMainDisplay();
+        var mainDisplay = item.MainDisplay;
         if (mainDisplay is not null && item.IsMachine)
         {
             if (mainDisplay.Orientation == DisplayOrientationKind.vertical)

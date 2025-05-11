@@ -45,7 +45,7 @@ internal class GamesGridItem
 
     public static GamesGridItem Create(MameMachine machine)
     {
-        var display = machine.GetMainDisplay();
+        var display = machine.MainDisplay;
         var displayStr = "Nessuno";
         if (display is not null)
         {

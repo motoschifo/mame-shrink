@@ -28,4 +28,5 @@ public class MameCollection<T> : ICollection<T>
     }
     IEnumerator IEnumerable.GetEnumerator() => _items.GetEnumerator();
     public List<T> ToList() => [.. _items];
+    public T this[int index] => _items[index];
 }

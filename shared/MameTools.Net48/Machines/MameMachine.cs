@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using MameTools.Net48.Common;
 using MameTools.Net48.Machines;
@@ -66,12 +67,19 @@ public class MameMachine
     //public string? ControlWays { get; set; }
     public MameCollection<Display> Displays { get; } = [];
     public bool Screenless => Displays.Count == 0;
-    public Display? GetMainDisplay()
+    public Display? MainDisplay
     {
-        if (Displays.Count == 0)
-            return null;
-        var display = Displays.FirstOrDefault(x => "screen".Equals(x.Tag, StringComparison.OrdinalIgnoreCase));
-        return display is not null ? display : Displays.First();
+        get
+        {
+            if (Displays.Count == 0)
+                return null;
+            foreach (var display in Displays)
+            {
+                if ("screen".Equals(display.Tag, StringComparison.OrdinalIgnoreCase))
+                    return display;
+            }
+            return Displays[0];
+        }
     }
     public Driver Driver { get; set; } = new();
     public Sound Sound { get; set; } = new();
@@ -83,12 +91,13 @@ public class MameMachine
 
     public override string ToString()
     {
-        return $"{Name} - {Description} - " +
-            (IsBios ? "BIOS" : string.Empty) +
-            (IsParentMachine ? " PARENT" : string.Empty) +
-            (IsCloneMachine ? " CLONE" : string.Empty) +
-            (IsDevice ? " DEVICE" : string.Empty) +
-            (IsRunnable ? " RUNNABLE" : string.Empty);
+        var flags = new List<string>();
+        if (IsBios) flags.Add("BIOS");
+        if (IsParentMachine) flags.Add("PARENT");
+        if (IsCloneMachine) flags.Add("CLONE");
+        if (IsDevice) flags.Add("DEVICE");
+        if (IsRunnable) flags.Add("RUNNABLE");
+        return $"{Name} - {Description} - {string.Join(" ", flags)}";
     }
 
     public bool RequiresDisks { get; set; }
