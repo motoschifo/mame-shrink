@@ -1,7 +1,7 @@
 ﻿#nullable enable
-namespace ArcadeDatabaseSdk.Net48.Common;
+namespace ArcadeDatabaseSdk.Net48.Services.Categories;
 
-public partial class ApiResponse
+public partial class ClassificationsApiResult
 {
     public enum ClassificationType
     {

@@ -29,6 +29,7 @@ using MameTools.Net48.Helpers;
 using MameTools.Net48.Imports;
 using NLog;
 using static ArcadeDatabaseSdk.Net48.Common.ApiResponse;
+using static ArcadeDatabaseSdk.Net48.Services.Categories.ClassificationsApiResult;
 using static MAME_Shrink.Settings.UserPreferences;
 using static MAME_Shrink.Settings.UserPreferences.GridColumnDefinition;
 using static MameTools.Net48.Machines.Disks.Disk;
@@ -1355,81 +1356,12 @@ public partial class MainForm : Form
         {
             try
             {
-                //progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Categories})");
-                //if (!_categoriesCache.IsValid(_applicationName, _adbMameRelease))
-                //{
-                //    var adbCategories = await ServiceClassifications.Get(classificationType: ClassificationType.Category, language: GetCurrentLanguage());
-                //    _categoriesCache.Clear();
-                //    if (adbCategories.Data.Any())
-                //    {
-                //        foreach (var item in adbCategories.Data)
-                //        {
-                //            _categoriesCache.Add(
-                //                key: item.Title ?? string.Empty,
-                //                item: new ClassificationCacheItem
-                //                {
-                //                    Code = item.Code,
-                //                    Title = item.Title,
-                //                    IsObsolete = item.IsObsolete,
-                //                }
-                //            );
-                //        }
-                //        _categoriesCache.Store(_applicationName, _adbMameRelease);
-                //    }
-                //}
-
-                //progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Genres})");
-                //if (!_genresCache.IsValid(_applicationName, mameRelease))
-                //{
-                //    var adbGenres = await ServiceClassifications.Get(classificationType: ClassificationType.Genre, language: GetCurrentLanguage());
-                //    _genresCache.Clear();
-                //    if (adbGenres.Data.Any())
-                //    {
-                //        foreach (var item in adbGenres.Data)
-                //        {
-                //            _genresCache.Add(
-                //                key: item.Title ?? string.Empty,
-                //                item: new ClassificationCacheItem
-                //                {
-                //                    Code = item.Code,
-                //                    Title = item.Title,
-                //                    IsObsolete = item.IsObsolete,
-                //                }
-                //            );
-                //        }
-                //        _genresCache.Store(_applicationName, mameRelease);
-                //    }
-                //}
-
-                //progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Series})");
-                //if (!_seriesCache.IsValid(_applicationName, _adbMameRelease))
-                //{
-                //    var adbSeries = await ServiceClassifications.Get(classificationType: ClassificationType.Serie, language: GetCurrentLanguage());
-                //    _seriesCache.Clear();
-                //    if (adbSeries.Data.Any())
-                //    {
-                //        foreach (var item in adbSeries.Data)
-                //        {
-                //            _seriesCache.Add(
-                //                key: item.Title ?? string.Empty,
-                //                item: new ClassificationCacheItem
-                //                {
-                //                    Code = item.Code,
-                //                    Title = item.Title,
-                //                    IsObsolete = item.IsObsolete,
-                //                }
-                //            );
-                //        }
-                //        _seriesCache.Store(_applicationName, _adbMameRelease);
-                //    }
-                //}
-
                 progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Games})");
                 if (!_mameCache.IsValid(_applicationName, _adbMameRelease))
                 {
                     // Download categories and machine extra info
                     // http://adb.arcadeitalia.net/service_scraper.php?ajax=query_categories&game_name=mslug;atetris;100lions;mslug3;mslug5
-                    var adbMameCategories = await ServiceMame.Categories(language: GetCurrentLanguage());
+                    var adbMameCategories = await MameService.Categories(language: GetCurrentLanguage());
                     _mameCache.Clear();
                     if (adbMameCategories.Data.Any())
                     {
@@ -1488,14 +1420,14 @@ public partial class MainForm : Form
         {
             try
             {
-                var adbStatus = await ServiceGeneric.Status();
+                var adbStatus = await BaseService.Status();
                 if (adbStatus.Data.FirstOrDefault().ApiOnline != true)
                     throw new Exception(Strings.WebSiteUnderMaintenance);
                 _online = true;
 
                 if (_adbMameRelease is null)
                 {
-                    var adbRelease = await ServiceMame.Releases();
+                    var adbRelease = await MameService.Releases();
                     _adbMameRelease = string.Join(",", adbRelease.Data);
                 }
             }
@@ -1528,7 +1460,7 @@ public partial class MainForm : Form
             var item = _gridItems.Values.FirstOrDefault(x => x.Name == machine.Name)
                 ?? throw new Exception();
             SelectedRomsetName.Text = machine.Name.ToUpper();
-            OpenRomsetWebPage.Tag = ServiceMame.GetRomsetUrl(machine.Name);
+            OpenRomsetWebPage.Tag = MameService.GetRomsetUrl(machine.Name);
             SelectedRomsetName.Show();
             OpenRomsetWebPage.Show();
 
@@ -1657,7 +1589,7 @@ public partial class MainForm : Form
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                var imageStream = await Servicedownload.GetCurrentIngameFile(romset!, cancellationToken);
+                var imageStream = await DownloadService.GetCurrentIngameFile(romset!, cancellationToken);
                 cancellationToken.ThrowIfCancellationRequested();
                 var image = ImageHelper.ConvertStreamToImage(imageStream);
                 _snapshotsCache.Add(romset!, image);
@@ -1722,7 +1654,7 @@ public partial class MainForm : Form
                     {
                         if (!_genresCache.IsValid(_applicationName, _adbMameRelease))
                         {
-                            var adbGenres = await ServiceClassifications.Get(classificationType: ClassificationType.Genre, language: GetCurrentLanguage());
+                            var adbGenres = await ClassificationsService.Get(classificationType: ClassificationType.Genre, language: GetCurrentLanguage());
                             _genresCache.Clear();
                             if (adbGenres.Data.Any())
                             {
@@ -1778,7 +1710,7 @@ public partial class MainForm : Form
                     {
                         if (!_categoriesCache.IsValid(_applicationName, _adbMameRelease))
                         {
-                            var adbCategories = await ServiceClassifications.Get(classificationType: ClassificationType.Category, language: GetCurrentLanguage());
+                            var adbCategories = await ClassificationsService.Get(classificationType: ClassificationType.Category, language: GetCurrentLanguage());
                             _categoriesCache.Clear();
                             if (adbCategories.Data.Any())
                             {
@@ -1834,7 +1766,7 @@ public partial class MainForm : Form
                     {
                         if (!_seriesCache.IsValid(_applicationName, _adbMameRelease))
                         {
-                            var adbSeries = await ServiceClassifications.Get(classificationType: ClassificationType.Serie, language: GetCurrentLanguage());
+                            var adbSeries = await ClassificationsService.Get(classificationType: ClassificationType.Serie, language: GetCurrentLanguage());
                             _seriesCache.Clear();
                             if (adbSeries.Data.Any())
                             {
@@ -1958,7 +1890,7 @@ public partial class MainForm : Form
                 progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Genres})");
                 if (!_genresCache.IsValid(_applicationName, _adbMameRelease))
                 {
-                    var adbCategories = await ServiceClassifications.Get(classificationType: ClassificationType.Genre, language: GetCurrentLanguage());
+                    var adbCategories = await ClassificationsService.Get(classificationType: ClassificationType.Genre, language: GetCurrentLanguage());
                     _genresCache.Clear();
                     if (adbCategories.Data.Any())
                     {

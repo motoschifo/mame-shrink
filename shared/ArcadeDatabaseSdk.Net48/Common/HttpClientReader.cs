@@ -152,18 +152,23 @@ public class HttpClientReader
     }
 
 
-    public static async Task<ApiResponse<T>> GetServiceGeneric<T>(string operation, Dictionary<string, string?>? parameters = null)
+    public static async Task<ApiResponse<T>> GetBaseService<T>(string operation, Dictionary<string, string?>? parameters = null)
     {
-        return await GetService<T>($"{Constants.GenericApiUrl}/{operation}", parameters);
+        return await GetService<T>($"{Constants.BaseApiUrl}/{operation}", parameters);
     }
 
-    public static async Task<ApiResponse<T>> GetServiceMame<T>(string operation, Dictionary<string, string?>? parameters = null)
+    public static async Task<ApiResponse<T>> GetMameService<T>(string operation, Dictionary<string, string?>? parameters = null)
     {
         return await GetService<T>($"{Constants.MameApiUrl}/{operation}", parameters);
     }
 
-    public static async Task<ApiResponse<T>> GetServiceClassifications<T>(ClassificationType classificationType, Dictionary<string, string?>? parameters = null)
+    public static async Task<ApiResponse<T>> GetClassificationsService<T>(string operation, Dictionary<string, string?>? parameters = null)
     {
-        return await GetService<T>($"{Constants.ClassificationsApiUrl}/{classificationType.ToString().ToLower()}", parameters);
+        return await GetService<T>($"{Constants.ClassificationsApiUrl}/{operation}", parameters);
+    }
+
+    public static async Task<ApiResponse<T>> GetEmulatorsService<T>(string operation, Dictionary<string, string?>? parameters = null)
+    {
+        return await GetService<T>($"{Constants.ClassificationsApiUrl}/{operation}", parameters);
     }
 }

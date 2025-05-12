@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ArcadeDatabaseSdk.Net48.Common;
 
 namespace ArcadeDatabaseSdk.Net48.Services;
-public static class Servicedownload
+public static class DownloadService
 {
     public static async Task<Stream> GetCurrentIngameFile(string romset, CancellationToken cancellationToken = default)
     {

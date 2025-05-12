@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 namespace ArcadeDatabaseSdk.Net48.Services.Categories;
 
-public class ClassificationsApiResult
+public partial class ClassificationsApiResult
 {
     [JsonProperty("code")]
     public string? Code { get; set; } 

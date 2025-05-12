@@ -1,13 +1,13 @@
 ﻿#nullable enable
 using Newtonsoft.Json;
 
-namespace ArcadeDatabaseSdk.Net48.Services.Generic;
+namespace ArcadeDatabaseSdk.Net48.Services.Base;
 public class StatusApiResult
 {
-    [JsonProperty("website_online")]
+    [JsonProperty("is_website_online")]
     public bool WebSiteOnline { get; set; }
 
-    [JsonProperty("api_online")]
+    [JsonProperty("is_api_online")]
     public bool ApiOnline { get; set; }
 }
 
