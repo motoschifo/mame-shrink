@@ -79,7 +79,6 @@ jobs:
               }
           }
 
-
       - name: Compress Release Files x64
         run: Compress-Archive -Path release\x64\* -DestinationPath release_x64.zip
 
