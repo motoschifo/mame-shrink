@@ -17,17 +17,17 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Current project workspace
-        shell: cmd
-        run: |
-          echo Current project workspace:
-          echo %GITHUB_WORKSPACE%
+      #- name: Current project workspace
+      #  shell: cmd
+      #  run: |
+      #    echo Current project workspace:
+      #    echo %GITHUB_WORKSPACE%
 
-      - name: Current folder
-        shell: cmd
-        run: |
-          echo Current folder:
-          echo %CD%
+      #- name: Current folder
+      #  shell: cmd
+      #  run: |
+      #    echo Current folder:
+      #    echo %CD%
 
       - name: Checkout repository (with submodules)
         uses: actions/checkout@v4

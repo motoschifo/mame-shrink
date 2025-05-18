@@ -266,11 +266,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\mame-tools\src\ArcadeDatabaseSdk.Net48\ArcadeDatabaseSdk.Net48.csproj">
+    <ProjectReference Include="..\shared\mame-tools\src\ArcadeDatabaseSdk.Net48\ArcadeDatabaseSdk.Net48.csproj">
       <Project>{7efc7f4a-80e1-42a6-9526-c8b3a3b3485b}</Project>
       <Name>ArcadeDatabaseSdk.Net48</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\mame-tools\src\MameTools.Net48\MameTools.Net48.csproj">
+    <ProjectReference Include="..\shared\mame-tools\src\MameTools.Net48\MameTools.Net48.csproj">
       <Project>{3e21e1e2-4bf4-4d5e-b527-5ac259c6452a}</Project>
       <Name>MameTools.Net48</Name>
     </ProjectReference>
