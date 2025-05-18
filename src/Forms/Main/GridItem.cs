@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System.Collections.Generic;
 using System.Linq;
-using MameTools.Machine;
+using MameTools.Net48.Machine;
 using static MameTools.Net48.Machines.Displays.Display;
 using static MameTools.Net48.Machines.Drivers.Driver;
 

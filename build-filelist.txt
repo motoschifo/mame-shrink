@@ -1,12 +1,11 @@
-it\ArcadeDatabaseSdk.Net48.resources.dll
-it\MAME Shrink.resources.dll
-it\MameTools.Net48.resources.dll
 ArcadeDatabaseSdk.Net48.dll
 ArcadeDatabaseSdk.Net48.dll.config
+it\ArcadeDatabaseSdk.Net48.resources.dll
+MameTools.Net48.dll
+it\MameTools.Net48.resources.dll
 MAME Shrink.exe
 MAME Shrink.exe.config
 MAME Shrink.exe.manifest
-MameTools.Net48.dll
 Newtonsoft.Json.dll
 NLog.config
 NLog.dll
@@ -15,3 +14,4 @@ System.Memory.dll
 System.Numerics.Vectors.dll
 System.Runtime.CompilerServices.Unsafe.dll
 System.Text.Encoding.CodePages.dll
+it\MAME Shrink.resources.dll

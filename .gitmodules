@@ -1,0 +1,3 @@
+[submodule "shared/mame-tools"]
+	path = shared/mame-tools
+	url = https://github.com/motoschifo/mame-tools.git

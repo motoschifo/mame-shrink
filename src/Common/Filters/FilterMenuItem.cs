@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using MameTools.Machine;
+using MameTools.Net48.Machine;
 
 namespace MAME_Shrink.Common.Filters;
 internal class FilterMenuItem

@@ -29,8 +29,11 @@ jobs:
           echo Current folder:
           echo %CD%
 
-      - name: Checkout repository
+      - name: Checkout repository (with submodules)
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1

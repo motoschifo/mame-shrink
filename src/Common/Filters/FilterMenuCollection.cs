@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Forms;
 using MAME_Shrink.Extensions;
-using MameTools.Machine;
+using MameTools.Net48.Machine;
 
 namespace MAME_Shrink.Common.Filters;
 internal class FilterMenuCollection : Collection<FilterMenuItem>
