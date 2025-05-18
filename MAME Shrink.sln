@@ -16,8 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcadeDatabaseSdk.Net48", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MameTools.Net48", "shared\MameTools.Net48\MameTools.Net48.csproj", "{3E21E1E2-4BF4-4D5E-B527-5AC259C6452A}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Extensions.Net48-old", "shared\Extensions.Net48-old\Extensions.Net48-old.shproj", "{11587639-ED89-44D6-A090-9AA5FF9D57F8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -57,12 +55,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7EFC7F4A-80E1-42A6-9526-C8B3A3B3485B} = {F59E7454-3B8E-466D-93C1-AE1A5900FBA7}
 		{3E21E1E2-4BF4-4D5E-B527-5AC259C6452A} = {F59E7454-3B8E-466D-93C1-AE1A5900FBA7}
-		{11587639-ED89-44D6-A090-9AA5FF9D57F8} = {F59E7454-3B8E-466D-93C1-AE1A5900FBA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BA5CE638-E9F6-4BF3-B6A0-66747490E20D}
-	EndGlobalSection
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		shared\Extensions.Net48-old\Extensions.Net48.projitems*{11587639-ed89-44d6-a090-9aa5ff9d57f8}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
