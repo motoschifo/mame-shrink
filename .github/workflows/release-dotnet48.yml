@@ -64,8 +64,8 @@ jobs:
         run: |
           $sourceDir = Join-Path $env:GITHUB_WORKSPACE "src\bin\x64\Release"
           $destDir = Join-Path $env:GITHUB_WORKSPACE "release\x64"
-          $fileListPath = "$env:GITHUB_WORKSPACE\build-filelist.txt"
-          Get-Content $fileListPath | ForEach-Object {
+          $fileListPath = Join-Path $env:GITHUB_WORKSPACE "build-filelist.txt"
+          Get-Content "$fileListPath" | ForEach-Object {
               $sourcePath = Join-Path $sourceDir $_
               $destPath = Join-Path $destDir $_
               if (Test-Path $sourcePath) {
@@ -90,8 +90,8 @@ jobs:
         run: |
           $sourceDir = Join-Path $env:GITHUB_WORKSPACE "src\bin\Release"
           $destDir = Join-Path $env:GITHUB_WORKSPACE "release\x86"
-          $fileListPath = "$env:GITHUB_WORKSPACE\build-filelist.txt"
-          Get-Content $fileListPath | ForEach-Object {
+          $fileListPath = Join-Path $env:GITHUB_WORKSPACE "build-filelist.txt"
+          Get-Content "$fileListPath" | ForEach-Object {
               $sourcePath = Join-Path $sourceDir $_
               $destPath = Join-Path $destDir $_
               if (Test-Path $sourcePath) {
