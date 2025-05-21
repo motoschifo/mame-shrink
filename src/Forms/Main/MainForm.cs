@@ -1661,12 +1661,11 @@ public partial class MainForm : Form
                                 foreach (var item in adbGenres.Data)
                                 {
                                     _genresCache.Add(
-                                        key: item.Title ?? string.Empty,
+                                        key: item.Description ?? string.Empty,
                                         item: new ClassificationCacheItem
                                         {
                                             Code = item.Code,
-                                            Title = item.Title,
-                                            IsObsolete = item.IsObsolete,
+                                            Description = item.Description,
                                         }
                                     );
                                 }
@@ -1681,11 +1680,11 @@ public partial class MainForm : Form
                 }
 
                 var items = _genresCache.Items
-                    .Where(x => !x.Value.IsObsolete && !string.IsNullOrEmpty(x.Value.Title))
+                    .Where(x => !string.IsNullOrEmpty(x.Value.Description))
                     .Select(x => new SelectionListItem
                     {
-                        Code = x.Value.Title!,
-                        Description = x.Value.Title,
+                        Code = x.Value.Description!,
+                        Description = x.Value.Description,
                         IsSelected = false
                     })
                     .OrderBy(x => x.Description)
@@ -1717,12 +1716,11 @@ public partial class MainForm : Form
                                 foreach (var item in adbCategories.Data)
                                 {
                                     _categoriesCache.Add(
-                                        key: item.Title ?? string.Empty,
+                                        key: item.Description ?? string.Empty,
                                         item: new ClassificationCacheItem
                                         {
                                             Code = item.Code,
-                                            Title = item.Title,
-                                            IsObsolete = item.IsObsolete,
+                                            Description = item.Description,
                                         }
                                     );
                                 }
@@ -1737,11 +1735,11 @@ public partial class MainForm : Form
                 }
 
                 var items = _categoriesCache.Items
-                    .Where(x => !x.Value.IsObsolete && !string.IsNullOrEmpty(x.Value.Title))
+                    .Where(x => !string.IsNullOrEmpty(x.Value.Description))
                     .Select(x => new SelectionListItem
                     {
-                        Code = x.Value.Title!,
-                        Description = x.Value.Title,
+                        Code = x.Value.Description!,
+                        Description = x.Value.Description,
                         IsSelected = false
                     })
                     .OrderBy(x => x.Description)
@@ -1773,12 +1771,11 @@ public partial class MainForm : Form
                                 foreach (var item in adbSeries.Data)
                                 {
                                     _seriesCache.Add(
-                                        key: item.Title ?? string.Empty,
+                                        key: item.Description ?? string.Empty,
                                         item: new ClassificationCacheItem
                                         {
                                             Code = item.Code,
-                                            Title = item.Title,
-                                            IsObsolete = item.IsObsolete,
+                                            Description = item.Description,
                                         }
                                     );
                                 }
@@ -1793,11 +1790,11 @@ public partial class MainForm : Form
                 }
 
                 var items = _seriesCache.Items
-                    .Where(x => !x.Value.IsObsolete && !string.IsNullOrEmpty(x.Value.Title))
+                    .Where(x => !string.IsNullOrEmpty(x.Value.Description))
                     .Select(x => new SelectionListItem
                     {
-                        Code = x.Value.Title!,
-                        Description = x.Value.Title,
+                        Code = x.Value.Description!,
+                        Description = x.Value.Description,
                         IsSelected = false
                     })
                     .OrderBy(x => x.Description)
@@ -1877,45 +1874,4 @@ public partial class MainForm : Form
     //{
 
     //}
-
-    private async Task OpenGenreDialog(Action<string> progressUpdate)
-    {
-        UpdateOnlineFilters(false);
-
-        // Verifica online
-        if (await ArcadeDatabaseIsOnline())
-        {
-            try
-            {
-                progressUpdate($"{Strings.LoadingArcadeItalia} ({Strings.Genres})");
-                if (!_genresCache.IsValid(_applicationName, _adbMameRelease))
-                {
-                    var adbCategories = await ClassificationsService.Get(classificationType: ClassificationType.Genre, language: GetCurrentLanguage());
-                    _genresCache.Clear();
-                    if (adbCategories.Data.Any())
-                    {
-                        foreach (var item in adbCategories.Data)
-                        {
-                            _genresCache.Add(
-                                key: item.Title ?? string.Empty,
-                                item: new ClassificationCacheItem
-                                {
-                                    Code = item.Code,
-                                    Title = item.Title,
-                                    IsObsolete = item.IsObsolete,
-                                }
-                            );
-                        }
-                        _genresCache.Store(_applicationName, _adbMameRelease);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Dialogs.ShowErrorDialog($"{Strings.ErrorLoadingArcadeItalia}\n\n{ex.Message}");
-            }
-        }
-    }
-
-
 }
