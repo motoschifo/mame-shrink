@@ -69,32 +69,51 @@ public partial class OptionsForm : Form
                     throw new Exception("Lista giochi XML non trovata");
                 // TODO: Lettura XML
             }
-            var mameConfig = await Mame.LoadMameConfiguration(_userPreferences.Mame.ExecutableFilePath);
-            if (RomPathsAuto.Checked)
+            MameConfiguration? mameConfig = null;
+            if (!string.IsNullOrWhiteSpace(_userPreferences.Mame.ExecutableFilePath))
             {
-                _userPreferences.Mame.RomPaths = mameConfig.RomPath;
+                try
+                {
+                    mameConfig = await Mame.LoadMameConfiguration(_userPreferences.Mame.ExecutableFilePath);
+                }
+                catch (Exception ex)
+                {
+                    Dialogs.ShowErrorDialog($"Impossibile caricare la configurazione MAME dall'eseguibile specificato.\n\n{ex.Message}");
+                }
+            }
+            if (mameConfig is not null)
+            {
+                if (RomPathsAuto.Checked)
+                {
+                    _userPreferences.Mame.RomPaths = mameConfig.RomPath;
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(txtRomsPath.Text))
+                        throw new Exception("Percorso roms non specificato");
+                    var basePath = Path.GetDirectoryName(_userPreferences.Mame.ExecutableFilePath);
+                    foreach (var folder in MameConfiguration.SplitPath(txtRomsPath.Text))
+                    {
+                        var path = Path.Combine(basePath, mameConfig.HomePath, folder);
+                        if (!Directory.Exists(path))
+                            throw new Exception($"Percorso {path} non trovato");
+                    }
+                }
             }
             else
             {
-                if (string.IsNullOrEmpty(txtRomsPath.Text))
-                    throw new Exception("Percorso roms non specificato");
-                var basePath = Path.GetDirectoryName(_userPreferences.Mame.ExecutableFilePath);
-                foreach (var folder in MameConfiguration.SplitPath(txtRomsPath.Text))
-                {
-                    var path = Path.Combine(basePath, mameConfig.HomePath, folder);
-                    if (!Directory.Exists(path))
-                        throw new Exception($"Percorso {path} non trovato");
-                }
                 _userPreferences.Mame.RomPaths = txtRomsPath.Text;
             }
+            if (string.IsNullOrWhiteSpace(txtRomsPath.Text))
+                throw new Exception("Percorso roms non specificato");
             _userPreferences.Mame.MameSetType = MameSetType;
 
             _userPreferences.CleanOptions.CleanMethod = CleanMethod;
             if (_userPreferences.CleanOptions.CleanMethod == CleanMethodKind.MoveFilesToFolder)
             {
-                if (!string.IsNullOrEmpty(_userPreferences.Mame.ExecutableFilePath))
+                if (!string.IsNullOrWhiteSpace(_userPreferences.Mame.ExecutableFilePath))
                     _userPreferences.CleanOptions.RemovedFilesFolder = Path.Combine(Path.GetDirectoryName(_userPreferences.Mame.ExecutableFilePath), "REMOVED-FILES");
-                if (string.IsNullOrEmpty(_userPreferences.CleanOptions.RemovedFilesFolder))
+                if (string.IsNullOrWhiteSpace(_userPreferences.CleanOptions.RemovedFilesFolder))
                     throw new Exception("Percorso di pulizia non specificato");
                 if (!Directory.Exists(_userPreferences.CleanOptions.RemovedFilesFolder))
                     Directory.CreateDirectory(_userPreferences.CleanOptions.RemovedFilesFolder);
