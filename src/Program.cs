@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Net;
 using System.Windows.Forms;
 using MAME_Shrink.Forms;
 using MAME_Shrink.Settings;
@@ -21,7 +22,8 @@ internal static class Program
         {
             _logger.Info("Application started");
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");    //  TEST
-
+            
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13 | SecurityProtocolType.Tls11;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

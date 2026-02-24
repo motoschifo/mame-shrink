@@ -1360,7 +1360,7 @@ public partial class MainForm : Form
                 if (!_mameCache.IsValid(_applicationName, _adbMameRelease))
                 {
                     // Download categories and machine extra info
-                    // http://adb.arcadeitalia.net/service_scraper.php?ajax=query_categories&game_name=mslug;atetris;100lions;mslug3;mslug5
+                    // https://adb.arcadeitalia.net/service_scraper.php?ajax=query_categories&game_name=mslug;atetris;100lions;mslug3;mslug5
                     var adbMameCategories = await MameService.Categories(language: GetCurrentLanguage());
                     _mameCache.Clear();
                     if (adbMameCategories.Data.Any())
