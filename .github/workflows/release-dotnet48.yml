@@ -116,6 +116,9 @@ jobs:
           body: "Questa è la release automatica per il tag ${{ github.ref_name }}."
           draft: false
           prerelease: false
-          files: release_x64.zip, release_x86.zip
+          files: |
+            release_x64.zip
+            release_x86.zip
+          overwrite: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
