@@ -22,8 +22,8 @@ internal static class Program
         {
             _logger.Info("Application started");
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");    //  TEST
-            
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13 | SecurityProtocolType.Tls11;
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
